@@ -90,7 +90,7 @@
       } else if (identityService.isAuthenticated() && !vm.isPlayerOnPyramid && player.position === 99) {
         addPlayerToPyramid();
       } else {
-        Notification.error('You can not update this pyramid');
+        Notification.error('You can not update this pyramid.<br>You must join the pyramid first.');
       }
     }
 
