@@ -1,0 +1,25 @@
+<div class="container">
+  <form name="newUserForm" ng-submit="vm.register(vm.newUser)" novalidate>
+    <div class="form-group">
+      <label>Email</label>
+      <input class="form-control" type="email" ng-model="vm.newUser.username" required>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input class="form-control" type="password" ng-model="vm.newUser.password" required>
+    </div>
+    <div class="form-group">
+      <label>First Name</label>
+      <input class="form-control" type="text" ng-model="vm.newUser.firstName" required>
+    </div>
+    <div class="form-group">
+      <label>Last Name</label>
+      <input class="form-control" type="text" ng-model="vm.newUser.lastName" required>
+    </div>
+    <div class="form-group">
+      <label>Nickname</label>
+      <input class="form-control" type="text" ng-model="vm.newUser.nickname">
+    </div>
+    <input class="btn btn-success btn-lg btn-block" type="submit" value="Register" ng-disabled="newUserForm.$invalid">
+  </form>
+</div>

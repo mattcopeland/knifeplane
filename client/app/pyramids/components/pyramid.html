@@ -1,0 +1,7 @@
+<div class="pyramid">
+  <div class="pyramid-name">{{vm.pyramid.name}}</div>
+  <div ng-repeat-start="player in vm.pyramid.players" ng-if="vm.breakPoints.indexOf($index+1) > -1"></div>
+  <div ng-repeat-end ng-click="vm.updatePyramid(player)" class="pyramid-block" ng-class="player.class">
+    {{player.firstName}} {{player.lastName}}
+  </div>
+</div>
