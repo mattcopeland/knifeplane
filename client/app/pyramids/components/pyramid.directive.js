@@ -1,14 +1,16 @@
 (function () {
   'use strict';
-  angular.module('app').directive('kpPyramid', kpPyramid);
+  angular
+    .module('app')
+    .directive('kpPyramid', kpPyramid);
 
   function kpPyramid() {
     var directive = {
-      restrict: 'E',
+      restrict: 'A',
       templateUrl: '/pyramids/components/pyramid.html',
       replace: true,
       scope: {
-        pyramidId: '@'
+        competitionId: '@'
       },
       controller: ctrlFunc,
       controllerAs: 'vm',
@@ -18,28 +20,26 @@
     return directive;
   }
 
-  ctrlFunc.$inject = ['$scope', 'pyramidsService', '$filter', 'Notification', 'identityService'];
-
-  function ctrlFunc($scope, pyramidsService, $filter, Notification, identityService) {
+  /* @ngInject */
+  function ctrlFunc($scope, pyramidsService, $filter, Notification, identityService, challengesService) {
     var vm = this;
     vm.pyramid = {};
     vm.breakPoints = [];
     vm.numberOfBlocks = 0;
     vm.level = 0;
-    vm.updatePyramid = updatePyramid;
     vm.isPlayerOnPyramid = false;
+    vm.startChallenge = startChallenge;
+    vm.createChallenge = createChallenge;
 
-    var player1 = {};
-    var player2 = {};
-    var numberOfActualPlayers = 0;
+    var currentUserPlayer = {};
 
     activate();
 
     function activate() {
-      pyramidsService.getPyramid(vm.pyramidId).then(function (pyramid) {
+      pyramidsService.getPyramid(vm.competitionId).then(function (pyramid) {
         vm.pyramid = pyramid.data;
-        numberOfActualPlayers = vm.pyramid.players.length;
 
+        // Figure out if the current user is on this pyramid
         if (_.find(vm.pyramid.players, ['_id', identityService.currentUser._id])) {
           vm.isPlayerOnPyramid = true;
         }
@@ -50,61 +50,8 @@
         fillInEmptyBlocks();
         assignLevelsToPlayers();
         if (vm.isPlayerOnPyramid) {
-          assignPlayerOne();
+          findCurrentUserOnPyramid();
         }
-      });
-    }
-
-    function updatePyramid(player) {
-      if (identityService.isAuthenticated() && vm.isPlayerOnPyramid) {
-        // Allow admins to select the first player
-        if (_.isEmpty(player1) && player.position !== 99 && identityService.isAuthorized('admin')) {
-          player1 = player;
-          player1.class = 'active';
-          // Allow admins to deselect the first player
-        } else if (player1 === player && identityService.isAuthorized('admin')) {
-          player1.class = '';
-          player1 = {};
-          // Only allow swapping with (real) players 1 level above or below
-        } else if (player.level === player1.level || player.level < player1.level - 1 || player.level > player1.level + 1 || player.position === 99) {
-          Notification.error('Sorry, thats not allowed!');
-          // Do the swapping and save to the database
-          // Then reset to do it all over again
-        } else {
-          var player1OldPosition = player1.position;
-          var player1OldLevel = player1.level;
-          player2 = player;
-
-          player1.position = player.position;
-          player1.level = player.level;
-
-          player2.position = player1OldPosition;
-          player2.level = player1OldLevel;
-
-          pyramidsService.swapPositions(vm.pyramidId, player1, player2);
-
-          player1.class = '';
-          player1 = {};
-          player2 = {};
-        }
-      } else if (identityService.isAuthenticated() && !vm.isPlayerOnPyramid && player.position === 99) {
-        addPlayerToPyramid();
-      } else {
-        Notification.error('You can not update this pyramid.<br>You must join the pyramid first.');
-      }
-    }
-
-    function addPlayerToPyramid() {
-      var newPlayer = {
-        position: numberOfActualPlayers + 1,
-        _id: identityService.currentUser._id,
-        firstName: identityService.currentUser.firstName,
-        lastName: identityService.currentUser.lastName,
-        nickname: identityService.currentUser.nickname
-      }
-      pyramidsService.addPlayerToPyramid(vm.pyramidId, newPlayer).then(function (response) {
-        vm.isPlayerOnPyramid = true;
-        refreshPyramid();
       });
     }
 
@@ -152,26 +99,63 @@
       }
     }
 
-    // If the current user is a player on this pyramid make them player 1
-    function assignPlayerOne() {
-      if (!identityService.isAuthorized('admin') && identityService.isAuthenticated() && vm.isPlayerOnPyramid) {
-        player1 = _.find(vm.pyramid.players, ['_id', identityService.currentUser._id]);
-        player1.class = 'active';
+    // If the current user is a player on this pyramid add a class to them
+    function findCurrentUserOnPyramid() {
+      if (identityService.isAuthenticated() && vm.isPlayerOnPyramid) {
+        currentUserPlayer = _.find(vm.pyramid.players, ['_id', identityService.currentUser._id]);
+        currentUserPlayer.class = 'current-user';
       }
     }
 
+    function startChallenge() {
+      var levelAbove = currentUserPlayer.level > 1 ? currentUserPlayer.level - 1 : null;
+      _.forEach(vm.pyramid.players, function (player) {
+        if (player.level === levelAbove && player.position !== 99) {
+          player.class = 'available';
+          player.available = true;
+        }
+      });
+    }
+
+    function createChallenge(player) {
+      if (!player.available) {
+        Notification.error('Sorry, that is not a valid challenge.');
+      } else {
+        var challenge = {
+          competitionId: vm.competitionId,
+          challenger: {
+            _id: currentUserPlayer._id,
+            firstName: currentUserPlayer.firstName,
+            lastName: currentUserPlayer.lastName,
+            nickname: currentUserPlayer.nickname
+          },
+          opponent: {
+            _id: player._id,
+            firstName: player.firstName,
+            lastName: player.lastName,
+            nickname: player.nickname
+          }
+        };
+        challengesService.create(challenge).then(function (response) {
+          console.log(response);
+        });
+      }
+    }
+
+
+    // Refresh the pyramid becasue if an update
     function refreshPyramid() {
-      pyramidsService.getPyramid(vm.pyramidId).then(function (pyramid) {
+      pyramidsService.getPyramid(vm.competitionId).then(function (pyramid) {
         vm.pyramid = pyramid.data;
         orderPlayers();
         fillInEmptyBlocks();
         assignLevelsToPlayers();
-        assignPlayerOne();
       });
     }
 
-    $scope.$on('ws:match_results', function (_, result) {
-      Notification.info(result);
+    // Watch for websocket event
+    $scope.$on('ws:challenge_created', function (_, challengeDetails) {
+      Notification.info(challengeDetails);
       refreshPyramid();
     });
   }

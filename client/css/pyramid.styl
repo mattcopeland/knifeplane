@@ -7,7 +7,6 @@
     
   .pyramid-block
     border 1px solid #000
-    cursor pointer
     display inline-block
     font-size 14px
     height 75px
@@ -18,16 +17,10 @@
     
     &.empty
       background-color #ccc
-      cursor default
       
-    &.active
+    &.current-user
       background-color #f00
-      cursor default
       
-&.non-player
-  
-  .pyramid-block
-    cursor default
-  
-    &.empty
+    &.available
+      background-color #0f0
       cursor pointer

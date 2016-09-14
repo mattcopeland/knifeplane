@@ -28,7 +28,7 @@
           'topbar': {
             controller: 'TopbarCtrl',
             controllerAs: 'vm',
-            templateUrl: 'common/components/topbar.html'
+            templateUrl: 'common/views/topbar.html'
           }
         }
       }).state('pyramids', {
@@ -42,7 +42,7 @@
           'topbar': {
             controller: 'TopbarCtrl',
             controllerAs: 'vm',
-            templateUrl: 'common/components/topbar.html'
+            templateUrl: 'common/views/topbar.html'
           }
         }
       }).state('pyramids.view', {
@@ -77,7 +77,7 @@
           'topbar': {
             controller: 'TopbarCtrl',
             controllerAs: 'vm',
-            templateUrl: 'common/components/topbar.html'
+            templateUrl: 'common/views/topbar.html'
           }
         }
       }).state('register', {
@@ -91,7 +91,7 @@
           'topbar': {
             controller: 'TopbarCtrl',
             controllerAs: 'vm',
-            templateUrl: 'common/components/topbar.html'
+            templateUrl: 'common/views/topbar.html'
           }
         }
       });

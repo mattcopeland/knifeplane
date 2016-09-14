@@ -5,8 +5,7 @@ var express = require('express'),
   passport = require('passport'),
   credentials = require('./credentials'),
   mongoose = require('mongoose'),
-  MongoStore = require('connect-mongo')(session),
-  path = require('path');
+  MongoStore = require('connect-mongo')(session);
 
 module.exports = function (app, config) {
   app.set('views', config.rootPath + '/server/views');
