@@ -1,7 +1,7 @@
 var Challenge = require('mongoose').model('Challenge');
 var websockets = require('../websockets');
 
-exports.getByCompetition = function (req, res) {
+exports.getChallengesByCompetition = function (req, res) {
   var competitionId = req.query.competitionId;
   Challenge.find({
     competitionId: competitionId
@@ -10,11 +10,32 @@ exports.getByCompetition = function (req, res) {
   });
 };
 
+exports.getActiveChallengeByCompetitionByPlayer = function (req, res) {
+  var competitionId = req.query.competitionId;
+  var playerId = req.query.playerId;
+  Challenge.findOne({
+    'competitionId': competitionId,
+    'complete': { $ne: true },
+    '$or': [
+      {
+        'challenger._id': playerId
+      },{
+        'opponent._id': playerId
+      }
+    ]
+  }).exec(function (err, challenge) {
+    res.send(challenge);
+  });
+};
+
 exports.createChallenge = function (req, res) {
   var challengeData = req.body.challenge;
   var challenger = challengeData.challenger.firstName + ' ' + challengeData.challenger.lastName;
   var opponent = challengeData.opponent.firstName + ' ' + challengeData.opponent.lastName;
-  var challengeDetails = challenger + ' has challenged ' + opponent;
+  var challengeDetails = {
+    competitionId: challengeData.competitionId,
+    description: challenger + ' has challenged ' + opponent
+  };
   
   Challenge.create(challengeData, function (err) {
     if (err) {

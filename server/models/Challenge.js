@@ -13,12 +13,17 @@ var challengeSchema = mongoose.Schema({
     type: Object,
     required: '{PATH} is required!'
   },
-  winner: {
-    type: Object
-  },
   forfeit: {
     type: Boolean,
     Default: false
+  },
+  complete: {
+    type: Boolean,
+    Default: false
+  },
+  timeLimit: {
+    type: Number,
+    default: 24
   },
   created: {
     type: Date,
@@ -27,4 +32,4 @@ var challengeSchema = mongoose.Schema({
   }
 });
 
-var Challenge = mongoose.model('Challenge', challengeSchema);
+mongoose.model('Challenge', challengeSchema);

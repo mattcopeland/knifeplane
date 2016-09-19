@@ -13,6 +13,7 @@
     },
     "globals": {
         "angular": true,
-        "_": true
+        "_": true,
+        "moment": true
     }
 }

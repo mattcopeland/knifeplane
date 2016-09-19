@@ -27,8 +27,13 @@
     activate();
 
     function activate() {
-      challengesService.getByCompetition(vm.competitionId).then(function (challenges) {
-        vm.challenges = challenges.data;
+      challengesService.getChallengesByCompetition(vm.competitionId).then(function (challenges) {
+        if (challenges.data.length > 0) {
+          vm.challenges = challenges.data;
+          _.forEach(vm.challenges, function (challenge) {
+            challenge.expires = (moment().diff(moment(challenge.created).add(challenge.timeLimit, 'h'),'s')) * -1;
+          });
+        }
       });
     }
   }

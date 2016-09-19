@@ -1,3 +1,4 @@
 <div ng-repeat="challenge in vm.challenges">
-    {{challenge.challenger.firstName}}
+    {{challenge.challenger.firstName}} {{challenge.challenger.lastName}} has a challenge out to {{challenge.opponent.firstName}} {{challenge.opponent.lastName}}
+    <timer interval="1000" countdown="challenge.expires">{{hours}}:{{minutes}}:{{seconds}}</timer>
 </div>

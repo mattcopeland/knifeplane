@@ -7,10 +7,13 @@
     <div ng-repeat-start="player in vm.pyramid.players" ng-if="vm.breakPoints.indexOf($index+1) > -1"></div>
     <div ng-repeat-end ng-click="vm.createChallenge(player)" class="pyramid-block" ng-class="player.class">
       {{player.firstName}} {{player.lastName}}
+      <div ng-if="player.challenge">
+        <timer interval="1000" countdown="player.challenge.expires">{{hours}}:{{minutes}}:{{seconds}}</timer>
+      </div>
     </div>
   </div>
 
   <div class="row">
-    <button class="btn btn-default" type="button" ng-click="vm.startChallenge()">Make a Challenge</button>
+    <button class="btn btn-default" type="button" ng-if="!vm.hasActiveChallenge" ng-click="vm.startChallenge()">Make a Challenge</button>
   </div>
 </div>

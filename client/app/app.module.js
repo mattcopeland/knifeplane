@@ -3,5 +3,6 @@ angular.module('app', [
   'ui.router',
   'ngAnimate',
   'ui-notification',
-  'isteven-multi-select'
+  'isteven-multi-select',
+  'timer'
 ]);

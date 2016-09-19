@@ -28,10 +28,10 @@
     vm.numberOfBlocks = 0;
     vm.level = 0;
     vm.isPlayerOnPyramid = false;
+    vm.hasActiveChallenge = false;
     vm.startChallenge = startChallenge;
     vm.createChallenge = createChallenge;
-
-    var currentUserPlayer = {};
+    vm.currentUserPlayer = {};
 
     activate();
 
@@ -45,6 +45,7 @@
         }
 
         orderPlayers();
+        getPlayersStatus();
         createBreakPoints();
         calculatePyramidBlocks();
         fillInEmptyBlocks();
@@ -58,6 +59,22 @@
     // Order the players by the position property of the players array in the pyramid object
     function orderPlayers() {
       vm.pyramid.players = $filter('orderBy')(vm.pyramid.players, 'position');
+    }
+
+    // Figure out if each player is already challenged and set some stuff
+    function getPlayersStatus() {
+      _.forEach(vm.pyramid.players, function (player) {
+        challengesService.getActiveChallengeByCompetitionByPlayer(vm.competitionId, player._id).then(function (challenge) {
+          if (challenge.data) {
+            player.challenge = {
+              expires: (moment().diff(moment(challenge.data.created).add(challenge.data.timeLimit, 'h'),'s')) * -1
+            };
+            if (player._id !== vm.currentUserPlayer._id) {
+              player.class = 'unavailable';
+            }
+          }
+        });
+      });
     }
 
     // Figure out where to start each new row on the pyramid
@@ -89,6 +106,7 @@
     }
 
     // Give each player a level property based on the break points
+    // This will be used to determine who other players can challenge
     function assignLevelsToPlayers() {
       vm.level = 0;
       for (var i = 0; i < vm.pyramid.players.length; i++) {
@@ -102,15 +120,19 @@
     // If the current user is a player on this pyramid add a class to them
     function findCurrentUserOnPyramid() {
       if (identityService.isAuthenticated() && vm.isPlayerOnPyramid) {
-        currentUserPlayer = _.find(vm.pyramid.players, ['_id', identityService.currentUser._id]);
-        currentUserPlayer.class = 'current-user';
+        vm.currentUserPlayer = _.find(vm.pyramid.players, ['_id', identityService.currentUser._id]);
+        vm.currentUserPlayer.class = 'current-user';
+
+        challengesService.getActiveChallengeByCompetitionByPlayer(vm.competitionId, identityService.currentUser._id).then(function (response) {
+          vm.hasActiveChallenge = response.data.length > 0 ? true : false;
+        });
       }
     }
 
     function startChallenge() {
-      var levelAbove = currentUserPlayer.level > 1 ? currentUserPlayer.level - 1 : null;
+      var levelAbove = vm.currentUserPlayer.level > 1 ? vm.currentUserPlayer.level - 1 : null;
       _.forEach(vm.pyramid.players, function (player) {
-        if (player.level === levelAbove && player.position !== 99) {
+        if (player.level === levelAbove && player.position !== 99 && player.class != 'unavailable') {
           player.class = 'available';
           player.available = true;
         }
@@ -123,11 +145,14 @@
       } else {
         var challenge = {
           competitionId: vm.competitionId,
+          complete: false,
+          forfeit: false,
+          timeLimit: 24,
           challenger: {
-            _id: currentUserPlayer._id,
-            firstName: currentUserPlayer.firstName,
-            lastName: currentUserPlayer.lastName,
-            nickname: currentUserPlayer.nickname
+            _id: vm.currentUserPlayer._id,
+            firstName: vm.currentUserPlayer.firstName,
+            lastName: vm.currentUserPlayer.lastName,
+            nickname: vm.currentUserPlayer.nickname
           },
           opponent: {
             _id: player._id,
@@ -136,27 +161,31 @@
             nickname: player.nickname
           }
         };
-        challengesService.create(challenge).then(function (response) {
-          console.log(response);
-        });
+        challengesService.createChallenge(challenge);
+        refreshPyramid();
       }
     }
 
 
-    // Refresh the pyramid becasue if an update
+    // Refresh the pyramid becasue of an update
     function refreshPyramid() {
       pyramidsService.getPyramid(vm.competitionId).then(function (pyramid) {
         vm.pyramid = pyramid.data;
         orderPlayers();
+        getPlayersStatus();
         fillInEmptyBlocks();
         assignLevelsToPlayers();
+        if (vm.isPlayerOnPyramid) {
+          findCurrentUserOnPyramid();
+        }
       });
     }
 
     // Watch for websocket event
     $scope.$on('ws:challenge_created', function (_, challengeDetails) {
-      Notification.info(challengeDetails);
-      refreshPyramid();
+      if (vm.competitionId === challengeDetails.competitionId) {
+        Notification.info(challengeDetails.description);
+      }
     });
   }
 })();
