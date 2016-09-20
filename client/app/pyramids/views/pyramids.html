@@ -1,5 +1,8 @@
 <div class='container'>
-  <div ng-repeat="pyramid in vm.pyramids">
+  <div ng-if="vm.pyramids.length === 0">
+      Sorry, you don't have any pyramids!'
+  </div>
+  <div ng-if="vm.pyramids.length > 0" ng-repeat="pyramid in vm.pyramids">
     <a ui-sref="pyramids.view({pyramidId: pyramid._id})">{{pyramid.name}}</a>
   </div>
 </div>

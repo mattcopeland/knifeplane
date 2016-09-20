@@ -14,14 +14,8 @@ bower_components
 build
 #.tmp
 
-# Ignore Credentials
-###################
-**/credentials.js
-
 # Ignore Directories
 ###################
-**/employee-photos
-**/user-photos
 **/assets
 
 # Ignore Test reporters

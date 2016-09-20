@@ -5,7 +5,8 @@
         "linebreak-style": ["error", "unix"],
         "quotes": ["error", "single"],
         "semi": ["error", "always"],
-        "no-console": "off"
+        "no-console": "off",
+        "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1 }]
     },
     "env" : {
         "browser": true,
