@@ -26,11 +26,15 @@
     vm.pyramid = {};
     vm.breakPoints = [];
     vm.numberOfBlocks = 0;
-    vm.level = 0;
-    vm.isPlayerOnPyramid = false;
+    vm.isCurrentUserOnPyramid = false;
     vm.hasActiveChallenge = false;
+    vm.showCreateChallengeOptions = false;
+    vm.showCompleteChallengeOptions = false;
+    vm.availableChallenges = false;
     vm.startChallenge = startChallenge;
     vm.createChallenge = createChallenge;
+    vm.completeChallenge = completeChallenge;
+    vm.challengeExpired = challengeExpired;
     vm.currentUserPlayer = {};
 
     activate();
@@ -39,20 +43,12 @@
       pyramidsService.getPyramid(vm.competitionId).then(function (pyramid) {
         vm.pyramid = pyramid.data;
 
-        // Figure out if the current user is on this pyramid
-        if (_.find(vm.pyramid.players, ['_id', identityService.currentUser._id])) {
-          vm.isPlayerOnPyramid = true;
-        }
-
         orderPlayers();
         getPlayersStatus();
         createBreakPoints();
         calculatePyramidBlocks();
         fillInEmptyBlocks();
         assignLevelsToPlayers();
-        if (vm.isPlayerOnPyramid) {
-          findCurrentUserOnPyramid();
-        }
       });
     }
 
@@ -64,12 +60,37 @@
     // Figure out if each player is already challenged and set some stuff
     function getPlayersStatus() {
       _.forEach(vm.pyramid.players, function (player) {
+
+        if (identityService.currentUser && player._id === identityService.currentUser._id) {
+          vm.isCurrentUserOnPyramid = true;
+          player.class = 'current-user';
+          vm.currentUserPlayer = player;
+        }
+
         challengesService.getActiveChallengeByCompetitionByPlayer(vm.competitionId, player._id).then(function (challenge) {
+          // If this player is involed in an active challange
           if (challenge.data) {
-            player.challenge = {
-              expires: (moment().diff(moment(challenge.data.created).add(challenge.data.timeLimit, 'h'),'s')) * -1
-            };
-            if (player._id !== vm.currentUserPlayer._id) {
+            // Init a challenge object on this player
+            player.challenge = {};
+            // Capture if they are the challenger or the opponent
+            if (player._id === challenge.data.challenger._id) {
+              player.challenge.position = 'challenger';
+            } else {
+              player.challenge.position = 'opponent';
+            }
+
+            // Track when the challenge will expire
+            var timeToExpire = moment().diff(moment(challenge.data.created).add(challenge.data.timeLimit, 's'), 's') * -1;
+            if (timeToExpire > 0) {
+              player.challenge.expires = timeToExpire;
+            }
+
+            // If this is the currently logged in user set some properties for use
+            if (vm.isCurrentUserOnPyramid && player._id === identityService.currentUser._id) {
+              vm.hasActiveChallenge = true;
+              vm.currentUserPlayer = player;
+              // If this is not the currently logged in user mark them as unavailable
+            } else {
               player.class = 'unavailable';
             }
           }
@@ -108,64 +129,118 @@
     // Give each player a level property based on the break points
     // This will be used to determine who other players can challenge
     function assignLevelsToPlayers() {
-      vm.level = 0;
+      var level = 0;
       for (var i = 0; i < vm.pyramid.players.length; i++) {
         if (vm.breakPoints.indexOf(i + 1) > -1) {
-          vm.level += 1;
+          level += 1;
         }
-        vm.pyramid.players[i].level = vm.level;
+        vm.pyramid.players[i].level = level;
       }
     }
 
-    // If the current user is a player on this pyramid add a class to them
-    function findCurrentUserOnPyramid() {
-      if (identityService.isAuthenticated() && vm.isPlayerOnPyramid) {
-        vm.currentUserPlayer = _.find(vm.pyramid.players, ['_id', identityService.currentUser._id]);
-        vm.currentUserPlayer.class = 'current-user';
-
-        challengesService.getActiveChallengeByCompetitionByPlayer(vm.competitionId, identityService.currentUser._id).then(function (response) {
-          vm.hasActiveChallenge = response.data.length > 0 ? true : false;
-        });
+    function startChallenge(cancel) {
+      if (!cancel) {
+        vm.showCreateChallengeOptions = true;
+      } else {
+        vm.showCreateChallengeOptions = false;
       }
-    }
 
-    function startChallenge() {
+      // Find the players available to be challenged
       var levelAbove = vm.currentUserPlayer.level > 1 ? vm.currentUserPlayer.level - 1 : null;
       _.forEach(vm.pyramid.players, function (player) {
         if (player.level === levelAbove && player.position !== 99 && player.class != 'unavailable') {
-          player.class = 'available';
-          player.available = true;
+          vm.availableChallenges = true;
+          if (!cancel) {
+            player.class = 'available';
+            player.available = true;
+          } else {
+            player.class = '';
+            player.available = false;
+          }
         }
       });
     }
 
     function createChallenge(player) {
-      if (!player.available) {
-        Notification.error('Sorry, that is not a valid challenge.');
-      } else {
-        var challenge = {
-          competitionId: vm.competitionId,
-          complete: false,
-          forfeit: false,
-          timeLimit: 24,
-          challenger: {
-            _id: vm.currentUserPlayer._id,
-            firstName: vm.currentUserPlayer.firstName,
-            lastName: vm.currentUserPlayer.lastName,
-            nickname: vm.currentUserPlayer.nickname
-          },
-          opponent: {
-            _id: player._id,
-            firstName: player.firstName,
-            lastName: player.lastName,
-            nickname: player.nickname
-          }
-        };
-        challengesService.createChallenge(challenge);
-        refreshPyramid();
+      if (vm.showCreateChallengeOptions) {
+        if (!player.available) {
+          Notification.error('Sorry, that is not a valid challenge.');
+        } else {
+          vm.showCreateChallengeOptions = false;
+          vm.hasActiveChallenge = true;
+          var challenge = {
+            competitionId: vm.competitionId,
+            complete: false,
+            forfeit: false,
+            timeLimit: 24,
+            challenger: {
+              _id: vm.currentUserPlayer._id,
+              firstName: vm.currentUserPlayer.firstName,
+              lastName: vm.currentUserPlayer.lastName,
+              nickname: vm.currentUserPlayer.nickname,
+              position: vm.currentUserPlayer.position
+            },
+            opponent: {
+              _id: player._id,
+              firstName: player.firstName,
+              lastName: player.lastName,
+              nickname: player.nickname,
+              position: player.position
+            }
+          };
+          challengesService.createChallenge(challenge);
+          refreshPyramid();
+        }
       }
     }
 
+    function completeChallenge(winnerIsCurrentUser, forfeit) {
+      challengesService.getActiveChallengeByCompetitionByPlayer(vm.competitionId, vm.currentUserPlayer._id).then(function (challenge) {
+        vm.hasActiveChallenge = false;
+        vm.showCreateChallengeOptions = false;
+        vm.showCompleteChallengeOptions = false;
+
+        var swapPositions = false;
+
+        // If there is a forfeit than swap position and make the challenger the winner
+        if (forfeit) {
+          challenge.data.forfeit = true;
+          challenge.data.challenger.winner = true;
+          swapPositions = true;
+          // Figure out who the winner was to store in the challenge record
+        } else if (winnerIsCurrentUser) {
+          if (challenge.data.challenger._id === vm.currentUserPlayer._id) {
+            challenge.data.challenger.winner = true;
+            swapPositions = true;
+          } else {
+            challenge.data.opponent.winner = true;
+          }
+        } else {
+          if (challenge.data.challenger._id === vm.currentUserPlayer._id) {
+            challenge.data.opponent.winner = true;
+          } else {
+            challenge.data.challenger.winner = true;
+            swapPositions = true;
+          }
+        }
+
+        // Mark the challenge as complete and note the winner
+        challengesService.completeChallenge(challenge.data).then(function (challenge) {
+          // If the current user is the winner and was the challenger
+          // or the current user is NOT the winner and was the opponent
+          // then swap positions
+          if (swapPositions) {
+            pyramidsService.swapPositions(vm.competitionId, challenge.data.opponent, challenge.data.challenger).then(refreshPyramid);
+          } else {
+            refreshPyramid();
+          }
+        });
+      });
+    }
+
+    function challengeExpired() {
+      completeChallenge(null, true);
+    }
 
     // Refresh the pyramid becasue of an update
     function refreshPyramid() {
@@ -175,14 +250,18 @@
         getPlayersStatus();
         fillInEmptyBlocks();
         assignLevelsToPlayers();
-        if (vm.isPlayerOnPyramid) {
-          findCurrentUserOnPyramid();
-        }
       });
     }
 
     // Watch for websocket event
     $scope.$on('ws:challenge_created', function (_, challengeDetails) {
+      if (vm.competitionId === challengeDetails.competitionId) {
+        Notification.info(challengeDetails.description);
+      }
+    });
+
+    // Watch for websocket event
+    $scope.$on('ws:challenge_completed', function (_, challengeDetails) {
       if (vm.competitionId === challengeDetails.competitionId) {
         Notification.info(challengeDetails.description);
       }

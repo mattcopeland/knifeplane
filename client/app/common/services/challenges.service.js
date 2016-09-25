@@ -7,6 +7,7 @@
   function challengesService($http) {
     var service = {
       createChallenge: createChallenge,
+      completeChallenge: completeChallenge,
       getChallengesByCompetition: getChallengesByCompetition,
       getActiveChallengeByCompetitionByPlayer: getActiveChallengeByCompetitionByPlayer
     };
@@ -15,6 +16,12 @@
 
     function createChallenge(challenge) {
       return $http.post('/api/challenges/create', {
+        challenge: challenge
+      });
+    }
+
+    function completeChallenge(challenge) {
+      return $http.post('/api/challenges/complete',  {
         challenge: challenge
       });
     }

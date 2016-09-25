@@ -28,7 +28,7 @@ exports.getPyramidsForUser = function (req, res) {
   });
 };
 
-exports.createPyramid = function (req, res, next) {
+exports.createPyramid = function (req, res) {
   var pyramidData = req.body.pyramid;
   Pyramid.create(pyramidData, function (err, pyramid) {
     if (err) {
@@ -42,40 +42,33 @@ exports.createPyramid = function (req, res, next) {
 };
 
 exports.swapPositions = function (req, res, next) {
-  var player1 = req.body.player1;
-  var player2 = req.body.player2;
-  var winner, loser;
+  var challenger = req.body.challenger;
+  var opponent = req.body.opponent;
 
-  if (player1.position < player2.position) {
-    winner = player1;
-    loser = player2;
-  } else {
-    winner = player2;
-    loser = player1;
-  }
+  var newResult = challenger.firstName + ' ' + challenger.lastName + ' beat ' + opponent.firstName + ' ' + opponent.lastName;
 
-  var newResult = winner.firstName + ' ' + winner.lastName + ' beat ' + loser.firstName + ' ' + loser.lastName;
-
-  Pyramid.update({
+  Pyramid.update(
+    {
       _id: req.body.pyramidId,
-      'players._id': req.body.player1._id
+      'players._id': req.body.challenger._id
     }, {
       $set: {
-        'players.$.position': req.body.player1.position
+        'players.$.position': req.body.opponent.position
       }
     })
-    .exec(function (err, pyramids) {
+    .exec(function (err) {
       if (err) {
         return next(err);
       }
     });
 
-  Pyramid.update({
+  Pyramid.update(
+    {
       _id: req.body.pyramidId,
-      'players._id': req.body.player2._id
+      'players._id': req.body.opponent._id
     }, {
       $set: {
-        'players.$.position': req.body.player2.position
+        'players.$.position': req.body.challenger.position
       }
     })
     .exec(function (err, pyramids) {
@@ -90,16 +83,16 @@ exports.swapPositions = function (req, res, next) {
 
 exports.addPlayer = function (req, res, next) {
   Pyramid.update({
-      _id: req.body.pyramidId
-    }, {
-      $push: {
-        'players': req.body.player
-      }
-    })
-    .exec(function (err, pyramids) {
-      if (err) {
-        return next(err);
-      }
-      res.status(201).json(pyramids);
-    });
+    _id: req.body.pyramidId
+  }, {
+    $push: {
+      'players': req.body.player
+    }
+  })
+  .exec(function (err, pyramids) {
+    if (err) {
+      return next(err);
+    }
+    res.status(201).json(pyramids);
+  });
 };

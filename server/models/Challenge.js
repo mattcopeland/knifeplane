@@ -29,6 +29,9 @@ var challengeSchema = mongoose.Schema({
     type: Date,
     required: true,
     default: Date.now
+  },
+  completed: {
+    type: Date
   }
 });
 

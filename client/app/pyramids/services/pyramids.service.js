@@ -47,11 +47,11 @@
       });
     }
 
-    function swapPositions(pyramidId, player1, player2) {
+    function swapPositions(pyramidId, challenger, opponent) {
       return $http.post('/api/pyramids/swapPositions', {
         pyramidId: pyramidId,
-        player1: player1,
-        player2: player2
+        challenger: challenger,
+        opponent: opponent
       });
     }
 

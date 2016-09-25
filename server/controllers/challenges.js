@@ -49,3 +49,40 @@ exports.createChallenge = function (req, res) {
     res.status(201);
   });
 };
+
+exports.completeChallenge = function (req, res, next) {
+  var challengeData = req.body.challenge;
+  var winner, loser, description;
+  if (challengeData.forfeit) {
+    description = challengeData.opponent.firstName + ' ' + challengeData.opponent.lastName + ' forfeited to ' +  challengeData.challenger.firstName + ' ' + challengeData.challenger.lastName;
+  } else {
+    if (challengeData.challenger.winner) {
+      winner = challengeData.challenger.firstName + ' ' + challengeData.challenger.lastName;
+      loser = challengeData.opponent.firstName + ' ' + challengeData.opponent.lastName;
+    } else {
+      winner = challengeData.opponent.firstName + ' ' + challengeData.opponent.lastName;
+      loser = challengeData.challenger.firstName + ' ' + challengeData.challenger.lastName;
+    }
+    description = winner + ' just defeated ' + loser;
+  }
+
+  var challengeDetails = {
+    competitionId: challengeData.competitionId,
+    description: description
+  };
+
+  Challenge.findOneAndUpdate({
+    '_id': challengeData._id
+  }, {
+    'complete': true,
+    'challenger.winner': challengeData.challenger.winner || false,
+    'opponent.winner': challengeData.opponent.winner || false,
+    'completed': Date.now()
+  }).exec(function (err, challenge) {
+    if (err) {
+      return next(err);
+    }
+    websockets.broadcast('challenge_completed', challengeDetails);
+    res.status(201).json(challenge);
+  });
+};
