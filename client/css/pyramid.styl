@@ -4,16 +4,43 @@
   
   .pyramid-name
     font-size 20px
+
+  .level
+    padding 5px 50px
+    position relative
+  
+    .level-marker
+      color #ccc
+      font-size 40px
+      left 0
+      line-height 75px
+      padding 10px 15px
+      position absolute
+      top 0
+
+  .level:nth-child(odd)
+    background-color #eee
+
+    .level-marker
+      color #ddd
     
+  .level:nth-child(even)
+    background-color #ddd
+
   .pyramid-block
+    background-color #fff
     border 1px solid #000
     display inline-block
     font-size 14px
     height 75px
     margin 5px
     padding 5px
+    position relative
     vertical-align top
     width 150px
+
+    @media screen and (max-width: 450px)
+      width 100%
     
     &.empty
       background-color #ccc
@@ -25,5 +52,12 @@
       border-color #0f0
       cursor pointer
 
-    &.unavailable
-      border-color #00f
+    &.unavailable:before
+      color #b50000
+      content "\e033"
+      font-family "Glyphicons Halflings"
+      line-height 1
+      margin 5px
+      position absolute
+      bottom 0
+      right 0

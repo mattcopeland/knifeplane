@@ -43,9 +43,13 @@
       pyramidsService.getPyramid(vm.competitionId).then(function (pyramid) {
         vm.pyramid = pyramid.data;
 
+        vm.levels = [];
+        for (var i = 1; i <= pyramid.data.levels; ++i) {
+          vm.levels.push(i);
+        }
+
         orderPlayers();
         getPlayersStatus();
-        createBreakPoints();
         calculatePyramidBlocks();
         fillInEmptyBlocks();
         assignLevelsToPlayers();
@@ -80,7 +84,7 @@
             }
 
             // Track when the challenge will expire
-            var timeToExpire = moment().diff(moment(challenge.data.created).add(challenge.data.timeLimit, 's'), 's') * -1;
+            var timeToExpire = moment().diff(moment(challenge.data.created).add(challenge.data.timeLimit, 'h'), 's') * -1;
             if (timeToExpire > 0) {
               player.challenge.expires = timeToExpire;
             }
@@ -130,6 +134,7 @@
     // This will be used to determine who other players can challenge
     function assignLevelsToPlayers() {
       var level = 0;
+      createBreakPoints();
       for (var i = 0; i < vm.pyramid.players.length; i++) {
         if (vm.breakPoints.indexOf(i + 1) > -1) {
           level += 1;
