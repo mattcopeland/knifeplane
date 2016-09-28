@@ -56,21 +56,27 @@
       });
     }
 
-    // Order the players by the position property of the players array in the pyramid object
+    /**
+     * Order the players by the position property of the players array in the pyramid object
+     */
     function orderPlayers() {
       vm.pyramid.players = $filter('orderBy')(vm.pyramid.players, 'position');
     }
 
-    // Figure out if each player is already challenged and set some stuff
+    /**
+     * Figure out if each player is already challenged and set some stuff
+     */
     function getPlayersStatus() {
       _.forEach(vm.pyramid.players, function (player) {
 
+        // Find the current user if they are on this pyramid and set some properties
         if (identityService.currentUser && player._id === identityService.currentUser._id) {
           vm.isCurrentUserOnPyramid = true;
           player.class = 'current-user';
           vm.currentUserPlayer = player;
         }
 
+        // Get the active challenges for each player and do some stuff
         challengesService.getActiveChallengeByCompetitionByPlayer(vm.competitionId, player._id).then(function (challenge) {
           // If this player is involed in an active challange
           if (challenge.data) {
@@ -83,16 +89,22 @@
               player.challenge.position = 'opponent';
             }
 
+            /*
             // Track when the challenge will expire
             var timeToExpire = moment().diff(moment(challenge.data.created).add(challenge.data.timeLimit, 'h'), 's') * -1;
+            //timeToExpire = 0;
+            // If the challenge has not yet expired display a countdown
             if (timeToExpire > 0) {
               player.challenge.expires = timeToExpire;
+              // If they challenge expired while no one was viewing this pyramid, complete the challenge by forfeit
+            } else if (timeToExpire <= 0 && !challenge.data.complete && player.challenge.position === 'challenger') {
+              completeChallenge(null, true, player);
             }
+            */
 
             // If this is the currently logged in user set some properties for use
             if (vm.isCurrentUserOnPyramid && player._id === identityService.currentUser._id) {
               vm.hasActiveChallenge = true;
-              vm.currentUserPlayer = player;
               // If this is not the currently logged in user mark them as unavailable
             } else {
               player.class = 'unavailable';
@@ -102,7 +114,9 @@
       });
     }
 
-    // Figure out where to start each new row on the pyramid
+    /**
+     * Figure out where to start each new row on the pyramid
+     */
     function createBreakPoints() {
       vm.breakPoints = [];
       for (var i = 0; i < vm.pyramid.levels; i++) {
@@ -198,9 +212,16 @@
         }
       }
     }
-
-    function completeChallenge(winnerIsCurrentUser, forfeit) {
-      challengesService.getActiveChallengeByCompetitionByPlayer(vm.competitionId, vm.currentUserPlayer._id).then(function (challenge) {
+    /**
+     * Complete a challenge by a user interaction or a forfeit
+     * 
+     * @param  {boolean} winnerIsCurrentUser
+     * @param  {boolean} forfeit
+     * @param  {object} forfeitWinner
+     */
+    function completeChallenge(winnerIsCurrentUser, forfeit, forfeitWinner) {
+      var player = forfeitWinner || vm.currentUserPlayer;
+      challengesService.getActiveChallengeByCompetitionByPlayer(vm.competitionId, player._id).then(function (challenge) {
         vm.hasActiveChallenge = false;
         vm.showCreateChallengeOptions = false;
         vm.showCompleteChallengeOptions = false;

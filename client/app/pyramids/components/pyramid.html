@@ -1,20 +1,19 @@
 <div class="pyramid">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="pyramid-name">{{vm.pyramid.name}}</div>
             <div ng-repeat="level in vm.levels" class="level level-{{level}}">
                 <div class="level-marker">{{level}}</div>
                 <div ng-repeat="player in vm.pyramid.players" ng-if="player.level === level" ng-click="vm.createChallenge(player)" class="pyramid-block" ng-class="player.class">
                     {{player.firstName}} {{player.lastName}}
-                    <div ng-if="player.challenge && player.challenge.position === 'opponent'">
+                    <div ng-if="player.challenge && player.challenge.position === 'opponent' && player.challenge.expires">
                         <timer interval="1000" countdown="player.challenge.expires" finish-callback="vm.challengeExpired()">{{hours}}:{{mminutes}}:{{sseconds}}</timer>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <button class="btn btn-block btn-default" type="button" ng-if="vm.isCurrentUserOnPyramid && !vm.hasActiveChallenge && !vm.showCreateChallengeOptions && vm.currentUserPlayer.level !== 1" ng-click="vm.startChallenge()">Make a Challenge</button>
-
             <div ng-if="vm.showCreateChallengeOptions && vm.availableChallenges">
                 <button class="btn btn-block btn-default" type="button" ng-click="vm.startChallenge(true)">Cancel</button> Choose from the following players:
                 <div ng-repeat="player in vm.pyramid.players" ng-if="player.available" ng-click="vm.createChallenge(player)">
@@ -24,15 +23,12 @@
             <div ng-if="vm.showCreateChallengeOptions && !vm.availableChallenges">
                 Sorry, you have no available opponents
             </div>
-
             <button class="btn btn-block btn-default" type="button" ng-if="vm.isCurrentUserOnPyramid && vm.hasActiveChallenge && !vm.showCompleteChallengeOptions" ng-click="vm.showCompleteChallengeOptions = true">Complete a Challenge</button>
-
             <div ng-if="vm.showCompleteChallengeOptions">
                 <button class="btn btn-success" type="button" ng-click="vm.completeChallenge(true)">Won</button>
                 <button class="btn btn-danger" type="button" ng-click="vm.completeChallenge(false)">Lost</button>
             </div>
-
-            <div kp-challeneges competition-id="{{vm.competitionId}}"></div>
+            <!--<div kp-challeneges competition-id="{{vm.competitionId}}"></div>-->
         </div>
     </div>
 </div>

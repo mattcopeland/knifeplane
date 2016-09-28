@@ -75,6 +75,7 @@ exports.completeChallenge = function (req, res, next) {
     '_id': challengeData._id
   }, {
     'complete': true,
+    'forfeit': challengeData.challenger.forfeit,
     'challenger.winner': challengeData.challenger.winner || false,
     'opponent.winner': challengeData.opponent.winner || false,
     'completed': Date.now()

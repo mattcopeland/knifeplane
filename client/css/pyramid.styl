@@ -29,7 +29,8 @@
 
   .pyramid-block
     background-color #fff
-    border 1px solid #000
+    border 1px solid #ddd
+    border-top-width 3px
     display inline-block
     font-size 14px
     height 75px
@@ -46,18 +47,21 @@
       background-color #ccc
       
     &.current-user
-      border-color #f00
+      border-top 3px solid #32c8de
       
     &.available
-      border-color #0f0
+      border-top 3px solid #51d466
       cursor pointer
 
-    &.unavailable:before
-      color #b50000
-      content "\e033"
-      font-family "Glyphicons Halflings"
-      line-height 1
-      margin 5px
-      position absolute
-      bottom 0
-      right 0
+    &.unavailable
+      border-top 3px solid #f75353
+
+      &:before
+        color #f75353
+        content "\f023"
+        font-family "FontAwesome"
+        line-height 1
+        margin 5px
+        position absolute
+        bottom 0
+        right 0

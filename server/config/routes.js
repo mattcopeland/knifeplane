@@ -12,13 +12,13 @@ module.exports = function (app) {
   app.get('/api/pyramids', auth.requiresApiLogin, pyramids.getPyramids);
   app.get('/api/pyramids/user', auth.requiresApiLogin, pyramids.getPyramidsForUser);
   app.post('/api/pyramids/create', auth.requiresRole('admin'), pyramids.createPyramid);
-  app.post('/api/pyramids/swapPositions', auth.requiresApiLogin, pyramids.swapPositions);
+  app.post('/api/pyramids/swapPositions', pyramids.swapPositions);
   app.post('/api/pyramids/addPlayer', auth.requiresApiLogin, pyramids.addPlayer);
 
   app.get('/api/challenges/competition', challenges.getChallengesByCompetition);
   app.get('/api/challenges/active/competition/player', challenges.getActiveChallengeByCompetitionByPlayer);
   app.post('/api/challenges/create', auth.requiresApiLogin, challenges.createChallenge);
-  app.post('/api/challenges/complete', auth.requiresApiLogin, challenges.completeChallenge);
+  app.post('/api/challenges/complete', challenges.completeChallenge);
 
   app.post('/login', auth.authenticate);
 

@@ -8,7 +8,7 @@
       createUser: createUser,
       logout: logout,
       authorizeCurrentUserForRoute: authorizeCurrentUserForRoute,
-      authorizeAuthenticatedUserForRoute: authorizeAuthenticatedUserForRoute
+      authenticatedUserForRoute: authenticatedUserForRoute
     };
     return service;
 
@@ -63,7 +63,7 @@
       }
     }
 
-    function authorizeAuthenticatedUserForRoute() {
+    function authenticatedUserForRoute() {
       if (identityService.isAuthenticated()) {
         return true;
       } else {

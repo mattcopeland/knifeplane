@@ -112,6 +112,6 @@
   requireAuth.$inject = ['authService'];
 
   function requireAuth(authService) {
-    return authService.authorizeAuthenticatedUserForRoute();
+    return authService.authenticatedUserForRoute();
   }
 })();

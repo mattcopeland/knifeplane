@@ -8,5 +8,5 @@
       startTop: 6,
       startRight: 6
     });
-  };
+  }
 })();
