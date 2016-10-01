@@ -20,14 +20,18 @@
   }
 
   /* @ngInject */
-  function ctrlFunc(challengesService) {
+  function ctrlFunc($scope, challengesService) {
     var vm = this;
     vm.challenges = [];
 
     activate();
 
     function activate() {
-      challengesService.getChallengesByCompetition(vm.competitionId).then(function (challenges) {
+      getActiveChallenges();
+    }
+
+    function getActiveChallenges() {
+      challengesService.getActiveChallengesByCompetition(vm.competitionId).then(function (challenges) {
         if (challenges.data.length > 0) {
           vm.challenges = challenges.data;
           _.forEach(vm.challenges, function (challenge) {
@@ -36,5 +40,19 @@
         }
       });
     }
+
+    // Watch for websocket event
+    $scope.$on('ws:challenge_created', function (_, challengeDetails) {
+      if (vm.competitionId === challengeDetails.competitionId) {
+        getActiveChallenges();
+      }
+    });
+
+    // Watch for websocket event
+    $scope.$on('ws:challenge_completed', function (_, challengeDetails) {
+      if (vm.competitionId === challengeDetails.competitionId) {
+        getActiveChallenges();
+      }
+    });
   }
 })();

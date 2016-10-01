@@ -10,6 +10,16 @@ exports.getChallengesByCompetition = function (req, res) {
   });
 };
 
+exports.getActiveChallengesByCompetition = function (req, res) {
+  var competitionId = req.query.competitionId;
+  Challenge.find({
+    competitionId: competitionId,
+    complete: {$ne: true}
+  }).exec(function (err, collection) {
+    res.send(collection);
+  });
+};
+
 exports.getActiveChallengeByCompetitionByPlayer = function (req, res) {
   var competitionId = req.query.competitionId;
   var playerId = req.query.playerId;

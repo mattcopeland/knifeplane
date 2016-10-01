@@ -89,7 +89,6 @@
               player.challenge.position = 'opponent';
             }
 
-            /*
             // Track when the challenge will expire
             var timeToExpire = moment().diff(moment(challenge.data.created).add(challenge.data.timeLimit, 'h'), 's') * -1;
             //timeToExpire = 0;
@@ -100,7 +99,6 @@
             } else if (timeToExpire <= 0 && !challenge.data.complete && player.challenge.position === 'challenger') {
               completeChallenge(null, true, player);
             }
-            */
 
             // If this is the currently logged in user set some properties for use
             if (vm.isCurrentUserOnPyramid && player._id === identityService.currentUser._id) {
@@ -283,6 +281,7 @@
     $scope.$on('ws:challenge_created', function (_, challengeDetails) {
       if (vm.competitionId === challengeDetails.competitionId) {
         Notification.info(challengeDetails.description);
+        refreshPyramid();
       }
     });
 
@@ -290,6 +289,7 @@
     $scope.$on('ws:challenge_completed', function (_, challengeDetails) {
       if (vm.competitionId === challengeDetails.competitionId) {
         Notification.info(challengeDetails.description);
+        refreshPyramid();
       }
     });
   }

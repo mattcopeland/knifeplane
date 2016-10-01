@@ -9,6 +9,7 @@
       createChallenge: createChallenge,
       completeChallenge: completeChallenge,
       getChallengesByCompetition: getChallengesByCompetition,
+      getActiveChallengesByCompetition: getActiveChallengesByCompetition,
       getActiveChallengeByCompetitionByPlayer: getActiveChallengeByCompetitionByPlayer
     };
 
@@ -27,6 +28,14 @@
     }
 
     function getChallengesByCompetition(competitionId) {
+      return $http.get('/api/challenges/competition',  {
+        params: {
+          competitionId: competitionId
+        }
+      });
+    }
+
+    function getActiveChallengesByCompetition(competitionId) {
       return $http.get('/api/challenges/competition',  {
         params: {
           competitionId: competitionId

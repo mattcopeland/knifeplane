@@ -1,5 +1,4 @@
 var Pyramid = require('mongoose').model('Pyramid');
-var websockets = require('../websockets');
 
 exports.getPyramid = function (req, res) {
   Pyramid.findOne({
@@ -42,11 +41,6 @@ exports.createPyramid = function (req, res) {
 };
 
 exports.swapPositions = function (req, res, next) {
-  var challenger = req.body.challenger;
-  var opponent = req.body.opponent;
-
-  var newResult = challenger.firstName + ' ' + challenger.lastName + ' beat ' + opponent.firstName + ' ' + opponent.lastName;
-
   Pyramid.update(
     {
       _id: req.body.pyramidId,
@@ -76,7 +70,6 @@ exports.swapPositions = function (req, res, next) {
         return next(err);
       }
 
-      websockets.broadcast('match_results', newResult);
       res.status(201).json(pyramids);
     });
 };

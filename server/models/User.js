@@ -30,8 +30,8 @@ var userSchema = mongoose.Schema({
     required: '{PATH} is required!'
   },
   roles: [
-   String
- ],
+    String
+  ],
   created: {
     type: Date,
     required: true,
@@ -63,6 +63,72 @@ function createDefaultUsers() {
         salt: salt,
         hashedPwd: hash,
         roles: ['super-admin', 'admin', 'user']
+      });
+
+      salt = encrypt.createSalt();
+      hash = encrypt.hashPwd(salt, 'tom');
+      User.create({
+        firstName: 'Tom',
+        lastName: 'Klonowski',
+        username: 'tom@tom.com',
+        salt: salt,
+        hashedPwd: hash,
+        roles: ['user']
+      });
+
+      salt = encrypt.createSalt();
+      hash = encrypt.hashPwd(salt, 'justin');
+      User.create({
+        firstName: 'Justin',
+        lastName: 'Modrzynski',
+        username: 'justin@justin.com',
+        salt: salt,
+        hashedPwd: hash,
+        roles: ['user']
+      });
+
+      salt = encrypt.createSalt();
+      hash = encrypt.hashPwd(salt, 'jt');
+      User.create({
+        firstName: 'JT',
+        lastName: 'Ripper',
+        username: 'jt@jt.com',
+        salt: salt,
+        hashedPwd: hash,
+        roles: ['user']
+      });
+
+      salt = encrypt.createSalt();
+      hash = encrypt.hashPwd(salt, 'jodi');
+      User.create({
+        firstName: 'Jodi',
+        lastName: 'Hamann',
+        username: 'jodi@jodi.com',
+        salt: salt,
+        hashedPwd: hash,
+        roles: ['user']
+      });
+
+      salt = encrypt.createSalt();
+      hash = encrypt.hashPwd(salt, 'ryan');
+      User.create({
+        firstName: 'Ryan',
+        lastName: 'Kirkpatrick',
+        username: 'ryan@ryan.com',
+        salt: salt,
+        hashedPwd: hash,
+        roles: ['user']
+      });
+
+      salt = encrypt.createSalt();
+      hash = encrypt.hashPwd(salt, 'abdul');
+      User.create({
+        firstName: 'Abdul',
+        lastName: 'Kader',
+        username: 'abdul@abdul.com',
+        salt: salt,
+        hashedPwd: hash,
+        roles: ['user']
       });
     }
   });
