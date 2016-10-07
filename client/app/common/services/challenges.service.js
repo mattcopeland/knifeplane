@@ -16,7 +16,7 @@
     return service;
 
     function createChallenge(challenge) {
-      $http.post('/api/challenges/create', {
+      return $http.post('/api/challenges/create', {
         challenge: challenge
       });
     }

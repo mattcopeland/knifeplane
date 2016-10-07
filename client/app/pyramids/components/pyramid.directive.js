@@ -205,8 +205,9 @@
               position: player.position
             }
           };
-          challengesService.createChallenge(challenge);
-          refreshPyramid();
+          challengesService.createChallenge(challenge).then(function () {
+            refreshPyramid();
+          });
         }
       }
     }

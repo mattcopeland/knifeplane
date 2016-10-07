@@ -47,7 +47,7 @@ exports.createChallenge = function (req, res) {
     description: challenger + ' has challenged ' + opponent
   };
   
-  Challenge.create(challengeData, function (err) {
+  Challenge.create(challengeData, function (err, challenge) {
     if (err) {
       console.log(err);
       res.status(400);
@@ -56,7 +56,7 @@ exports.createChallenge = function (req, res) {
       });
     }
     websockets.broadcast('challenge_created', challengeDetails);
-    res.status(201);
+    res.status(201).json(challenge);
   });
 };
 

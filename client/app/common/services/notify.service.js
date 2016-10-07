@@ -6,7 +6,7 @@
 
   function notifyService() {
     var service = {
-      notify: notify,
+      info: info,
       success: success,
       warning: warning,
       error: error,
@@ -22,7 +22,7 @@
 
     return service;
 
-    function notify(message, url, target) {
+    function info(message, url, target) {
       $.notify({
         // options
         icon: 'zmdi zmdi-alert-circle-o',
