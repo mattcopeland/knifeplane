@@ -8,21 +8,14 @@
         </div>
         <div class="card-body card-padding">
             <form name="createPyramidForm" ng-submit="vm.createPyramid(vm.newPyramid)" novalidate>
-                <div class="form-group fg-float m-b-30">
+                <div class="form-group m-b-30">
                     <div class="fg-line">
-                        <input type="text" class="form-control fg-input" ng-model="vm.newPyramid.name" required>
-                        <label class="fg-label">Pyramid Name</label>
+                        <input type="text" class="form-control" ng-model="vm.newPyramid.name" placeholder="Pyramid Name" required>
                     </div>
                 </div>
-                <p class="c-gray">Pyramid Levels: {{ vm.newPyramid.levels }}</p>
-                <div slider class="input-slider" ng-model="vm.newPyramid.levels" start="2" end="7" data-is-color="blue"></div>
-                <br />
-                <br />
-                <select chosen multiple data-placeholder="Choose players..." ng-model="vm.addedPlayers" ng-options="player as (player.firstName + ' ' + player.lastName) for player in vm.availablePlayers" class="w-100" required>
-                    <option value=""></option>
-                </select>
-                <br />
-                <br />
+                <p class="c-gray m-b-10">Pyramid Levels: {{ vm.newPyramid.levels }}</p>
+                <div class="input-slider m-b-25" slider ng-model="vm.newPyramid.levels" start="2" end="7" data-is-color="blue"></div>
+                <select class="w-100" chosen multiple data-placeholder="Choose players..." ng-model="vm.addedPlayers" ng-options="player as (player.firstName + ' ' + player.lastName) for player in vm.availablePlayers track by player._id" required></select>
                 <button type="submit" class="btn btn-primary waves-effect" ng-disabled="createPyramidForm.$invalid">Create Pyramid</button>
             </form>
         </div>

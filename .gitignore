@@ -16,7 +16,7 @@ build
 
 # Ignore Directories
 ###################
-**/assets
+
 
 # Ignore Test reporters
 ###################
