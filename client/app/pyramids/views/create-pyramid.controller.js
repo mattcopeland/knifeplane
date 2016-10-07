@@ -10,6 +10,7 @@
     vm.availablePlayers = [];
     vm.addedPlayers = [];
     vm.createPyramid = createPyramid;
+    vm.newPyramid.levels = 4;
 
     activate();
 

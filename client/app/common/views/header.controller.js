@@ -1,8 +1,8 @@
 (function () {
   'use strict';
-  angular.module('app').controller('TopbarCtrl', TopbarCtrl);
+  angular.module('app').controller('HeaderCtrl', HeaderCtrl);
 
-  function TopbarCtrl(identityService, authService) {
+  function HeaderCtrl(identityService, authService) {
     var vm = this;
     vm.indentity = identityService;
     vm.logout = logout;

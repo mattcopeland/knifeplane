@@ -4,7 +4,7 @@
 
   function identityService($window) {
     var currentUser;
-    if (!!$window.bootstrappedUserObject) {
+    if ($window.bootstrappedUserObject !== null) {
       currentUser = $window.bootstrappedUserObject;
     }
     var service = {

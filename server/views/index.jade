@@ -1,5 +1,8 @@
 extends ../includes/layout
 
 block main-content
-  div.topbar-view(ui-view="topbar")
-  div.main-view(ui-view="main")
+  header#header(ui-view="header" data-current-skin="blue")
+  section#main
+    aside#sidebar(kp-sidebar ng-class="{ 'toggled': appCtrl.sidebarToggle.left === true }")
+    section#content(ui-view="content")
+  footer#footer(kp-footer)

@@ -1,0 +1,40 @@
+<div class="sidebar-inner c-overflow">
+    <div class="profile-menu" ng-if="vm.indentity.isAuthenticated()">
+        <a href="" toggle-submenu>
+            <div class="profile-pic">
+                <img src="img/profile-pics/1.jpg" alt="">
+            </div>
+            <div class="profile-info">
+                <span ng-if="vm.indentity.currentUser">{{vm.indentity.currentUser.firstName}}</span>
+                <i class="zmdi zmdi-caret-down"></i>
+            </div>
+        </a>
+        <ul class="main-menu">
+            <li>
+                <a href="" ng-click="vm.logout()"><i class="zmdi zmdi-time-restore"></i> Logout</a>
+            </li>
+        </ul>
+    </div>
+    <ul class="main-menu">
+        <li ui-sref-active="active">
+            <a ui-sref="home"><i class="zmdi zmdi-home"></i> Home</a>
+        </li>
+        <li ui-sref-active="active" ng-if="!vm.indentity.isAuthenticated()">
+            <a ui-sref="login"><i class="zmdi zmdi-account"></i> Login</a>
+        </li>
+        <li ui-sref-active="active" ng-if="!vm.indentity.isAuthenticated()">
+            <a ui-sref="register"><i class="zmdi zmdi-account-add"></i> Register</a>
+        </li>
+        <li class="sub-menu" ng-class="{ 'active toggled': appCtrl.$state.includes('pyramids') }">
+            <a href="" toggle-submenu><i class="zmdi zmdi-triangle-up"></i> Pyramids</a>
+            <ul>
+                <li>
+                    <a ui-sref-active="active" ui-sref="pyramids.myPyramids">My Pyramids</a>
+                </li>
+                <li>
+                    <a ui-sref-active="active" ui-sref="pyramids.create">Cerate Pyramid</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

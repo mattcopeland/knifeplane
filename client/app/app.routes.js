@@ -20,35 +20,52 @@
       .state('home', {
         url: '/',
         views: {
-          'main': {
+          'content': {
             controller: 'HomeCtrl',
             controllerAs: 'vm',
             templateUrl: 'common/views/home.html'
           },
-          'topbar': {
-            controller: 'TopbarCtrl',
+          'header': {
+            controller: 'HeaderCtrl',
             controllerAs: 'vm',
-            templateUrl: 'common/views/topbar.html'
+            templateUrl: 'common/views/header.html'
+          },
+          'sidebar': {
+            controller: 'SidebarCtrl',
+            controllerAs: 'vm',
+            templateUrl: 'common/views/sidebar.html'
           }
         }
       }).state('pyramids', {
         url: '/pyramids',
         views: {
-          'main': {
+          'content': {
             controller: 'PyramidsCtrl',
             controllerAs: 'vm',
             templateUrl: 'pyramids/views/pyramids.html'
           },
-          'topbar': {
-            controller: 'TopbarCtrl',
+          'header': {
+            controller: 'HeaderCtrl',
             controllerAs: 'vm',
-            templateUrl: 'common/views/topbar.html'
+            templateUrl: 'common/views/header.html'
           }
+        }
+      }).state('pyramids.myPyramids', {
+        url: '/my-pyramids',
+        views: {
+          'content@': {
+            controller: 'MyPyramidsCtrl',
+            controllerAs: 'vm',
+            templateUrl: 'pyramids/views/my-pyramids.html'
+          }
+        },
+        resolve: {
+          auth: routeRoleChecks.user
         }
       }).state('pyramids.view', {
         url: '/view/:pyramidId',
         views: {
-          'main@': {
+          'content@': {
             controller: 'PyramidCtrl',
             controllerAs: 'vm',
             templateUrl: 'pyramids/views/pyramid.html'
@@ -57,41 +74,51 @@
       }).state('pyramids.create', {
         url: '/create',
         views: {
-          'main@': {
+          'content@': {
             controller: 'CreatePyramidCtrl',
             controllerAs: 'vm',
             templateUrl: 'pyramids/views/create-pyramid.html'
           }
         },
         resolve: {
-          auth: routeRoleChecks.admin
+          auth: routeRoleChecks.user
         }
       }).state('login', {
         url: '/login',
         views: {
-          'main': {
+          'content': {
             controller: 'LoginCtrl',
             controllerAs: 'vm',
             templateUrl: 'authentication/views/login.html'
           },
-          'topbar': {
-            controller: 'TopbarCtrl',
+          'header': {
+            controller: 'HeaderCtrl',
             controllerAs: 'vm',
-            templateUrl: 'common/views/topbar.html'
+            templateUrl: 'common/views/header.html'
+          },
+          'sidebar': {
+            controller: 'SidebarCtrl',
+            controllerAs: 'vm',
+            templateUrl: 'common/views/sidebar.html'
           }
         }
       }).state('register', {
         url: '/register',
         views: {
-          'main': {
+          'content': {
             controller: 'RegisterCtrl',
             controllerAs: 'vm',
             templateUrl: 'authentication/views/register.html'
           },
-          'topbar': {
-            controller: 'TopbarCtrl',
+          'header': {
+            controller: 'HeaderCtrl',
             controllerAs: 'vm',
-            templateUrl: 'common/views/topbar.html'
+            templateUrl: 'common/views/header.html'
+          },
+          'sidebar': {
+            controller: 'SidebarCtrl',
+            controllerAs: 'vm',
+            templateUrl: 'common/views/sidebar.html'
           }
         }
       });

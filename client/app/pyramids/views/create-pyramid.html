@@ -1,18 +1,30 @@
 <div class="container">
-  <form name="createPyramidForm" ng-submit="vm.createPyramid(vm.newPyramid)" novalidate>
-    <div class="form-group">
-      <label>Pyramid Name</label>
-      <input class="form-control" type="text" ng-model="vm.newPyramid.name" required>
+    <div class="block-header">
+        <h2>Create a New Pyramid</h2>
     </div>
-    <div class="form-group">
-      <label>Levels</label>
-      <input class="form-control" type="text" ng-model="vm.newPyramid.levels" required>
+    <div class="card">
+        <div class="card-header">
+            <h2>Pyramid Details</h2>
+        </div>
+        <div class="card-body card-padding">
+            <form name="createPyramidForm" ng-submit="vm.createPyramid(vm.newPyramid)" novalidate>
+                <div class="form-group fg-float m-b-30">
+                    <div class="fg-line">
+                        <input type="text" class="form-control fg-input" ng-model="vm.newPyramid.name" required>
+                        <label class="fg-label">Pyramid Name</label>
+                    </div>
+                </div>
+                <p class="c-gray">Pyramid Levels: {{ vm.newPyramid.levels }}</p>
+                <div slider class="input-slider" ng-model="vm.newPyramid.levels" start="2" end="7" data-is-color="blue"></div>
+                <br />
+                <br />
+                <select chosen multiple data-placeholder="Choose players..." ng-model="vm.addedPlayers" ng-options="player as (player.firstName + ' ' + player.lastName) for player in vm.availablePlayers" class="w-100" required>
+                    <option value=""></option>
+                </select>
+                <br />
+                <br />
+                <button type="submit" class="btn btn-primary waves-effect" ng-disabled="createPyramidForm.$invalid">Create Pyramid</button>
+            </form>
+        </div>
     </div>
-    <div class="form-group">
-      <label>Choose Players</label>
-      <div isteven-multi-select input-model="vm.availablePlayers" output-model="vm.addedPlayers" button-label="firstName lastName" item-label="firstName lastName" tick-property="ticked">
-      </div>
-    </div>
-    <input class="btn btn-success btn-lg btn-block" type="submit" value="Create Pyramid" ng-disabled="createPyramidForm.$invalid">
-  </form>
 </div>

@@ -21,7 +21,7 @@
   }
 
   /* @ngInject */
-  function ctrlFunc($scope, pyramidsService, $filter, Notification, identityService, challengesService) {
+  function ctrlFunc($scope, pyramidsService, $filter, notifyService, identityService, challengesService) {
     var vm = this;
     vm.pyramid = {};
     vm.breakPoints = [];
@@ -181,7 +181,7 @@
     function createChallenge(player) {
       if (vm.showCreateChallengeOptions) {
         if (!player.available) {
-          Notification.error('Sorry, that is not a valid challenge.');
+          notifyService.error('Sorry, that is not a valid challenge.');
         } else {
           vm.showCreateChallengeOptions = false;
           vm.hasActiveChallenge = true;
@@ -280,7 +280,7 @@
     // Watch for websocket event
     $scope.$on('ws:challenge_created', function (_, challengeDetails) {
       if (vm.competitionId === challengeDetails.competitionId) {
-        Notification.info(challengeDetails.description);
+        notifyService.info(challengeDetails.description);
         refreshPyramid();
       }
     });
@@ -288,7 +288,7 @@
     // Watch for websocket event
     $scope.$on('ws:challenge_completed', function (_, challengeDetails) {
       if (vm.competitionId === challengeDetails.competitionId) {
-        Notification.info(challengeDetails.description);
+        notifyService.info(challengeDetails.description);
         refreshPyramid();
       }
     });

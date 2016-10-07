@@ -1,26 +1,27 @@
 <div class="container">
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3>Basic Form</h3>
+    <div class="block-header">
+        <h2>Welcome to the Knifeplane</h2>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h2>Login</h2>
+        </div>
+        <div class="card-body card-padding">
+            <form role="form" name="loginForm" ng-submit="vm.login(vm.username, vm.password)" novalidate>
+                <div class="form-group fg-float m-b-30">
+                    <div class="fg-line">
+                        <input type="email" class="form-control fg-input" ng-model="vm.username">
+                        <label class="fg-label">Email</label>
+                    </div>
                 </div>
-                <div class="panel-body">
-                    <form role="form" name="loginForm" ng-submit="vm.login(vm.username, vm.password)" novalidate>
-                        <div class="form-group">
-                            <label>Email address</label>
-                            <input type="email" placeholder="Enter email" class="form-control" ng-model="vm.username">
-                        </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" placeholder="Password" class="form-control" ng-model="vm.password">
-                        </div>
-                        <div class="text-right">
-                            <button type="submit" class="btn btn-space btn-primary">Sign In</button>
-                        </div>
-                    </form>
+                <div class="form-group fg-float m-b-30">
+                    <div class="fg-line">
+                        <input type="password" class="form-control fg-input" ng-model="vm.password">
+                        <label class="fg-label">Password</label>
+                    </div>
                 </div>
-            </div>
+                <button type="submit" class="btn btn-primary waves-effect">Sign In</button>
+            </form>
         </div>
     </div>
 </div>

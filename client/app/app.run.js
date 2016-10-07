@@ -6,6 +6,7 @@
     $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
       if (error === 'not authorized') {
         $state.go('login');
+        $state.previous = toState;
       }
     });
   }

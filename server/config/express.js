@@ -26,7 +26,7 @@ module.exports = function (app, config) {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  app.use(express.static(__dirname + '/../../client/assets'));
   app.use(express.static(__dirname + '/../../bower_components'));
+  app.use(express.static(__dirname + '/../../client/assets'));
   app.use(express.static(__dirname + '/../../client/app'));
 };
