@@ -7199,9 +7199,6 @@ body {
 .pyramid {
   text-align: center;
 }
-.pyramid .pyramid-name {
-  font-size: 20px;
-}
 .pyramid .level {
   padding: 5px 50px;
   position: relative;
