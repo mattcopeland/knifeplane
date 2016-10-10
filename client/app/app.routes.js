@@ -24,16 +24,6 @@
             controller: 'HomeCtrl',
             controllerAs: 'vm',
             templateUrl: 'common/views/home.html'
-          },
-          'header': {
-            controller: 'HeaderCtrl',
-            controllerAs: 'vm',
-            templateUrl: 'common/views/header.html'
-          },
-          'sidebar': {
-            controller: 'SidebarCtrl',
-            controllerAs: 'vm',
-            templateUrl: 'common/views/sidebar.html'
           }
         }
       }).state('pyramids', {
@@ -43,11 +33,6 @@
             controller: 'PyramidsCtrl',
             controllerAs: 'vm',
             templateUrl: 'pyramids/views/pyramids.html'
-          },
-          'header': {
-            controller: 'HeaderCtrl',
-            controllerAs: 'vm',
-            templateUrl: 'common/views/header.html'
           }
         }
       }).state('pyramids.myPyramids', {
@@ -90,16 +75,6 @@
             controller: 'LoginCtrl',
             controllerAs: 'vm',
             templateUrl: 'authentication/views/login.html'
-          },
-          'header': {
-            controller: 'HeaderCtrl',
-            controllerAs: 'vm',
-            templateUrl: 'common/views/header.html'
-          },
-          'sidebar': {
-            controller: 'SidebarCtrl',
-            controllerAs: 'vm',
-            templateUrl: 'common/views/sidebar.html'
           }
         }
       }).state('register', {
@@ -109,16 +84,6 @@
             controller: 'RegisterCtrl',
             controllerAs: 'vm',
             templateUrl: 'authentication/views/register.html'
-          },
-          'header': {
-            controller: 'HeaderCtrl',
-            controllerAs: 'vm',
-            templateUrl: 'common/views/header.html'
-          },
-          'sidebar': {
-            controller: 'SidebarCtrl',
-            controllerAs: 'vm',
-            templateUrl: 'common/views/sidebar.html'
           }
         }
       });

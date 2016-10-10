@@ -15,7 +15,7 @@
             <h2>Select a pyramid from the list below to view</h2>
         </div>
         <div class="card-body card-padding">
-            <ul>
+            <ul class="clist clist-pyramid">
                 <li ng-if="vm.pyramids.length > 0" ng-repeat="pyramid in vm.pyramids">
                     <a ui-sref="pyramids.view({pyramidId: pyramid._id})">{{pyramid.name}}</a>
                 </li>
