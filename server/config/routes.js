@@ -16,6 +16,7 @@ module.exports = function (app) {
   app.post('/api/pyramids/addPlayer', auth.requiresApiLogin, pyramids.addPlayer);
 
   app.get('/api/challenges/competition', challenges.getChallengesByCompetition);
+  app.get('/api/challenges/active/competition', challenges.getActiveChallengesByCompetition);
   app.get('/api/challenges/active/competition/player', challenges.getActiveChallengeByCompetitionByPlayer);
   app.post('/api/challenges/create', auth.requiresApiLogin, challenges.createChallenge);
   app.post('/api/challenges/complete', challenges.completeChallenge);

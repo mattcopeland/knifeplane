@@ -36,7 +36,7 @@
     }
 
     function getActiveChallengesByCompetition(competitionId) {
-      return $http.get('/api/challenges/competition',  {
+      return $http.get('/api/challenges/active/competition',  {
         params: {
           competitionId: competitionId
         }

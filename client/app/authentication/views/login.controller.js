@@ -9,7 +9,6 @@
     activate();
 
     function activate() {
-      console.log($state.previous);
     }
 
     function login(username, password) {

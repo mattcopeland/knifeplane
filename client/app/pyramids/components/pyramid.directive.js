@@ -74,39 +74,38 @@
           vm.isCurrentUserOnPyramid = true;
           player.class = 'current-user';
           vm.currentUserPlayer = player;
-        }
 
-        // Get the active challenges for each player and do some stuff
-        challengesService.getActiveChallengeByCompetitionByPlayer(vm.competitionId, player._id).then(function (challenge) {
-          // If this player is involed in an active challange
-          if (challenge.data) {
-            // Init a challenge object on this player
-            player.challenge = {};
-            // Capture if they are the challenger or the opponent
-            if (player._id === challenge.data.challenger._id) {
-              player.challenge.position = 'challenger';
-            } else {
-              player.challenge.position = 'opponent';
-            }
-
-            // Track when the challenge will expire
-            var timeToExpire = moment().diff(moment(challenge.data.created).add(challenge.data.timeLimit, 'h'), 's') * -1;
-            //timeToExpire = 0;
-            // If the challenge has not yet expired display a countdown
-            if (timeToExpire > 0) {
-              player.challenge.expires = timeToExpire;
-              // If they challenge expired while no one was viewing this pyramid, complete the challenge by forfeit
-            } else if (timeToExpire <= 0 && !challenge.data.complete && player.challenge.position === 'challenger') {
-              completeChallenge(null, true, player);
-            }
-
-            // If this is the currently logged in user set some properties for use
-            if (vm.isCurrentUserOnPyramid && player._id === identityService.currentUser._id) {
+          challengesService.getActiveChallengeByCompetitionByPlayer(vm.competitionId, player._id).then(function (challenge) {
+            if (challenge.data) {
               vm.hasActiveChallenge = true;
-              // If this is not the currently logged in user mark them as unavailable
-            } else {
-              player.class = 'unavailable';
             }
+          });
+        }
+      });
+
+      challengesService.getActiveChallengesByCompetition(vm.competitionId).then(function (challenges) {
+        _.forEach(challenges.data, function (challenge) {
+
+          var challenger = _.find(vm.pyramid.players, {'_id': challenge.challenger._id});
+          challenger.class = 'unavailable';
+          challenger.challenge = {
+            position: 'challenger'
+          };
+
+          var opponent = _.find(vm.pyramid.players, {'_id': challenge.opponent._id});
+          opponent.class = 'unavailable';
+          opponent.challenge = {
+            position: 'opponent'
+          };
+
+          // Track when the challenge will expire
+          var timeToExpire = moment().diff(moment(challenge.created).add(challenge.timeLimit, 'h'), 's') * -1;
+          // If the challenge has not yet expired display a countdown on the opponent
+          if (timeToExpire > 0) {
+            opponent.challenge.expires = timeToExpire;
+            // If the challenge expired while no one was viewing this pyramid complete the challenge by forfeit
+          } else if (timeToExpire <= 0) {
+            completeChallenge(null, true, challenger);
           }
         });
       });

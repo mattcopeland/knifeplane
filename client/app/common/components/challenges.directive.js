@@ -32,6 +32,7 @@
 
     function getActiveChallenges() {
       challengesService.getActiveChallengesByCompetition(vm.competitionId).then(function (challenges) {
+        vm.challenges = [];
         if (challenges.data.length > 0) {
           vm.challenges = challenges.data;
           _.forEach(vm.challenges, function (challenge) {
