@@ -30,7 +30,7 @@
 
   .pyramid-block {
     background-color: #fff;
-    border: 1px solid #ddd;
+    border: 1px solid #bdbdbd;
     border-top-width: 3px;
     display: inline-block;
     font-size: 14px;
@@ -46,20 +46,21 @@
     }
     
     &.empty {
-      background-color: #ccc;
+      background-color: @m-gray;
+      color: #fff;
     }
       
     &.current-user {
-      border-top: 3px solid #32c8de;
+      border-top: 3px solid @m-blue;
     }
       
     &.available {
-      border-top: 3px solid #51d466;
+      border-top: 3px solid @m-green;
       cursor: pointer;
     }
 
     &.unavailable {
-      border-top: 3px solid #f75353;
+      border-top: 3px solid @m-red;
     }
   }
 }

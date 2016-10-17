@@ -3,6 +3,6 @@ extends ../includes/layout
 block main-content
   header#header(kp-header data-current-skin="blue")
   section#main
-    aside#sidebar(kp-sidebar ng-class="{ 'toggled': appCtrl.sidebarToggle.left === true }")
+    aside#sidebar(kp-sidebar ng-class="{ 'toggled': sidebarCtrl.sidebarStatus.left === true }")
     section#content(ui-view="content")
   footer#footer(kp-footer)

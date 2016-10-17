@@ -15,7 +15,7 @@ gulp.task('css', function () {
 gulp.task('less', function () {
   gulp.src('client/less/combined.less')
     .pipe(less())
-    .pipe(autoprefixer())
+    //.pipe(autoprefixer())
     .pipe(gulp.dest('client/assets'));
 });
 

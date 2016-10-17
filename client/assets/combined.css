@@ -1059,10 +1059,14 @@ th {
   content: "\e260";
 }
 * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 *:before,
 *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 html {
@@ -1123,6 +1127,7 @@ img {
   border: 1px solid #EDEDED;
   border-radius: 2px;
   -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
   display: inline-block;
   max-width: 100%;
@@ -2498,6 +2503,8 @@ label {
   font-weight: bold;
 }
 input[type="search"] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 input[type="radio"],
@@ -2543,13 +2550,16 @@ output {
   background-image: none;
   border: 1px solid #e0e0e0;
   border-radius: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 .form-control:focus {
   border-color: #b4b4b4;
   outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(180, 180, 180, 0.6);
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(180, 180, 180, 0.6);
 }
 .form-control::-moz-placeholder {
@@ -2806,10 +2816,12 @@ select[multiple].input-lg {
 }
 .has-success .form-control {
   border-color: #67bd6a;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 .has-success .form-control:focus {
   border-color: #49a84d;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #aedcb0;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #aedcb0;
 }
 .has-success .input-group-addon {
@@ -2834,10 +2846,12 @@ select[multiple].input-lg {
 }
 .has-warning .form-control {
   border-color: #ffa829;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 .has-warning .form-control:focus {
   border-color: #f59200;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ffd28f;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ffd28f;
 }
 .has-warning .input-group-addon {
@@ -2862,10 +2876,12 @@ select[multiple].input-lg {
 }
 .has-error .form-control {
   border-color: #f6675d;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 .has-error .form-control:focus {
   border-color: #f33a2c;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #fbc2bd;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #fbc2bd;
 }
 .has-error .input-group-addon {
@@ -2982,8 +2998,7 @@ select[multiple].input-lg {
   font-weight: 400;
   text-align: center;
   vertical-align: middle;
-  -ms-touch-action: manipulation;
-      touch-action: manipulation;
+  touch-action: manipulation;
   cursor: pointer;
   background-image: none;
   border: 1px solid transparent;
@@ -2994,6 +3009,7 @@ select[multiple].input-lg {
   border-radius: 2px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
+  -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -3018,6 +3034,7 @@ select[multiple].input-lg {
 .btn.active {
   outline: 0;
   background-image: none;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 .btn.disabled,
@@ -3026,6 +3043,7 @@ fieldset[disabled] .btn {
   cursor: not-allowed;
   opacity: 0.65;
   filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
   box-shadow: none;
 }
 a.btn.disabled,
@@ -3715,6 +3733,7 @@ fieldset[disabled] .btn-danger:active {
 .btn-link[disabled],
 fieldset[disabled] .btn-link {
   background-color: transparent;
+  -webkit-box-shadow: none;
   box-shadow: none;
 }
 .btn-link,
@@ -3772,6 +3791,7 @@ input[type="button"].btn-block {
 .fade {
   opacity: 0;
   -webkit-transition: opacity 0.15s linear;
+  -o-transition: opacity 0.15s linear;
   transition: opacity 0.15s linear;
 }
 .fade.in {
@@ -3834,6 +3854,7 @@ tbody.collapse.in {
   background-color: #fff;
   border: 1px solid transparent;
   border-radius: 2px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   background-clip: padding-box;
 }
@@ -4023,9 +4044,11 @@ tbody.collapse.in {
   padding-right: 12px;
 }
 .btn-group.open .dropdown-toggle {
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 .btn-group.open .dropdown-toggle.btn-link {
+  -webkit-box-shadow: none;
   box-shadow: none;
 }
 .btn .caret {
@@ -4663,6 +4686,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   padding: 10px 15px;
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
   margin-top: 7.5px;
   margin-bottom: 7.5px;
@@ -4733,6 +4757,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     margin-right: 0;
     padding-top: 0;
     padding-bottom: 0;
+    -webkit-box-shadow: none;
     box-shadow: none;
   }
 }
@@ -5300,6 +5325,7 @@ a.badge:focus {
   border: 1px solid #EDEDED;
   border-radius: 2px;
   -webkit-transition: border 0.2s ease-in-out;
+  -o-transition: border 0.2s ease-in-out;
   transition: border 0.2s ease-in-out;
 }
 .thumbnail > img,
@@ -5348,7 +5374,7 @@ a.thumbnail.active {
   color: inherit;
 }
 .alert-success {
-  background-color: rgba(76, 175, 80, 0.7);
+  background-color: rgba(76, 175, 80, 0.9);
   border-color: transparent;
   color: #fff;
 }
@@ -5359,7 +5385,7 @@ a.thumbnail.active {
   color: #e6e6e6;
 }
 .alert-info {
-  background-color: rgba(33, 150, 243, 0.7);
+  background-color: rgba(33, 150, 243, 0.9);
   border-color: transparent;
   color: #fff;
 }
@@ -5370,7 +5396,7 @@ a.thumbnail.active {
   color: #e6e6e6;
 }
 .alert-warning {
-  background-color: rgba(255, 193, 7, 0.7);
+  background-color: rgba(255, 193, 7, 0.9);
   border-color: transparent;
   color: #fff;
 }
@@ -5381,7 +5407,7 @@ a.thumbnail.active {
   color: #e6e6e6;
 }
 .alert-danger {
-  background-color: rgba(244, 67, 54, 0.7);
+  background-color: rgba(244, 67, 54, 0.9);
   border-color: transparent;
   color: #fff;
 }
@@ -5413,6 +5439,7 @@ a.thumbnail.active {
   margin-bottom: 18px;
   background-color: #f5f5f5;
   border-radius: 2px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 .progress-bar {
@@ -5424,19 +5451,23 @@ a.thumbnail.active {
   color: #fff;
   text-align: center;
   background-color: #2196F3;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   -webkit-transition: width 0.6s ease;
+  -o-transition: width 0.6s ease;
   transition: width 0.6s ease;
 }
 .progress-striped .progress-bar,
 .progress-bar-striped {
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-size: 40px 40px;
 }
 .progress.active .progress-bar,
 .progress-bar.active {
   -webkit-animation: progress-bar-stripes 2s linear infinite;
+  -o-animation: progress-bar-stripes 2s linear infinite;
   animation: progress-bar-stripes 2s linear infinite;
 }
 .progress-bar-success {
@@ -5444,6 +5475,7 @@ a.thumbnail.active {
 }
 .progress-striped .progress-bar-success {
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 .progress-bar-info {
@@ -5451,6 +5483,7 @@ a.thumbnail.active {
 }
 .progress-striped .progress-bar-info {
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 .progress-bar-warning {
@@ -5458,6 +5491,7 @@ a.thumbnail.active {
 }
 .progress-striped .progress-bar-warning {
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 .progress-bar-danger {
@@ -5465,6 +5499,7 @@ a.thumbnail.active {
 }
 .progress-striped .progress-bar-danger {
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 .media {
@@ -5726,6 +5761,7 @@ button.list-group-item-danger.active:focus {
   background-color: #fff;
   border: 1px solid transparent;
   border-radius: 2px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 .panel-body {
@@ -6096,6 +6132,7 @@ button.list-group-item-danger.active:focus {
   background-color: #f5f5f5;
   border: 1px solid #e3e3e3;
   border-radius: 2px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 .well blockquote {
@@ -6152,14 +6189,18 @@ button.close {
 }
 .modal.fade .modal-dialog {
   -webkit-transform: translate(0, -25%);
+  -ms-transform: translate(0, -25%);
+  -o-transform: translate(0, -25%);
   transform: translate(0, -25%);
   -webkit-transition: -webkit-transform 0.3s ease-out;
-  transition: -webkit-transform 0.3s ease-out;
+  -moz-transition: -moz-transform 0.3s ease-out;
+  -o-transition: -o-transform 0.3s ease-out;
   transition: transform 0.3s ease-out;
-  transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
 }
 .modal.in .modal-dialog {
   -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
   transform: translate(0, 0);
 }
 .modal-open .modal {
@@ -6176,6 +6217,7 @@ button.close {
   background-color: #fff;
   border: 1px solid transparent;
   border-radius: 2px;
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
   background-clip: padding-box;
   outline: 0;
@@ -6240,6 +6282,7 @@ button.close {
     margin: 30px auto;
   }
   .modal-content {
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   }
   .modal-sm {
@@ -6393,6 +6436,7 @@ button.close {
   background-clip: padding-box;
   border: 1px solid #fff;
   border-radius: 2px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 .popover.top {
@@ -6506,6 +6550,7 @@ button.close {
   display: none;
   position: relative;
   -webkit-transition: 0.6s ease-in-out left;
+  -o-transition: 0.6s ease-in-out left;
   transition: 0.6s ease-in-out left;
 }
 .carousel-inner > .item > img,
@@ -6515,12 +6560,14 @@ button.close {
 @media all and (transform-3d), (-webkit-transform-3d) {
   .carousel-inner > .item {
     -webkit-transition: -webkit-transform 0.6s ease-in-out;
-    transition: -webkit-transform 0.6s ease-in-out;
+    -moz-transition: -moz-transform 0.6s ease-in-out;
+    -o-transition: -o-transform 0.6s ease-in-out;
     transition: transform 0.6s ease-in-out;
-    transition: transform 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
     -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
     backface-visibility: hidden;
     -webkit-perspective: 1000px;
+    -moz-perspective: 1000px;
     perspective: 1000px;
   }
   .carousel-inner > .item.next,
@@ -6589,6 +6636,7 @@ button.close {
 }
 .carousel-control.left {
   background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
@@ -6597,6 +6645,7 @@ button.close {
   left: auto;
   right: 0;
   background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
@@ -7189,14 +7238,11 @@ body {
   right: 0;
 }
 #content.ng-enter {
-  -webkit-animation: slideInRight 0.5s ease both;
-          animation: slideInRight 0.5s ease both;
-  -webkit-animation-delay: 0.1s;
-          animation-delay: 0.1s;
+  animation: slideInRight 0.5s ease both;
+  animation-delay: 0.1s;
 }
 #content.ng-leave {
-  -webkit-animation: slideOutLeft 0.5s ease both;
-          animation: slideOutLeft 0.5s ease both;
+  animation: slideOutLeft 0.5s ease both;
 }
 .pyramid {
   text-align: center;
@@ -7225,7 +7271,7 @@ body {
 }
 .pyramid .pyramid-block {
   background-color: #fff;
-  border: 1px solid #ddd;
+  border: 1px solid #bdbdbd;
   border-top-width: 3px;
   display: inline-block;
   font-size: 14px;
@@ -7242,17 +7288,18 @@ body {
   }
 }
 .pyramid .pyramid-block.empty {
-  background-color: #ccc;
+  background-color: #9E9E9E;
+  color: #fff;
 }
 .pyramid .pyramid-block.current-user {
-  border-top: 3px solid #32c8de;
+  border-top: 3px solid #2196F3;
 }
 .pyramid .pyramid-block.available {
-  border-top: 3px solid #51d466;
+  border-top: 3px solid #4CAF50;
   cursor: pointer;
 }
 .pyramid .pyramid-block.unavailable {
-  border-top: 3px solid #f75353;
+  border-top: 3px solid #F44336;
 }
 /*
  * Vendors
@@ -7286,21 +7333,29 @@ body {
   opacity: 0;
   background: rgba(0, 0, 0, 0.2);
   background: -webkit-radial-gradient(rgba(0, 0, 0, 0.2) 0, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.5) 60%, rgba(255, 255, 255, 0) 70%);
+  background: -o-radial-gradient(rgba(0, 0, 0, 0.2) 0, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.5) 60%, rgba(255, 255, 255, 0) 70%);
+  background: -moz-radial-gradient(rgba(0, 0, 0, 0.2) 0, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.5) 60%, rgba(255, 255, 255, 0) 70%);
   background: radial-gradient(rgba(0, 0, 0, 0.2) 0, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.5) 60%, rgba(255, 255, 255, 0) 70%);
   -webkit-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
   transition: all 0.5s ease-out;
   -webkit-transition-property: -webkit-transform, opacity;
-  -webkit-transition-property: opacity, -webkit-transform;
-  transition-property: opacity, -webkit-transform;
+  -moz-transition-property: -moz-transform, opacity;
+  -o-transition-property: -o-transform, opacity;
   transition-property: transform, opacity;
-  transition-property: transform, opacity, -webkit-transform;
   -webkit-transform: scale(0) translate(0, 0);
+  -moz-transform: scale(0) translate(0, 0);
+  -ms-transform: scale(0) translate(0, 0);
+  -o-transform: scale(0) translate(0, 0);
   transform: scale(0) translate(0, 0);
   pointer-events: none;
 }
 .waves-effect.waves-light .waves-ripple {
   background: rgba(255, 255, 255, 0.4);
   background: -webkit-radial-gradient(rgba(255, 255, 255, 0.2) 0, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0) 70%);
+  background: -o-radial-gradient(rgba(255, 255, 255, 0.2) 0, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0) 70%);
+  background: -moz-radial-gradient(rgba(255, 255, 255, 0.2) 0, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0) 70%);
   background: radial-gradient(rgba(255, 255, 255, 0.2) 0, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0) 70%);
 }
 .waves-effect.waves-classic .waves-ripple {
@@ -7311,11 +7366,16 @@ body {
 }
 .waves-notransition {
   -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
   transition: none !important;
 }
 .waves-button,
 .waves-circle {
   -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
   transform: translateZ(0);
   -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
 }
@@ -7366,11 +7426,15 @@ body {
 }
 .waves-float {
   -webkit-mask-image: none;
+  -webkit-box-shadow: 0px 1px 1.5px 1px rgba(0, 0, 0, 0.12);
   box-shadow: 0px 1px 1.5px 1px rgba(0, 0, 0, 0.12);
   -webkit-transition: all 300ms;
+  -moz-transition: all 300ms;
+  -o-transition: all 300ms;
   transition: all 300ms;
 }
 .waves-float:active {
+  -webkit-box-shadow: 0px 8px 20px 1px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 8px 20px 1px rgba(0, 0, 0, 0.3);
 }
 .waves-block {
@@ -7498,26 +7562,31 @@ body {
 .fa-rotate-90 {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
   -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
   transform: rotate(90deg);
 }
 .fa-rotate-180 {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
   -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
   transform: rotate(180deg);
 }
 .fa-rotate-270 {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
   -webkit-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
   transform: rotate(270deg);
 }
 .fa-flip-horizontal {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
   -webkit-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
   transform: scale(-1, 1);
 }
 .fa-flip-vertical {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
   -webkit-transform: scale(1, -1);
+  -ms-transform: scale(1, -1);
   transform: scale(1, -1);
 }
 :root .fa-rotate-90,
@@ -7525,8 +7594,7 @@ body {
 :root .fa-rotate-270,
 :root .fa-flip-horizontal,
 :root .fa-flip-vertical {
-  -webkit-filter: none;
-          filter: none;
+  filter: none;
 }
 .fa-stack {
   position: relative;
@@ -10201,9 +10269,12 @@ h6 small,
  */
 .header-inner {
   list-style: none;
-  padding: 17px 0;
+  padding: 0;
   margin-bottom: 0;
   position: relative;
+}
+.header-inner > li {
+  margin: 17px 0;
 }
 .header-inner > li:not(.pull-right) {
   float: left;
@@ -10211,11 +10282,15 @@ h6 small,
 .header-inner > li:not(:last-child) {
   margin-right: -2px;
 }
+.logo {
+  line-height: 56px;
+  margin: 0 !important;
+}
 .logo a {
   color: #fff;
   text-transform: uppercase;
   display: block;
-  font-size: 16px;
+  font-size: 22px;
 }
 #menu-trigger {
   width: 65px;
@@ -10235,15 +10310,20 @@ h6 small,
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.22);
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
   -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
   transform: scale(0);
   z-index: 0;
 }
 #menu-trigger.open:before {
   -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
   transform: scale(1);
 }
 .top-menu {
@@ -10280,12 +10360,17 @@ h6 small,
     width: 100%;
     height: 100%;
     -webkit-transform: scale3d(0, 0, 0);
+    -moz-transform: scale3d(0, 0, 0);
+    -ms-transform: scale3d(0, 0, 0);
+    -o-transform: scale3d(0, 0, 0);
     transform: scale3d(0, 0, 0);
     -webkit-transition: all;
+    -o-transition: all;
     transition: all;
     -webkit-transition-duration: 250ms;
     transition-duration: 250ms;
     -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
     backface-visibility: hidden;
     background-color: rgba(0, 0, 0, 0.12);
     z-index: 0;
@@ -10296,6 +10381,9 @@ h6 small,
   .top-menu > li:not(#toggle-width):hover:before,
   .top-menu > li:not(#toggle-width).open:before {
     -webkit-transform: scale3d(1, 1, 1);
+    -moz-transform: scale3d(1, 1, 1);
+    -ms-transform: scale3d(1, 1, 1);
+    -o-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1);
     opacity: 1;
     filter: alpha(opacity=100);
@@ -10352,10 +10440,13 @@ h6 small,
   height: calc(100% - 70px);
   background: url(../img/notifications.png) no-repeat center;
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 400ms;
   transition-duration: 400ms;
   -webkit-transform: scale(0) rotate(-180deg);
+  -ms-transform: scale(0) rotate(-180deg);
+  -o-transform: scale(0) rotate(-180deg);
   transform: scale(0) rotate(-180deg);
   opacity: 0;
   filter: alpha(opacity=0);
@@ -10363,6 +10454,8 @@ h6 small,
 }
 #notifications.empty:before {
   -webkit-transform: scale(1) rotate(0deg);
+  -ms-transform: scale(1) rotate(0deg);
+  -o-transform: scale(1) rotate(0deg);
   transform: scale(1) rotate(0deg);
   opacity: 1;
   filter: alpha(opacity=100);
@@ -10380,15 +10473,6 @@ h6 small,
 :full-screen [data-action="fullscreen"] {
   display: none;
 }
-:-webkit-full-screen [data-action="fullscreen"] {
-  display: none;
-}
-:-moz-full-screen [data-action="fullscreen"] {
-  display: none;
-}
-:-ms-fullscreen [data-action="fullscreen"] {
-  display: none;
-}
 :fullscreen [data-action="fullscreen"] {
   display: none;
 }
@@ -10402,6 +10486,7 @@ h6 small,
   min-height: 70px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
+  -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -10427,6 +10512,7 @@ h6 small,
   height: 70px;
   background: #fff;
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
@@ -10645,8 +10731,8 @@ h6 small,
   position: fixed;
   background: #fff;
   box-shadow: 0 0 10px rgba(51, 51, 51, 0.38);
-  top: 65px;
-  height: calc(100% - 65px);
+  top: 70px;
+  height: calc(100% - 70px);
   -webkit-transform: translate3d(-268px, 0, 0);
   transform: translate3d(-268px, 0, 0);
   z-index: 5;
@@ -10655,6 +10741,7 @@ h6 small,
   opacity: 0;
   filter: alpha(opacity=0);
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
@@ -10702,6 +10789,7 @@ h6 small,
   right: 15px;
   top: 7px;
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
@@ -10729,6 +10817,8 @@ h6 small,
 }
 .profile-menu.toggled .profile-info > i {
   -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
   transform: rotate(180deg);
 }
 .main-menu {
@@ -10772,20 +10862,26 @@ h6 small,
   font-size: 17px;
   right: 15px;
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 250ms;
   transition-duration: 250ms;
   -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 .sub-menu > a:before {
   content: "\f278";
   -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
   transform: scale(1);
 }
 .sub-menu > a:after {
   content: "\f273";
   -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
   transform: scale(0);
 }
 .sub-menu .sub-menu > a:before,
@@ -10795,11 +10891,15 @@ h6 small,
 .sub-menu.toggled > a:before {
   content: "\f278";
   -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
   transform: scale(0);
 }
 .sub-menu.toggled > a:after {
   content: "\f273";
   -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
   transform: scale(1);
 }
 .sub-menu ul {
@@ -10862,35 +10962,156 @@ body:not(.sw-toggled) #sidebar {
 .ie9 body:not(.sw-toggled) #sidebar:not(.toggled) {
   display: none;
 }
+/*
+.dropdown-menu {
+    box-shadow: @dropdown-shadow;
+    .animated(fadeIn, 300ms);
+    padding: 10px 0;
+    border-radius: 3px;
+    top: -1px;
+    margin: 0;
+    border: 0;
+
+    & > li > a {
+        padding: 10px 20px;
+        .transition(background-color);
+        .transition-duration(300ms);
+    }
+}
+
+.dm-icon {
+    & > li > a > .zmdi {
+        line-height: 100%;
+        vertical-align: top;
+        font-size: 18px;
+        width: 28px;
+    }
+}
+
+.dropdown-menu-lg {
+    width: 300px;
+}
+
+.dropdown-header {
+    padding: 3px 17px;
+    margin-top: 10px;
+    color: #b1b1b1;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+.btn-group.open .dropdown-toggle {
+    box-shadow: none;
+}
+*/
 .dropdown-menu {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  -webkit-animation-name: fadeIn;
-  animation-name: fadeIn;
-  -webkit-animation-duration: 300ms;
-  animation-duration: 300ms;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  padding: 10px 0;
-  border-radius: 3px;
-  top: -1px;
-  margin: 0;
-  border: 0;
+  -webkit-transition: all;
+  -o-transition: all;
+  transition: all;
+  -webkit-transition-duration: 250ms;
+  transition-duration: 250ms;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+  margin-top: 1px;
 }
 .dropdown-menu > li > a {
-  padding: 10px 20px;
+  padding: 8px 17px;
   -webkit-transition: background-color;
+  -o-transition: background-color;
   transition: background-color;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
+  font-family: roboto;
 }
-.dm-icon > li > a > .zmdi {
+.dropdown-menu.dropdown-menu-lg {
+  width: 300px;
+}
+.dropdown-menu.dropdown-menu-sm {
+  width: 150px;
+}
+.dropdown-menu.dropdown-menu-right {
+  right: 0;
+  left: auto;
+}
+.dropdown-menu.dropdown-menu-right > li > a {
+  text-align: right;
+}
+.dropdown-menu.dm-icon > li > a > .zmdi {
   line-height: 100%;
   vertical-align: top;
   font-size: 18px;
-  width: 28px;
+  width: 20px;
+  text-align: center;
+  margin-right: 10px;
 }
-.dropdown-menu-lg {
-  width: 300px;
+.dropdown-menu:not([class*="bgm-"]) > li > a {
+  color: #4C4C4C;
+}
+.dropdown-menu:not([class*="bgm-"]) > li > a:hover {
+  color: #000;
+}
+.dropdown-menu[class*="bgm-"] > li > a {
+  font-weight: 300;
+  color: #fff;
+}
+.dropdown:not([data-animation]) .dropdown-menu,
+.btn-group .dropdown-menu,
+.date-picker .dropdown-menu {
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+  transform: scale(0);
+  opacity: 0;
+  filter: alpha(opacity=0);
+  display: block;
+}
+.dropdown:not([data-animation]) .dropdown-menu.pull-right,
+.bootstrap-select .dropdown-menu.pull-right,
+.btn-group .dropdown-menu.pull-right,
+.date-picker .dropdown-menu.pull-right,
+.dropdown:not([data-animation]) .dropdown-menu.dropdown-menu-right,
+.bootstrap-select .dropdown-menu.dropdown-menu-right,
+.btn-group .dropdown-menu.dropdown-menu-right,
+.date-picker .dropdown-menu.dropdown-menu-right {
+  -webkit-transform-origin: top right;
+  -moz-transform-origin: top right;
+  -ms-transform-origin: top right;
+  transform-origin: top right;
+}
+.dropdown:not([data-animation]) .dropdown-menu:not(.pull-right):not(.dropdown-menu-right),
+.bootstrap-select .dropdown-menu:not(.pull-right):not(.dropdown-menu-right),
+.btn-group .dropdown-menu:not(.pull-right):not(.dropdown-menu-right),
+.date-picker .dropdown-menu:not(.pull-right):not(.dropdown-menu-right) {
+  -webkit-transform-origin: top left;
+  -moz-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+}
+.dropup:not([data-animation]) .dropdown-menu.pull-right,
+.dropup:not([data-animation]) .dropdown-menu.dropdown-menu-right {
+  -webkit-transform-origin: bottom right;
+  -moz-transform-origin: bottom right;
+  -ms-transform-origin: bottom right;
+  transform-origin: bottom right;
+}
+.dropup:not([data-animation]) .dropdown-menu:not(.pull-right):not(.dropdown-menu-right) {
+  -webkit-transform-origin: bottom left;
+  -moz-transform-origin: bottom left;
+  -ms-transform-origin: bottom left;
+  transform-origin: bottom left;
+}
+.dropdown:not([data-animation]).open .dropdown-menu,
+.dropup.open .dropdown-menu,
+.bootstrap-select.open .dropdown-menu,
+.btn-group.open .dropdown-menu {
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+  opacity: 1;
+  filter: alpha(opacity=100);
 }
 .dropdown-header {
   padding: 3px 17px;
@@ -10925,6 +11146,7 @@ body:not(.sw-toggled) #sidebar {
   position: relative;
   display: block;
   -webkit-transition: background-color;
+  -o-transition: background-color;
   transition: background-color;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
@@ -11143,10 +11365,11 @@ a.lv-footer:hover {
   padding: 20px 0;
   width: 260px;
   box-shadow: 0 0 10px rgba(51, 51, 51, 0.38);
-  height: calc(100% - 65px);
+  height: calc(100% - 70px);
   right: -280px;
-  top: 65px;
+  top: 70px;
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
@@ -11168,11 +11391,12 @@ a.lv-footer:hover {
   background-position: left center;
   padding-left: 30px;
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #chat .chat-search .form-control {
     background-image: url("../img/icons/search-2@2x.png");
     background-size: 24px 24px;
@@ -11250,6 +11474,7 @@ a.lv-footer:hover {
 }
 .tab-nav:not(.tn-vertical) > li > a {
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 250ms;
   transition-duration: 250ms;
@@ -11262,10 +11487,13 @@ a.lv-footer:hover {
   left: 0;
   bottom: 0;
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 250ms;
   transition-duration: 250ms;
   -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
   transform: scale(0);
 }
 .tab-nav:not(.tn-vertical) > li.active > a {
@@ -11273,6 +11501,8 @@ a.lv-footer:hover {
 }
 .tab-nav:not(.tn-vertical) > li.active > a:after {
   -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
   transform: scale(1);
 }
 .tab-nav:not(.tn-vertical).tab-nav-right {
@@ -11481,10 +11711,12 @@ a.lv-footer:hover {
 }
 .mini-charts-item:before {
   -webkit-transition: width;
+  -o-transition: width;
   transition: width;
   -webkit-transition-duration: 500ms;
   transition-duration: 500ms;
   -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
   backface-visibility: hidden;
   content: "";
   width: 113px;
@@ -11693,6 +11925,7 @@ a.lv-footer:hover {
   top: 0;
   color: #fff;
   background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
+  background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#99000000', endColorstr='#00000000', GradientType=0);
@@ -11705,6 +11938,7 @@ a.lv-footer:hover {
   left: 0;
   width: 100%;
   background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
+  background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#99000000', GradientType=0);
@@ -11738,7 +11972,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-0 {
   background-image: url("../img/icons/weather/0.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-0 {
     background-image: url("../img/icons/weather/0@2x.png");
     background-size: 125px 125px;
@@ -11747,7 +11981,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-1 {
   background-image: url("../img/icons/weather/1.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-1 {
     background-image: url("../img/icons/weather/1@2x.png");
     background-size: 125px 125px;
@@ -11756,7 +11990,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-2 {
   background-image: url("../img/icons/weather/2.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-2 {
     background-image: url("../img/icons/weather/2@2x.png");
     background-size: 125px 125px;
@@ -11765,7 +11999,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-3 {
   background-image: url("../img/icons/weather/3.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-3 {
     background-image: url("../img/icons/weather/3@2x.png");
     background-size: 125px 125px;
@@ -11774,7 +12008,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-4 {
   background-image: url("../img/icons/weather/2.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-4 {
     background-image: url("../img/icons/weather/2@2x.png");
     background-size: 125px 125px;
@@ -11783,7 +12017,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-5 {
   background-image: url("../img/icons/weather/5.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-5 {
     background-image: url("../img/icons/weather/5@2x.png");
     background-size: 125px 125px;
@@ -11792,7 +12026,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-6 {
   background-image: url("../img/icons/weather/5.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-6 {
     background-image: url("../img/icons/weather/5@2x.png");
     background-size: 125px 125px;
@@ -11801,7 +12035,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-7 {
   background-image: url("../img/icons/weather/5.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-7 {
     background-image: url("../img/icons/weather/5@2x.png");
     background-size: 125px 125px;
@@ -11810,7 +12044,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-8 {
   background-image: url("../img/icons/weather/5.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-8 {
     background-image: url("../img/icons/weather/5@2x.png");
     background-size: 125px 125px;
@@ -11819,7 +12053,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-9 {
   background-image: url("../img/icons/weather/9.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-9 {
     background-image: url("../img/icons/weather/9@2x.png");
     background-size: 125px 125px;
@@ -11828,7 +12062,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-10 {
   background-image: url("../img/icons/weather/5.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-10 {
     background-image: url("../img/icons/weather/5@2x.png");
     background-size: 125px 125px;
@@ -11837,7 +12071,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-11 {
   background-image: url("../img/icons/weather/9.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-11 {
     background-image: url("../img/icons/weather/9@2x.png");
     background-size: 125px 125px;
@@ -11846,7 +12080,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-12 {
   background-image: url("../img/icons/weather/9.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-12 {
     background-image: url("../img/icons/weather/9@2x.png");
     background-size: 125px 125px;
@@ -11855,7 +12089,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-13 {
   background-image: url("../img/icons/weather/9.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-13 {
     background-image: url("../img/icons/weather/9@2x.png");
     background-size: 125px 125px;
@@ -11864,7 +12098,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-14 {
   background-image: url("../img/icons/weather/9.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-14 {
     background-image: url("../img/icons/weather/9@2x.png");
     background-size: 125px 125px;
@@ -11873,7 +12107,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-15 {
   background-image: url("../img/icons/weather/5.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-15 {
     background-image: url("../img/icons/weather/5@2x.png");
     background-size: 125px 125px;
@@ -11882,7 +12116,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-16 {
   background-image: url("../img/icons/weather/9.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-16 {
     background-image: url("../img/icons/weather/9@2x.png");
     background-size: 125px 125px;
@@ -11891,7 +12125,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-17 {
   background-image: url("../img/icons/weather/5.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-17 {
     background-image: url("../img/icons/weather/5@2x.png");
     background-size: 125px 125px;
@@ -11900,7 +12134,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-18 {
   background-image: url("../img/icons/weather/18.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-18 {
     background-image: url("../img/icons/weather/18@2x.png");
     background-size: 125px 125px;
@@ -11909,7 +12143,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-19 {
   background-image: url("../img/icons/weather/19.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-19 {
     background-image: url("../img/icons/weather/19@2x.png");
     background-size: 125px 125px;
@@ -11918,7 +12152,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-20 {
   background-image: url("../img/icons/weather/19.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-20 {
     background-image: url("../img/icons/weather/19@2x.png");
     background-size: 125px 125px;
@@ -11927,7 +12161,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-21 {
   background-image: url("../img/icons/weather/19.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-21 {
     background-image: url("../img/icons/weather/19@2x.png");
     background-size: 125px 125px;
@@ -11936,7 +12170,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-22 {
   background-image: url("../img/icons/weather/19.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-22 {
     background-image: url("../img/icons/weather/19@2x.png");
     background-size: 125px 125px;
@@ -11945,7 +12179,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-23 {
   background-image: url("../img/icons/weather/19.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-23 {
     background-image: url("../img/icons/weather/19@2x.png");
     background-size: 125px 125px;
@@ -11954,7 +12188,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-24 {
   background-image: url("../img/icons/weather/24.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-24 {
     background-image: url("../img/icons/weather/24@2x.png");
     background-size: 125px 125px;
@@ -11963,7 +12197,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-25 {
   background-image: url("../img/icons/weather/24.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-25 {
     background-image: url("../img/icons/weather/24@2x.png");
     background-size: 125px 125px;
@@ -11972,7 +12206,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-26 {
   background-image: url("../img/icons/weather/26.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-26 {
     background-image: url("../img/icons/weather/26@2x.png");
     background-size: 125px 125px;
@@ -11981,7 +12215,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-27 {
   background-image: url("../img/icons/weather/27.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-27 {
     background-image: url("../img/icons/weather/27@2x.png");
     background-size: 125px 125px;
@@ -11990,7 +12224,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-28 {
   background-image: url("../img/icons/weather/28.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-28 {
     background-image: url("../img/icons/weather/28@2x.png");
     background-size: 125px 125px;
@@ -11999,7 +12233,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-29 {
   background-image: url("../img/icons/weather/27.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-29 {
     background-image: url("../img/icons/weather/27@2x.png");
     background-size: 125px 125px;
@@ -12008,7 +12242,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-30 {
   background-image: url("../img/icons/weather/28.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-30 {
     background-image: url("../img/icons/weather/28@2x.png");
     background-size: 125px 125px;
@@ -12017,7 +12251,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-31 {
   background-image: url("../img/icons/weather/31.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-31 {
     background-image: url("../img/icons/weather/31@2x.png");
     background-size: 125px 125px;
@@ -12026,7 +12260,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-32 {
   background-image: url("../img/icons/weather/32.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-32 {
     background-image: url("../img/icons/weather/32@2x.png");
     background-size: 125px 125px;
@@ -12035,7 +12269,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-33 {
   background-image: url("../img/icons/weather/31.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-33 {
     background-image: url("../img/icons/weather/31@2x.png");
     background-size: 125px 125px;
@@ -12044,7 +12278,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-34 {
   background-image: url("../img/icons/weather/32.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-34 {
     background-image: url("../img/icons/weather/32@2x.png");
     background-size: 125px 125px;
@@ -12053,7 +12287,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-35 {
   background-image: url("../img/icons/weather/5.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-35 {
     background-image: url("../img/icons/weather/5@2x.png");
     background-size: 125px 125px;
@@ -12062,7 +12296,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-36 {
   background-image: url("../img/icons/weather/32.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-36 {
     background-image: url("../img/icons/weather/32@2x.png");
     background-size: 125px 125px;
@@ -12071,7 +12305,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-37 {
   background-image: url("../img/icons/weather/2.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-37 {
     background-image: url("../img/icons/weather/2@2x.png");
     background-size: 125px 125px;
@@ -12080,7 +12314,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-38 {
   background-image: url("../img/icons/weather/2.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-38 {
     background-image: url("../img/icons/weather/2@2x.png");
     background-size: 125px 125px;
@@ -12089,7 +12323,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-39 {
   background-image: url("../img/icons/weather/2.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-39 {
     background-image: url("../img/icons/weather/2@2x.png");
     background-size: 125px 125px;
@@ -12098,7 +12332,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-40 {
   background-image: url("../img/icons/weather/5.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-40 {
     background-image: url("../img/icons/weather/5@2x.png");
     background-size: 125px 125px;
@@ -12107,7 +12341,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-41 {
   background-image: url("../img/icons/weather/5.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-41 {
     background-image: url("../img/icons/weather/5@2x.png");
     background-size: 125px 125px;
@@ -12116,7 +12350,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-42 {
   background-image: url("../img/icons/weather/9.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-42 {
     background-image: url("../img/icons/weather/9@2x.png");
     background-size: 125px 125px;
@@ -12125,7 +12359,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-43 {
   background-image: url("../img/icons/weather/5.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-43 {
     background-image: url("../img/icons/weather/5@2x.png");
     background-size: 125px 125px;
@@ -12134,7 +12368,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-44 {
   background-image: url("../img/icons/weather/27.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-44 {
     background-image: url("../img/icons/weather/27@2x.png");
     background-size: 125px 125px;
@@ -12143,7 +12377,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-45 {
   background-image: url("../img/icons/weather/2.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-45 {
     background-image: url("../img/icons/weather/2@2x.png");
     background-size: 125px 125px;
@@ -12152,7 +12386,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-46 {
   background-image: url("../img/icons/weather/18.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-46 {
     background-image: url("../img/icons/weather/18@2x.png");
     background-size: 125px 125px;
@@ -12161,7 +12395,7 @@ a.lv-footer:hover {
 #weather-widget .weather-icon.wi-47 {
   background-image: url("../img/icons/weather/2.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   #weather-widget .weather-icon.wi-47 {
     background-image: url("../img/icons/weather/2@2x.png");
     background-size: 125px 125px;
@@ -12393,6 +12627,9 @@ a.lv-footer:hover {
   width: 100%;
   background-image: url('../img/headers/sm/4.png');
   background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
   background-position: center;
 }
@@ -12405,6 +12642,7 @@ a.lv-footer:hover {
   left: 50%;
   margin-left: -65px;
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
@@ -12459,6 +12697,7 @@ a.lv-footer:hover {
   text-transform: uppercase;
   display: block;
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
@@ -12468,6 +12707,8 @@ a.lv-footer:hover {
 }
 .profile-view:hover .pv-main {
   -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
   transform: scale(1.2);
 }
 /*
@@ -12495,12 +12736,17 @@ a.lv-footer:hover {
     width: 100%;
     height: 100%;
     -webkit-transform: scale3d(0, 0, 0);
+    -moz-transform: scale3d(0, 0, 0);
+    -ms-transform: scale3d(0, 0, 0);
+    -o-transform: scale3d(0, 0, 0);
     transform: scale3d(0, 0, 0);
     -webkit-transition: all;
+    -o-transition: all;
     transition: all;
     -webkit-transition-duration: 250ms;
     transition-duration: 250ms;
     -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
     backface-visibility: hidden;
     background-color: rgba(0, 0, 0, 0.3);
     z-index: 0;
@@ -12511,6 +12757,9 @@ a.lv-footer:hover {
   .picture-list .pl-body [class*="col-"] > a:hover:before,
   .picture-list .pl-body [class*="col-"] > a.open:before {
     -webkit-transform: scale3d(1, 1, 1);
+    -moz-transform: scale3d(1, 1, 1);
+    -ms-transform: scale3d(1, 1, 1);
+    -o-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1);
     opacity: 1;
     filter: alpha(opacity=100);
@@ -12546,14 +12795,18 @@ a.lv-footer:hover {
 }
 .go-social .card-body [class*="col-"] img {
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 200ms;
   transition-duration: 200ms;
   -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 .go-social .card-body [class*="col-"]:hover img {
   -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
   transform: scale(1.2);
 }
 /*
@@ -12739,18 +12992,23 @@ a.lv-footer:hover {
   top: -25px;
   right: 23px;
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
   backface-visibility: hidden;
   -webkit-transition-duration: 200ms;
   transition-duration: 200ms;
 }
 #add-tl-item .add-new-item {
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 200ms;
   transition-duration: 200ms;
   -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
   transform: scale(1);
 }
 #add-tl-item .add-tl-body {
@@ -12758,6 +13016,7 @@ a.lv-footer:hover {
   opacity: 0;
   filter: alpha(opacity=0);
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
@@ -12802,6 +13061,8 @@ a.lv-footer:hover {
 }
 #add-tl-item.toggled .add-new-item {
   -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
   transform: scale(0);
   height: 0;
   overflow: hidden;
@@ -12829,6 +13090,7 @@ a.lv-footer:hover {
   line-height: 41px;
   border-radius: 50%;
   -webkit-transition: background-color;
+  -o-transition: background-color;
   transition: background-color;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
@@ -13036,12 +13298,15 @@ fieldset[disabled] .btn-inverse:active {
 .btn-float i {
   font-size: 23px;
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 500ms;
   transition-duration: 500ms;
 }
 .btn-float:hover i {
   -webkit-transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
+  -o-transform: rotate(360deg);
   transform: rotate(360deg);
 }
 .btn-float:not(.bgm-white):not(.bgm-gray) > i {
@@ -13113,6 +13378,7 @@ input:focus {
 .radio-inline:before,
 .checkbox-inline:before {
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 250ms;
   transition-duration: 250ms;
@@ -13139,6 +13405,8 @@ input:focus {
   opacity: 0;
   filter: alpha(opacity=0);
   -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
   transform: scale(0);
 }
 .checkbox label:active:before,
@@ -13148,6 +13416,8 @@ input:focus {
   opacity: 1;
   filter: alpha(opacity=100);
   -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
   transform: scale(1);
 }
 .checkbox label,
@@ -13197,6 +13467,8 @@ input:focus {
   opacity: 1;
   filter: alpha(opacity=100);
   -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
   transform: scale(1);
 }
 .checkbox .input-helper:before {
@@ -13209,6 +13481,8 @@ input:focus {
   opacity: 0;
   filter: alpha(opacity=0);
   -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
   transform: scale(0);
   content: '\f26b';
   font-family: 'Material-Design-Iconic-Font';
@@ -13225,6 +13499,8 @@ input:focus {
 }
 .radio input:checked + .input-helper:after {
   -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
   transform: scale(1);
 }
 .radio .input-helper:before {
@@ -13241,6 +13517,8 @@ input:focus {
   top: 4px;
   left: 5px;
   -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
   transform: scale(0);
 }
 .checkbox-inline,
@@ -13268,7 +13546,7 @@ html:not(.ie9) .select:before {
   pointer-events: none;
   z-index: 5;
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   html:not(.ie9) .select:before {
     background-image: url("../img/select@2x.png");
     background-size: 12px 12px;
@@ -13319,6 +13597,7 @@ html:not(.ie9) .select.fg-line:before {
   width: 0;
   content: "";
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
@@ -13354,6 +13633,7 @@ html:not(.ie9) .select.fg-line:before {
 }
 .fg-float .fg-label {
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 200ms;
   transition-duration: 200ms;
@@ -13381,6 +13661,7 @@ html:not(.ie9) .select.fg-line:before {
   vertical-align: top;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
+  -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -13415,7 +13696,6 @@ html:not(.ie9) .select.fg-line:before {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
   border-radius: 50%;
   webkit-transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1), background 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-  -webkit-transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1), background 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
   transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1), background 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .toggle-switch:not(.disabled) .ts-helper:active:before {
@@ -13599,12 +13879,17 @@ html:not(.ie9) .select.fg-line:before {
     width: 100%;
     height: 100%;
     -webkit-transform: scale3d(0, 0, 0);
+    -moz-transform: scale3d(0, 0, 0);
+    -ms-transform: scale3d(0, 0, 0);
+    -o-transform: scale3d(0, 0, 0);
     transform: scale3d(0, 0, 0);
     -webkit-transition: all;
+    -o-transition: all;
     transition: all;
     -webkit-transition-duration: 250ms;
     transition-duration: 250ms;
     -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
     backface-visibility: hidden;
     background-color: rgba(0, 0, 0, 0.1);
     z-index: 0;
@@ -13617,6 +13902,9 @@ html:not(.ie9) .select.fg-line:before {
   .pagination > li > a.open:before,
   .pagination > li > span.open:before {
     -webkit-transform: scale3d(1, 1, 1);
+    -moz-transform: scale3d(1, 1, 1);
+    -ms-transform: scale3d(1, 1, 1);
+    -o-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1);
     opacity: 1;
     filter: alpha(opacity=100);
@@ -13737,12 +14025,17 @@ a.thumbnail.active {
     width: 100%;
     height: 100%;
     -webkit-transform: scale3d(0, 0, 0);
+    -moz-transform: scale3d(0, 0, 0);
+    -ms-transform: scale3d(0, 0, 0);
+    -o-transform: scale3d(0, 0, 0);
     transform: scale3d(0, 0, 0);
     -webkit-transition: all;
+    -o-transition: all;
     transition: all;
     -webkit-transition-duration: 250ms;
     transition-duration: 250ms;
     -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
     backface-visibility: hidden;
     background-color: rgba(0, 0, 0, 0.1);
     z-index: 0;
@@ -13753,6 +14046,9 @@ a.thumbnail.active {
   .lightbox .lightbox-item:hover:before,
   .lightbox .lightbox-item.open:before {
     -webkit-transform: scale3d(1, 1, 1);
+    -moz-transform: scale3d(1, 1, 1);
+    -ms-transform: scale3d(1, 1, 1);
+    -o-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1);
     opacity: 1;
     filter: alpha(opacity=100);
@@ -13786,6 +14082,7 @@ a.thumbnail.active {
 .carousel .carousel-control {
   cursor: pointer;
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 250ms;
   transition-duration: 250ms;
@@ -13857,6 +14154,7 @@ a.thumbnail.active {
   height: 3px;
   margin: 0 2px;
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 250ms;
   transition-duration: 250ms;
@@ -13974,12 +14272,16 @@ a.thumbnail.active {
 }
 .panel-collapse .panel-heading .panel-title > a:after {
   -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
   transform: scale(0);
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
   -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 .panel-collapse .panel-heading:not(.active) .panel-title > a:before {
@@ -13992,33 +14294,45 @@ a.thumbnail.active {
   position: absolute;
   left: 0;
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
   -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
   backface-visibility: hidden;
   top: 4px;
 }
 .panel-collapse .panel-heading:before {
   content: "\f0fb";
   -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
   transform: scale(1);
 }
 .panel-collapse .panel-heading:after {
   -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
   transform: scale(0);
   content: "\f111";
 }
 .panel-collapse .panel-heading.active .panel-title > a:after {
   -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
   transform: scale(1);
 }
 .panel-collapse .panel-heading.active:before {
   -webkit-transform: scale(0) rotate(-90deg);
+  -ms-transform: scale(0) rotate(-90deg);
+  -o-transform: scale(0) rotate(-90deg);
   transform: scale(0) rotate(-90deg);
 }
 .panel-collapse .panel-heading.active:after {
   -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
   transform: scale(1);
 }
 .panel-collapse .panel-body {
@@ -14374,6 +14688,7 @@ a.thumbnail.active {
   height: 100%;
   width: 240px;
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 250ms;
   transition-duration: 250ms;
@@ -14444,6 +14759,7 @@ a.thumbnail.active {
 #ms-menu-trigger {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
+  -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -14616,6 +14932,7 @@ a.thumbnail.active {
   border-radius: 50%;
   text-align: center;
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
@@ -14668,6 +14985,7 @@ a.thumbnail.active {
   display: inline-block;
   margin: 0 2px;
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 150ms;
   transition-duration: 150ms;
@@ -14679,6 +14997,7 @@ a.thumbnail.active {
   min-height: 16px;
   text-transform: uppercase;
   -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 .login-navigation > li > span {
@@ -14865,6 +15184,8 @@ body.login-content:before {
   height: 150px;
   top: -74px;
   -webkit-transform-origin: center;
+  -moz-transform-origin: center;
+  -ms-transform-origin: center;
   transform-origin: center;
 }
 #profile-main .pmo-pic .pmop-message .dropdown-menu textarea {
@@ -15194,6 +15515,7 @@ body.login-content:before {
     position: relative;
     z-index: 1;
     -webkit-transition: all;
+    -o-transition: all;
     transition: all;
     -webkit-transition-duration: 300ms;
     transition-duration: 300ms;
@@ -15212,6 +15534,7 @@ body.login-content:before {
 .photos:not(.p-timeline) [data-src] {
   padding: 3px;
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 150ms;
   transition-duration: 150ms;
@@ -15238,6 +15561,7 @@ body.login-content:before {
   margin: 0 2px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
+  -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -15407,7 +15731,6 @@ body.login-content:before {
 .z-depth-animation .z-depth-3,
 .z-depth-animation .z-depth-4,
 .z-depth-animation .z-depth-5 {
-  -webkit-transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
   transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 /*
@@ -15493,12 +15816,17 @@ body.login-content:before {
     width: 100%;
     height: 100%;
     -webkit-transform: scale3d(0, 0, 0);
+    -moz-transform: scale3d(0, 0, 0);
+    -ms-transform: scale3d(0, 0, 0);
+    -o-transform: scale3d(0, 0, 0);
     transform: scale3d(0, 0, 0);
     -webkit-transition: all;
+    -o-transition: all;
     transition: all;
     -webkit-transition-duration: 250ms;
     transition-duration: 250ms;
     -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
     backface-visibility: hidden;
     background-color: rgba(0, 0, 0, 0.1);
     z-index: 0;
@@ -15511,6 +15839,9 @@ body.login-content:before {
   .actions > li > a.open:before,
   .actions > a.open:before {
     -webkit-transform: scale3d(1, 1, 1);
+    -moz-transform: scale3d(1, 1, 1);
+    -ms-transform: scale3d(1, 1, 1);
+    -o-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1);
     opacity: 1;
     filter: alpha(opacity=100);
@@ -15523,6 +15854,8 @@ body.login-content:before {
 .actions > li.open > a:before,
 .actions.open > a:before {
   -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
   transform: scale(1);
   opacity: 1;
   filter: alpha(opacity=100);
@@ -15546,6 +15879,7 @@ body.login-content:before {
   width: 18px;
   height: 12px;
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
@@ -15555,6 +15889,7 @@ body.login-content:before {
   width: 18px;
   height: 2px;
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
@@ -15564,6 +15899,8 @@ body.login-content:before {
 }
 .open .line-wrap {
   -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
   transform: rotate(180deg);
 }
 .open .line-wrap .line.top {
@@ -15652,28 +15989,80 @@ body.login-content:before {
 @-webkit-keyframes ball-clip-rotate {
   0% {
     -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
     transform: rotate(0deg);
   }
   50% {
     -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
     transform: rotate(180deg);
   }
   100% {
     -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes ball-clip-rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes ball-clip-rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
 @keyframes ball-clip-rotate {
   0% {
     -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
     transform: rotate(0deg);
   }
   50% {
     -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
     transform: rotate(180deg);
   }
   100% {
     -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
@@ -15683,6 +16072,7 @@ body.login-content:before {
   pointer-events: none;
   -webkit-pointer-events: none;
   -webkit-transition: linear all;
+  -o-transition: linear all;
   transition: linear all;
   -webkit-transition-duration: 350ms;
   transition-duration: 350ms;
@@ -15703,6 +16093,7 @@ body.login-content:before {
 }
 #loading-bar .bar {
   -webkit-transition: width;
+  -o-transition: width;
   transition: width;
   -webkit-transition-duration: 350ms;
   transition-duration: 350ms;
@@ -15753,6 +16144,7 @@ body.login-content:before {
   border-bottom-color: transparent !important;
   border-radius: 100%;
   -webkit-animation: ball-clip-rotate 0.75s linear infinite;
+  -o-animation: ball-clip-rotate 0.75s linear infinite;
   animation: ball-clip-rotate 0.75s linear infinite;
 }
 #loading-bar-spinner:before,
@@ -15860,6 +16252,7 @@ body.login-content:before {
   line-height: 60px;
   font-size: 30px;
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
@@ -16041,6 +16434,9 @@ body.login-content:before {
   overflow: hidden;
   border: 2px solid #fff;
   background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
   background-position: center;
 }
@@ -16124,8 +16520,12 @@ body.login-content:before {
   left: -40px;
   z-index: 1;
   -webkit-transform-origin: center;
+  -moz-transform-origin: center;
+  -ms-transform-origin: center;
   transform-origin: center;
   -webkit-transform: scale(0) rotate(-360deg);
+  -ms-transform: scale(0) rotate(-360deg);
+  -o-transform: scale(0) rotate(-360deg);
   transform: scale(0) rotate(-360deg);
   -webkit-transition-duration: 500ms;
   transition-duration: 500ms;
@@ -16171,6 +16571,8 @@ body.login-content:before {
 }
 #header-2 .skin-switch.open .dropdown-menu {
   -webkit-transform: scale(1) rotate(0deg);
+  -ms-transform: scale(1) rotate(0deg);
+  -o-transform: scale(1) rotate(0deg);
   transform: scale(1) rotate(0deg);
 }
 /* ----------------------------- End header type 2 ------------------------------------- */
@@ -16316,12 +16718,10 @@ body.login-content:before {
   width: 100px;
 }
 .preloader:not([class*="pls-"]) .plc-path {
-  -webkit-animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
-          animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
 }
 .preloader[class*="pls-"] .plc-path {
-  -webkit-animation: dash 1.5s ease-in-out infinite;
-          animation: dash 1.5s ease-in-out infinite;
+  animation: dash 1.5s ease-in-out infinite;
 }
 .preloader.pls-red .plc-path {
   stroke: #F44336;
@@ -16354,11 +16754,9 @@ body.login-content:before {
   stroke: #9C27B0;
 }
 .pl-circular {
-  -webkit-animation: rotate 2s linear infinite;
-          animation: rotate 2s linear infinite;
+  animation: rotate 2s linear infinite;
   height: 100%;
-  -webkit-transform-origin: center center;
-          transform-origin: center center;
+  transform-origin: center center;
   width: 100%;
   position: absolute;
   top: 0;
@@ -16375,30 +16773,9 @@ body.login-content:before {
   stroke-miterlimit: 10;
   fill: none;
 }
-@-webkit-keyframes rotate {
-  100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-  }
-}
 @keyframes rotate {
   100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-  }
-}
-@-webkit-keyframes dash {
-  0% {
-    stroke-dasharray: 1,200;
-    stroke-dashoffset: 0;
-  }
-  50% {
-    stroke-dasharray: 89,200;
-    stroke-dashoffset: -35px;
-  }
-  100% {
-    stroke-dasharray: 89,200;
-    stroke-dashoffset: -124px;
+    transform: rotate(360deg);
   }
 }
 @keyframes dash {
@@ -16413,22 +16790,6 @@ body.login-content:before {
   100% {
     stroke-dasharray: 89,200;
     stroke-dashoffset: -124px;
-  }
-}
-@-webkit-keyframes color {
-  100%,
-  0% {
-    stroke: #F44336;
-  }
-  40% {
-    stroke: #2196F3;
-  }
-  66% {
-    stroke: #4CAF50;
-  }
-  80%,
-  90% {
-    stroke: #FFC107;
   }
 }
 @keyframes color {
@@ -16540,7 +16901,7 @@ body.login-content:before {
 .mejs-container .mejs-controls .mejs-play button {
   background-image: url("../img/icons/play.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   .mejs-container .mejs-controls .mejs-play button {
     background-image: url("../img/icons/play@2x.png");
     background-size: 15px 15px;
@@ -16549,7 +16910,7 @@ body.login-content:before {
 .mejs-container .mejs-controls .mejs-pause button {
   background-image: url("../img/icons/pause.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   .mejs-container .mejs-controls .mejs-pause button {
     background-image: url("../img/icons/pause@2x.png");
     background-size: 15px 15px;
@@ -16558,7 +16919,7 @@ body.login-content:before {
 .mejs-container .mejs-controls .mejs-mute button {
   background-image: url("../img/icons/speaker.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   .mejs-container .mejs-controls .mejs-mute button {
     background-image: url("../img/icons/speaker@2x.png");
     background-size: 15px 15px;
@@ -16567,7 +16928,7 @@ body.login-content:before {
 .mejs-container .mejs-controls .mejs-unmute button {
   background-image: url("../img/icons/speaker-2.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   .mejs-container .mejs-controls .mejs-unmute button {
     background-image: url("../img/icons/speaker-2@2x.png");
     background-size: 15px 15px;
@@ -16580,7 +16941,7 @@ body.login-content:before {
 .mejs-container .mejs-controls .mejs-fullscreen-button button {
   background-image: url("../img/icons/fullscreen.png");
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   .mejs-container .mejs-controls .mejs-fullscreen-button button {
     background-image: url("../img/icons/fullscreen@2x.png");
     background-size: 15px 15px;
@@ -16639,6 +17000,9 @@ body.login-content:before {
   height: 300px;
   background-image: url('../img/cal-header.jpg');
   background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
   background-position: center;
   background-position: inherit;
@@ -16811,21 +17175,25 @@ hr.fc-divider {
   border: 0;
   left: 0;
   -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
   transform: scale(0);
   opacity: 0;
   filter: alpha(opacity=0);
   -webkit-transform-origin: top left;
+  -moz-transform-origin: top left;
+  -ms-transform-origin: top left;
   transform-origin: top left;
   -webkit-transition: transform opacity;
-  -webkit-transition: -webkit-transform opacity;
-  transition: -webkit-transform opacity;
+  -o-transition: transform opacity;
   transition: transform opacity;
-  transition: transform opacity, -webkit-transform opacity;
   -webkit-transition-duration: 250ms;
   transition-duration: 250ms;
 }
 .chosen-container.chosen-with-drop .chosen-drop {
   -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
   transform: scale(1);
   opacity: 1;
   filter: alpha(opacity=100);
@@ -16886,6 +17254,7 @@ hr.fc-divider {
   left: 0;
   bottom: -1px;
   -webkit-transition: width;
+  -o-transition: width;
   transition: width;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
@@ -16895,7 +17264,7 @@ hr.fc-divider {
   background-repeat: no-repeat;
   background-position: right 12px;
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   .chosen-container-single .chosen-single div b {
     background-image: url("../img/select@2x.png");
     background-size: 12px 12px;
@@ -16985,6 +17354,7 @@ select.chosen {
   border-radius: 100%;
   box-shadow: none;
   -webkit-transition: box-shadow;
+  -o-transition: box-shadow;
   transition: box-shadow;
   -webkit-transition-duration: 200ms;
   transition-duration: 200ms;
@@ -17015,14 +17385,18 @@ select.chosen {
   margin-left: -25px;
   padding: 0 10px;
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 200ms;
   transition-duration: 200ms;
   -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
   backface-visibility: hidden;
   opacity: 0;
   filter: alpha(opacity=0);
   -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
   transform: scale(0);
 }
 .noUi-horizontal .noUi-handle .is-tooltip:after,
@@ -17044,6 +17418,8 @@ select.chosen {
 .noUi-horizontal .noUi-active .is-tooltip,
 .noUi-vertical .noUi-active .is-tooltip {
   -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
   transform: scale(1);
   bottom: 40px;
   opacity: 1;
@@ -17354,6 +17730,8 @@ select.chosen {
 }
 .bootstrap-datetimepicker-widget.top {
   -webkit-transform-origin: 0 100% !important;
+  -moz-transform-origin: 0 100% !important;
+  -ms-transform-origin: 0 100% !important;
   transform-origin: 0 100% !important;
 }
 .bootstrap-datetimepicker-widget:before,
@@ -17479,6 +17857,7 @@ select.chosen {
   line-height: 38px;
   background: #F44336;
   -webkit-transition: all;
+  -o-transition: all;
   transition: all;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
@@ -17588,6 +17967,8 @@ select.chosen {
 }
 .date-picker.is-opened .dropdown-menu {
   -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
   transform: scale(1);
   opacity: 1;
   filter: alpha(opacity=100);
@@ -17716,6 +18097,7 @@ select.chosen {
   cursor: pointer;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
+  -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;

@@ -1,20 +1,4 @@
 <div class="sidebar-inner c-overflow">
-    <div class="profile-menu" ng-if="vm.indentity.isAuthenticated()">
-        <a href="" toggle-submenu>
-            <div class="profile-pic">
-                <img src="img/profile-pics/1.jpg" alt="">
-            </div>
-            <div class="profile-info">
-                <span ng-if="vm.indentity.currentUser">{{vm.indentity.currentUser.firstName}}</span>
-                <i class="zmdi zmdi-caret-down"></i>
-            </div>
-        </a>
-        <ul class="main-menu">
-            <li>
-                <a href="" ng-click="vm.logout()"><i class="zmdi zmdi-time-restore"></i> Logout</a>
-            </li>
-        </ul>
-    </div>
     <ul class="main-menu">
         <li ui-sref-active="active">
             <a ui-sref="home"><i class="zmdi zmdi-home"></i> Home</a>

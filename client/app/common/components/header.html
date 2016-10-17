@@ -1,12 +1,26 @@
 <ul class="header-inner clearfix">
-    <li id="menu-trigger" target="mainmenu" ng-click="appCtrl.toggleSidebar()" ng-class="{ 'open': appCtrl.sidebarToggle.left === true }">
+    <li id="menu-trigger" target="mainmenu" ng-click="headerCtrl.toggleSidebar()" ng-class="{ 'open': headerCtrl.sidebarStatus.left === true }">
         <div class="line-wrap">
             <div class="line top"></div>
             <div class="line center"></div>
             <div class="line bottom"></div>
         </div>
     </li>
-    <li class="logo hidden-xs">
+    <li class="logo">
         <a data-ui-sref="home"><i class="fa fa-paper-plane" aria-hidden="true"></i> <b>Knife</b>plane</a>
+    </li>
+    <li class="pull-right">
+        <ul class="top-menu">
+            <li class="dropdown" uib-dropdown ng-if="vm.indentity.currentUser">
+                <a uib-dropdown-toggle href="">
+                    <i class="tm-icon zmdi zmdi-account"></i>
+                </a>
+                <ul class="dropdown-menu dm-icon pull-right">
+                    <li>
+                        <a ng-click="vm.logout()" href=""><i class="zmdi zmdi-account-circle"></i> {{vm.indentity.currentUser.firstName}} {{vm.indentity.currentUser.lastName}}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </li>
 </ul>

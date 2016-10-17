@@ -9,7 +9,7 @@
     var directive = {
       bindToController: true,
       controller: ctrlFunc,
-      controllerAs: 'vm',
+      controllerAs: 'headerCtrl',
       restrict: 'A',
       templateUrl: '/common/components/header.html'
     };
@@ -17,6 +17,20 @@
   }
 
   /* @ngInject */
-  function ctrlFunc() {
+  function ctrlFunc(sidebarService, identityService, authService) {
+    var vm = this;
+    vm.indentity = identityService;
+    vm.logout = logout;
+    vm.sidebarStatus = sidebarService.getSidebarStatus();
+    vm.toggleSidebar = toggleSidebar;
+
+    function toggleSidebar() {
+      vm.sidebarStatus.left = !vm.sidebarStatus.left;
+      sidebarService.setSidebarStatus(vm.sidebarStatus.left);
+    }
+
+    function logout() {
+      authService.logout();
+    }
   }
 })();

@@ -9,7 +9,7 @@
     var directive = {
       bindToController: true,
       controller: ctrlFunc,
-      controllerAs: 'vm',
+      controllerAs: 'sidebarCtrl',
       restrict: 'A',
       templateUrl: '/common/components/sidebar.html'
     };
@@ -17,10 +17,11 @@
   }
 
   /* @ngInject */
-  function ctrlFunc(identityService, authService) {
+  function ctrlFunc(identityService, authService, sidebarService) {
     var vm = this;
     vm.indentity = identityService;
     vm.logout = logout;
+    vm.sidebarStatus = sidebarService.getSidebarStatus();
 
     function logout() {
       authService.logout();
