@@ -1,41 +1,89 @@
-<div class='container'>
+<div class="container pyramid-container">
     <div class="block-header">
         <h2>{{vm.pyramid.name}}</h2>
     </div>
-    <div class="pyramid">
-        <div class="row">
-            <div class="col-md-9">
-                <div class="card">
-                    <div class="card-body card-padding">
-                        <div ng-repeat="level in vm.levels" class="level level-{{level}}">
-                            <div class="level-marker">{{level}}</div>
-                            <div ng-repeat="player in vm.pyramid.players" ng-if="player.level === level" ng-click="vm.createChallenge(player)" class="pyramid-block" ng-class="player.class">
-                                <i ng-if="player.class==='unavailable'" class="zmdi zmdi-lock"></i> {{player.firstName}} {{player.lastName}}
-                                <div ng-if="player.challenge && player.challenge.position === 'opponent' && player.challenge.expires">
-                                    <timer interval="1000" countdown="player.challenge.expires" finish-callback="vm.challengeExpired()">{{hours}}:{{mminutes}}:{{sseconds}}</timer>
-                                </div>
+    <div class="card m-b-0" id="messages-main">
+        <div class="ms-menu pyramid-menu" ng-class="{ 'toggled': vm.pyramidMenuToggle }">
+            <!-- Make a challenge -->
+            <div class="ms-block m-b-20" ng-if="vm.isCurrentUserOnPyramid && !vm.hasActiveChallenge && vm.currentUserPlayer.level !== 1">
+                <div class="dropdown" uib-dropdown>
+                    <a class="btn btn-primary btn-block" href="" uib-dropdown-toggle ng-click="vm.startChallenge()">Make a Challenge <i class="caret m-l-5"></i></a>
+                    <ul class="dropdown-menu w-100" ng-if="vm.availableChallenges">
+                        <li class="dd-header">Choose from the following players:</li>
+                        <li class="divider hidden-xs"></li>
+                        <li ng-repeat="player in vm.pyramid.players" ng-if="player.available">
+                            <a href="" ng-click="vm.createChallenge(player)"><i class="zmdi zmdi-account"></i> {{player.firstName}} {{player.lastName}}</a>
+                        </li>
+                    </ul>
+                    <ul class="dropdown-menu w-100" ng-if="!vm.availableChallenges">
+                        <li class="dd-header">Sorry, you have no available opponents</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Complete a challenge -->
+            <div class="ms-block m-b-20" ng-if="vm.isCurrentUserOnPyramid && vm.hasActiveChallenge">
+                <div class="dropdown" uib-dropdown>
+                    <a class="btn btn-primary btn-block" href="" uib-dropdown-toggle>Complete a Challenge <i class="caret m-l-5"></i></a>
+                    <ul class="dropdown-menu w-100">
+                        <li class="dd-header">Select your result:</li>
+                        <li class="divider hidden-xs"></li>
+                        <li class="btn-container">
+                            <button class="btn btn-success" type="button" ng-click="vm.completeChallenge(true)">Won</button>
+                            <button class="btn btn-danger" type="button" ng-click="vm.completeChallenge(false)">Lost</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div kp-active-challeneges competition-id="{{vm.competitionId}}"></div>
+        </div>
+        <!-- Pyramid -->
+        <div class="ms-body">
+            <div class="listview lv-message">
+                <div class="lv-header-alt clearfix">
+                    <div id="ms-menu-trigger" ng-class="{ 'open': vm.pyramidMenuToggle }" ng-click="vm.pyramidMenuToggle = (vm.pyramidMenuToggle === true ? false : true )">
+                        <div class="line-wrap">
+                            <div class="line top"></div>
+                            <div class="line center"></div>
+                            <div class="line bottom"></div>
+                        </div>
+                    </div>
+                    <ul class="lv-actions actions">
+                        <li>
+                            <a href="">
+                                <i class="zmdi zmdi-close"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="zmdi zmdi-account-add"></i>
+                            </a>
+                        </li>
+                        <li class="dropdown" uib-dropdown>
+                            <a href="" uib-dropdown-toggle aria-expanded="true">
+                                <i class="zmdi zmdi-more-vert"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li>
+                                    <a href="">Past Results</a>
+                                </li>
+                                <li>
+                                    <a href="">More Details</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="lv-body pyramid">
+                    <div ng-repeat="level in vm.levels" class="level level-{{level}}">
+                        <div class="level-marker">{{level}}</div>
+                        <div ng-repeat="player in vm.pyramid.players" ng-if="player.level === level" class="pyramid-block" ng-class="player.class">
+                            <i ng-if="player.class === 'unavailable'" class="zmdi zmdi-lock"></i> {{player.firstName}} {{player.lastName}}
+                            <div ng-if="player.challenge && player.challenge.position === 'opponent' && player.challenge.expires">
+                                <timer interval="1000" countdown="player.challenge.expires" finish-callback="vm.challengeExpired(player)">{{hours}}:{{mminutes}}:{{sseconds}}</timer>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <button class="btn btn-block btn-default" type="button" ng-if="vm.isCurrentUserOnPyramid && !vm.hasActiveChallenge && !vm.showCreateChallengeOptions && vm.currentUserPlayer.level !== 1" ng-click="vm.startChallenge()">Make a Challenge</button>
-                <div ng-if="vm.showCreateChallengeOptions && vm.availableChallenges">
-                    <button class="btn btn-block btn-default" type="button" ng-click="vm.startChallenge(true)">Cancel</button> Choose from the following players:
-                    <div ng-repeat="player in vm.pyramid.players" ng-if="player.available" ng-click="vm.createChallenge(player)">
-                        {{player.firstName}} {{player.lastName}}
-                    </div>
-                </div>
-                <div ng-if="vm.showCreateChallengeOptions && !vm.availableChallenges">
-                    Sorry, you have no available opponents
-                </div>
-                <button class="btn btn-block btn-default" type="button" ng-if="vm.isCurrentUserOnPyramid && vm.hasActiveChallenge && !vm.showCompleteChallengeOptions" ng-click="vm.showCompleteChallengeOptions = true">Complete a Challenge</button>
-                <div ng-if="vm.showCompleteChallengeOptions">
-                    <button class="btn btn-success" type="button" ng-click="vm.completeChallenge(true)">Won</button>
-                    <button class="btn btn-danger" type="button" ng-click="vm.completeChallenge(false)">Lost</button>
-                </div>
-                <div kp-challeneges competition-id="{{vm.competitionId}}"></div>
             </div>
         </div>
     </div>

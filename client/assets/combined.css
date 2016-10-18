@@ -7244,6 +7244,16 @@ body {
 #content.ng-leave {
   animation: slideOutLeft 0.5s ease both;
 }
+.pyramid-menu .btn-container {
+  padding: 8px 0;
+  text-align: center;
+}
+.pyramid-menu .btn-container .btn {
+  margin-left: 5px;
+}
+.pyramid-menu .btn-container .btn:first-child {
+  margin-left: 0;
+}
 .pyramid {
   text-align: center;
 }
@@ -7300,6 +7310,15 @@ body {
 }
 .pyramid .pyramid-block.unavailable {
   border-top: 3px solid #F44336;
+}
+.challenges-list .lv-header {
+  margin-bottom: 0;
+}
+.challenges-list .lv-item {
+  border-bottom: 1px solid #eee;
+}
+.challenges-list .lv-item .badge {
+  float: right;
 }
 /*
  * Vendors
@@ -10961,6 +10980,9 @@ body:not(.sw-toggled) #sidebar {
 }
 .ie9 body:not(.sw-toggled) #sidebar:not(.toggled) {
   display: none;
+}
+.dropdown-menu .dd-header {
+  padding: 0 10px;
 }
 /*
 .dropdown-menu {

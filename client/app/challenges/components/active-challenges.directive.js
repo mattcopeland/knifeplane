@@ -3,9 +3,9 @@
 
   angular
     .module('app')
-    .directive('kpChalleneges', kpChalleneges);
+    .directive('kpActiveChalleneges', kpActiveChalleneges);
 
-  function kpChalleneges() {
+  function kpActiveChalleneges() {
     var directive = {
       bindToController: true,
       controller: ctrlFunc,
@@ -14,7 +14,7 @@
       scope: {
         competitionId: '@'
       },
-      templateUrl: '/common/components/challenges.html'
+      templateUrl: '/challenges/components/active-challenges.html'
     };
     return directive;
   }
@@ -31,8 +31,8 @@
     }
 
     function getActiveChallenges() {
+      vm.challenges = [];
       challengesService.getActiveChallengesByCompetition(vm.competitionId).then(function (challenges) {
-        vm.challenges = [];
         if (challenges.data.length > 0) {
           vm.challenges = challenges.data;
           _.forEach(vm.challenges, function (challenge) {

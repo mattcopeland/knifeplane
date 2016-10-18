@@ -16,7 +16,6 @@
         if (!response) {
           notifyService.error('Username / password combinaiton incorrect');
         } else {
-          notifyService.success('Login successful.  Welcome to Knifeplane!');
           if ($state.previous) {
             $state.go($state.previous);
           } else {

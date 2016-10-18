@@ -25,7 +25,6 @@
     function info(message, url, target) {
       $.notify({
         // options
-        icon: 'zmdi zmdi-alert-circle-o',
         message: message,
         url: url,
         target: target
@@ -38,7 +37,6 @@
     function success(message, url, target) {
       $.notify({
         // options
-        icon: 'zmdi zmdi-check',
         message: message,
         url: url,
         target: target
@@ -51,7 +49,6 @@
     function warning(message, url, target) {
       $.notify({
         // options
-        icon: 'zmdi zmdi-alert-triangle',
         message: message,
         url: url,
         target: target
@@ -64,7 +61,6 @@
     function error(message, url, target) {
       $.notify({
         // options
-        icon: 'zmdi zmdi-alert-octagon',
         message: message,
         url: url,
         target: target
