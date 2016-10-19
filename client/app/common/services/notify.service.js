@@ -14,6 +14,7 @@
     };
 
     $.notifyDefaults({
+      newest_on_top: true,
       offset: {
         x: 20,
         y: 85
