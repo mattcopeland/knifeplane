@@ -1,3 +1,4 @@
+// Pyramid View
 .pyramid-menu {
 
   .btn-container {
@@ -79,4 +80,59 @@
       border-top: 3px solid @m-red;
     }
   }
+}
+
+// Create pyramid form
+.pyramid-players {
+    border: 1px solid @input-border;
+    height: 150px;
+    list-style-type: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 0;
+
+    li {
+        cursor: pointer;
+        padding: 5px 10px;
+
+        &:hover {
+            color: @m-blue;
+        }
+
+        &.ng-enter {
+            animation: slideInRight 0.5s ease both;
+        }
+
+        &.ng-leave {
+            animation: slideOutRight 0.5s ease both;
+        }
+    }
+
+    &#added-players li {
+        &.ng-enter {
+            animation: slideInLeft 0.5s ease both;
+        }
+
+        &.ng-leave {
+            animation: slideOutLeft 0.5s ease both;
+        }
+    }
+}
+
+.swap-players {
+    text-align: center;
+
+    i {
+        font-size: 44px;
+        
+        &.hidden-xs {
+            font-size: 44px;
+            line-height: 180px;
+        }
+
+        &.visible-xs {
+            font-size: 44px;
+            line-height: 0;
+        }
+    }
 }
