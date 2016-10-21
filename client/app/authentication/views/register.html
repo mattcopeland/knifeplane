@@ -1,25 +1,49 @@
 <div class="container">
-  <form name="newUserForm" ng-submit="vm.register(vm.newUser)" novalidate>
-    <div class="form-group">
-      <label>Email</label>
-      <input class="form-control" type="email" ng-model="vm.newUser.username" required>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="block-header">
+                <h2>Register for the Knifeplane</h2>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2>Register</h2>
+                </div>
+                <div class="card-body card-padding">
+                    <form role="form" name="newUserForm" ng-submit="vm.register(vm.newUser)" novalidate>
+                        <div class="form-group fg-float m-b-30">
+                            <div class="fg-line">
+                                <input class="form-control" type="email" name="username" ng-model="vm.newUser.username" required>
+                                <label class="fg-label">Email</label>
+                            </div>
+                        </div>
+                        <div class="form-group fg-float m-b-30">
+                            <div class="fg-line">
+                                <input class="form-control" type="password" ng-model="vm.newUser.password" required>
+                                <label class="fg-label">Password</label>
+                            </div>
+                        </div>
+                        <div class="form-group fg-float m-b-30">
+                            <div class="fg-line">
+                                <input class="form-control" type="password" ng-model="vm.newUser.confirmPassword" required>
+                                <label class="fg-label">Confirm Password</label>
+                            </div>
+                        </div>
+                        <div class="form-group fg-float m-b-30">
+                            <div class="fg-line">
+                                <input class="form-control" type="text" ng-model="vm.newUser.firstName" required>
+                                <label class="fg-label">First Name</label>
+                            </div>
+                        </div>
+                        <div class="form-group fg-float m-b-30">
+                            <div class="fg-line">
+                                <input class="form-control" type="text" ng-model="vm.newUser.lastName" required>
+                                <label class="fg-label">Last Name</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary waves-effect" ng-disabled="newUserForm.$invalid">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-      <label>Password</label>
-      <input class="form-control" type="password" ng-model="vm.newUser.password" required>
-    </div>
-    <div class="form-group">
-      <label>First Name</label>
-      <input class="form-control" type="text" ng-model="vm.newUser.firstName" required>
-    </div>
-    <div class="form-group">
-      <label>Last Name</label>
-      <input class="form-control" type="text" ng-model="vm.newUser.lastName" required>
-    </div>
-    <div class="form-group">
-      <label>Nickname</label>
-      <input class="form-control" type="text" ng-model="vm.newUser.nickname">
-    </div>
-    <input class="btn btn-success btn-lg btn-block" type="submit" value="Register" ng-disabled="newUserForm.$invalid">
-  </form>
 </div>

@@ -8,14 +8,45 @@
         </div>
         <div class="card-body card-padding">
             <form name="createPyramidForm" ng-submit="vm.createPyramid(vm.newPyramid)" novalidate>
-                <div class="form-group m-b-30">
-                    <div class="fg-line">
-                        <input type="text" class="form-control" ng-model="vm.newPyramid.name" placeholder="Pyramid Name" required>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group m-b-30">
+                            <div class="fg-line">
+                                <input type="text" class="form-control" ng-model="vm.newPyramid.name" placeholder="Pyramid Name" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 m-t-5">
+                        <label class="m-b-10">Pyramid Levels: {{ vm.newPyramid.levels }}</label>
+                        <div class="input-slider m-b-25" slider ng-model="vm.newPyramid.levels" start="2" end="7" data-is-color="blue"></div>
+                    </div>
+                    <div class="col-sm-4 m-t-5">
+                        <label class="m-b-10">Forfeit Hours: {{ vm.newPyramid.forfeitHours }}</label>
+                        <div class="input-slider m-b-25" slider ng-model="vm.newPyramid.forfeitHours" start="2" end="24" step="2" data-is-color="blue"></div>
                     </div>
                 </div>
-                <p class="c-gray m-b-10">Pyramid Levels: {{ vm.newPyramid.levels }}</p>
-                <div class="input-slider m-b-25" slider ng-model="vm.newPyramid.levels" start="2" end="7" data-is-color="blue"></div>
-                <select class="w-100" chosen multiple data-placeholder="Choose players..." ng-model="vm.addedPlayers" ng-options="player as (player.firstName + ' ' + player.lastName) for player in vm.availablePlayers track by player._id" required></select>
+                <div class="row">
+                    <div class="col-sm-5 m-b-30">
+                        <label>Available Players</label>
+                        <ul class="challenge-players" id="available-players">
+                            <li ng-repeat="player in vm.availablePlayers" ng-click="vm.addPlayer(player)">
+                                {{player.firstName}} {{player.lastName}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-2 swap-players">
+                        <i class="zmdi zmdi-swap hidden-xs"></i>
+                        <i class="zmdi zmdi-swap-vertical visible-xs"></i>
+                    </div>
+                    <div class="col-sm-5 m-b-30">
+                        <label>Challenge Players</label>
+                        <ul class="challenge-players" id="added-players" scroll-glue="vm.addedPlayerAdded">
+                            <li ng-repeat="player in vm.addedPlayers" ng-click="vm.removePlayer(player)">
+                                {{player.firstName}} {{player.lastName}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-primary waves-effect" ng-disabled="createPyramidForm.$invalid">Create Pyramid</button>
             </form>
         </div>

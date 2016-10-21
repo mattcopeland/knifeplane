@@ -2,7 +2,7 @@
   'use strict';
   angular.module('app').controller('RegisterCtrl', RegisterCtrl);
 
-  function RegisterCtrl($scope, $state, authService) {
+  function RegisterCtrl($scope, $state, authService, notifyService) {
     var vm = this;
     vm.register = register;
 
@@ -11,9 +11,13 @@
     function activate() {}
 
     function register(newUser) {
-      authService.createUser(newUser).then(function (response) {
-        $state.go('home');
-      });
+      if (newUser.password !== newUser.confirmPassword) {
+        notifyService.error('Passwords don\'t match!');
+      } else{
+        authService.createUser(newUser).then(function (response) {
+          $state.go('home');
+        });
+      }
     }
   }
 })();

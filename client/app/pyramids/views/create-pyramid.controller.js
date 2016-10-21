@@ -10,7 +10,10 @@
     vm.availablePlayers = [];
     vm.addedPlayers = [];
     vm.createPyramid = createPyramid;
+    vm.addPlayer = addPlayer;
+    vm.removePlayer = removePlayer;
     vm.newPyramid.levels = 4;
+    vm.newPyramid.forfeitHours = 24;
 
     activate();
 
@@ -18,6 +21,18 @@
       userService.getAllUsers().then(function (users) {
         vm.availablePlayers = users.data;
       });
+    }
+
+    function addPlayer(player) {
+      vm.availablePlayerAdded = false;
+      vm.addedPlayerAdded = true;
+      vm.addedPlayers.push(_.remove(vm.availablePlayers, {_id: player._id})[0]);
+    }
+
+    function removePlayer(player) {
+      vm.availablePlayerAdded = true;
+      vm.addedPlayerAdded = false;
+      vm.availablePlayers.push(_.remove(vm.addedPlayers, {_id: player._id})[0]);
     }
 
     var position = 0;

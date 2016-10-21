@@ -5,5 +5,6 @@ angular.module('app', [
   'angular-loading-bar',
   'nouislider',
   'localytics.directives',
-  'timer'
+  'timer',
+  'luegg.directives'
 ]);

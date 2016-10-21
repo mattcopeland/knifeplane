@@ -7320,6 +7320,46 @@ body {
 .challenges-list .lv-item .badge {
   float: right;
 }
+.challenge-players {
+  border: 1px solid #e0e0e0;
+  height: 150px;
+  list-style-type: none;
+  overflow-y: scroll;
+  padding: 0;
+}
+.challenge-players li {
+  cursor: pointer;
+  padding: 5px 10px;
+}
+.challenge-players li:hover {
+  color: #2196F3;
+}
+.challenge-players li.ng-enter {
+  animation: slideInRight 0.5s ease both;
+}
+.challenge-players li.ng-leave {
+  animation: slideOutRight 0.5s ease both;
+}
+.challenge-players#added-players li.ng-enter {
+  animation: slideInLeft 0.5s ease both;
+}
+.challenge-players#added-players li.ng-leave {
+  animation: slideOutLeft 0.5s ease both;
+}
+.swap-players {
+  text-align: center;
+}
+.swap-players i {
+  font-size: 44px;
+}
+.swap-players i.hidden-xs {
+  font-size: 44px;
+  line-height: 180px;
+}
+.swap-players i.visible-xs {
+  font-size: 44px;
+  line-height: 0;
+}
 /*
  * Vendors
  */
