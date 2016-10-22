@@ -34,7 +34,7 @@
         userData: userData
       }).then(function (response) {
         if (response.data) {
-          identityService.currentUser = response.data;
+          authenticateUser(userData.username, userData.password);
           dfd.resolve(true);
         } else {
           dfd.resolve(false);

@@ -13,8 +13,8 @@
     function register(newUser) {
       if (newUser.password !== newUser.confirmPassword) {
         notifyService.error('Passwords don\'t match!');
-      } else{
-        authService.createUser(newUser).then(function (response) {
+      } else {
+        authService.createUser(newUser).then(function () {
           $state.go('home');
         });
       }
