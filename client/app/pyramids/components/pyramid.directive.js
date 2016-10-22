@@ -97,13 +97,15 @@
           };
 
           // Track when the challenge will expire
-          var timeToExpire = moment().diff(moment(challenge.created).add(challenge.timeLimit, 'h'), 's') * -1;
-          // If the challenge has not yet expired display a countdown on the opponent
-          if (timeToExpire > 0) {
-            opponent.challenge.expires = timeToExpire;
-            // If the challenge expired while no one was viewing this pyramid complete the challenge by forfeit
-          } else if (timeToExpire <= 0) {
-            completeChallenge(null, true, opponent);
+          if (challenge.timeLimit !== 0) {
+            var timeToExpire = moment().diff(moment(challenge.created).add(challenge.timeLimit, 'd'), 's') * -1;
+            // If the challenge has not yet expired display a countdown on the opponent
+            if (timeToExpire > 0) {
+              opponent.challenge.expires = timeToExpire;
+              // If the challenge expired while no one was viewing this pyramid complete the challenge by forfeit
+            } else if (timeToExpire <= 0) {
+              completeChallenge(null, true, opponent);
+            }
           }
         });
         // Now that we know which players are in challenges and which aren't
@@ -175,7 +177,7 @@
           competitionId: vm.competitionId,
           complete: false,
           forfeit: false,
-          timeLimit: 24,
+          timeLimit: vm.pyramid.forfeitDays,
           challenger: {
             _id: vm.currentUserPlayer._id,
             firstName: vm.currentUserPlayer.firstName,

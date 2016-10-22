@@ -36,7 +36,9 @@
         if (challenges.data.length > 0) {
           vm.challenges = challenges.data;
           _.forEach(vm.challenges, function (challenge) {
-            challenge.expires = (moment().diff(moment(challenge.created).add(challenge.timeLimit, 'h'),'s')) * -1;
+            if (challenge.timeLimit !== 0) {
+              challenge.expires = (moment().diff(moment(challenge.created).add(challenge.timeLimit, 'd'),'s')) * -1;
+            }
           });
         }
       });

@@ -9,6 +9,10 @@ var pyramidSchema = mongoose.Schema({
     type: Number,
     required: '{PATH} is required!'
   },
+  forfeitDays: {
+    type: Number,
+    default: 1
+  },
   players: {
     type: Array,
     default: []

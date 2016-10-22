@@ -7198,6 +7198,12 @@ body {
   -webkit-animation: fadeOut 0.2s ease both;
           animation: fadeOut 0.2s ease both;
 }
+.btns-group .btn {
+  margin-left: 5px;
+}
+.btns-group .btn:first-child {
+  margin-left: 0;
+}
 .pyramid-menu .btn-container {
   padding: 8px 0;
   text-align: center;
@@ -7281,20 +7287,20 @@ body {
   color: #2196F3;
 }
 .pyramid-players li.ng-enter {
-  -webkit-animation: slideInRight 0.5s ease both;
-          animation: slideInRight 0.5s ease both;
+  -webkit-animation: slideInRight 0.3s ease both;
+          animation: slideInRight 0.3s ease both;
 }
 .pyramid-players li.ng-leave {
-  -webkit-animation: slideOutRight 0.5s ease both;
-          animation: slideOutRight 0.5s ease both;
+  -webkit-animation: slideOutRight 0.3s ease both;
+          animation: slideOutRight 0.3s ease both;
 }
 .pyramid-players#added-players li.ng-enter {
-  -webkit-animation: slideInLeft 0.5s ease both;
-          animation: slideInLeft 0.5s ease both;
+  -webkit-animation: slideInLeft 0.3s ease both;
+          animation: slideInLeft 0.3s ease both;
 }
 .pyramid-players#added-players li.ng-leave {
-  -webkit-animation: slideOutLeft 0.5s ease both;
-          animation: slideOutLeft 0.5s ease both;
+  -webkit-animation: slideOutLeft 0.3s ease both;
+          animation: slideOutLeft 0.3s ease both;
 }
 .swap-players {
   text-align: center;

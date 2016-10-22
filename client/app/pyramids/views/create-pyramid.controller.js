@@ -12,8 +12,9 @@
     vm.createPyramid = createPyramid;
     vm.addPlayer = addPlayer;
     vm.removePlayer = removePlayer;
+    vm.updateAllowedPlayers = updateAllowedPlayers;
     vm.newPyramid.levels = 4;
-    vm.newPyramid.forfeitHours = 24;
+    vm.newPyramid.forfeitDays = 1;
 
     activate();
 
@@ -24,7 +25,6 @@
     }
 
     function addPlayer(player) {
-      vm.availablePlayerAdded = false;
       vm.addedPlayerAdded = true;
       vm.addedPlayers.push(_.remove(vm.availablePlayers, {_id: player._id})[0]);
     }
@@ -33,6 +33,10 @@
       vm.availablePlayerAdded = true;
       vm.addedPlayerAdded = false;
       vm.availablePlayers.push(_.remove(vm.addedPlayers, {_id: player._id})[0]);
+    }
+
+    function updateAllowedPlayers(levels) {
+      console.log(levels);
     }
 
     var position = 0;

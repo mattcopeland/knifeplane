@@ -19,11 +19,14 @@
                     </div>
                     <div class="col-sm-4 m-t-5">
                         <label class="m-b-10">Pyramid Levels: {{ vm.newPyramid.levels }}</label>
-                        <div class="input-slider m-b-25" slider ng-model="vm.newPyramid.levels" start="2" end="7" data-is-color="blue"></div>
+                        <div class="input-slider m-b-30" slider ng-model="vm.newPyramid.levels" start="2" end="7" data-is-color="blue"></div>
                     </div>
                     <div class="col-sm-4 m-t-5">
-                        <label class="m-b-10">Forfeit Hours: {{ vm.newPyramid.forfeitHours }}</label>
-                        <div class="input-slider m-b-25" slider ng-model="vm.newPyramid.forfeitHours" start="2" end="24" step="2" data-is-color="blue"></div>
+                        <label class="m-b-10">Forfeit Days:
+                            <span ng-if="vm.newPyramid.forfeitDays === 0"> No Limit</span>
+                            <span ng-if="vm.newPyramid.forfeitDays > 0">{{ vm.newPyramid.forfeitDays }}</span>
+                        </label>
+                        <div class="input-slider m-b-30" slider ng-model="vm.newPyramid.forfeitDays" start="0" end="5" step="1" data-is-color="blue"></div>
                     </div>
                 </div>
                 <div class="row">
@@ -48,7 +51,14 @@
                         </ul>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary waves-effect" ng-disabled="createPyramidForm.$invalid">Create Pyramid</button>
+                <div class="btns-group">
+                    <button type="submit" class="btn btn-primary" ng-disabled="createPyramidForm.$invalid">
+                        <i class="zmdi zmdi-check"></i> Create Pyramid
+                    </button>
+                    <a class="btn" ui-sref="pyramids">
+                        <i class="zmdi zmdi-close"></i> Cancel
+                    </a>
+                </div>
             </form>
         </div>
     </div>
