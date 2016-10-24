@@ -21,7 +21,7 @@
   }
 
   /* @ngInject */
-  function ctrlFunc($scope, pyramidsService, $filter, notifyService, identityService, challengesService) {
+  function ctrlFunc($scope, $state, pyramidsService, $filter, notifyService, identityService, challengesService) {
     var vm = this;
     vm.pyramid = {};
     vm.breakPoints = [];
@@ -34,23 +34,30 @@
     vm.challengeExpired = challengeExpired;
     vm.currentUserPlayer = {};
     vm.pyramidMenuToggle = false;
+    vm.addCurrentUserToPyramid = addCurrentUserToPyramid;
+    vm.numberOfRealPlayers = 0;
 
     activate();
 
     function activate() {
       pyramidsService.getPyramid(vm.competitionId).then(function (pyramid) {
-        vm.pyramid = pyramid.data;
+        if (pyramid.data) {
+          vm.pyramid = pyramid.data;
 
-        vm.levels = [];
-        for (var i = 1; i <= pyramid.data.levels; ++i) {
-          vm.levels.push(i);
+          // This doesn't change on refresh'
+          vm.levels = [];
+          for (var i = 1; i <= pyramid.data.levels; ++i) {
+            vm.levels.push(i);
+          }
+
+          orderPlayers();
+          getPlayersStatus();
+          calculatePyramidBlocks();
+          fillInEmptyBlocks();
+          assignLevelsToPlayers();
+        } else {
+          $state.go('pyramids.myPyramids');
         }
-
-        orderPlayers();
-        getPlayersStatus();
-        calculatePyramidBlocks();
-        fillInEmptyBlocks();
-        assignLevelsToPlayers();
       });
     }
 
@@ -84,13 +91,13 @@
       challengesService.getActiveChallengesByCompetition(vm.competitionId).then(function (challenges) {
         _.forEach(challenges.data, function (challenge) {
 
-          var challenger = _.find(vm.pyramid.players, {'_id': challenge.challenger._id});
+          var challenger = _.find(vm.pyramid.players, { '_id': challenge.challenger._id });
           challenger.class = 'unavailable';
           challenger.challenge = {
             position: 'challenger'
           };
 
-          var opponent = _.find(vm.pyramid.players, {'_id': challenge.opponent._id});
+          var opponent = _.find(vm.pyramid.players, { '_id': challenge.opponent._id });
           opponent.class = 'unavailable';
           opponent.challenge = {
             position: 'opponent'
@@ -134,6 +141,7 @@
 
     // Fill out the remaining blocks of the pyramid with empty blocks
     function fillInEmptyBlocks() {
+      vm.numberOfRealPlayers = vm.pyramid.players.length;
       for (var i = vm.pyramid.players.length; i < vm.numberOfBlocks; i++) {
         vm.pyramid.players.push({
           firstName: 'Empty',
@@ -193,8 +201,9 @@
             position: player.position
           }
         };
+        // Create the challenge
+        // Websocket event will refresh the pyramid
         challengesService.createChallenge(challenge).then(function () {
-          refreshPyramid();
           vm.pyramidMenuToggle = false;
         });
       }
@@ -244,16 +253,43 @@
         } else {
           challengesService.completeChallenge(challenge.data);
         }
-        
+
         vm.pyramidMenuToggle = false;
       });
     }
-
+    /**
+     * Calls the complete challnge function with the forfeiting player
+     * @param  {object} player
+     */
     function challengeExpired(player) {
       completeChallenge(null, true, player);
     }
+    /**
+     * Adds the current user the pyramid 
+     * if they're not already on it and there's space
+     */
+    function addCurrentUserToPyramid() {
+      if (identityService.isAuthenticated()) {
+        if (vm.numberOfRealPlayers < vm.numberOfBlocks) {
+          var player = {
+            _id: identityService.currentUser._id,
+            firstName: identityService.currentUser.firstName,
+            lastName: identityService.currentUser.lastName,
+            position: vm.numberOfRealPlayers + 1
+          };
+          pyramidsService.addPlayerToPyramid(vm.competitionId, player);
+        } else {
+          notifyService.warning('Sorry, this pyramid is full');
+        }
+      } else {
+        $state.go('login');
+      }
+    }
 
-    // Refresh the pyramid becasue of an update
+
+    /**
+     * Refresh the pyramid becasue of an update
+     */
     function refreshPyramid() {
       pyramidsService.getPyramid(vm.competitionId).then(function (pyramid) {
         vm.pyramid = pyramid.data;
@@ -276,6 +312,14 @@
     $scope.$on('ws:challenge_completed', function (_, challengeDetails) {
       if (vm.competitionId === challengeDetails.competitionId) {
         notifyService.info(challengeDetails.description);
+        refreshPyramid();
+      }
+    });
+
+    // Watch for websocket event
+    $scope.$on('ws:player_added', function (_, details) {
+      if (vm.competitionId === details.competitionId) {
+        notifyService.info(details.description);
         refreshPyramid();
       }
     });

@@ -15936,7 +15936,7 @@ body.login-content:before {
   margin: 0;
   float: left;
   background: transparent !important;
-  border: 2px solid #00BCD4;
+  border: 2px solid #2196F3;
   border-bottom-color: transparent !important;
   border-radius: 100%;
   -webkit-animation: ball-clip-rotate 0.75s linear infinite;

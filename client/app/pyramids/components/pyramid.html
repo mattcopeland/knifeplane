@@ -53,8 +53,8 @@
                                 <i class="zmdi zmdi-close"></i>
                             </a>
                         </li>
-                        <li>
-                            <a href="">
+                        <li ng-if="!vm.isCurrentUserOnPyramid && vm.numberOfRealPlayers < vm.numberOfBlocks">
+                            <a href="" ng-click="vm.addCurrentUserToPyramid()">
                                 <i class="zmdi zmdi-account-add"></i>
                             </a>
                         </li>

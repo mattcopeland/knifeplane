@@ -1,4 +1,5 @@
 var Pyramid = require('mongoose').model('Pyramid');
+var websockets = require('../websockets');
 
 exports.getPyramid = function (req, res) {
   Pyramid.findOne({
@@ -75,6 +76,11 @@ exports.swapPositions = function (req, res, next) {
 };
 
 exports.addPlayer = function (req, res, next) {
+  var player = req.body.player.firstName + ' ' + req.body.player.lastName;
+  var details = {
+    pyramidId: req.body.pyramidId,
+    description: player + ' has joined the competition'
+  };
   Pyramid.update({
     _id: req.body.pyramidId
   }, {
@@ -82,10 +88,11 @@ exports.addPlayer = function (req, res, next) {
       'players': req.body.player
     }
   })
-  .exec(function (err, pyramids) {
+  .exec(function (err, pyramid) {
     if (err) {
       return next(err);
     }
-    res.status(201).json(pyramids);
+    websockets.broadcast('player_added', details);
+    res.status(201).json(pyramid);
   });
 };
