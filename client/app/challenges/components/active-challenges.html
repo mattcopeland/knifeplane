@@ -6,7 +6,7 @@
         <i class="zmdi zmdi-account-circle"></i> <b>{{challenge.opponent.firstName}} {{challenge.opponent.lastName}}</b>
         <div class="badge" ng-if="challenge.expires">
             <i class="zmdi zmdi-time"></i>
-            <timer interval="1000" countdown="challenge.expires">{{hours}}:{{mminutes}}:{{sseconds}}</timer>
+            <timer interval="1000" countdown="challenge.expires" max-time-unit="'hour'">{{hours}}:{{mminutes}}:{{sseconds}}</timer>
         </div>
         <div class="clearfix"></div>
     </div>

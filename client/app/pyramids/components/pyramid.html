@@ -80,7 +80,7 @@
                             <i ng-if="player.class === 'unavailable'" class="zmdi zmdi-alert-octagon"></i> {{player.firstName}} {{player.lastName}}
                             <div ng-if="player.challenge && player.challenge.position === 'opponent' && player.challenge.expires">
                                 <i class="zmdi zmdi-time"></i>
-                                <timer interval="1000" countdown="player.challenge.expires" finish-callback="vm.challengeExpired(player)">{{hours}}:{{mminutes}}:{{sseconds}}</timer>
+                                <timer interval="1000" countdown="player.challenge.expires" max-time-unit="'hour'" finish-callback="vm.challengeExpired(player)">{{hours}}:{{mminutes}}:{{sseconds}}</timer>
                             </div>
                         </div>
                     </div>
