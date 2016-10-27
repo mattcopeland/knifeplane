@@ -26,7 +26,7 @@
     vm.pyramid = {};
     vm.breakPoints = [];
     vm.numberOfBlocks = 0;
-    vm.isCurrentUserOnPyramid = false;
+    vm.currentUserIsOnPyramid = false;
     vm.hasActiveChallenge = false;
     vm.availableChallenges = false;
     vm.createChallenge = createChallenge;
@@ -35,6 +35,7 @@
     vm.currentUserPlayer = {};
     vm.pyramidMenuToggle = false;
     vm.addCurrentUserToPyramid = addCurrentUserToPyramid;
+    vm.removeCurrentUserFromPyramid = removeCurrentUserFromPyramid;
     vm.numberOfRealPlayers = 0;
 
     activate();
@@ -75,8 +76,8 @@
       _.forEach(vm.pyramid.players, function (player) {
 
         // Find the current user if they are on this pyramid and set some properties
-        if (identityService.currentUser && player._id === identityService.currentUser._id) {
-          vm.isCurrentUserOnPyramid = true;
+        if (identityService.isAuthenticated() && player._id === identityService.currentUser._id) {
+          vm.currentUserIsOnPyramid = true;
           player.class = 'current-user';
           vm.currentUserPlayer = player;
 
@@ -222,11 +223,15 @@
 
         var swapPositions = false;
 
-        // If there is a forfeit than swap position and make the challenger the winner
+        // If there is a forfeit
         if (forfeit) {
           challenge.data.forfeit = true;
-          challenge.data.challenger.winner = true;
-          swapPositions = true;
+          if (forfeitLoser.challenge.position === 'opponent') {
+            challenge.data.challenger.winner = true;
+            swapPositions = true;
+          } else {
+            challenge.data.opponent.winner = true;
+          }
           // Figure out who the winner was to store in the challenge record
         } else if (winnerIsCurrentUser) {
           if (challenge.data.challenger._id === vm.currentUserPlayer._id) {
@@ -248,10 +253,18 @@
         // Websocket event will refresh the pyramid
         if (swapPositions) {
           pyramidsService.swapPositions(vm.competitionId, challenge.data.opponent, challenge.data.challenger).then(function () {
-            challengesService.completeChallenge(challenge.data);
+            challengesService.completeChallenge(challenge.data).then(function () {
+              if (removingCurrentUser) {
+                removeCurrentUserFromPyramid();
+              }
+            });
           });
         } else {
-          challengesService.completeChallenge(challenge.data);
+          challengesService.completeChallenge(challenge.data).then(function () {
+            if (removingCurrentUser) {
+              removeCurrentUserFromPyramid();
+            }
+          });
         }
 
         vm.pyramidMenuToggle = false;
@@ -286,6 +299,64 @@
       }
     }
 
+    // Use this to enforce order of operations when the player to be removed had an active challenge
+    var removingCurrentUser = false;
+
+    function removeCurrentUserFromPyramid() {
+      // Make sure the user is logged in and is on this pyramid
+      if (identityService.isAuthenticated() && vm.currentUserIsOnPyramid) {
+        removingCurrentUser = true;
+        // Forfeit if they have an active challenge
+        if (vm.hasActiveChallenge) {
+          completeChallenge(null, true, vm.currentUserPlayer);
+        } else {
+          // Since we are removing them ...
+          vm.currentUserIsOnPyramid = false;
+          vm.hasActiveChallenge = false;
+
+          // Get an updated copy of the pyramid incase a forfeit happened
+          pyramidsService.getPyramid(vm.competitionId).then(function (p) {
+            // Store the updated copy locally so as not to distrupt the pyramid
+            // until the player has been removed
+            var pyramid = p.data;
+
+            // Keep track of the spot they were in on the pyramid
+            var openPosition = vm.currentUserPlayer.position;
+
+            // Move all the players up 1 position that were behind the removed player
+            _.forEach(pyramid.players, function (player) {
+              if (player.position >= openPosition) {
+                player.position -= 1;
+              }
+            });
+
+            // Removed the player from the pyramid
+            var removedPlayer = _.remove(pyramid.players, function (player) {
+              return player._id === vm.currentUserPlayer._id;
+            });
+
+            // Make a new array of all the players still on the pyramid
+            // only use the properties we want to store in the pyramid document
+            var updatedPlayers = [];
+            for (var i = 0; i < vm.numberOfRealPlayers - 1; ++i) {
+              var updatedPlayer = {
+                _id: pyramid.players[i]._id,
+                firstName: pyramid.players[i].firstName,
+                lastName: pyramid.players[i].lastName,
+                position: pyramid.players[i].position
+              };
+
+              updatedPlayers.push(updatedPlayer);
+            }
+
+            // Call service to remove the player
+            pyramidsService.removedPlayerFromPyramid(vm.competitionId, removedPlayer[0], updatedPlayers).then(function () {
+              removingCurrentUser = false;
+            });
+          });
+        }
+      }
+    }
 
     /**
      * Refresh the pyramid becasue of an update
@@ -312,12 +383,22 @@
     $scope.$on('ws:challenge_completed', function (_, challengeDetails) {
       if (vm.competitionId === challengeDetails.competitionId) {
         notifyService.info(challengeDetails.description);
-        refreshPyramid();
+        if (!removingCurrentUser) {
+          refreshPyramid();
+        }
       }
     });
 
     // Watch for websocket event
     $scope.$on('ws:player_added', function (_, details) {
+      if (vm.competitionId === details.competitionId) {
+        notifyService.info(details.description);
+        refreshPyramid();
+      }
+    });
+
+    // Watch for websocket event
+    $scope.$on('ws:player_removed', function (_, details) {
       if (vm.competitionId === details.competitionId) {
         notifyService.info(details.description);
         refreshPyramid();

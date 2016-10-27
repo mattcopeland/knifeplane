@@ -8,7 +8,8 @@
       getPyramidsForUser: getPyramidsForUser,
       createPyramid: createPyramid,
       swapPositions: swapPositions,
-      addPlayerToPyramid: addPlayerToPyramid
+      addPlayerToPyramid: addPlayerToPyramid,
+      removedPlayerFromPyramid: removedPlayerFromPyramid
     };
 
     return service;
@@ -59,6 +60,14 @@
       return $http.post('/api/pyramids/addPlayer', {
         pyramidId: pyramidId,
         player: player
+      });
+    }
+
+    function removedPlayerFromPyramid(pyramidId, removedPlayer, players) {
+      return $http.post('/api/pyramids/removePlayer', {
+        pyramidId: pyramidId,
+        removedPlayer: removedPlayer,
+        players: players
       });
     }
   }

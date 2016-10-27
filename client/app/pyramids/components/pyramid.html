@@ -5,7 +5,7 @@
     <div class="card m-b-0" id="messages-main">
         <div class="ms-menu pyramid-menu" ng-class="{ 'toggled': vm.pyramidMenuToggle }">
             <!-- Make a challenge -->
-            <div class="ms-block m-b-20" ng-if="vm.isCurrentUserOnPyramid && !vm.hasActiveChallenge && vm.currentUserPlayer.level !== 1">
+            <div class="ms-block m-b-20" ng-if="vm.currentUserIsOnPyramid && !vm.hasActiveChallenge && vm.currentUserPlayer.level !== 1">
                 <div class="dropdown" uib-dropdown>
                     <a class="btn btn-primary btn-block" href="" uib-dropdown-toggle ng-click="vm.startChallenge()">Make a Challenge <i class="caret m-l-5"></i></a>
                     <ul class="dropdown-menu w-100" ng-if="vm.availableChallenges">
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <!-- Complete a challenge -->
-            <div class="ms-block m-b-20" ng-if="vm.isCurrentUserOnPyramid && vm.hasActiveChallenge">
+            <div class="ms-block m-b-20" ng-if="vm.currentUserIsOnPyramid && vm.hasActiveChallenge">
                 <div class="dropdown" uib-dropdown>
                     <a class="btn btn-primary btn-block" href="" uib-dropdown-toggle>Complete a Challenge <i class="caret m-l-5"></i></a>
                     <ul class="dropdown-menu w-100">
@@ -48,12 +48,12 @@
                         </div>
                     </div>
                     <ul class="lv-actions actions">
-                        <li>
-                            <a href="">
+                        <li ng-if="vm.currentUserIsOnPyramid">
+                            <a href="" ng-click="vm.removeCurrentUserFromPyramid()">
                                 <i class="zmdi zmdi-close"></i>
                             </a>
                         </li>
-                        <li ng-if="!vm.isCurrentUserOnPyramid && vm.numberOfRealPlayers < vm.numberOfBlocks">
+                        <li ng-if="!vm.currentUserIsOnPyramid && vm.numberOfRealPlayers < vm.numberOfBlocks">
                             <a href="" ng-click="vm.addCurrentUserToPyramid()">
                                 <i class="zmdi zmdi-account-add"></i>
                             </a>

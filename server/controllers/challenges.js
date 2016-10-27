@@ -64,7 +64,11 @@ exports.completeChallenge = function (req, res, next) {
   var challengeData = req.body.challenge;
   var winner, loser, description;
   if (challengeData.forfeit) {
-    description = challengeData.opponent.firstName + ' ' + challengeData.opponent.lastName + ' forfeited to ' +  challengeData.challenger.firstName + ' ' + challengeData.challenger.lastName;
+    if (challengeData.challenger.winner) {
+      description = challengeData.opponent.firstName + ' ' + challengeData.opponent.lastName + ' forfeited to ' +  challengeData.challenger.firstName + ' ' + challengeData.challenger.lastName;
+    } else {
+      description = challengeData.challenger.firstName + ' ' + challengeData.challenger.lastName + ' forfeited to ' +  challengeData.opponent.firstName + ' ' + challengeData.opponent.lastName;
+    }
   } else {
     if (challengeData.challenger.winner) {
       winner = challengeData.challenger.firstName + ' ' + challengeData.challenger.lastName;

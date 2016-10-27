@@ -78,7 +78,7 @@ exports.swapPositions = function (req, res, next) {
 exports.addPlayer = function (req, res, next) {
   var player = req.body.player.firstName + ' ' + req.body.player.lastName;
   var details = {
-    pyramidId: req.body.pyramidId,
+    competitionId: req.body.pyramidId,
     description: player + ' has joined the competition'
   };
   Pyramid.update({
@@ -93,6 +93,28 @@ exports.addPlayer = function (req, res, next) {
       return next(err);
     }
     websockets.broadcast('player_added', details);
+    res.status(201).json(pyramid);
+  });
+};
+
+exports.removePlayer = function (req, res, next) {
+  var removedPlayer = req.body.removedPlayer;
+  var details =  {
+    competitionId: req.body.pyramidId,
+    description: removedPlayer.firstName + ' ' + removedPlayer.lastName + 'has left the competition'
+  };
+  Pyramid.update({
+    _id: req.body.pyramidId
+  }, {
+    $set: {
+      'players': req.body.players
+    }
+  })
+  .exec(function (err, pyramid) {
+    if (err) {
+      return next(err);
+    }
+    websockets.broadcast('player_removed', details);
     res.status(201).json(pyramid);
   });
 };
