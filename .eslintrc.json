@@ -17,6 +17,7 @@
         "_": true,
         "moment": true,
         "Waves": true,
-        "$": true
+        "$": true,
+        "swal": true
     }
 }

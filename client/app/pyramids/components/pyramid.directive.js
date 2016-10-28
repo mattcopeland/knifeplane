@@ -35,7 +35,7 @@
     vm.currentUserPlayer = {};
     vm.pyramidMenuToggle = false;
     vm.addCurrentUserToPyramid = addCurrentUserToPyramid;
-    vm.removeCurrentUserFromPyramid = removeCurrentUserFromPyramid;
+    vm.confirmRemoveCurrentUserFromPyramid = confirmRemoveCurrentUserFromPyramid;
     vm.numberOfRealPlayers = 0;
 
     activate();
@@ -297,6 +297,23 @@
       } else {
         $state.go('login');
       }
+    }
+
+    function confirmRemoveCurrentUserFromPyramid() {
+      swal({
+        title: 'Leave Pyramid?',
+        text: 'You will lose your spot and forfeit any active challenges.',
+        type: 'error',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, leave',
+        confirmButtonClass: 'btn-danger',
+        cancelButtonText: 'No, stay',
+        closeOnConfirm: false,
+        closeOnCancel: true
+      }, function () {
+        removeCurrentUserFromPyramid();
+        swal('OK, you\'r out!', 'You\'ve been removed from the pyramid.', 'success');
+      });
     }
 
     // Use this to enforce order of operations when the player to be removed had an active challenge

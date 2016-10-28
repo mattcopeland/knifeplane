@@ -101,7 +101,7 @@ exports.removePlayer = function (req, res, next) {
   var removedPlayer = req.body.removedPlayer;
   var details =  {
     competitionId: req.body.pyramidId,
-    description: removedPlayer.firstName + ' ' + removedPlayer.lastName + 'has left the competition'
+    description: removedPlayer.firstName + ' ' + removedPlayer.lastName + ' has left the competition'
   };
   Pyramid.update({
     _id: req.body.pyramidId

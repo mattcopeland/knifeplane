@@ -32,6 +32,7 @@
     "angular-chosen-localytics": "^1.5.0",
     "font-awesome": "^4.6.3",
     "angular-bootstrap": "^2.2.0",
-    "angular-scroll-glue": "^2.0.7"
+    "angular-scroll-glue": "^2.0.7",
+    "bootstrap-sweetalert": "^1.0.1"
   }
 }
