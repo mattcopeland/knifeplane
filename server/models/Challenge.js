@@ -32,6 +32,9 @@ var challengeSchema = mongoose.Schema({
   },
   completed: {
     type: Date
+  },
+  winner: {
+    type: String
   }
 });
 

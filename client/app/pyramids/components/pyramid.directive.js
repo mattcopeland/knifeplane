@@ -45,7 +45,7 @@
         if (pyramid.data) {
           vm.pyramid = pyramid.data;
 
-          // This doesn't change on refresh'
+          // This doesn't change on refresh
           vm.levels = [];
           for (var i = 1; i <= pyramid.data.levels; ++i) {
             vm.levels.push(i);
@@ -228,23 +228,29 @@
           challenge.data.forfeit = true;
           if (forfeitLoser.challenge.position === 'opponent') {
             challenge.data.challenger.winner = true;
+            challenge.data.winner = 'challenger';
             swapPositions = true;
           } else {
             challenge.data.opponent.winner = true;
+            challenge.data.winner = 'opponent';
           }
           // Figure out who the winner was to store in the challenge record
         } else if (winnerIsCurrentUser) {
           if (challenge.data.challenger._id === vm.currentUserPlayer._id) {
             challenge.data.challenger.winner = true;
+            challenge.data.winner = 'challenger';
             swapPositions = true;
           } else {
             challenge.data.opponent.winner = true;
+            challenge.data.winner = 'opponent';
           }
         } else {
           if (challenge.data.challenger._id === vm.currentUserPlayer._id) {
             challenge.data.opponent.winner = true;
+            challenge.data.winner = 'opponent';
           } else {
             challenge.data.challenger.winner = true;
+            challenge.data.winner = 'challenger';
             swapPositions = true;
           }
         }

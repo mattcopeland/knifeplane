@@ -7182,6 +7182,20 @@ View Transitions
 body {
   overflow-x: hidden;
 }
+#header .logo a > i {
+  font-size: 30px;
+}
+#header .logo a > div {
+  display: inline-block;
+}
+#header .logo a > div div {
+  font-size: 10px;
+  line-height: 10px;
+}
+#header .logo a > div div.headline {
+  font-size: 24px;
+  line-height: 20px;
+}
 #content.ng-enter,
 #content.ng-leave {
   position: absolute;
@@ -7287,20 +7301,20 @@ body {
   color: #2196F3;
 }
 .pyramid-players li.ng-enter {
-  -webkit-animation: slideInRight 0.3s ease both;
-          animation: slideInRight 0.3s ease both;
+  -webkit-animation: slideInRight 0.2s ease both;
+          animation: slideInRight 0.2s ease both;
 }
 .pyramid-players li.ng-leave {
-  -webkit-animation: slideOutRight 0.3s ease both;
-          animation: slideOutRight 0.3s ease both;
+  -webkit-animation: slideOutRight 0.2s ease both;
+          animation: slideOutRight 0.2s ease both;
 }
 .pyramid-players#added-players li.ng-enter {
-  -webkit-animation: slideInLeft 0.3s ease both;
-          animation: slideInLeft 0.3s ease both;
+  -webkit-animation: slideInLeft 0.2s ease both;
+          animation: slideInLeft 0.2s ease both;
 }
 .pyramid-players#added-players li.ng-leave {
-  -webkit-animation: slideOutLeft 0.3s ease both;
-          animation: slideOutLeft 0.3s ease both;
+  -webkit-animation: slideOutLeft 0.2s ease both;
+          animation: slideOutLeft 0.2s ease both;
 }
 .swap-players {
   text-align: center;
@@ -7316,14 +7330,17 @@ body {
   font-size: 44px;
   line-height: 0;
 }
+.challenges-list {
+  text-align: center;
+}
 .challenges-list .lv-header {
   margin-bottom: 0;
 }
 .challenges-list .lv-item {
   border-bottom: 1px solid #eee;
 }
-.challenges-list .lv-item .badge {
-  float: right;
+.challenges-list .lv-item .player {
+  font-weight: bold;
 }
 /*
  * Vendors
@@ -9692,14 +9709,6 @@ body {
     -webkit-transform: scale(1);
             transform: scale(1);
   }
-  45% {
-    -webkit-transform: scale(0.8);
-            transform: scale(0.8);
-  }
-  80% {
-    -webkit-transform: scale(0.6);
-            transform: scale(0.6);
-  }
   100% {
     -webkit-transform: scale(0.5);
             transform: scale(0.5);
@@ -9709,14 +9718,6 @@ body {
   0% {
     -webkit-transform: scale(1);
             transform: scale(1);
-  }
-  45% {
-    -webkit-transform: scale(0.8);
-            transform: scale(0.8);
-  }
-  80% {
-    -webkit-transform: scale(0.6);
-            transform: scale(0.6);
   }
   100% {
     -webkit-transform: scale(0.5);
@@ -15279,8 +15280,7 @@ a.thumbnail.active {
   top: 0;
   background: #F8F8F8;
   border-right: 1px solid #EEE;
-  padding-bottom: 50px;
-  height: 100%;
+  min-height: 100%;
   width: 240px;
   -webkit-transition: all;
   transition: all;
@@ -15289,7 +15289,7 @@ a.thumbnail.active {
 }
 @media (max-width: 767px) {
   #messages-main .ms-menu {
-    height: calc(100% - 58px);
+    min-height: calc(100% - 58px);
     -webkit-transform: translate3d(-240px, 58px, 0);
     transform: translate3d(-240px, 58px, 0);
     opacity: 0;

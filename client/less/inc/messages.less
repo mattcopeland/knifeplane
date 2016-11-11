@@ -12,14 +12,13 @@
         top: 0;
         background: #F8F8F8;
         border-right: 1px solid #EEE;
-        padding-bottom: 50px;
-        height: 100%;
+        min-height: 100%;
         width: 240px;
         .transition(all);
         .transition-duration(250ms);
 
         @media (max-width: @screen-xs-max) {
-            height: ~"calc(100% - 58px)";
+            min-height: ~"calc(100% - 58px)";
             .translate3d(-240px, 58px, 0);
             .opacity(0);
             z-index: 1;

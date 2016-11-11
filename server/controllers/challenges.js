@@ -38,6 +38,20 @@ exports.getActiveChallengeByCompetitionByPlayer = function (req, res) {
   });
 };
 
+exports.getCompletedChallengesByCompetition = function (req, res) {
+  var competitionId = req.query.competitionId;
+  var limit = parseInt(req.query.limit) || 0;
+  Challenge.find({
+    competitionId: competitionId,
+    complete: {$eq: true}
+  }).sort({
+    'completed': -1
+  }).limit(limit).exec(function (err, collection) {
+    res.send(collection);
+  });
+};
+
+
 exports.createChallenge = function (req, res) {
   var challengeData = req.body.challenge;
   var challenger = challengeData.challenger.firstName + ' ' + challengeData.challenger.lastName;
@@ -92,7 +106,8 @@ exports.completeChallenge = function (req, res, next) {
     'forfeit': challengeData.forfeit,
     'challenger.winner': challengeData.challenger.winner || false,
     'opponent.winner': challengeData.opponent.winner || false,
-    'completed': Date.now()
+    'completed': Date.now(),
+    'winner': challengeData.winner
   }).exec(function (err, challenge) {
     if (err) {
       return next(err);

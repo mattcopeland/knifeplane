@@ -19,6 +19,7 @@ module.exports = function (app) {
   app.get('/api/challenges/competition', challenges.getChallengesByCompetition);
   app.get('/api/challenges/active/competition', challenges.getActiveChallengesByCompetition);
   app.get('/api/challenges/active/competition/player', challenges.getActiveChallengeByCompetitionByPlayer);
+  app.get('/api/challenges/completed/competition', challenges.getCompletedChallengesByCompetition);
   app.post('/api/challenges/create', auth.requiresApiLogin, challenges.createChallenge);
   app.post('/api/challenges/complete', challenges.completeChallenge);
 
