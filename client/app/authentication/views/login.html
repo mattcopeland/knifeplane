@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container login-page">
     <div class="row">
         <div class="col-md-6">
             <div class="block-header">
@@ -10,19 +10,17 @@
                 </div>
                 <div class="card-body card-padding">
                     <form role="form" name="loginForm" ng-submit="vm.login(vm.username, vm.password)" novalidate>
-                        <div class="form-group fg-float m-b-30">
+                        <div class="form-group m-b-30">
                             <div class="fg-line">
-                                <input type="email" class="form-control fg-input" ng-model="vm.username">
-                                <label class="fg-label">Email</label>
+                                <input type="email" class="form-control fg-input" ng-model="vm.username" placeholder="Email">
                             </div>
                         </div>
-                        <div class="form-group fg-float m-b-30">
+                        <div class="form-group m-b-30">
                             <div class="fg-line">
-                                <input type="password" class="form-control fg-input" ng-model="vm.password">
-                                <label class="fg-label">Password</label>
+                                <input type="password" class="form-control fg-input" ng-model="vm.password" placeholder="Password">
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary waves-effect">Sign In</button>
+                        <button type="submit" class="btn btn-login btn-primary btn-float waves-effect waves-circle"><i class="zmdi zmdi-arrow-forward"></i></button>
                     </form>
                 </div>
             </div>

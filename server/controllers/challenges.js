@@ -78,13 +78,13 @@ exports.completeChallenge = function (req, res, next) {
   var challengeData = req.body.challenge;
   var winner, loser, description;
   if (challengeData.forfeit) {
-    if (challengeData.challenger.winner) {
+    if (challengeData.winner === 'challenger') {
       description = challengeData.opponent.firstName + ' ' + challengeData.opponent.lastName + ' forfeited to ' +  challengeData.challenger.firstName + ' ' + challengeData.challenger.lastName;
     } else {
       description = challengeData.challenger.firstName + ' ' + challengeData.challenger.lastName + ' forfeited to ' +  challengeData.opponent.firstName + ' ' + challengeData.opponent.lastName;
     }
   } else {
-    if (challengeData.challenger.winner) {
+    if (challengeData.winner === 'challenger') {
       winner = challengeData.challenger.firstName + ' ' + challengeData.challenger.lastName;
       loser = challengeData.opponent.firstName + ' ' + challengeData.opponent.lastName;
     } else {
@@ -104,8 +104,6 @@ exports.completeChallenge = function (req, res, next) {
   }, {
     'complete': true,
     'forfeit': challengeData.forfeit,
-    'challenger.winner': challengeData.challenger.winner || false,
-    'opponent.winner': challengeData.opponent.winner || false,
     'completed': Date.now(),
     'winner': challengeData.winner
   }).exec(function (err, challenge) {

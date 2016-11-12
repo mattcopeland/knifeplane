@@ -35,7 +35,6 @@
                 </div>
             </div>
             <div kp-active-challeneges competition-id="{{vm.competitionId}}"></div>
-            <div kp-completed-challeneges competition-id="{{vm.competitionId}}"></div>
         </div>
         <!-- Pyramid -->
         <div class="ms-body">
@@ -65,7 +64,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-right">
                                 <li>
-                                    <a href="">Past Results</a>
+                                    <a ui-sref="pyramids.stats({competitionId: vm.competitionId})">Past Results</a>
                                 </li>
                                 <li>
                                     <a href="">More Details</a>

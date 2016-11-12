@@ -1,9 +1,15 @@
-<div class="listview challenges-list" ng-if="vm.challenges.length > 0">
-    <div class="lv-header">Recently Completed</div>
-    <div class="lv-item" ng-repeat="challenge in vm.challenges">
-        <div class="player">{{challenge[challenge.winner].firstName}} {{challenge[challenge.winner].lastName}}</div>
-        <div>defeated</div>
-        <div class="player">{{challenge[challenge.loser].firstName}} {{challenge[challenge.loser].lastName}}</div>
-        <div class="badge">{{challenge.whenCompleted}}</div>
+<div class="card completed-challenges">
+    <div class="card-header ch-alt">
+        <h2>Completed Challenges</h2>
+    </div>
+    <div class="card-body">
+        <div class="listview challenges-list" ng-if="vm.challenges.length > 0">
+            <div class="lv-item" ng-repeat="challenge in vm.challenges">
+                <div class="player winner">{{challenge[challenge.winner].firstName}} {{challenge[challenge.winner].lastName}}</div>
+                <div class="action">defeated</div>
+                <div class="player">{{challenge[challenge.loser].firstName}} {{challenge[challenge.loser].lastName}}</div>
+                <div class="badge">{{challenge.whenCompleted}}</div>
+            </div>
+        </div>
     </div>
 </div>

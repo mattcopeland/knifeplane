@@ -9,7 +9,22 @@
         border-bottom: 1px solid #eee;
 
         .player {
+            font-size: @font-size-base - 1px;
             font-weight: bold;
+
+            &.winner {
+                font-size: @font-size-base + 2px;
+            }
+        }
+
+        .action {
+            font-size: @font-size-base - 2px;
+            font-style: italic;
         }
     }
+}
+
+.card.completed-challenges {
+    max-height: 500px;
+    overflow-y: scroll;
 }

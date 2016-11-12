@@ -7218,6 +7218,16 @@ body {
 .btns-group .btn:first-child {
   margin-left: 0;
 }
+.login-page input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+  -webkit-transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 5000s ease-in-out 0s;
+}
+.login-page .btn-login {
+  top: 50%;
+  margin-top: -25px;
+  right: -25px;
+}
 .pyramid-menu .btn-container {
   padding: 8px 0;
   text-align: center;
@@ -7340,7 +7350,19 @@ body {
   border-bottom: 1px solid #eee;
 }
 .challenges-list .lv-item .player {
+  font-size: 12px;
   font-weight: bold;
+}
+.challenges-list .lv-item .player.winner {
+  font-size: 15px;
+}
+.challenges-list .lv-item .action {
+  font-size: 11px;
+  font-style: italic;
+}
+.card.completed-challenges {
+  max-height: 500px;
+  overflow-y: scroll;
 }
 /*
  * Vendors

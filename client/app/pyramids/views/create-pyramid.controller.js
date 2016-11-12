@@ -99,7 +99,7 @@
       });
       pyramidsService.createPyramid(pyramid).then(function (newPyramid) {
         $state.go('pyramids.view', {
-          pyramidId: newPyramid.data._id
+          competitionId: newPyramid.data._id
         });
       });
     }

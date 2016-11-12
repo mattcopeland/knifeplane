@@ -17,7 +17,7 @@
         <div class="card-body card-padding">
             <ul class="clist clist-pyramid">
                 <li ng-if="vm.pyramids.length > 0" ng-repeat="pyramid in vm.pyramids">
-                    <a ui-sref="pyramids.view({pyramidId: pyramid._id})">{{pyramid.name}}</a>
+                    <a ui-sref="pyramids.view({competitionId: pyramid._id})">{{pyramid.name}}</a>
                 </li>
             </ul>
         </div>

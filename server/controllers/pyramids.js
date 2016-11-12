@@ -3,7 +3,7 @@ var websockets = require('../websockets');
 
 exports.getPyramid = function (req, res) {
   Pyramid.findOne({
-    _id: req.query.pyramidId
+    _id: req.query.competitionId
   }).exec(function (err, pyramid) {
     res.send(pyramid);
   });
@@ -44,7 +44,7 @@ exports.createPyramid = function (req, res) {
 exports.swapPositions = function (req, res, next) {
   Pyramid.update(
     {
-      _id: req.body.pyramidId,
+      _id: req.body.competitionId,
       'players._id': req.body.challenger._id
     }, {
       $set: {
@@ -59,7 +59,7 @@ exports.swapPositions = function (req, res, next) {
 
   Pyramid.update(
     {
-      _id: req.body.pyramidId,
+      _id: req.body.competitionId,
       'players._id': req.body.opponent._id
     }, {
       $set: {
@@ -78,11 +78,11 @@ exports.swapPositions = function (req, res, next) {
 exports.addPlayer = function (req, res, next) {
   var player = req.body.player.firstName + ' ' + req.body.player.lastName;
   var details = {
-    competitionId: req.body.pyramidId,
+    competitionId: req.body.competitionId,
     description: player + ' has joined the competition'
   };
   Pyramid.update({
-    _id: req.body.pyramidId
+    _id: req.body.competitionId
   }, {
     $push: {
       'players': req.body.player
@@ -100,11 +100,11 @@ exports.addPlayer = function (req, res, next) {
 exports.removePlayer = function (req, res, next) {
   var removedPlayer = req.body.removedPlayer;
   var details =  {
-    competitionId: req.body.pyramidId,
+    competitionId: req.body.competitionId,
     description: removedPlayer.firstName + ' ' + removedPlayer.lastName + ' has left the competition'
   };
   Pyramid.update({
-    _id: req.body.pyramidId
+    _id: req.body.competitionId
   }, {
     $set: {
       'players': req.body.players

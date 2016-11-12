@@ -12,7 +12,8 @@
       controllerAs: 'vm',
       restrict: 'A',
       scope: {
-        competitionId: '@'
+        competitionId: '@',
+        limit: '@'
       },
       templateUrl: '/challenges/components/completed-challenges.html'
     };
@@ -21,7 +22,6 @@
 
   /* @ngInject */
   function ctrlFunc($scope, challengesService) {
-    var challengesLimit = 3;
     var vm = this;
     vm.challenges = [];
 
@@ -33,7 +33,7 @@
 
     function getCompletedChallenges() {
       vm.challenges = [];
-      challengesService.getCompletedChallengesByCompetition(vm.competitionId, challengesLimit).then(function (challenges) {
+      challengesService.getCompletedChallengesByCompetition(vm.competitionId, vm.limit).then(function (challenges) {
         if (challenges.data.length > 0) {
           vm.challenges = challenges.data;
           _.forEach(vm.challenges, function (challenge) {

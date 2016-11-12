@@ -4,13 +4,13 @@
 
   function PyramidCtrl($stateParams) {
     var vm = this;
-    vm.pyramidId = null;
+    vm.competitionId = null;
 
     activate();
 
     function activate() {
-      if ($stateParams.pyramidId) {
-        vm.pyramidId = $stateParams.pyramidId;
+      if ($stateParams.competitionId) {
+        vm.competitionId = $stateParams.competitionId;
       }
     }
   }

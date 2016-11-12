@@ -48,12 +48,21 @@
           auth: routeRoleChecks.user
         }
       }).state('pyramids.view', {
-        url: '/view/:pyramidId',
+        url: '/view/:competitionId',
         views: {
           'content@': {
             controller: 'PyramidCtrl',
             controllerAs: 'vm',
             templateUrl: 'pyramids/views/pyramid.html'
+          }
+        }
+      }).state('pyramids.stats', {
+        url: '/stats/:competitionId',
+        views: {
+          'content@': {
+            controller: 'StatsCtrl',
+            controllerAs: 'vm',
+            templateUrl: 'pyramids/views/stats.html'
           }
         }
       }).state('pyramids.create', {

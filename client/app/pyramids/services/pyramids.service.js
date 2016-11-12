@@ -20,10 +20,10 @@
      * @param {number} pyramid id for the requested pyramid
      * @return {Object} pyramid
      */
-    function getPyramid(pyramidId) {
+    function getPyramid(competitionId) {
       return $http.get('/api/pyramid', {
         params: {
-          pyramidId: pyramidId
+          competitionId: competitionId
         }
       });
     }
@@ -48,24 +48,24 @@
       });
     }
 
-    function swapPositions(pyramidId, challenger, opponent) {
+    function swapPositions(competitionId, challenger, opponent) {
       return $http.post('/api/pyramids/swapPositions', {
-        pyramidId: pyramidId,
+        competitionId: competitionId,
         challenger: challenger,
         opponent: opponent
       });
     }
 
-    function addPlayerToPyramid(pyramidId, player) {
+    function addPlayerToPyramid(competitionId, player) {
       return $http.post('/api/pyramids/addPlayer', {
-        pyramidId: pyramidId,
+        competitionId: competitionId,
         player: player
       });
     }
 
-    function removedPlayerFromPyramid(pyramidId, removedPlayer, players) {
+    function removedPlayerFromPyramid(competitionId, removedPlayer, players) {
       return $http.post('/api/pyramids/removePlayer', {
-        pyramidId: pyramidId,
+        competitionId: competitionId,
         removedPlayer: removedPlayer,
         players: players
       });
