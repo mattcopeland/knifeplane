@@ -7360,9 +7360,8 @@ body {
   font-size: 11px;
   font-style: italic;
 }
-.card.completed-challenges {
-  max-height: 500px;
-  overflow-y: scroll;
+.completed-challenges .card-body {
+  height: 500px;
 }
 /*
  * Vendors
