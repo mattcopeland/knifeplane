@@ -11,11 +11,11 @@
 
     return service;
 
-    function malihuScroll(selector, theme, mousewheelaxis) {
+    function malihuScroll(selector, theme, scrollaxis, mousewheelaxis) {
       $(selector).mCustomScrollbar({
         theme: theme,
         scrollInertia: 100,
-        axis: 'yx',
+        axis: scrollaxis,
         mouseWheel: {
           enable: true,
           axis: mousewheelaxis,

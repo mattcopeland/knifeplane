@@ -25,5 +25,33 @@
 }
 
 .completed-challenges .card-body {
-    height: 500px;
+    overflow-x: auto;
+    white-space: nowrap;
+
+    .challenge-result {
+        background-color: #f2f2f2;
+        display: inline-block;
+        margin: 10px 0 10px 10px;
+        padding: 10px;
+        text-align: center;
+        width: 200px;
+
+        &:last-child {
+            margin-right: 10px;
+        }
+
+        .player {
+            font-size: @font-size-base - 1px;
+            font-weight: bold;
+
+            &.winner {
+                font-size: @font-size-base + 2px;
+            }
+        }
+
+        .action {
+            font-size: @font-size-base - 2px;
+            font-style: italic;
+        }
+    }
 }

@@ -12,9 +12,12 @@
 
     return directive;
 
-    function linkFunc(scope, element) {
+    function linkFunc(scope, element, attrs) {
+      var scrollaxis = attrs.scrollaxis || 'y';
+      var theme = attrs.theme || 'minimal-dark';
+      var mousewheelaxis = attrs.mousewheelaxis || 'y';
       if (!$('html').hasClass('ismobile')) {
-        scrollbarService.malihuScroll(element, 'minimal-dark', 'y');
+        scrollbarService.malihuScroll(element, theme, scrollaxis, mousewheelaxis);
       }
     }
   }

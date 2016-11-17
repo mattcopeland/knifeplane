@@ -7361,7 +7361,30 @@ body {
   font-style: italic;
 }
 .completed-challenges .card-body {
-  height: 500px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.completed-challenges .card-body .challenge-result {
+  background-color: #f2f2f2;
+  display: inline-block;
+  margin: 10px 0 10px 10px;
+  padding: 10px;
+  text-align: center;
+  width: 200px;
+}
+.completed-challenges .card-body .challenge-result:last-child {
+  margin-right: 10px;
+}
+.completed-challenges .card-body .challenge-result .player {
+  font-size: 12px;
+  font-weight: bold;
+}
+.completed-challenges .card-body .challenge-result .player.winner {
+  font-size: 15px;
+}
+.completed-challenges .card-body .challenge-result .action {
+  font-size: 11px;
+  font-style: italic;
 }
 /*
  * Vendors
