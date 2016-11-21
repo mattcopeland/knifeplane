@@ -12,6 +12,7 @@
       getActiveChallengesByCompetition: getActiveChallengesByCompetition,
       getActiveChallengeByCompetitionByPlayer: getActiveChallengeByCompetitionByPlayer,
       getCompletedChallengesByCompetition: getCompletedChallengesByCompetition,
+      getPlayerResultsByCompetition: getPlayerResultsByCompetition
     };
 
     return service;
@@ -58,6 +59,15 @@
         params: {
           competitionId: competitionId,
           limit: limit
+        }
+      });
+    }
+
+    function getPlayerResultsByCompetition(competitionId, playerId) {
+      return $http.get('/api/challenges/results/competition/player',  {
+        params: {
+          competitionId: competitionId,
+          playerId: playerId
         }
       });
     }

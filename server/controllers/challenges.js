@@ -51,6 +51,26 @@ exports.getCompletedChallengesByCompetition = function (req, res) {
   });
 };
 
+exports.getPlayerResultsByCompetition = function (req, res) {
+  var competitionId = req.query.competitionId;
+  var playerId = req.query.playerId;
+  Challenge.find({
+    competitionId: competitionId,
+    complete: {$eq: true},
+    '$or': [
+      {
+        'challenger._id': playerId
+      },{
+        'opponent._id': playerId
+      }
+    ]
+  }).sort({
+    'completed': -1
+  }).exec(function (err, collection) {
+    res.send(collection);
+  });
+};
+
 
 exports.createChallenge = function (req, res) {
   var challengeData = req.body.challenge;
@@ -96,6 +116,8 @@ exports.completeChallenge = function (req, res, next) {
 
   var challengeDetails = {
     competitionId: challengeData.competitionId,
+    challengerId: challengeData.challenger._id,
+    opponentId: challengeData.opponent._id,
     description: description
   };
 

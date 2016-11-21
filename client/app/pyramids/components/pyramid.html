@@ -1,7 +1,4 @@
 <div class="container pyramid-container">
-    <div class="block-header">
-        <h2>{{vm.pyramid.name}}</h2>
-    </div>
     <div class="card m-b-0" id="messages-main">
         <div class="ms-menu pyramid-menu" ng-class="{ 'toggled': vm.pyramidMenuToggle }">
             <!-- Make a challenge -->
@@ -49,27 +46,14 @@
                     </div>
                     <ul class="lv-actions actions">
                         <li ng-if="vm.currentUserIsOnPyramid">
-                            <a href="" ng-click="vm.confirmRemoveCurrentUserFromPyramid()">
-                                <i class="zmdi zmdi-close"></i>
+                            <a href="" ng-click="vm.confirmRemoveCurrentUserFromPyramid()" uib-tooltip="Leave Pyramid" tooltip-placement="top">
+                                <i class="glyphicon glyphicon-log-out f-13"></i>
                             </a>
                         </li>
-                        <li ng-if="!vm.currentUserIsOnPyramid && vm.numberOfRealPlayers < vm.numberOfBlocks">
+                        <li ng-if="!vm.currentUserIsOnPyramid && vm.numberOfRealPlayers < vm.numberOfBlocks" uib-tooltip="Join Pyramid" tooltip-placement="top">
                             <a href="" ng-click="vm.addCurrentUserToPyramid()">
                                 <i class="zmdi zmdi-account-add"></i>
                             </a>
-                        </li>
-                        <li class="dropdown" uib-dropdown>
-                            <a href="" uib-dropdown-toggle aria-expanded="true">
-                                <i class="zmdi zmdi-more-vert"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li>
-                                    <a ui-sref="pyramids.stats({competitionId: vm.competitionId})">Past Results</a>
-                                </li>
-                                <li>
-                                    <a href="">More Details</a>
-                                </li>
-                            </ul>
                         </li>
                     </ul>
                 </div>

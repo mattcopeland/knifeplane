@@ -7365,7 +7365,6 @@ body {
   white-space: nowrap;
 }
 .completed-challenges .card-body .challenge-result {
-  background-color: #f2f2f2;
   display: inline-block;
   margin: 10px 0 10px 10px;
   padding: 10px;
@@ -7380,11 +7379,26 @@ body {
   font-weight: bold;
 }
 .completed-challenges .card-body .challenge-result .player.winner {
-  font-size: 15px;
+  font-size: 16px;
 }
 .completed-challenges .card-body .challenge-result .action {
   font-size: 11px;
   font-style: italic;
+}
+.player-statistics .card-header h2 {
+  margin-left: 10px;
+  position: relative;
+}
+.player-statistics .card-header h2 button {
+  cursor: default;
+  font-size: 16px;
+  left: -40px;
+  position: absolute;
+  top: -30px;
+}
+.player-statistics h5 {
+  margin-bottom: 6px;
+  margin-top: 6px;
 }
 /*
  * Vendors
@@ -10860,6 +10874,12 @@ body.stop-scrolling {
 }
 .c-indigo {
   color: #3F51B5 !important;
+}
+.bg-app-gray {
+  background-color: #F7F7F7 !important;
+}
+.c-app-gray {
+  color: #F7F7F7 !important;
 }
 /*
  * Background Colors

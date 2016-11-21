@@ -5,6 +5,7 @@
   function StatsCtrl($stateParams, $state, pyramidsService) {
     var vm = this;
     vm.competitionId = null;
+    vm.pyramid = null;
 
     activate();
 

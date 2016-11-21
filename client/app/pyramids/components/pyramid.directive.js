@@ -42,23 +42,19 @@
 
     function activate() {
       pyramidsService.getPyramid(vm.competitionId).then(function (pyramid) {
-        if (pyramid.data) {
-          vm.pyramid = pyramid.data;
+        vm.pyramid = pyramid.data;
 
-          // This doesn't change on refresh
-          vm.levels = [];
-          for (var i = 1; i <= pyramid.data.levels; ++i) {
-            vm.levels.push(i);
-          }
-
-          orderPlayers();
-          getPlayersStatus();
-          calculatePyramidBlocks();
-          fillInEmptyBlocks();
-          assignLevelsToPlayers();
-        } else {
-          $state.go('pyramids.myPyramids');
+        // This doesn't change on refresh
+        vm.levels = [];
+        for (var i = 1; i <= pyramid.data.levels; ++i) {
+          vm.levels.push(i);
         }
+
+        orderPlayers();
+        getPlayersStatus();
+        calculatePyramidBlocks();
+        fillInEmptyBlocks();
+        assignLevelsToPlayers();
       });
     }
 

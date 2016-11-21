@@ -29,7 +29,6 @@
     white-space: nowrap;
 
     .challenge-result {
-        background-color: #f2f2f2;
         display: inline-block;
         margin: 10px 0 10px 10px;
         padding: 10px;
@@ -45,7 +44,7 @@
             font-weight: bold;
 
             &.winner {
-                font-size: @font-size-base + 2px;
+                font-size: @font-size-base + 3px;
             }
         }
 
@@ -54,4 +53,23 @@
             font-style: italic;
         }
     }
+}
+
+.player-statistics {
+    .card-header h2 {
+        margin-left: 10px;
+        position: relative;
+
+        button {
+            cursor: default;
+            font-size: @font-size-base + 3px;
+            left: -40px;
+            position: absolute;
+            top: -30px;
+        }
+    }
+     h5 {
+         margin-bottom: 6px;
+         margin-top: 6px;
+     }
 }
