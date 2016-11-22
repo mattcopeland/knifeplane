@@ -7346,17 +7346,23 @@ body {
 .challenges-list .lv-header {
   margin-bottom: 0;
 }
-.challenges-list .lv-item {
+.challenges-list .lv-item,
+.challenges-list .lv-item:hover {
+  background: none !important;
   border-bottom: 1px solid #eee;
+  cursor: default !important;
 }
-.challenges-list .lv-item .player {
+.challenges-list .lv-item .player,
+.challenges-list .lv-item:hover .player {
   font-size: 12px;
   font-weight: bold;
 }
-.challenges-list .lv-item .player.winner {
+.challenges-list .lv-item .player.winner,
+.challenges-list .lv-item:hover .player.winner {
   font-size: 15px;
 }
-.challenges-list .lv-item .action {
+.challenges-list .lv-item .action,
+.challenges-list .lv-item:hover .action {
   font-size: 11px;
   font-style: italic;
 }
@@ -15344,7 +15350,7 @@ a.thumbnail.active {
   top: 0;
   background: #F8F8F8;
   border-right: 1px solid #EEE;
-  min-height: 100%;
+  height: 100%;
   width: 240px;
   -webkit-transition: all;
   transition: all;
@@ -15353,7 +15359,7 @@ a.thumbnail.active {
 }
 @media (max-width: 767px) {
   #messages-main .ms-menu {
-    min-height: calc(100% - 58px);
+    height: calc(100% - 58px);
     -webkit-transform: translate3d(-240px, 58px, 0);
     transform: translate3d(-240px, 58px, 0);
     opacity: 0;
