@@ -9,7 +9,7 @@ module.exports = function (app) {
   app.put('/api/users', auth.requiresApiLogin, users.updateUser);
 
   app.get('/api/pyramid', pyramids.getPyramid);
-  app.get('/api/pyramids', auth.requiresApiLogin, pyramids.getPyramids);
+  app.get('/api/pyramids', pyramids.getPyramids);
   app.get('/api/pyramids/user', auth.requiresApiLogin, pyramids.getPyramidsForUser);
   app.post('/api/pyramids/create', auth.requiresApiLogin, pyramids.createPyramid);
   app.post('/api/pyramids/swapPositions', pyramids.swapPositions);

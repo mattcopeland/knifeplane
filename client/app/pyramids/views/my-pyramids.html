@@ -10,16 +10,20 @@
             <p>Create a new pyramid or add yourself to an existing one.</p>
         </div>
     </div>
-    <div class="card" ng-if="vm.pyramids.length > 0">
-        <div class="card-header">
-            <h2>Select a pyramid from the list below to view</h2>
-        </div>
-        <div class="card-body card-padding">
-            <ul class="clist clist-pyramid">
-                <li ng-if="vm.pyramids.length > 0" ng-repeat="pyramid in vm.pyramids">
-                    <a ui-sref="pyramids.view({competitionId: pyramid._id})">{{pyramid.name}}</a>
-                </li>
-            </ul>
+
+    <div class="row" ng-if="vm.pyramids.length > 0">
+        <div class="col-sm-3" ng-repeat="pyramid in vm.pyramids">
+            <div class="card">
+                <div class="card-header ch-alt m-b-20">
+                    <h2>{{pyramid.name}}</h2>
+                    <a ui-sref="pyramids.view({competitionId: pyramid._id})" class="btn bgm-blue btn-float waves-effect">
+                        <i class="zmdi zmdi-triangle-up"></i>
+                    </a>
+                </div>
+                <div class="card-body card-padding-sm">
+                    Players: {{pyramid.players.length}}
+                </div>
+            </div>
         </div>
     </div>
 </div>

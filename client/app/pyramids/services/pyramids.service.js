@@ -6,6 +6,7 @@
     var service = {
       getPyramid: getPyramid,
       getPyramidsForUser: getPyramidsForUser,
+      getPyramids: getPyramids,
       createPyramid: createPyramid,
       swapPositions: swapPositions,
       addPlayerToPyramid: addPlayerToPyramid,
@@ -29,7 +30,7 @@
     }
 
     /**
-     * Gets all pyramids from the database the a particular user is included in
+     * Gets all pyramids from the database that a particular user is included in
      *
      * @param {userId} the user id for the requested user
      * @return {Object} pyramids
@@ -40,6 +41,15 @@
           userId: userId
         }
       });
+    }
+
+    /**
+     * Gets all active pyramids from the database
+     *
+     * @return {Object} pyramids
+     */
+    function getPyramids() {
+      return $http.get('/api/pyramids');
     }
 
     function createPyramid(pyramid) {
