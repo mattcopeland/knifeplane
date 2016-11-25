@@ -91,6 +91,7 @@
         var addPlayer = {
           position: position,
           _id: player._id,
+          email: player.username,
           firstName: player.firstName,
           lastName: player.lastName,
           nickname: player.nickname

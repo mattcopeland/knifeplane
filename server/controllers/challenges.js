@@ -1,5 +1,6 @@
 var Challenge = require('mongoose').model('Challenge');
 var websockets = require('../websockets');
+var emails = require('./emails');
 
 exports.getChallengesByCompetition = function (req, res) {
   var competitionId = req.query.competitionId;
@@ -80,6 +81,7 @@ exports.createChallenge = function (req, res) {
     competitionId: challengeData.competitionId,
     description: challenger + ' has challenged ' + opponent
   };
+  emails.challengeNotification(challengeData,req.get('host'));
   
   Challenge.create(challengeData, function (err, challenge) {
     if (err) {
@@ -91,7 +93,7 @@ exports.createChallenge = function (req, res) {
     }
     websockets.broadcast('challenge_created', challengeDetails);
     res.status(201).json(challenge);
-  });
+  }); 
 };
 
 exports.completeChallenge = function (req, res, next) {

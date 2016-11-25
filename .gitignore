@@ -14,6 +14,10 @@ bower_components
 build
 #.tmp
 
+# Ignore Credentials
+###################
+**/credentials.js
+
 # Ignore Directories
 ###################
 .vscode

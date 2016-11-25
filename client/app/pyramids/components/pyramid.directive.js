@@ -179,12 +179,14 @@
       } else {
         vm.hasActiveChallenge = true;
         var challenge = {
+          competitionName: vm.pyramid.name,
           competitionId: vm.competitionId,
           complete: false,
           forfeit: false,
           timeLimit: vm.pyramid.forfeitDays,
           challenger: {
             _id: vm.currentUserPlayer._id,
+            email: vm.currentUserPlayer.email,
             firstName: vm.currentUserPlayer.firstName,
             lastName: vm.currentUserPlayer.lastName,
             nickname: vm.currentUserPlayer.nickname,
@@ -192,6 +194,7 @@
           },
           opponent: {
             _id: player._id,
+            email: player.email,
             firstName: player.firstName,
             lastName: player.lastName,
             nickname: player.nickname,

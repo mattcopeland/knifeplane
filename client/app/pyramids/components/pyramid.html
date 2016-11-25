@@ -1,6 +1,6 @@
 <div class="container pyramid-container">
     <div class="card m-b-0" id="messages-main">
-        <div class="ms-menu pyramid-menu c-overflow" ng-class="{ 'toggled': vm.pyramidMenuToggle }">
+        <div class="ms-menu pyramid-menu" ng-class="{ 'toggled': vm.pyramidMenuToggle }">
             <!-- Make a challenge -->
             <div class="ms-block m-b-20" ng-if="vm.currentUserIsOnPyramid && !vm.hasActiveChallenge && vm.currentUserPlayer.level !== 1">
                 <div class="dropdown" uib-dropdown>
@@ -31,7 +31,7 @@
                     </ul>
                 </div>
             </div>
-            <div kp-active-challeneges competition-id="{{vm.competitionId}}"></div>
+            <div class="active-challenges c-overflow" kp-active-challeneges competition-id="{{vm.competitionId}}"></div>
         </div>
         <!-- Pyramid -->
         <div class="ms-body">

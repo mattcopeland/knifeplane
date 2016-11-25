@@ -1,28 +1,32 @@
-.challenges-list {
-    text-align: center;
+.active-challenges {
+    height: ~"calc(100% - 73px)";
 
-    .lv-header {
-        margin-bottom: 0;
-    }
-    
-    .lv-item,
-    .lv-item:hover {
-        background: none !important;
-        border-bottom: 1px solid #eee;
-        cursor: default !important;
+    .listview {
+        text-align: center;
 
-        .player {
-            font-size: @font-size-base - 1px;
-            font-weight: bold;
-
-            &.winner {
-                font-size: @font-size-base + 2px;
-            }
+        .lv-header {
+            margin-bottom: 0;
         }
+        
+        .lv-item,
+        .lv-item:hover {
+            background: none !important;
+            border-bottom: 1px solid #eee;
+            cursor: default !important;
 
-        .action {
-            font-size: @font-size-base - 2px;
-            font-style: italic;
+            .player {
+                font-size: @font-size-base - 1px;
+                font-weight: bold;
+
+                &.winner {
+                    font-size: @font-size-base + 2px;
+                }
+            }
+
+            .action {
+                font-size: @font-size-base - 2px;
+                font-style: italic;
+            }
         }
     }
 }

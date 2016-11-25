@@ -7340,29 +7340,32 @@ body {
   font-size: 44px;
   line-height: 0;
 }
-.challenges-list {
+.active-challenges {
+  height: calc(100% - 73px);
+}
+.active-challenges .listview {
   text-align: center;
 }
-.challenges-list .lv-header {
+.active-challenges .listview .lv-header {
   margin-bottom: 0;
 }
-.challenges-list .lv-item,
-.challenges-list .lv-item:hover {
+.active-challenges .listview .lv-item,
+.active-challenges .listview .lv-item:hover {
   background: none !important;
   border-bottom: 1px solid #eee;
   cursor: default !important;
 }
-.challenges-list .lv-item .player,
-.challenges-list .lv-item:hover .player {
+.active-challenges .listview .lv-item .player,
+.active-challenges .listview .lv-item:hover .player {
   font-size: 12px;
   font-weight: bold;
 }
-.challenges-list .lv-item .player.winner,
-.challenges-list .lv-item:hover .player.winner {
+.active-challenges .listview .lv-item .player.winner,
+.active-challenges .listview .lv-item:hover .player.winner {
   font-size: 15px;
 }
-.challenges-list .lv-item .action,
-.challenges-list .lv-item:hover .action {
+.active-challenges .listview .lv-item .action,
+.active-challenges .listview .lv-item:hover .action {
   font-size: 11px;
   font-style: italic;
 }
