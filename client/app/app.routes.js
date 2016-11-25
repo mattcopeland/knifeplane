@@ -95,6 +95,24 @@
             templateUrl: 'authentication/views/register.html'
           }
         }
+      }).state('verify', {
+        url: '/verification',
+        views: {
+          'content': {
+            controller: 'VerificationCtrl',
+            controllerAs: 'vm',
+            templateUrl: 'authentication/views/verification.html'
+          }
+        }
+      }).state('verification', {
+        url: '/verification/:userId/:verificationToken',
+        views: {
+          'content': {
+            controller: 'VerificationCtrl',
+            controllerAs: 'vm',
+            templateUrl: 'authentication/views/verification.html'
+          }
+        }
       });
   }
 

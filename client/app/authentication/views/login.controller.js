@@ -15,9 +15,12 @@
       authService.authenticateUser(username, password).then(function (response) {
         if (!response) {
           notifyService.error('Username / password combinaiton incorrect');
+        } else if (response === 'unverified') {
+          notifyService.error('You must verify your email before you can login');
         } else {
           if ($state.previous) {
             $state.go($state.previous);
+            $state.previous = null;
           } else {
             $state.go('home');
           }

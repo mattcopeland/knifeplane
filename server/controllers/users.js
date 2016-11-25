@@ -1,6 +1,7 @@
 var User = require('mongoose').model('User'),
   encrypt = require('../utilities/encryption'),
-  passport = require('passport');
+  uuid = require('uuid'),
+  emails = require('./emails');
 
 exports.getUsers = function (req, res) {
   User.find({}).exec(function (err, collection) {
@@ -8,11 +9,12 @@ exports.getUsers = function (req, res) {
   });
 };
 
-exports.createUser = function (req, res, next) {
+exports.createUser = function (req, res) {
   var userData = req.body.userData;
   userData.username = userData.username.toLowerCase();
   userData.salt = encrypt.createSalt();
   userData.hashedPwd = encrypt.hashPwd(userData.salt, userData.password);
+  userData.verificationToken = uuid();
   User.create(userData, function (err, user) {
     if (err) {
       if (err.toString().indexOf('E11000') > -1) {
@@ -23,7 +25,26 @@ exports.createUser = function (req, res, next) {
         reason: err.toString()
       });
     }
+    emails.userVerification(user, req.get('host'));
     res.send(user);
+  });
+};
+
+exports.verifyUser = function (req, res, next) {
+  User.findOneAndUpdate({
+    _id: req.query.userId,
+    verificationToken: req.query.verificationToken
+  }, {
+    $set: {
+      verified: true
+    }
+  })
+  .select('_id')
+  .exec(function (err, user) {
+    if (err) {
+      return next(err);
+    }
+    res.status(201).json(user);
   });
 };
 

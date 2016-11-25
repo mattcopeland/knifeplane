@@ -42,7 +42,7 @@ exports.createPyramid = function (req, res) {
 };
 
 exports.swapPositions = function (req, res, next) {
-  Pyramid.update(
+  Pyramid.findOneAndUpdate(
     {
       _id: req.body.competitionId,
       'players._id': req.body.challenger._id
@@ -57,7 +57,7 @@ exports.swapPositions = function (req, res, next) {
       }
     });
 
-  Pyramid.update(
+  Pyramid.findOneAndUpdate(
     {
       _id: req.body.competitionId,
       'players._id': req.body.opponent._id
@@ -81,7 +81,7 @@ exports.addPlayer = function (req, res, next) {
     competitionId: req.body.competitionId,
     description: player + ' has joined the competition'
   };
-  Pyramid.update({
+  Pyramid.findByIdAndUpdate({
     _id: req.body.competitionId
   }, {
     $push: {
@@ -103,7 +103,7 @@ exports.removePlayer = function (req, res, next) {
     competitionId: req.body.competitionId,
     description: removedPlayer.firstName + ' ' + removedPlayer.lastName + ' has left the competition'
   };
-  Pyramid.update({
+  Pyramid.findByIdAndUpdate({
     _id: req.body.competitionId
   }, {
     $set: {

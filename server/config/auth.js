@@ -11,6 +11,13 @@ exports.authenticate = function (req, res, next) {
         success: false
       });
     }
+    if (user === 'unverified') {
+      user = null;
+      res.send({
+        success: false,
+        message: 'unverified'
+      });
+    }
     req.logIn(user, function (err) {
       if (err) {
         next(err);

@@ -2,7 +2,7 @@
   'use strict';
   angular.module('app').factory('authService', authService);
 
-  function authService($state, $http, $q, userService, identityService) {
+  function authService($state, $http, $q, userService, identityService, notifyService) {
     var service = {
       authenticateUser: authenticateUser,
       createUser: createUser,
@@ -21,6 +21,8 @@
         if (response.data.success) {
           identityService.currentUser = response.data.user;
           dfd.resolve(true);
+        } else if (response.data.message === 'unverified') {
+          dfd.resolve('unverified');
         } else {
           dfd.resolve(false);
         }
@@ -34,10 +36,13 @@
         userData: userData
       }).then(function (response) {
         if (response.data) {
-          authenticateUser(userData.username, userData.password);
           dfd.resolve(true);
         } else {
           dfd.resolve(false);
+        }
+      }, function (response) {
+        if (response.data.reason === 'Error: Duplicate Username') {
+          notifyService.error('Sorry, an account already exists with that email address.');
         }
       });
       return dfd.promise;

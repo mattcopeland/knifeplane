@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="block-header">
+        <h2>Welcome to the Knifeplane</h2>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h2>Verification Status</h2>
+        </div>
+        <div class="card-body card-padding">
+            <p ng-if="!vm.verifying">Please check your email for the verification link</p>
+            <div ng-if="vm.verifying">
+                <p ng-if="vm.verified === null">We are checking on your account.  Hold tight...</p>
+                <div ng-if="vm.verified"> 
+                    <p>Your email address has been verified!</p>
+                    <p>You may now <a ui-sref="login">log in</a> and start competing.</p>
+                </div>
+                <p ng-if="vm.verified === false">Sorry.  We were unable to verify your information.  Please check your verification email from Knifeplane and try again.</p>
+            </div>
+        </div>
+    </div>
+</div>

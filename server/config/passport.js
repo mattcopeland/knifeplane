@@ -9,10 +9,17 @@ module.exports = function () {
       User.findOne({
         username: username
       }).exec(function (err, user) {
-        if (user && user.authenticate(password)) {
-          return done(null, user);
-        } else {
+        if (!user) {
           return done(null, false);
+        }
+        else if (user.verified) {
+          if (user.authenticate(password)) {
+            return done(null, user);
+          } else {
+            return done(null, false);
+          }
+        } else {
+          return done(null, 'unverified');
         }
       });
     }

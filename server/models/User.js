@@ -32,6 +32,14 @@ var userSchema = mongoose.Schema({
   roles: [
     String
   ],
+  verified: {
+    type: Boolean,
+    default: false
+  },
+  verificationToken: {
+    type: String,
+    select: false
+  },
   created: {
     type: Date,
     required: true,
@@ -62,7 +70,8 @@ function createDefaultUsers() {
         username: 'matt@matt.com',
         salt: salt,
         hashedPwd: hash,
-        roles: ['super-admin', 'admin', 'user']
+        roles: ['super-admin', 'admin', 'user'],
+        verified: true
       });
 
       salt = encrypt.createSalt();
@@ -73,7 +82,8 @@ function createDefaultUsers() {
         username: 'tom@tom.com',
         salt: salt,
         hashedPwd: hash,
-        roles: ['user']
+        roles: ['user'],
+        verified: true
       });
 
       salt = encrypt.createSalt();
@@ -84,7 +94,8 @@ function createDefaultUsers() {
         username: 'justin@justin.com',
         salt: salt,
         hashedPwd: hash,
-        roles: ['user']
+        roles: ['user'],
+        verified: true
       });
 
       salt = encrypt.createSalt();
@@ -95,7 +106,8 @@ function createDefaultUsers() {
         username: 'jt@jt.com',
         salt: salt,
         hashedPwd: hash,
-        roles: ['user']
+        roles: ['user'],
+        verified: true
       });
 
       salt = encrypt.createSalt();
@@ -106,7 +118,8 @@ function createDefaultUsers() {
         username: 'jodi@jodi.com',
         salt: salt,
         hashedPwd: hash,
-        roles: ['user']
+        roles: ['user'],
+        verified: true
       });
 
       salt = encrypt.createSalt();
@@ -117,7 +130,8 @@ function createDefaultUsers() {
         username: 'ryan@ryan.com',
         salt: salt,
         hashedPwd: hash,
-        roles: ['user']
+        roles: ['user'],
+        verified: true
       });
 
       salt = encrypt.createSalt();
@@ -128,7 +142,8 @@ function createDefaultUsers() {
         username: 'abdul@abdul.com',
         salt: salt,
         hashedPwd: hash,
-        roles: ['user']
+        roles: ['user'],
+        verified: true
       });
     }
   });

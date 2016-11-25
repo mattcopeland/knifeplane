@@ -2,9 +2,10 @@
   'use strict';
   angular.module('app').factory('userService', userService);
 
-  function userService($http, identityService) {
+  function userService($http) {
     var service = {
-      getAllUsers: getAllUsers
+      getAllUsers: getAllUsers,
+      verifyUser: verifyUser
     };
     return service;
 
@@ -12,6 +13,15 @@
       return $http.get('/api/users').then(function (users) {
         return users;
       });
+    }
+
+    function verifyUser(userId, verificationToken) {
+      return $http.get('/api/user/verification', {
+        params: {
+          userId: userId,
+          verificationToken: verificationToken
+        }
+      });  
     }
   }
 })();
