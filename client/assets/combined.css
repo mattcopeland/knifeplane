@@ -11535,7 +11535,7 @@ h6 small,
 }
 #sidebar .sidebar-inner {
   height: 100%;
-  margin-bottom: 50px;
+  padding-bottom: 50px;
   overflow-y: auto;
   width: 268px;
 }
@@ -11546,9 +11546,13 @@ h6 small,
   filter: alpha(opacity=100);
 }
 #sidebar .lock-sidebar {
-  bottom: 15px;
-  left: 15px;
+  background-color: #edecec;
+  bottom: 0;
+  height: 50px;
+  left: 0;
+  padding: 17px 0 0 10px;
   position: absolute;
+  width: 100%;
 }
 .profile-menu > a {
   display: block;
