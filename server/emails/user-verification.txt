@@ -46,7 +46,7 @@
                                                     <tbody>
                                                         <tr>
                                                             <td align="center">
-                                                                <div><img width="60" border="0" alt="DigitalOcean Logo" style="display:block;border:none;outline:none;text-decoration:none" src="https://ci6.googleusercontent.com/proxy/_gqL3vU4z5GEYaahWsV-4TEfmlIIBR8em3qxgxfs3-p9rgfNQalirM9Iiz4vwFWc8VzL8k8EpyIp59_ARQ7-mdr67MkQVpdAL0ZGtofdFTcNrGUGolAHIQ=s0-d-e1-ft#http://go.digitalocean.com/rs/937-EID-756/images/email_logo-sm.png" class="CToWUd"></div>
+                                                                <div><img width="218" border="0" alt="KnifePlane Logo" style="display:block;border:none;outline:none;text-decoration:none" src="' + logo + '"></div>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -58,12 +58,31 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="center">
+                            <td bgcolor="#F7F7F7" align="right" valign="top">
+                                <table width="100%" cellpadding="0" cellspacing="0" border="0" align="right">
+                                    <tbody>
+                                        <tr>
+                                            <td valign="top" width="100%">
+                                                <table width="100%" cellpadding="0" cellspacing="0" border="0" align="right">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td height="39" style="font-size:1px;line-height:1px">&nbsp;</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td bgcolor="#2196F3" align="center">
                                 <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
                                     <tbody>
                                         <tr>
                                             <td width="41" style="font-size:1px;line-height:1px">&nbsp;</td>
-                                            <td style="font-family:\'Proxima Nova\',Calibri,Helvetica,sans-serif;font-size:36px;color:#444444;text-align:center;line-height:55px;font-weight:100">
+                                            <td style="font-family:\'Proxima Nova\',Calibri,Helvetica,sans-serif;font-size:36px;color:#FFFFFF;text-align:center;line-height:55px;font-weight:100">
                                                 <p>Welcom to Knifeplane!</p>
                                             </td>
                                             <td width="41" style="font-size:1px;line-height:1px">&nbsp;</td>
