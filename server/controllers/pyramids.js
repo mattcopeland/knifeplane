@@ -1,5 +1,6 @@
 var Pyramid = require('mongoose').model('Pyramid');
 var websockets = require('../websockets');
+var emails = require('./emails');
 
 exports.getPyramid = function (req, res) {
   Pyramid.findOne({
@@ -97,6 +98,24 @@ exports.addPlayer = function (req, res, next) {
   });
 };
 
+exports.addPlayerRequest = function (req, res, next) {
+  emails.addPlayerRequest(req.body.competition, req.body.player, req.get('host'));
+  
+  Pyramid.findByIdAndUpdate({
+    _id: req.body.competition._id
+  }, {
+    $push: {
+      'pendingPlayers': req.body.player
+    }
+  })
+  .exec(function (err, pyramid) {
+    if (err) {
+      return next(err);
+    }
+    res.status(201).json(pyramid);
+  });
+};
+
 exports.removePlayer = function (req, res, next) {
   var removedPlayer = req.body.removedPlayer;
   var details =  {
@@ -115,6 +134,74 @@ exports.removePlayer = function (req, res, next) {
       return next(err);
     }
     websockets.broadcast('player_removed', details);
+    res.status(201).json(pyramid);
+  });
+};
+
+exports.approvePlayer = function (req, res, next) {
+  var player = req.body.player.firstName + ' ' + req.body.player.lastName;
+  var details = {
+    competitionId: req.body.competitionId,
+    description: player + ' has joined the competition'
+  };
+
+  var competitionName;
+  Pyramid.findOne({
+    _id: req.body.competitionId
+  }, 'name', function (err, pyramid) {
+    if (err) {
+      return next(err);  
+    }
+    competitionName = pyramid.name;
+    emails.approveRequest(req.body.competitionId, competitionName, req.body.player, req.get('host'));
+  });
+
+  Pyramid.findByIdAndUpdate({
+    _id: req.body.competitionId
+  }, {
+    $push: {
+      'players': req.body.player
+    },
+    $pull: {
+      'pendingPlayers': {
+        '_id': req.body.player._id
+      }
+    }
+  })
+  .exec(function (err, pyramid) {
+    if (err) {
+      return next(err);
+    }
+    websockets.broadcast('player_added', details);
+    res.status(201).json(pyramid);
+  });
+};
+
+exports.denyPlayer = function (req, res, next) {
+  var competitionName;
+  Pyramid.findOne({
+    _id: req.body.competitionId
+  }, 'name', function (err, pyramid) {
+    if (err) {
+      return next(err);  
+    }
+    competitionName = pyramid.name;
+    emails.denyRequest(req.body.competitionId, competitionName, req.body.player, req.get('host'));
+  });
+
+  Pyramid.findByIdAndUpdate({
+    _id: req.body.competitionId
+  }, {
+    $pull: {
+      'pendingPlayers': {
+        '_id': req.body.player._id
+      }
+    }
+  })
+  .exec(function (err, pyramid) {
+    if (err) {
+      return next(err);
+    }
     res.status(201).json(pyramid);
   });
 };

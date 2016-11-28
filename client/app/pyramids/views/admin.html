@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="block-header">
+        <h2>{{vm.pyramid.name}}</h2>
+        <ul class="actions">
+            <li>
+                <a ui-sref="pyramids.view({competitionId: vm.competitionId})" uib-tooltip="View Pyramid" tooltip-placement="bottom">
+                    <i class="zmdi zmdi-triangle-up"></i>
+                </a>
+            </li>
+            <li>
+                <a ui-sref="pyramids.stats({competitionId: vm.competitionId})" uib-tooltip="View Statistics" tooltip-placement="bottom">
+                    <i class="zmdi zmdi-trending-up"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div kp-pending-players competition-id="{{vm.competitionId}}"></div>
+</div>

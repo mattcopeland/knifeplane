@@ -15,7 +15,10 @@ module.exports = function (app) {
   app.post('/api/pyramids/create', auth.requiresApiLogin, pyramids.createPyramid);
   app.post('/api/pyramids/swapPositions', pyramids.swapPositions);
   app.post('/api/pyramids/addPlayer', auth.requiresApiLogin, pyramids.addPlayer);
+  app.post('/api/pyramids/addPlayerRequest', auth.requiresApiLogin, pyramids.addPlayerRequest);
   app.post('/api/pyramids/removePlayer', auth.requiresApiLogin, pyramids.removePlayer);
+  app.post('/api/pyramids/approvePlayer', auth.requiresApiLogin, pyramids.approvePlayer);
+  app.post('/api/pyramids/denyPlayer', auth.requiresApiLogin, pyramids.denyPlayer);
 
   app.get('/api/challenges/competition', challenges.getChallengesByCompetition);
   app.get('/api/challenges/active/competition', challenges.getActiveChallengesByCompetition);

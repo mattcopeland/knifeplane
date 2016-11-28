@@ -83,7 +83,7 @@
                                         <tr>
                                             <td width="41" style="font-size:1px;line-height:1px">&nbsp;</td>
                                             <td style="font-family:\'Proxima Nova\',Calibri,Helvetica,sans-serif;font-size:36px;color:#FFFFFF;text-align:center;line-height:55px;font-weight:100">
-                                                <p>You\'ve been challenged!</p>
+                                                <p>Request Denied :(</p>
                                             </td>
                                             <td width="41" style="font-size:1px;line-height:1px">&nbsp;</td>
                                         </tr>
@@ -98,12 +98,10 @@
                                         <tr>
                                             <td width="41" style="font-size:1px;line-height:1px">&nbsp;</td>
                                             <td style="font-family:\'Proxima Nova\',Calibri,Helvetica,sans-serif;font-size:16px;color:#505050;text-align:center;line-height:25.6px;font-weight:normal;text-transform:none">
-                                                <p style="font-size: 20px"><strong>' + challenger + '</strong></p>
-                                                <p>has challenged you in: <strong> ' + competitionName + '</strong></p>
+                                                <p> Your request to join <strong>' + competitionName + '</strong> has been denied.</p>
                                                 <p>
                                                     <br>
                                                 </p>
-                                                ' + timeLimit + '
                                                 <p>' + details + '</p>
                                                 <p>
                                                     <br>

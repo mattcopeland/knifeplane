@@ -13,10 +13,22 @@ var pyramidSchema = mongoose.Schema({
     type: Number,
     default: 1
   },
+  open: {
+    type: Boolean,
+    default: true
+  },
   players: {
     type: Array,
     default: []
-  }
+  },
+  pendingPlayers: {
+    type: Array,
+    default: []
+  },
+  owners: {
+    type: Array,
+    default: []
+  }  
 });
 
 var Pyramid = mongoose.model('Pyramid', pyramidSchema);
@@ -27,7 +39,9 @@ function createDefaultPyramid() {
       Pyramid.create({
         name: 'Default Pyramid',
         levels: 4,
-        players: []
+        players: [],
+        pendingPlayers: [],
+        owners: []
       });
     }
   });

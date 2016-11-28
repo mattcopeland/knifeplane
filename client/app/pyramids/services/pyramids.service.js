@@ -10,7 +10,10 @@
       createPyramid: createPyramid,
       swapPositions: swapPositions,
       addPlayerToPyramid: addPlayerToPyramid,
-      removedPlayerFromPyramid: removedPlayerFromPyramid
+      addPlayerToPyramidRequest: addPlayerToPyramidRequest,
+      removedPlayerFromPyramid: removedPlayerFromPyramid,
+      approvePendingPlayer: approvePendingPlayer,
+      denyPendingPlayer: denyPendingPlayer
     };
 
     return service;
@@ -73,11 +76,32 @@
       });
     }
 
+    function addPlayerToPyramidRequest(competition, player) {
+      return $http.post('/api/pyramids/addPlayerRequest', {
+        competition: competition,
+        player: player
+      });
+    }
+
     function removedPlayerFromPyramid(competitionId, removedPlayer, players) {
       return $http.post('/api/pyramids/removePlayer', {
         competitionId: competitionId,
         removedPlayer: removedPlayer,
         players: players
+      });
+    }
+
+    function approvePendingPlayer(competitionId, player) {
+      return $http.post('/api/pyramids/approvePlayer', {
+        competitionId: competitionId,
+        player: player
+      });
+    }
+
+    function denyPendingPlayer(competitionId, player) {
+      return $http.post('/api/pyramids/denyPlayer', {
+        competitionId: competitionId,
+        player: player
       });
     }
   }

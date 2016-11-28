@@ -1,13 +1,6 @@
 <div class="container">
     <div class="block-header">
         <h2>{{vm.pyramid.name}}</h2>
-        <ul class="actions">
-            <li>
-                <a ui-sref="pyramids.stats({competitionId: vm.competitionId})" uib-tooltip="View Statistics" tooltip-placement="bottom">
-                    <i class="glyphicon glyphicon-stats f-13"></i>
-                </a>
-            </li>
-        </ul>
     </div>
 </div>
 <div kp-pyramid ng-if="vm.competitionId" competition-id="{{vm.competitionId}}"></div>

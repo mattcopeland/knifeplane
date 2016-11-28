@@ -7,6 +7,7 @@
       if (error === 'not authorized') {
         $state.go('login');
         $state.previous = toState;
+        $state.prevParams = toParams;
       }
     });
 

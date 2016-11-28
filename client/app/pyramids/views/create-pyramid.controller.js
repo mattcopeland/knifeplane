@@ -5,10 +5,11 @@
   'use strict';
   angular.module('app').controller('CreatePyramidCtrl', CreatePyramidCtrl);
 
-  function CreatePyramidCtrl($scope, $state, userService, pyramidsService, notifyService) {
+  function CreatePyramidCtrl($scope, $state, userService, pyramidsService, notifyService, identityService) {
     var vm = this;
     vm.newPyramid = {
-      players: []
+      players: [],
+      open: false
     };
     vm.availablePlayers = [];
     vm.addedPlayers = [];
@@ -98,6 +99,10 @@
         };
         vm.newPyramid.players.push(addPlayer);
       });
+      vm.newPyramid.owners = [{
+        _id: identityService.currentUser._id,
+        email: identityService.currentUser.username
+      }];
       pyramidsService.createPyramid(pyramid).then(function (newPyramid) {
         $state.go('pyramids.view', {
           competitionId: newPyramid.data._id

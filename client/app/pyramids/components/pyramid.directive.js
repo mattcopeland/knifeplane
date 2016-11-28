@@ -27,6 +27,8 @@
     vm.breakPoints = [];
     vm.numberOfBlocks = 0;
     vm.currentUserIsOnPyramid = false;
+    vm.currentUserIsPending = false;
+    vm.currentUserIsOwner = false;
     vm.hasActiveChallenge = false;
     vm.availableChallenges = false;
     vm.createChallenge = createChallenge;
@@ -42,19 +44,21 @@
 
     function activate() {
       pyramidsService.getPyramid(vm.competitionId).then(function (pyramid) {
-        vm.pyramid = pyramid.data;
+        if (pyramid.data) {
+          vm.pyramid = pyramid.data;
 
-        // This doesn't change on refresh
-        vm.levels = [];
-        for (var i = 1; i <= pyramid.data.levels; ++i) {
-          vm.levels.push(i);
+          // This doesn't change on refresh
+          vm.levels = [];
+          for (var i = 1; i <= pyramid.data.levels; ++i) {
+            vm.levels.push(i);
+          }
+
+          orderPlayers();
+          getPlayersStatus();
+          calculatePyramidBlocks();
+          fillInEmptyBlocks();
+          assignLevelsToPlayers();
         }
-
-        orderPlayers();
-        getPlayersStatus();
-        calculatePyramidBlocks();
-        fillInEmptyBlocks();
-        assignLevelsToPlayers();
       });
     }
 
@@ -69,6 +73,11 @@
      * Figure out if each player is already challenged and set some stuff
      */
     function getPlayersStatus() {
+      // Check to see if the current user is an owner of this pyramid
+      if (identityService.isAuthenticated()) {
+        vm.currentUserIsOwner = _.some(vm.pyramid.owners, ['_id', identityService.currentUser._id]);
+      }
+
       _.forEach(vm.pyramid.players, function (player) {
 
         // Find the current user if they are on this pyramid and set some properties
@@ -82,6 +91,13 @@
               vm.hasActiveChallenge = true;
             }
           });
+        }
+      });
+
+      // Check to see if the current user has a pending request to join
+      _.forEach(vm.pyramid.pendingPlayers, function (player) {
+        if (identityService.isAuthenticated() && player._id === identityService.currentUser._id) {
+          vm.currentUserIsPending = true;
         }
       });
 
@@ -287,9 +303,40 @@
             _id: identityService.currentUser._id,
             firstName: identityService.currentUser.firstName,
             lastName: identityService.currentUser.lastName,
+            email: identityService.currentUser.username,
             position: vm.numberOfRealPlayers + 1
           };
-          pyramidsService.addPlayerToPyramid(vm.competitionId, player);
+          if (vm.pyramid.open) {
+            swal({
+              title: 'Join Competition?',
+              text: 'You\'ll be added to the bottom',
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonText: 'Join',
+              cancelButtonText: 'Nevermind',
+              closeOnConfirm: false,
+              closeOnCancel: true
+            }, function () {
+              pyramidsService.addPlayerToPyramid(vm.competitionId, player);
+              swal('Welcome Aboard!', 'Now start fighting your way to the top', 'success');
+            });  
+          } else {
+            swal({
+              title: 'Send Join Request?',
+              text: 'This is a closed competition so the owner must approve your request',
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonText: 'Send Request',
+              cancelButtonText: 'Nevermind',
+              closeOnConfirm: false,
+              closeOnCancel: true
+            }, function () {
+              pyramidsService.addPlayerToPyramidRequest(vm.pyramid, player).then(function () {
+                vm.currentUserIsPending = true;
+              });
+              swal('Request Sent', 'You will receive an email once the owner processes the request.', 'success');
+            });
+          }
         } else {
           notifyService.warning('Sorry, this pyramid is full');
         }

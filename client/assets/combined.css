@@ -7340,6 +7340,23 @@ body {
   font-size: 44px;
   line-height: 0;
 }
+.pending-players .card-body {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.pending-players .card-body .pending-player {
+  display: inline-block;
+  margin: 10px 0 10px 10px;
+  padding: 10px;
+  text-align: center;
+}
+.pending-players .card-body .pending-player:last-child {
+  margin-right: 10px;
+}
+.pending-players .card-body .pending-player .player {
+  font-size: 16px;
+  font-weight: bold;
+}
 .active-challenges {
   height: calc(100% - 73px);
 }

@@ -65,6 +65,18 @@
             templateUrl: 'pyramids/views/stats.html'
           }
         }
+      }).state('pyramids.admin', {
+        url: '/admin/:competitionId',
+        views: {
+          'content@': {
+            controller: 'AdminCtrl',
+            controllerAs: 'vm',
+            templateUrl: 'pyramids/views/admin.html'
+          }
+        },
+        resolve: {
+          auth: routeRoleChecks.user
+        }
       }).state('pyramids.create', {
         url: '/create',
         views: {

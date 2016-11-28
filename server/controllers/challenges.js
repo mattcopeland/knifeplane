@@ -81,7 +81,7 @@ exports.createChallenge = function (req, res) {
     competitionId: challengeData.competitionId,
     description: challenger + ' has challenged ' + opponent
   };
-  emails.challengeNotification(challengeData,req.get('host'));
+  emails.challengeNotification(challengeData, req.get('host'));
   
   Challenge.create(challengeData, function (err, challenge) {
     if (err) {

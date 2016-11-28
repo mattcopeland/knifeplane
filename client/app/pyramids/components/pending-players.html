@@ -1,0 +1,14 @@
+<div class="card pending-players" ng-if="vm.pendingPlayers.length > 0">
+    <div class="card-header ch-alt">
+        <h2>Pending Players</h2>
+    </div>
+    <div class="card-body card-padding-sm c-overflow" scrollaxis="x">
+        <div class="pending-player bg-app-gray" ng-repeat="player in vm.pendingPlayers">
+            <div class="player">{{player.firstName}} {{player.lastName}}</div>
+            <div class="btns-group text-center">
+                <button class="btn btn-primary" ng-click="vm.approvePendingPlayer(player)">Approve</button>
+                <button class="btn btn-danger" ng-click="vm.denyPendingPlayer(player)">Deny</button>
+            </div>
+        </div>
+    </div>
+</div>

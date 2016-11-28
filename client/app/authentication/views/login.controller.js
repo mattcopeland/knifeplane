@@ -19,8 +19,9 @@
           notifyService.error('You must verify your email before you can login');
         } else {
           if ($state.previous) {
-            $state.go($state.previous);
+            $state.go($state.previous, $state.prevParams);
             $state.previous = null;
+            $state.prevParams = null;
           } else {
             $state.go('home');
           }

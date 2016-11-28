@@ -45,12 +45,22 @@
                         </div>
                     </div>
                     <ul class="lv-actions actions">
-                        <li ng-if="vm.currentUserIsOnPyramid">
-                            <a href="" ng-click="vm.confirmRemoveCurrentUserFromPyramid()" uib-tooltip="Leave Pyramid" tooltip-placement="top">
-                                <i class="glyphicon glyphicon-log-out f-13"></i>
+                        <li ng-if="vm.currentUserIsOwner">
+                            <a ui-sref="pyramids.admin({competitionId: vm.competitionId})" uib-tooltip="Admin" tooltip-placement="top">
+                                <i class="zmdi zmdi-edit"></i>
                             </a>
                         </li>
-                        <li ng-if="!vm.currentUserIsOnPyramid && vm.numberOfRealPlayers < vm.numberOfBlocks" uib-tooltip="Join Pyramid" tooltip-placement="top">
+                        <li>
+                            <a ui-sref="pyramids.stats({competitionId: vm.competitionId})" uib-tooltip="View Statistics" tooltip-placement="top">
+                                <i class="zmdi zmdi-trending-up"></i>
+                            </a>
+                        </li>
+                        <li ng-if="vm.currentUserIsOnPyramid">
+                            <a href="" ng-click="vm.confirmRemoveCurrentUserFromPyramid()" uib-tooltip="Leave Pyramid" tooltip-placement="top">
+                                <i class="zmdi zmdi-minus-circle-outline"></i>
+                            </a>
+                        </li>
+                        <li ng-if="!vm.currentUserIsOnPyramid && !vm.currentUserIsPending && vm.numberOfRealPlayers < vm.numberOfBlocks" uib-tooltip="Join Pyramid" tooltip-placement="top">
                             <a href="" ng-click="vm.addCurrentUserToPyramid()">
                                 <i class="zmdi zmdi-account-add"></i>
                             </a>
