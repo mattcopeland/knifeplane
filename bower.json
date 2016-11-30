@@ -34,6 +34,7 @@
     "angular-bootstrap": "^2.2.0",
     "angular-scroll-glue": "^2.0.7",
     "bootstrap-sweetalert": "^1.0.1",
-    "malihu-custom-scrollbar-plugin": "^3.1.5"
+    "malihu-custom-scrollbar-plugin": "^3.1.5",
+    "angular-local-storage": "^0.5.2"
   }
 }

@@ -11563,13 +11563,18 @@ h6 small,
   filter: alpha(opacity=100);
 }
 #sidebar .lock-sidebar {
-  background-color: #edecec;
+  background-color: #f7f7f7;
   bottom: 0;
   height: 50px;
   left: 0;
   padding: 17px 0 0 10px;
   position: absolute;
   width: 100%;
+}
+@media (max-width: 1200px) {
+  #sidebar .lock-sidebar {
+    display: none;
+  }
 }
 .profile-menu > a {
   display: block;

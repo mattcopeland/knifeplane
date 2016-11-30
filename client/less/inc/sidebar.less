@@ -25,13 +25,17 @@
     }
 
     .lock-sidebar {
-        background-color: @body-bg;
+        background-color: #f7f7f7;
         bottom: 0;
         height: 50px;
         left: 0;
         padding: 17px 0 0 10px;
         position: absolute;
         width: 100%;
+
+        @media(max-width: @screen-lg-min) {
+            display: none;
+        }
     }
 }
 
