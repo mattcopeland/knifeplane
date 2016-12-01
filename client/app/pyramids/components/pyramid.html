@@ -60,7 +60,7 @@
                                 <i class="zmdi zmdi-minus-circle-outline"></i>
                             </a>
                         </li>
-                        <li ng-if="!vm.currentUserIsOnPyramid && !vm.currentUserIsPending && vm.numberOfRealPlayers < vm.numberOfBlocks" uib-tooltip="Join Pyramid" tooltip-placement="top">
+                        <li ng-if="!vm.currentUserIsOnPyramid && !vm.currentUserIsPending && vm.numberOfRealPlayers < vm.maxPlayers" uib-tooltip="Join Pyramid" tooltip-placement="top">
                             <a href="" ng-click="vm.addCurrentUserToPyramid()">
                                 <i class="zmdi zmdi-account-add"></i>
                             </a>

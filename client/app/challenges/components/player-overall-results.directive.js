@@ -13,8 +13,7 @@
       restrict: 'A',
       scope: {
         competitionId: '@',
-        player: '=',
-        levels: '@'
+        player: '='
       },
       templateUrl: '/challenges/components/player-overall-results.html'
     };
@@ -24,6 +23,7 @@
   /* @ngInject */
   function ctrlFunc($scope, challengesService, notifyService) {
     var vm = this;
+    vm.maxLevels = 10;
     vm.wins = {
       total: 0,
       asChallenger: 0,
@@ -52,7 +52,7 @@
 
         // Determine all the break points to figure out levels
         var breakPoints = [];
-        for (var i = 0; i < vm.levels; i++) {
+        for (var i = 0; i < vm.maxLevels; i++) {
           breakPoints.push((((i * (i + 1)) / 2)) + 1);
         }
 

@@ -7,6 +7,7 @@
 
   function CreatePyramidCtrl($state, userService, pyramidsService, notifyService, identityService) {
     var breakPoints = [];
+    var maxLevels = 10;
     var vm = this;
     vm.newPyramid = {
       players: [],
@@ -14,8 +15,6 @@
     };
     vm.availablePlayers = [];
     vm.addedPlayers = [];
-    vm.breakPoints = [];
-    vm.maxLevels = 10;
     vm.createPyramid = createPyramid;
     vm.addPlayer = addPlayer;
     vm.removePlayer = removePlayer;
@@ -32,7 +31,7 @@
       });
 
       // Create break points array
-      for (var i = 0; i < vm.maxLevels; i++) {
+      for (var i = 0; i < maxLevels; i++) {
         breakPoints.push((((i * (i + 1)) / 2)) + 1);
       }
     }
@@ -43,7 +42,6 @@
      * @param  {object} player
      */
     function addPlayer(player) {
-      vm.addedPlayerAdded = true;
       vm.addedPlayers.push(_.remove(vm.availablePlayers, {_id: player._id})[0]);
     }
 
@@ -52,7 +50,6 @@
      * @param  {object} player
      */
     function removePlayer(player) {
-      vm.addedPlayerAdded = false;
       vm.availablePlayers.push(_.remove(vm.addedPlayers, {_id: player._id})[0]);
     }
 

@@ -10,5 +10,5 @@
         </ul>
     </div>
     <div kp-completed-challeneges competition-id="{{vm.competitionId}}"></div>
-    <div ng-repeat="player in vm.pyramid.players | orderObjectBy: 'position'" kp-player-overall-results competition-id="{{vm.competitionId}}" player="player" levels="{{vm.pyramid.levels}}"></div>
+    <div ng-repeat="player in vm.pyramid.players | orderObjectBy: 'position'" kp-player-overall-results competition-id="{{vm.competitionId}}" player="player"></div>
 </div>

@@ -22,9 +22,11 @@
 
   /* @ngInject */
   function ctrlFunc($scope, $state, pyramidsService, $filter, notifyService, identityService, challengesService) {
+    var maxLevels = 10;
     var vm = this;
     vm.pyramid = {};
     vm.breakPoints = [];
+    vm.levels = [];
     vm.numberOfBlocks = 0;
     vm.currentUserIsOnPyramid = false;
     vm.currentUserIsPending = false;
@@ -39,25 +41,25 @@
     vm.addCurrentUserToPyramid = addCurrentUserToPyramid;
     vm.confirmRemoveCurrentUserFromPyramid = confirmRemoveCurrentUserFromPyramid;
     vm.numberOfRealPlayers = 0;
+    vm.maxPlayers = 0;
 
     activate();
 
     function activate() {
       pyramidsService.getPyramid(vm.competitionId).then(function (pyramid) {
+        // Determine the maximum number of players based on the maximum number of levels
+        for (var i = maxLevels; i > 0; --i) {
+          vm.maxPlayers += i;
+        }
+
         if (pyramid.data) {
           vm.pyramid = pyramid.data;
 
-          // This doesn't change on refresh
-          vm.levels = [];
-          for (var i = 1; i <= pyramid.data.levels; ++i) {
-            vm.levels.push(i);
-          }
-
           orderPlayers();
           getPlayersStatus();
+          assignLevelsToPlayers();
           calculatePyramidBlocks();
           fillInEmptyBlocks();
-          assignLevelsToPlayers();
         }
       });
     }
@@ -79,7 +81,6 @@
       }
 
       _.forEach(vm.pyramid.players, function (player) {
-
         // Find the current user if they are on this pyramid and set some properties
         if (identityService.isAuthenticated() && player._id === identityService.currentUser._id) {
           vm.currentUserIsOnPyramid = true;
@@ -139,15 +140,32 @@
      */
     function createBreakPoints() {
       vm.breakPoints = [];
-      for (var i = 0; i < vm.pyramid.levels; i++) {
+      for (var i = 0; i < maxLevels; i++) {
         vm.breakPoints.push((((i * (i + 1)) / 2)) + 1);
+      }
+    }
+
+    // Give each player a level property based on the break points
+    // This will be used to determine who other players can challenge
+    function assignLevelsToPlayers() {
+      var level = 0;
+      vm.levels = [];
+      createBreakPoints();
+      for (var i = 0; i < vm.pyramid.players.length; i++) {
+        if (vm.breakPoints.indexOf(i + 1) > -1) {
+          level += 1;
+          // Set the number of total levels
+          vm.levels.push(level);
+        }
+        // Give each player a level
+        vm.pyramid.players[i].level = level;
       }
     }
 
     // How many total blocks in this pyramid
     function calculatePyramidBlocks() {
       vm.numberOfBlocks = 0;
-      for (var i = vm.pyramid.levels; i > 0; i--) {
+      for (var i = _.last(vm.levels); i > 0; i--) {
         vm.numberOfBlocks += i;
       }
     }
@@ -163,19 +181,8 @@
           class: 'empty'
         });
       }
-    }
-
-    // Give each player a level property based on the break points
-    // This will be used to determine who other players can challenge
-    function assignLevelsToPlayers() {
-      var level = 0;
-      createBreakPoints();
-      for (var i = 0; i < vm.pyramid.players.length; i++) {
-        if (vm.breakPoints.indexOf(i + 1) > -1) {
-          level += 1;
-        }
-        vm.pyramid.players[i].level = level;
-      }
+      // We have to give levels to the new empty spots
+      assignLevelsToPlayers();
     }
 
     // Find all the players that are available to be challenged by this user
@@ -298,7 +305,7 @@
      */
     function addCurrentUserToPyramid() {
       if (identityService.isAuthenticated()) {
-        if (vm.numberOfRealPlayers < vm.numberOfBlocks) {
+        if (vm.numberOfRealPlayers < vm.maxPlayers) {
           var player = {
             _id: identityService.currentUser._id,
             firstName: identityService.currentUser.firstName,
@@ -429,8 +436,9 @@
         vm.pyramid = pyramid.data;
         orderPlayers();
         getPlayersStatus();
-        fillInEmptyBlocks();
         assignLevelsToPlayers();
+        calculatePyramidBlocks();
+        fillInEmptyBlocks();
       });
     }
 
