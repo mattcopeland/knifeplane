@@ -108,7 +108,11 @@
         }
     }
 
-    &#added-players li {
+    &.added-players {
+      height: auto;
+      min-height: 150px;
+      
+      li {
         &.ng-enter {
             animation: slideInLeft 0.2s ease both;
         }
@@ -116,7 +120,41 @@
         &.ng-leave {
             animation: slideOutLeft 0.2s ease both;
         }
+      }
     }
+}
+
+.added-player1,
+.added-player4,
+.added-player5,
+.added-player6,
+.added-player11,
+.added-player12,
+.added-player13,
+.added-player14,
+.added-player15,
+.added-player22,
+.added-player23,
+.added-player24,
+.added-player25,
+.added-player26,
+.added-player27,
+.added-player28 {
+  background-color: #eee;
+}
+
+.added-player2,
+.added-player3,
+.added-player7,
+.added-player8,
+.added-player9,
+.added-player16,
+.added-player17,
+.added-player18,
+.added-player19,
+.added-player20,
+.added-player21 {
+  background-color: #ddd;
 }
 
 .swap-players {

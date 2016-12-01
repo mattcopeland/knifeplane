@@ -10,18 +10,14 @@
         <div class="card-body card-padding">
             <form name="createPyramidForm" ng-submit="vm.createPyramid(vm.newPyramid)" novalidate>
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         <div class="form-group m-b-30">
                             <div class="fg-line">
                                 <input type="text" class="form-control" ng-model="vm.newPyramid.name" placeholder="Pyramid Name" required>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4 m-t-5">
-                        <label class="m-b-10">Pyramid Levels: {{ vm.newPyramid.levels }}</label>
-                        <div class="input-slider m-b-30" slider ng-model="vm.newPyramid.levels" start="2" end="7" data-is-color="blue"></div>
-                    </div>
-                    <div class="col-sm-4 m-t-5">
+                    <div class="col-sm-6 m-t-5">
                         <label class="m-b-10">Forfeit Days:
                             <span ng-if="vm.newPyramid.forfeitDays === 0"> No Limit</span>
                             <span ng-if="vm.newPyramid.forfeitDays > 0">{{ vm.newPyramid.forfeitDays }}</span>
@@ -32,7 +28,7 @@
                 <div class="row">
                     <div class="col-sm-5 m-b-30">
                         <label>Available Players</label>
-                        <ul class="pyramid-players" id="available-players">
+                        <ul class="pyramid-players">
                             <li ng-repeat="player in vm.availablePlayers" ng-click="vm.addPlayer(player)">
                                 {{player.firstName}} {{player.lastName}}
                             </li>
@@ -44,8 +40,8 @@
                     </div>
                     <div class="col-sm-5 m-b-30">
                         <label>Challenge Players</label>
-                        <ul class="pyramid-players" id="added-players" scroll-glue="vm.addedPlayerAdded">
-                            <li ng-repeat="player in vm.addedPlayers" ng-click="vm.removePlayer(player)">
+                        <ul class="pyramid-players added-players" scroll-glue="vm.addedPlayerAdded">
+                            <li ng-repeat="player in vm.addedPlayers" ng-click="vm.removePlayer(player)" ng-class="'added-player' + ($index + 1)">
                                 {{player.firstName}} {{player.lastName}}
                             </li>
                         </ul>

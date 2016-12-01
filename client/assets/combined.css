@@ -7183,18 +7183,14 @@ body {
   overflow-x: hidden;
 }
 #header .logo a > i {
-  font-size: 30px;
+  font-size: 24px;
 }
 #header .logo a > div {
   display: inline-block;
 }
-#header .logo a > div div {
-  font-size: 10px;
-  line-height: 10px;
-}
-#header .logo a > div div.headline {
+#header .logo a > div.headline {
   font-size: 24px;
-  line-height: 20px;
+  line-height: 24px;
 }
 #content.ng-enter,
 #content.ng-leave {
@@ -7318,13 +7314,48 @@ body {
   -webkit-animation: slideOutRight 0.2s ease both;
           animation: slideOutRight 0.2s ease both;
 }
-.pyramid-players#added-players li.ng-enter {
+.pyramid-players.added-players {
+  height: auto;
+  min-height: 150px;
+}
+.pyramid-players.added-players li.ng-enter {
   -webkit-animation: slideInLeft 0.2s ease both;
           animation: slideInLeft 0.2s ease both;
 }
-.pyramid-players#added-players li.ng-leave {
+.pyramid-players.added-players li.ng-leave {
   -webkit-animation: slideOutLeft 0.2s ease both;
           animation: slideOutLeft 0.2s ease both;
+}
+.added-player1,
+.added-player4,
+.added-player5,
+.added-player6,
+.added-player11,
+.added-player12,
+.added-player13,
+.added-player14,
+.added-player15,
+.added-player22,
+.added-player23,
+.added-player24,
+.added-player25,
+.added-player26,
+.added-player27,
+.added-player28 {
+  background-color: #eee;
+}
+.added-player2,
+.added-player3,
+.added-player7,
+.added-player8,
+.added-player9,
+.added-player16,
+.added-player17,
+.added-player18,
+.added-player19,
+.added-player20,
+.added-player21 {
+  background-color: #ddd;
 }
 .swap-players {
   text-align: center;
@@ -11308,7 +11339,8 @@ h6 small,
   transform: translate3d(0, -70px, 0);
 }
 #header .logo a {
-  padding: 7px 10px;
+  line-height: 70px;
+  padding: 0 10px;
 }
 #top-search-wrap {
   position: absolute;
