@@ -8,8 +8,7 @@
     </li>
     <li class="logo">
         <a data-ui-sref="home">
-            <i class="zmdi zmdi-play-circle" aria-hidden="true"></i>
-            <div class="headline"><b>Wanna</b>Play<b>Me</b></div>
+            <img src="/images/wpm-logo-white.png" alt="WannaPlayMe" />
         </a>
     </li>
     <li class="pull-right">
@@ -20,7 +19,10 @@
                 </a>
                 <ul class="dropdown-menu dm-icon pull-right">
                     <li>
-                        <a ng-click="vm.logout()" href=""><i class="zmdi zmdi-account-circle"></i> {{vm.indentity.currentUser.firstName}} {{vm.indentity.currentUser.lastName}}</a>
+                        <a href=""><i class="zmdi zmdi-account-circle"></i> {{vm.indentity.currentUser.firstName}} {{vm.indentity.currentUser.lastName}}</a>
+                    </li>
+                    <li>
+                        <a ng-click="vm.logout()" href=""><i class="fa fa-sign-out"></i> Logout</a>
                     </li>
                 </ul>
             </li>

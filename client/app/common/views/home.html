@@ -13,19 +13,5 @@
     <div class="block-header">
         <h2>Active Competitions</h2>
     </div>
-    <div class="row">
-        <div class="col-sm-3" ng-repeat="pyramid in vm.pyramids">
-            <div class="card">
-                <div class="card-header ch-alt m-b-20">
-                    <h2>{{pyramid.name}}</h2>
-                    <a ui-sref="pyramids.view({competitionId: pyramid._id})" class="btn bgm-blue btn-float waves-effect">
-                        <i class="zmdi zmdi-triangle-up"></i>
-                    </a>
-                </div>
-                <div class="card-body card-padding-sm">
-                    Players: {{pyramid.players.length}}
-                </div>
-            </div>
-        </div>
-    </div>
+    <div kp-pyramid-compact></div>
 </div>

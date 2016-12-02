@@ -10,9 +10,6 @@ var userSchema = mongoose.Schema({
     type: String,
     required: '{PATH} is required!'
   },
-  nickname: {
-    type: String
-  },
   username: {
     type: String,
     required: '{PATH} is required!',

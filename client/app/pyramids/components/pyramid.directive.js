@@ -212,7 +212,6 @@
             email: vm.currentUserPlayer.email,
             firstName: vm.currentUserPlayer.firstName,
             lastName: vm.currentUserPlayer.lastName,
-            nickname: vm.currentUserPlayer.nickname,
             position: vm.currentUserPlayer.position
           },
           opponent: {
@@ -220,7 +219,6 @@
             email: player.email,
             firstName: player.firstName,
             lastName: player.lastName,
-            nickname: player.nickname,
             position: player.position
           }
         };
