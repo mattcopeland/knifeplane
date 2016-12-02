@@ -3,12 +3,12 @@ var rootPath = path.normalize(__dirname + '/../../');
 
 module.exports = {
   development: {
-    db: 'mongodb://localhost/knifeplane',
+    db: 'mongodb://localhost/wannaplayme',
     rootPath: rootPath,
     port: process.env.PORT || 3000
   },
   production: {
-    db: 'mongodb://localhost/knifeplane',
+    db: 'mongodb://localhost/wannaplayme',
     rootPath: rootPath,
     port: process.env.PORT || 80
   }

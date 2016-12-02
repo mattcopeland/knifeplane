@@ -46,7 +46,7 @@
                                                     <tbody>
                                                         <tr>
                                                             <td align="center">
-                                                                <div><img width="218" border="0" alt="KnifePlane Logo" style="display:block;border:none;outline:none;text-decoration:none" src="' + logo + '"></div>
+                                                                <div><img width="218" border="0" alt="WannaPlayMe Logo" style="display:block;border:none;outline:none;text-decoration:none" src="' + logo + '"></div>
                                                             </td>
                                                         </tr>
                                                     </tbody>

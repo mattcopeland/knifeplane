@@ -1,7 +1,7 @@
 {
-  "name": "knifeplane",
+  "name": "wannaplayme",
   "version": "0.0.1",
-  "description": "Knifeplane Rules!!",
+  "description": "WannaPlayMe Rules!!",
   "main": "app-express.js",
   "dependencies": {
     "body-parser": "^1.15.2",

@@ -9,7 +9,7 @@ module.exports = function (config) {
   var db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error…'));
   db.once('open', function callback() {
-    console.log('knifeplane db opened');
+    console.log('wannaplayme db opened');
   });
 
   userModel.createDefaultUsers();

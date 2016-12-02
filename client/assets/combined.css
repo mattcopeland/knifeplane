@@ -7386,7 +7386,6 @@ body {
 }
 .pending-players .card-body .pending-player .player {
   font-size: 16px;
-  font-weight: bold;
 }
 .active-challenges {
   height: calc(100% - 73px);
