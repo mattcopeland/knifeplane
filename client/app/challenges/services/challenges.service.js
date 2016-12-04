@@ -12,6 +12,7 @@
       getActiveChallengesByCompetition: getActiveChallengesByCompetition,
       getActiveChallengeByCompetitionByPlayer: getActiveChallengeByCompetitionByPlayer,
       getCompletedChallengesByCompetition: getCompletedChallengesByCompetition,
+      deleteActiveChallengeByCompetitionByPlayer: deleteActiveChallengeByCompetitionByPlayer,
       getPlayerResultsByCompetition: getPlayerResultsByCompetition
     };
 
@@ -59,6 +60,15 @@
         params: {
           competitionId: competitionId,
           limit: limit
+        }
+      });
+    }
+
+    function deleteActiveChallengeByCompetitionByPlayer(competitionId, playerId) {
+      return $http.delete('/api/challenges/active/competition/player/delete',  {
+        params: {
+          competitionId: competitionId,
+          playerId: playerId
         }
       });
     }

@@ -13,7 +13,8 @@ module.exports = function (app) {
   app.get('/api/pyramids', pyramids.getPyramids);
   app.get('/api/pyramids/user', auth.requiresApiLogin, pyramids.getPyramidsForUser);
   app.post('/api/pyramids/create', auth.requiresApiLogin, pyramids.createPyramid);
-  app.post('/api/pyramids/swapPositions', pyramids.swapPositions);
+  app.post('/api/pyramids/update', auth.requiresApiLogin, pyramids.updatePyramid);
+  app.post('/api/pyramids/swapPositions', auth.requiresApiLogin, pyramids.swapPositions);
   app.post('/api/pyramids/addPlayer', auth.requiresApiLogin, pyramids.addPlayer);
   app.post('/api/pyramids/addPlayerRequest', auth.requiresApiLogin, pyramids.addPlayerRequest);
   app.post('/api/pyramids/removePlayer', auth.requiresApiLogin, pyramids.removePlayer);
@@ -25,6 +26,7 @@ module.exports = function (app) {
   app.get('/api/challenges/active/competition/player', challenges.getActiveChallengeByCompetitionByPlayer);
   app.get('/api/challenges/completed/competition', challenges.getCompletedChallengesByCompetition);
   app.get('/api/challenges/results/competition/player', challenges.getPlayerResultsByCompetition);
+  app.delete('/api/challenges/active/competition/player/delete', auth.requiresApiLogin, challenges.deleteActiveChallengeByCompetitionByPlayer);
   app.post('/api/challenges/create', auth.requiresApiLogin, challenges.createChallenge);
   app.post('/api/challenges/complete', challenges.completeChallenge);
 

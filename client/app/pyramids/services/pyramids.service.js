@@ -8,6 +8,7 @@
       getPyramidsForUser: getPyramidsForUser,
       getPyramids: getPyramids,
       createPyramid: createPyramid,
+      updatePyramid: updatePyramid,
       swapPositions: swapPositions,
       addPlayerToPyramid: addPlayerToPyramid,
       addPlayerToPyramidRequest: addPlayerToPyramidRequest,
@@ -57,6 +58,12 @@
 
     function createPyramid(pyramid) {
       return $http.post('/api/pyramids/create', {
+        pyramid: pyramid
+      });
+    }
+
+    function updatePyramid(pyramid) {
+      return $http.post('/api/pyramids/update', {
         pyramid: pyramid
       });
     }

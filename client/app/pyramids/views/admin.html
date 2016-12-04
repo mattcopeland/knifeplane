@@ -17,18 +17,7 @@
     <div kp-pending-players competition-id="{{vm.competitionId}}"></div>
     <div class="row">
         <div class="col-sm-6">
-            <div class="card">
-                <div class="card-header ch-alt">
-                    <h2>Current Players</h2>
-                </div>
-                <div class="card-body card-padding-sm">
-                    <ul>
-                        <li ng-repeat="player in vm.pyramid.players">
-                            {{player.firstName}} {{player.lastName}}
-                        </li>
-                    </ul>
-                </div> 
-            </div>
+            <div kp-update-players pyramid="vm.pyramid"></div>
         </div>
         <div class="col-sm-6">
             <div class="card">        
@@ -42,6 +31,11 @@
                         </li>
                     </ul>
                 </div> 
+            </div>
+            <div class="toggle-switch" data-ts-color="blue">
+                <label for="open" class="ts-label" uib-tooltip="Anyone can join an open competition. Closed requires owner approval." tooltip-placement="top">Open Competition</label>
+                <input id="open" type="checkbox" hidden="hidden" ng-model="vm.pyramid.open" ng-change="vm.updatePyramidOpenStatus()">
+                <label for="open" class="ts-helper"></label>
             </div>
         </div>
     </div>

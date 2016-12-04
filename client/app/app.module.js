@@ -6,5 +6,6 @@ angular.module('app', [
   'nouislider',
   'localytics.directives',
   'timer',
-  'LocalStorageModule'
+  'LocalStorageModule',
+  'angular-sortable-view'
 ]);

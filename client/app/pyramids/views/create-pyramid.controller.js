@@ -18,6 +18,7 @@
     vm.createPyramid = createPyramid;
     vm.addPlayer = addPlayer;
     vm.removePlayer = removePlayer;
+    vm.reorderPlayers = reorderPlayers;
     vm.newPyramid.forfeitDays = 1;
 
     activate();
@@ -42,6 +43,7 @@
      * @param  {object} player
      */
     function addPlayer(player) {
+      player.position = vm.addedPlayers.length + 1;
       vm.addedPlayers.push(_.remove(vm.availablePlayers, {_id: player._id})[0]);
     }
 
@@ -51,6 +53,17 @@
      */
     function removePlayer(player) {
       vm.availablePlayers.push(_.remove(vm.addedPlayers, {_id: player._id})[0]);
+    }
+
+    /**
+     * Reorder the players based on the drag-drop
+     */
+    function reorderPlayers() {
+      var i = 1;
+      _.forEach(vm.addedPlayers, function (player) {
+        player.position = i;
+        ++i;
+      });
     }
 
     // Used to keep track of position on the pyramid based on when the player was added

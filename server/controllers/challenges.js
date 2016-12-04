@@ -52,6 +52,22 @@ exports.getCompletedChallengesByCompetition = function (req, res) {
   });
 };
 
+exports.deleteActiveChallengeByCompetitionByPlayer = function (req, res) {
+  console.log(req);
+  Challenge.findOneAndRemove({
+    competitionId: req.query.competitionId,
+    '$or': [
+      {
+        'challenger._id': req.query.playerId
+      },{
+        'opponent._id': req.query.playerId
+      }
+    ]
+  }).exec(function () {
+    res.send('deleted');
+  });
+};
+
 exports.getPlayerResultsByCompetition = function (req, res) {
   var competitionId = req.query.competitionId;
   var playerId = req.query.playerId;

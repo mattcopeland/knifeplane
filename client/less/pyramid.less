@@ -1,126 +1,145 @@
 // Pyramid View
 .pyramid-menu {
-
-  .btn-container {
-    padding: 8px 0;
-    text-align: center;
-
-    .btn {
-      margin-left: 5px;
-
-      &:first-child {
-        margin-left: 0;
-      }
+    .btn-container {
+        padding: 8px 0;
+        text-align: center;
+        .btn {
+            margin-left: 5px;
+            &:first-child {
+                margin-left: 0;
+            }
+        }
     }
-  }
 }
 
 .pyramid {
-  text-align: center;
-
-  .level {
-    padding: 5px 50px;
-    position: relative;
-  
-    .level-marker {
-      color: #ccc;
-      font-size: 40px;
-      left: 0;
-      line-height: 75px;
-      padding: 10px 15px;
-      position: absolute;
-      top: 0;
+    text-align: center;
+    .level {
+        padding: 5px 50px;
+        position: relative;
+        .level-marker {
+            color: #ccc;
+            font-size: 40px;
+            left: 0;
+            line-height: 75px;
+            padding: 10px 15px;
+            position: absolute;
+            top: 0;
+        }
     }
-  }
-
-  .level:nth-child(odd) {
-    background-color: #eee;
-
-    .level-marker {
-      color: #ddd;
+    .level:nth-child(odd) {
+        background-color: #eee;
+        .level-marker {
+            color: #ddd;
+        }
     }
-  }
-    
-  .level:nth-child(even) {
-    background-color: #ddd;
-  }
-
-  .pyramid-block {
-    background-color: #fff;
-    border: 1px solid #bdbdbd;
-    border-top-width: 3px;
-    display: inline-block;
-    font-size: 14px;
-    height: 75px;
-    margin: 5px;
-    padding: 5px;
-    position: relative;
-    vertical-align: top;
-    width: 150px;
-
-    @media screen and (max-width: 450px) {
-      width: 100%;
+    .level:nth-child(even) {
+        background-color: #ddd;
     }
-    
-    &.empty {
-      background-color: @m-gray;
-      color: #fff;
+    .pyramid-block {
+        background-color: #fff;
+        border: 1px solid #bdbdbd;
+        border-top-width: 3px;
+        display: inline-block;
+        font-size: 14px;
+        height: 75px;
+        margin: 5px;
+        padding: 5px;
+        position: relative;
+        vertical-align: top;
+        width: 150px;
+        @media screen and (max-width: 450px) {
+            width: 100%;
+        }
+        &.empty {
+            background-color: @m-gray;
+            color: #fff;
+        }
+        &.current-user {
+            border-top: 3px solid @m-blue;
+        }
+        &.available {
+            border-top: 3px solid @m-green;
+            cursor: pointer;
+        }
+        &.unavailable {
+            border-top: 3px solid @m-red;
+        }
     }
-      
-    &.current-user {
-      border-top: 3px solid @m-blue;
-    }
-      
-    &.available {
-      border-top: 3px solid @m-green;
-      cursor: pointer;
-    }
-
-    &.unavailable {
-      border-top: 3px solid @m-red;
-    }
-  }
 }
 
 // Create pyramid form
+.create-pyramid-form {
+    .pyramid-players {
+        height: 150px;
+
+        li {
+            &.ng-enter {
+                animation: slideInRight 0.2s ease both;
+            }
+            &.ng-leave {
+                animation: slideOutRight 0.2s ease both;
+            }
+        }
+
+        &.added-players {
+            height: auto;
+            min-height: 150px;
+         
+            li {
+                &.ng-enter {
+                    animation: slideInLeft 0.2s ease both;
+                }
+                &.ng-leave {
+                    animation: slideOutLeft 0.2s ease both;
+                }
+            }
+        }
+    }
+}
+
 .pyramid-players {
     border: 1px solid @input-border;
-    height: 150px;
     list-style-type: none;
     overflow-x: hidden;
     overflow-y: auto;
     padding: 0;
-
     li {
         cursor: pointer;
         padding: 5px 10px;
+        &.sortable {
+            cursor: default;
+            position: relative;
 
+            &:hover {
+                color: inherit;
+            }
+
+            i {
+                cursor: pointer;
+                float: right;
+                font-size: 18px;
+                padding: 0 10px;
+                text-align: center;
+
+                &.sort {
+                    cursor: grab;
+                }
+
+                &:hover {
+                    color: @m-blue;
+                }
+            }
+        }
         &:hover {
             color: @m-blue;
         }
-
-        &.ng-enter {
-            animation: slideInRight 0.2s ease both;
+        
+        span {
+            display: inline-block;
+            font-weight: bold;
+            width: 17px;
         }
-
-        &.ng-leave {
-            animation: slideOutRight 0.2s ease both;
-        }
-    }
-
-    &.added-players {
-      height: auto;
-      min-height: 150px;
-      
-      li {
-        &.ng-enter {
-            animation: slideInLeft 0.2s ease both;
-        }
-
-        &.ng-leave {
-            animation: slideOutLeft 0.2s ease both;
-        }
-      }
     }
 }
 
@@ -140,7 +159,7 @@
 .added-player26,
 .added-player27,
 .added-player28 {
-  background-color: #eee;
+    background-color: #eee;
 }
 
 .added-player2,
@@ -154,20 +173,17 @@
 .added-player19,
 .added-player20,
 .added-player21 {
-  background-color: #ddd;
+    background-color: #ddd;
 }
 
 .swap-players {
     text-align: center;
-
     i {
         font-size: 44px;
-        
         &.hidden-xs {
             font-size: 44px;
             line-height: 180px;
         }
-
         &.visible-xs {
             font-size: 44px;
             line-height: 0;
@@ -178,17 +194,14 @@
 .pending-players .card-body {
     overflow-x: auto;
     white-space: nowrap;
-
     .pending-player {
         display: inline-block;
         margin: 10px 0 10px 10px;
         padding: 10px;
         text-align: center;
-
         &:last-child {
             margin-right: 10px;
         }
-
         .player {
             font-size: @font-size-base + 3px;
         }

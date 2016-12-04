@@ -42,6 +42,34 @@ exports.createPyramid = function (req, res) {
   });
 };
 
+exports.updatePyramid = function (req, res, next) {
+  var pyramidData = req.body.pyramid;
+  var details = {
+    competitionId: pyramidData._id,
+    description: pyramidData.name + ' has been updated by the owner.'
+  };
+  Pyramid.findOneAndUpdate(
+    {
+      _id: pyramidData._id
+    }, {
+      $set: {
+        'name': pyramidData.name,
+        'forfeitDays': pyramidData.forfeitDays,
+        'open': pyramidData.open,
+        'players': pyramidData.players,
+        'pendingPlayers': pyramidData.pendingPlayers,
+        'owners': pyramidData.owners
+      }
+    })
+    .exec(function (err, pyramid) {
+      if (err) {
+        return next(err);
+      }
+      websockets.broadcast('pyramid_updated', details);
+      res.status(201).json(pyramid);
+    });
+};
+
 exports.swapPositions = function (req, res, next) {
   Pyramid.findOneAndUpdate(
     {

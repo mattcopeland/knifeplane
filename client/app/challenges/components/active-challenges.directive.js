@@ -57,5 +57,12 @@
         getActiveChallenges();
       }
     });
+
+    // Watch for websocket event
+    $scope.$on('ws:pyramid_updated', function (_, challengeDetails) {
+      if (vm.competitionId === challengeDetails.competitionId) {
+        getActiveChallenges();
+      }
+    });
   }
 })();

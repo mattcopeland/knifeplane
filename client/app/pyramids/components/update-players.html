@@ -1,0 +1,22 @@
+<div class="card">
+    <div class="card-header ch-alt">
+        <h2>Players</h2>
+    </div>
+    <div class="card-body card-padding-sm">
+        <ul class="pyramid-players added-players" sv-root sv-part="vm.pyramid.players" sv-on-sort="vm.reorderPlayers()">
+            <li ng-repeat="player in vm.pyramid.players" class="sortable" ng-class="'added-player' + ($index + 1)" sv-element>
+                <span class="position">{{player.position}}</span> {{player.firstName}} {{player.lastName}}
+                <i class="zmdi zmdi-unfold-more sort" sv-handle></i>
+                <i class="zmdi zmdi-close-circle-o" ng-click="vm.removePlayer(player, $index)"></i>
+            </li>
+        </ul>
+        <div class="btns-group text-center">
+            <button type="submit" class="btn btn-primary" ng-click="vm.updatePyramid()">
+                <i class="zmdi zmdi-check"></i> Update Players
+            </button>
+            <button class="btn btn-default" ng-click="vm.cancelUpdate()">
+                <i class="zmdi zmdi-close"></i> Cancel
+            </a>
+        </div>
+    </div> 
+</div>
