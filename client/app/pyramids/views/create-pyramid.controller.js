@@ -5,7 +5,7 @@
   'use strict';
   angular.module('app').controller('CreatePyramidCtrl', CreatePyramidCtrl);
 
-  function CreatePyramidCtrl($state, userService, pyramidsService, notifyService, identityService) {
+  function CreatePyramidCtrl($state, userService, pyramidsService, identityService) {
     var breakPoints = [];
     var maxLevels = 10;
     var vm = this;
@@ -53,6 +53,7 @@
      */
     function removePlayer(player) {
       vm.availablePlayers.push(_.remove(vm.addedPlayers, {_id: player._id})[0]);
+      reorderPlayers();
     }
 
     /**

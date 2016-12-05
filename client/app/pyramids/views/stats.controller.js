@@ -2,7 +2,7 @@
   'use strict';
   angular.module('app').controller('StatsCtrl', StatsCtrl);
 
-  function StatsCtrl($stateParams, $state, pyramidsService) {
+  function StatsCtrl($scope, $stateParams, $state, pyramidsService, notifyService) {
     var vm = this;
     vm.competitionId = null;
     vm.pyramid = null;
@@ -12,14 +12,26 @@
     function activate() {
       if ($stateParams.competitionId) {
         vm.competitionId = $stateParams.competitionId;
-        pyramidsService.getPyramid(vm.competitionId).then(function (pyramid) {
-          if (pyramid.data) {
-            vm.pyramid = pyramid.data;
-          } else {
-            $state.go('pyramids.myPyramids');
-          }
-        });
+        refreshPyramid();
       }
     }
+
+    function refreshPyramid() {
+      pyramidsService.getPyramid(vm.competitionId).then(function (pyramid) {
+        if (pyramid.data) {
+          vm.pyramid = pyramid.data;
+        } else {
+          $state.go('pyramids.myPyramids');
+        }
+      });
+    }
+
+    // Watch for websocket event
+    $scope.$on('ws:challenge_completed', function (_, challengeDetails) {
+      if (vm.competitionId === challengeDetails.competitionId) {
+        notifyService.info(challengeDetails.description);
+        refreshPyramid();
+      }
+    });
   }
 })();

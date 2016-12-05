@@ -20,7 +20,7 @@
   }
 
   /* @ngInject */
-  function ctrlFunc($scope, pyramidsService) {
+  function ctrlFunc(pyramidsService) {
     var vm = this;
     vm.pendingPlayers = [];
     vm.approvePendingPlayer = approvePendingPlayer;

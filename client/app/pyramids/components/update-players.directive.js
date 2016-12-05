@@ -20,7 +20,7 @@
   }
 
   /* @ngInject */
-  function ctrlFunc($scope, $state, $filter, pyramidsService, challengesService) {
+  function ctrlFunc(pyramidsService, challengesService) {
     var removedPlayers = [];
     var vm = this;
     vm.updatePyramid = updatePyramid;
@@ -30,12 +30,7 @@
 
     activate();
 
-    function activate() {
-      if (vm.pyramid) {
-        // Display the players in the proper order
-        vm.pyramid.players = $filter('orderBy')(vm.pyramid.players, 'position');
-      }
-    }
+    function activate() {}
 
     // Perform the updates that were requsted
     function updatePyramid() {

@@ -21,7 +21,7 @@
   }
 
   /* @ngInject */
-  function ctrlFunc($scope, challengesService, notifyService) {
+  function ctrlFunc(challengesService) {
     var vm = this;
     vm.maxLevels = 10;
     vm.wins = {
@@ -144,17 +144,5 @@
         }));
       });
     }
-
-    // Watch for websocket event
-    $scope.$on('ws:challenge_completed', function (_, challengeDetails) {
-      if (vm.competitionId === challengeDetails.competitionId) {
-        if (vm.player._id === challengeDetails.challengerId) {
-          notifyService.info(challengeDetails.description);
-          getPlayerOverallResults(challengeDetails.competitionId, challengeDetails.challengerId);
-        } else if (vm.player._id === challengeDetails.opponentId) {
-          getPlayerOverallResults(challengeDetails.competitionId, challengeDetails.opponentId);
-        }
-      }
-    });
   }
 })();

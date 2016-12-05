@@ -2,7 +2,7 @@
   'use strict';
   angular.module('app').controller('AdminCtrl', AdminCtrl);
 
-  function AdminCtrl($scope, $state, $stateParams, $filter, pyramidsService, challengesService, identityService, notifyService) {
+  function AdminCtrl($scope, $state, $stateParams, $filter, pyramidsService, identityService, notifyService) {
     var vm = this;
     vm.competitionId = null;
     vm.updatePyramidOpenStatus = updatePyramidOpenStatus;
@@ -22,6 +22,8 @@
       pyramidsService.getPyramid(vm.competitionId).then(function (pyramid) {
         // Check to see if this user is an owner of this competition
         if (pyramid.data && _.some(pyramid.data.owners, ['_id', identityService.currentUser._id])) {
+          // Display the players in the proper order
+          pyramid.data.players = $filter('orderBy')(pyramid.data.players, 'position');
           vm.pyramid = pyramid.data;
         } else {
           $state.go('pyramids.myPyramids');
