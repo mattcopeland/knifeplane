@@ -7312,31 +7312,24 @@ body {
   padding: 0;
 }
 .pyramid-players li {
-  cursor: pointer;
   padding: 5px 10px;
-}
-.pyramid-players li.sortable {
-  cursor: default;
   position: relative;
 }
-.pyramid-players li.sortable:hover {
-  color: inherit;
+.pyramid-players li:hover {
+  background-color: #cacaca;
 }
-.pyramid-players li.sortable i {
+.pyramid-players li i {
   cursor: pointer;
   float: right;
   font-size: 18px;
   padding: 0 10px;
   text-align: center;
 }
-.pyramid-players li.sortable i.sort {
+.pyramid-players li i.sort {
   cursor: -webkit-grab;
   cursor: grab;
 }
-.pyramid-players li.sortable i:hover {
-  color: #2196F3;
-}
-.pyramid-players li:hover {
+.pyramid-players li i:hover {
   color: #2196F3;
 }
 .pyramid-players li span {

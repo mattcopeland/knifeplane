@@ -12,7 +12,7 @@
       controllerAs: 'vm',
       restrict: 'A',
       scope: {
-        competitionId: '@'
+        pyramid: '='
       },
       templateUrl: '/pyramids/components/pending-players.html'
     };
@@ -22,34 +22,21 @@
   /* @ngInject */
   function ctrlFunc($scope, pyramidsService) {
     var vm = this;
-    vm.pyramid = {};
     vm.pendingPlayers = [];
     vm.approvePendingPlayer = approvePendingPlayer;
     vm.denyPendingPlayer = denyPendingPlayer;
 
     activate();
 
-    function activate() {
-      getPendingPlayers();
-    }
-
-    function getPendingPlayers() {
-      vm.pendingPlayers = [];
-      pyramidsService.getPyramid(vm.competitionId).then(function (pyramid) {
-        vm.pyramid = pyramid.data;
-        if (pyramid.data && pyramid.data.pendingPlayers.length > 0) {
-          vm.pendingPlayers = pyramid.data.pendingPlayers;
-        }
-      });
-    }
+    function activate() {}
 
     function approvePendingPlayer(player) {
       player.position = vm.pyramid.players.length + 1;
-      pyramidsService.approvePendingPlayer(vm.competitionId, player).then(getPendingPlayers);
+      pyramidsService.approvePendingPlayer(vm.pyramid._id, player);
     }
 
     function denyPendingPlayer(player) {
-      pyramidsService.denyPendingPlayer(vm.competitionId, player).then(getPendingPlayers);
+      pyramidsService.denyPendingPlayer(vm.pyramid._id, player);
     }
   }
 })();

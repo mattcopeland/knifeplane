@@ -53,7 +53,6 @@ exports.getCompletedChallengesByCompetition = function (req, res) {
 };
 
 exports.deleteActiveChallengeByCompetitionByPlayer = function (req, res) {
-  console.log(req);
   Challenge.findOneAndRemove({
     competitionId: req.query.competitionId,
     '$or': [
@@ -101,7 +100,6 @@ exports.createChallenge = function (req, res) {
   
   Challenge.create(challengeData, function (err, challenge) {
     if (err) {
-      console.log(err);
       res.status(400);
       return res.send({
         reason: err.toString()

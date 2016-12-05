@@ -29,8 +29,9 @@
                     <div class="col-sm-5 m-b-30">
                         <label>Available Players</label>
                         <ul class="pyramid-players">
-                            <li ng-repeat="player in vm.availablePlayers" ng-click="vm.addPlayer(player)">
+                            <li ng-repeat="player in vm.availablePlayers">
                                 {{player.firstName}} {{player.lastName}}
+                                <i class="zmdi zmdi-plus-circle-o" ng-click="vm.addPlayer(player)"></i>
                             </li>
                         </ul>
                     </div>

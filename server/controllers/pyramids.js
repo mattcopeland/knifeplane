@@ -128,6 +128,11 @@ exports.addPlayer = function (req, res, next) {
 
 exports.addPlayerRequest = function (req, res, next) {
   emails.addPlayerRequest(req.body.competition, req.body.player, req.get('host'));
+  var player = req.body.player.firstName + ' ' + req.body.player.lastName;
+  var details =  {
+    competitionId: req.body.competition._id,
+    description: player + ' has requested to join the competition'
+  };
   
   Pyramid.findByIdAndUpdate({
     _id: req.body.competition._id
@@ -140,6 +145,7 @@ exports.addPlayerRequest = function (req, res, next) {
     if (err) {
       return next(err);
     }
+    websockets.broadcast('add_player_request', details);
     res.status(201).json(pyramid);
   });
 };
@@ -206,6 +212,11 @@ exports.approvePlayer = function (req, res, next) {
 };
 
 exports.denyPlayer = function (req, res, next) {
+  var player = req.body.player.firstName + ' ' + req.body.player.lastName;
+  var details = {
+    competitionId: req.body.competitionId,
+    description: player + ' has been denied entry to the competition'
+  };
   var competitionName;
   Pyramid.findOne({
     _id: req.body.competitionId
@@ -230,6 +241,7 @@ exports.denyPlayer = function (req, res, next) {
     if (err) {
       return next(err);
     }
+    websockets.broadcast('add_player_request_denied', details);
     res.status(201).json(pyramid);
   });
 };

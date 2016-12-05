@@ -8,10 +8,7 @@
                 </a>
             </div>
             <div class="card-body card-padding-sm">
-                <div><i class="zmdi zmdi-accounts" uib-tooltip="Players" tooltip-placement="left"></i> {{pyramid.players.length}}</div>
-                <div ng-repeat="owner in pyramid.owners">
-                    <i class="zmdi zmdi-account-circle" uib-tooltip="Owner" tooltip-placement="left"></i> {{owner.firstName}} {{owner.lastName}}
-                </div>
+                <div><i class="zmdi zmdi-accounts" uib-tooltip="# of Players" tooltip-placement="top"></i> {{pyramid.players.length}}</div>
             </div>
         </div>
     </div>

@@ -69,5 +69,21 @@
         refreshPyramid();
       }
     });
+
+    // Watch for websocket event
+    $scope.$on('ws:add_player_request', function (_, challengeDetails) {
+      if (vm.competitionId === challengeDetails.competitionId) {
+        notifyService.info(challengeDetails.description);
+        refreshPyramid();
+      }
+    });
+
+    // Watch for websocket event
+    $scope.$on('ws:add_player_request_denied', function (_, challengeDetails) {
+      if (vm.competitionId === challengeDetails.competitionId) {
+        notifyService.info(challengeDetails.description);
+        refreshPyramid();
+      }
+    });
   }
 })();

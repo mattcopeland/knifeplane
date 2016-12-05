@@ -80,6 +80,8 @@
         vm.currentUserIsOwner = _.some(vm.pyramid.owners, ['_id', identityService.currentUser._id]);
       }
 
+      vm.currentUserIsOnPyramid = false;
+      vm.hasActiveChallenge = false;
       _.forEach(vm.pyramid.players, function (player) {
         // Find the current user if they are on this pyramid and set some properties
         if (identityService.isAuthenticated() && player._id === identityService.currentUser._id) {
@@ -96,6 +98,7 @@
       });
 
       // Check to see if the current user has a pending request to join
+      vm.currentUserIsPending = false;
       _.forEach(vm.pyramid.pendingPlayers, function (player) {
         if (identityService.isAuthenticated() && player._id === identityService.currentUser._id) {
           vm.currentUserIsPending = true;

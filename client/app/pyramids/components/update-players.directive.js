@@ -32,13 +32,9 @@
 
     function activate() {
       if (vm.pyramid) {
-        renderPlayers(vm.pyramid);
+        // Display the players in the proper order
+        vm.pyramid.players = $filter('orderBy')(vm.pyramid.players, 'position');
       }
-    }
-
-    // Display the players in the proper order
-    function renderPlayers(pyramid) {
-      pyramid.players = $filter('orderBy')(pyramid.players, 'position');
     }
 
     // Perform the updates that were requsted
