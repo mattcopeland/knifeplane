@@ -89,6 +89,18 @@
         resolve: {
           auth: routeRoleChecks.user
         }
+      }).state('user', {
+        url: '/user',
+        views: {
+          'content': {
+            controller: 'UserCtrl',
+            controllerAs: 'vm',
+            templateUrl: 'users/views/user.html'
+          }
+        },
+        resolve: {
+          auth: routeRoleChecks.user
+        }
       }).state('login', {
         url: '/login',
         views: {
