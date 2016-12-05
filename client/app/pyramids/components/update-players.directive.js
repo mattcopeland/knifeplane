@@ -20,7 +20,7 @@
   }
 
   /* @ngInject */
-  function ctrlFunc(pyramidsService, challengesService) {
+  function ctrlFunc($filter, pyramidsService, challengesService) {
     var removedPlayers = [];
     var vm = this;
     vm.updatePyramid = updatePyramid;
@@ -43,6 +43,7 @@
     // Cancel the update and put everything back to the orginal
     function cancelUpdate() {
       pyramidsService.getPyramid(vm.pyramid._id).then(function (pyramid) {
+        pyramid.data.players = $filter('orderBy')(pyramid.data.players, 'position');
         vm.pyramid = pyramid.data;
       });
     }
