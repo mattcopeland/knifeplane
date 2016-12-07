@@ -8,6 +8,7 @@ module.exports = function (app) {
   app.post('/api/users', users.createUser);
   app.put('/api/users', auth.requiresApiLogin, users.updateUser);
   app.get('/api/user/verification', users.verifyUser);
+  app.get('/api/user/password/link', users.generatePasswordResetLink);
 
   app.get('/api/pyramid', pyramids.getPyramid);
   app.get('/api/pyramids', pyramids.getPyramids);

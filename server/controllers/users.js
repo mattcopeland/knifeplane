@@ -18,7 +18,7 @@ exports.createUser = function (req, res) {
   User.create(userData, function (err, user) {
     if (err) {
       if (err.toString().indexOf('E11000') > -1) {
-        err = new Error('Duplicate Username');
+        err = new Error('Email already in use');
       }
       res.status(400);
       return res.send({
@@ -43,6 +43,24 @@ exports.verifyUser = function (req, res, next) {
   .exec(function (err, user) {
     if (err) {
       return next(err);
+    }
+    res.status(201).json(user);
+  });
+};
+
+exports.generatePasswordResetLink = function (req, res) {
+  var verificationToken = uuid();
+  User.findOneAndUpdate({
+    username: req.query.username
+  }, {
+    $set: {
+      verificationToken: verificationToken
+    }
+  }, {
+    new: true
+  }).exec(function (err, user) {
+    if (user) {
+      emails.passwordReset(user, verificationToken, req.get('host'));
     }
     res.status(201).json(user);
   });

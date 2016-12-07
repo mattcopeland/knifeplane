@@ -137,6 +137,15 @@
             templateUrl: 'authentication/views/verification.html'
           }
         }
+      }).state('password-reset', {
+        url: '/password-resset',
+        views: {
+          'content': {
+            controller: 'PasswordResetCtrl',
+            controllerAs: 'vm',
+            templateUrl: 'authentication/views/password-reset.html'
+          }
+        }
       });
   }
 
