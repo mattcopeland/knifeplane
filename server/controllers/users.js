@@ -66,6 +66,24 @@ exports.generatePasswordResetLink = function (req, res) {
   });
 };
 
+exports.resetPassword = function (req, res) {
+  var user = {
+    _id: req.body.userId
+  };
+  user.salt = encrypt.createSalt();
+  user.hashedPwd = encrypt.hashPwd(user.salt, req.body.password);
+  
+  User.findOneAndUpdate({
+    _id: req.body.userId,
+    verificationToken: req.body.verificationToken
+  }, user).exec(function (err, user) {
+    if (user) {
+      console.log('password reset successful');
+    }
+    res.status(201).json(user);
+  });
+};
+
 exports.updateUser = function (req, res) {
   var userUpdates = req.body;
 

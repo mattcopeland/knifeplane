@@ -2,5 +2,15 @@
     <div class="block-header">
         <h2>User Information</h2>
     </div>
-    {{vm.indentity.currentUser.firstName}} {{vm.indentity.currentUser.lastName}}
+    <div class="card">
+        <div class="card-header">
+            <h2>Update User Info</h2>
+        </div>
+        <div class="card-body card-padding">
+            <div class="row">
+                <div class="col-md-6">{{vm.indentity.currentUser.firstName}} {{vm.indentity.currentUser.lastName}}</div>
+                <div class="col-md-6">{{vm.indentity.currentUser.username}}</div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -6,7 +6,8 @@
     var service = {
       getAllUsers: getAllUsers,
       verifyUser: verifyUser,
-      generatePasswordResetLink: generatePasswordResetLink
+      generatePasswordResetLink: generatePasswordResetLink,
+      resetPassword: resetPassword
     };
     return service;
 
@@ -30,6 +31,14 @@
         params: {
           username: username
         }
+      });  
+    }
+
+    function resetPassword(userId, verificationToken, password) {
+      return $http.put('/api/user/password/reset', {
+        userId: userId,
+        verificationToken: verificationToken,
+        password: password
       });  
     }
   }

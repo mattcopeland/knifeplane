@@ -137,8 +137,17 @@
             templateUrl: 'authentication/views/verification.html'
           }
         }
+      }).state('password-reset-request', {
+        url: '/password-reset',
+        views: {
+          'content': {
+            controller: 'PasswordResetCtrl',
+            controllerAs: 'vm',
+            templateUrl: 'authentication/views/password-reset.html'
+          }
+        }
       }).state('password-reset', {
-        url: '/password-resset',
+        url: '/password-reset/:userId/:verificationToken',
         views: {
           'content': {
             controller: 'PasswordResetCtrl',

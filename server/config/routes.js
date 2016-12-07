@@ -9,13 +9,14 @@ module.exports = function (app) {
   app.put('/api/users', auth.requiresApiLogin, users.updateUser);
   app.get('/api/user/verification', users.verifyUser);
   app.get('/api/user/password/link', users.generatePasswordResetLink);
+  app.put('/api/user/password/reset', users.resetPassword);
 
   app.get('/api/pyramid', pyramids.getPyramid);
   app.get('/api/pyramids', pyramids.getPyramids);
   app.get('/api/pyramids/user', auth.requiresApiLogin, pyramids.getPyramidsForUser);
   app.post('/api/pyramids/create', auth.requiresApiLogin, pyramids.createPyramid);
   app.post('/api/pyramids/update', auth.requiresApiLogin, pyramids.updatePyramid);
-  app.post('/api/pyramids/swapPositions', auth.requiresApiLogin, pyramids.swapPositions);
+  app.post('/api/pyramids/swapPositions', pyramids.swapPositions);
   app.post('/api/pyramids/addPlayer', auth.requiresApiLogin, pyramids.addPlayer);
   app.post('/api/pyramids/addPlayerRequest', auth.requiresApiLogin, pyramids.addPlayerRequest);
   app.post('/api/pyramids/removePlayer', auth.requiresApiLogin, pyramids.removePlayer);
