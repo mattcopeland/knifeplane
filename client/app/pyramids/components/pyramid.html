@@ -6,7 +6,7 @@
                 <div class="dropdown" uib-dropdown>
                     <a class="btn btn-primary btn-block" href="" uib-dropdown-toggle ng-click="vm.startChallenge()">Make a Challenge <i class="caret m-l-5"></i></a>
                     <ul class="dropdown-menu w-100" ng-if="vm.availableChallenges">
-                        <li class="dd-header">Choose from the following players:</li>
+                        <li class="dd-header">Available opponents:</li>
                         <li class="divider hidden-xs"></li>
                         <li ng-repeat="player in vm.pyramid.players" ng-if="player.available">
                             <a href="" ng-click="vm.createChallenge(player)"><i class="zmdi zmdi-account"></i> {{player.firstName}} {{player.lastName}}</a>
@@ -22,7 +22,7 @@
                 <div class="dropdown" uib-dropdown>
                     <a class="btn btn-primary btn-block" href="" uib-dropdown-toggle>Complete a Challenge <i class="caret m-l-5"></i></a>
                     <ul class="dropdown-menu w-100">
-                        <li class="dd-header">Select your result:</li>
+                        <li class="dd-header">How did you do against<div><b>{{vm.activeChallengeOpponent.firstName}} {{vm.activeChallengeOpponent.lastName}}</b>?</div></li>
                         <li class="divider hidden-xs"></li>
                         <li class="btn-container">
                             <button class="btn btn-success" type="button" ng-click="vm.completeChallenge(true)">Won</button>

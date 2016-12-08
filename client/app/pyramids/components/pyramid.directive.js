@@ -32,6 +32,7 @@
     vm.currentUserIsPending = false;
     vm.currentUserIsOwner = false;
     vm.hasActiveChallenge = false;
+    vm.activeChallengeOpponent = null;
     vm.availableChallenges = false;
     vm.createChallenge = createChallenge;
     vm.completeChallenge = completeChallenge;
@@ -75,9 +76,14 @@
      * Figure out if each player is already challenged and set some stuff
      */
     function getPlayersStatus() {
-      // Check to see if the current user is an owner of this pyramid
+      
+      vm.currentUserIsOwner = false;
+      vm.currentUserIsPending = false;
       if (identityService.isAuthenticated()) {
+        // Check to see if the current user is an owner of this pyramid
         vm.currentUserIsOwner = _.some(vm.pyramid.owners, ['_id', identityService.currentUser._id]);
+        // Check to see if the current user has a pending request to join
+        vm.currentUserIsPending = _.some(vm.pyramid.pendingPlayers, ['_id', identityService.currentUser._id]);
       }
 
       vm.currentUserIsOnPyramid = false;
@@ -89,19 +95,13 @@
           player.class = 'current-user';
           vm.currentUserPlayer = player;
 
+          // Check if the current user has an active challenge
           challengesService.getActiveChallengeByCompetitionByPlayer(vm.competitionId, player._id).then(function (challenge) {
             if (challenge.data) {
               vm.hasActiveChallenge = true;
+              vm.activeChallengeOpponent = challenge.data.challenger._id === player._id ? challenge.data.opponent : challenge.data.challenger;
             }
           });
-        }
-      });
-
-      // Check to see if the current user has a pending request to join
-      vm.currentUserIsPending = false;
-      _.forEach(vm.pyramid.pendingPlayers, function (player) {
-        if (identityService.isAuthenticated() && player._id === identityService.currentUser._id) {
-          vm.currentUserIsPending = true;
         }
       });
 
