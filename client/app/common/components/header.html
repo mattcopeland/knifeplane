@@ -13,7 +13,7 @@
     </li>
     <li class="pull-right">
         <ul class="top-menu">
-            <li class="dropdown" uib-dropdown ng-if="vm.indentity.currentUser">
+            <li class="dropdown" uib-dropdown ng-if="vm.indentity.isAuthenticated()">
                 <a uib-dropdown-toggle href="">
                     <i class="tm-icon zmdi zmdi-account"></i>
                 </a>
@@ -25,6 +25,11 @@
                         <a ng-click="vm.logout()" href=""><i class="fa fa-sign-out"></i> Logout</a>
                     </li>
                 </ul>
+            </li>
+            <li ng-if="!vm.indentity.isAuthenticated()">
+                <a ui-sref="login">
+                    <i class="tm-icon zmdi zmdi-sign-in"></i>
+                </a>
             </li>
         </ul>
     </li>

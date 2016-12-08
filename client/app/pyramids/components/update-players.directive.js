@@ -37,7 +37,7 @@
       _.forEach(removedPlayers, function(player) {
         challengesService.deleteActiveChallengeByCompetitionByPlayer(vm.pyramid._id, player._id);
       });
-      pyramidsService.updatePyramid(vm.pyramid);      
+      pyramidsService.updatePyramid(vm.pyramid);   
     }
 
     // Cancel the update and put everything back to the orginal
