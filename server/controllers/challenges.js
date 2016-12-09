@@ -69,12 +69,13 @@ exports.deleteActiveChallengeByCompetitionByPlayer = function (req, res) {
 
 exports.deleteChallenge = function (req, res) {
   var challengeDetails = {
-    competitionId: req.query.competitionId
+    competitionId: req.query.competitionId,
+    description: 'A challenege was deleted by the owner'
   };
   Challenge.findOneAndRemove({
     _id: req.query.challengeId
   }).exec(function () {
-    websockets.broadcast('challenge_deleted', challengeDetails);
+    websockets.broadcast('pyramid_updated', challengeDetails);
     res.send('deleted');
   });
 };
@@ -117,7 +118,7 @@ exports.createChallenge = function (req, res) {
         reason: err.toString()
       });
     }
-    websockets.broadcast('challenge_created', challengeDetails);
+    websockets.broadcast('pyramid_updated', challengeDetails);
     res.status(201).json(challenge);
   }); 
 };
@@ -160,7 +161,7 @@ exports.completeChallenge = function (req, res, next) {
     if (err) {
       return next(err);
     }
-    websockets.broadcast('challenge_completed', challengeDetails);
+    websockets.broadcast('pyramid_updated', challengeDetails);
     res.status(201).json(challenge);
   });
 };

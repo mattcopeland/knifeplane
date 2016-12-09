@@ -60,17 +60,9 @@
     }
 
     // Watch for websocket event
-    $scope.$on('ws:challenge_completed', function (_, challengeDetails) {
+    $scope.$on('ws:pyramid_updated', function (_, challengeDetails) {
       if (vm.competitionId === challengeDetails.competitionId) {
         getCompletedChallenges();
-      }
-    });
-
-    // Watch for websocket event
-    $scope.$on('ws:challenge_deleted', function (_, challengeDetails) {
-      if (vm.competitionId === challengeDetails.competitionId) {
-        getCompletedChallenges();
-        notifyService.info('Challenges Updated');
       }
     });
   }

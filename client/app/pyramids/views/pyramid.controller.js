@@ -26,7 +26,7 @@
     // Watch for websocket event
     $scope.$on('ws:pyramid_deleted', function (_, challengeDetails) {
       if (vm.competitionId === challengeDetails.competitionId) {
-        notifyService.info('The competition was deleted by the owner');
+        notifyService.info(challengeDetails.description);
         $state.go('pyramids.myPyramids');
       }
     });

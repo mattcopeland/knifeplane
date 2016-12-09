@@ -444,40 +444,6 @@
     }
 
     // Watch for websocket event
-    $scope.$on('ws:challenge_created', function (_, challengeDetails) {
-      if (vm.competitionId === challengeDetails.competitionId) {
-        notifyService.info(challengeDetails.description);
-        refreshPyramid();
-      }
-    });
-
-    // Watch for websocket event
-    $scope.$on('ws:challenge_completed', function (_, challengeDetails) {
-      if (vm.competitionId === challengeDetails.competitionId) {
-        notifyService.info(challengeDetails.description);
-        if (!removingCurrentUser) {
-          refreshPyramid();
-        }
-      }
-    });
-
-    // Watch for websocket event
-    $scope.$on('ws:player_added', function (_, details) {
-      if (vm.competitionId === details.competitionId) {
-        notifyService.info(details.description);
-        refreshPyramid();
-      }
-    });
-
-    // Watch for websocket event
-    $scope.$on('ws:player_removed', function (_, details) {
-      if (vm.competitionId === details.competitionId) {
-        notifyService.info(details.description);
-        refreshPyramid();
-      }
-    });
-
-    // Watch for websocket event
     $scope.$on('ws:pyramid_updated', function (_, challengeDetails) {
       if (vm.competitionId === challengeDetails.competitionId) {
         notifyService.info(challengeDetails.description);

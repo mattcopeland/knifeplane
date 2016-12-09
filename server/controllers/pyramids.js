@@ -72,7 +72,8 @@ exports.updatePyramid = function (req, res, next) {
 
 exports.deletePyramid = function (req, res) {
   var challengeDetails = {
-    competitionId: req.query.competitionId
+    competitionId: req.query.competitionId,
+    description: 'This competition has been updated by the owner.'
   };
   Pyramid.findOneAndRemove({
     _id: req.query.competitionId
@@ -134,7 +135,7 @@ exports.addPlayer = function (req, res, next) {
     if (err) {
       return next(err);
     }
-    websockets.broadcast('player_added', details);
+    websockets.broadcast('pyramid_updated', details);
     res.status(201).json(pyramid);
   });
 };
@@ -158,7 +159,7 @@ exports.addPlayerRequest = function (req, res, next) {
     if (err) {
       return next(err);
     }
-    websockets.broadcast('add_player_request', details);
+    websockets.broadcast('pyramid_updated', details);
     res.status(201).json(pyramid);
   });
 };
@@ -180,7 +181,7 @@ exports.removePlayer = function (req, res, next) {
     if (err) {
       return next(err);
     }
-    websockets.broadcast('player_removed', details);
+    websockets.broadcast('pyramid_updated', details);
     res.status(201).json(pyramid);
   });
 };
@@ -219,7 +220,7 @@ exports.approvePlayer = function (req, res, next) {
     if (err) {
       return next(err);
     }
-    websockets.broadcast('player_added', details);
+    websockets.broadcast('pyramid_updated', details);
     res.status(201).json(pyramid);
   });
 };
@@ -254,7 +255,7 @@ exports.denyPlayer = function (req, res, next) {
     if (err) {
       return next(err);
     }
-    websockets.broadcast('add_player_request_denied', details);
+    websockets.broadcast('pyramid_updated', details);
     res.status(201).json(pyramid);
   });
 };

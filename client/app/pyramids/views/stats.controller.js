@@ -27,21 +27,6 @@
     }
 
     // Watch for websocket event
-    $scope.$on('ws:challenge_completed', function (_, challengeDetails) {
-      if (vm.competitionId === challengeDetails.competitionId) {
-        notifyService.info(challengeDetails.description);
-        refreshPyramid();
-      }
-    });
-
-    // Watch for websocket event
-    $scope.$on('ws:challenge_deleted', function (_, challengeDetails) {
-      if (vm.competitionId === challengeDetails.competitionId) {
-        refreshPyramid();
-      }
-    });
-
-    // Watch for websocket event
     $scope.$on('ws:pyramid_updated', function (_, challengeDetails) {
       if (vm.competitionId === challengeDetails.competitionId) {
         notifyService.info(challengeDetails.description);
@@ -52,7 +37,7 @@
     // Watch for websocket event
     $scope.$on('ws:pyramid_deleted', function (_, challengeDetails) {
       if (vm.competitionId === challengeDetails.competitionId) {
-        notifyService.info('The competition was deleted by the owner');
+        notifyService.info(challengeDetails.description);
         $state.go('pyramids.myPyramids');
       }
     });
