@@ -13,6 +13,7 @@
       restrict: 'A',
       scope: {
         competitionId: '@',
+        allowDelete: '=',
         limit: '@'
       },
       templateUrl: '/challenges/components/completed-challenges.html'
@@ -21,9 +22,10 @@
   }
 
   /* @ngInject */
-  function ctrlFunc($scope, challengesService) {
+  function ctrlFunc($scope, $state, challengesService, notifyService) {
     var vm = this;
     vm.challenges = [];
+    vm.deleteChallenge = deleteChallenge;
 
     activate();
 
@@ -51,10 +53,24 @@
       });
     }
 
+    function deleteChallenge(challengeId, $index) {
+      challengesService.deleteChallenge(vm.competitionId, challengeId).then (function () {
+        vm.challenges.splice($index, 1);
+      });
+    }
+
     // Watch for websocket event
     $scope.$on('ws:challenge_completed', function (_, challengeDetails) {
       if (vm.competitionId === challengeDetails.competitionId) {
         getCompletedChallenges();
+      }
+    });
+
+    // Watch for websocket event
+    $scope.$on('ws:challenge_deleted', function (_, challengeDetails) {
+      if (vm.competitionId === challengeDetails.competitionId) {
+        getCompletedChallenges();
+        notifyService.info('Challenges Updated');
       }
     });
   }

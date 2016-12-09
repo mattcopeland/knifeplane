@@ -2,7 +2,7 @@
   'use strict';
   angular.module('app').controller('PyramidCtrl', PyramidCtrl);
 
-  function PyramidCtrl($state, $stateParams, pyramidsService) {
+  function PyramidCtrl($scope, $state, $stateParams, pyramidsService, notifyService) {
     var vm = this;
     vm.competitionId = null;
     vm.pyramid = null;
@@ -22,5 +22,13 @@
         });
       }
     }
+
+    // Watch for websocket event
+    $scope.$on('ws:pyramid_deleted', function (_, challengeDetails) {
+      if (vm.competitionId === challengeDetails.competitionId) {
+        notifyService.info('The competition was deleted by the owner');
+        $state.go('pyramids.myPyramids');
+      }
+    });
   }
 })();

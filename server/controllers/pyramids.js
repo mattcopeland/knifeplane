@@ -70,6 +70,19 @@ exports.updatePyramid = function (req, res, next) {
     });
 };
 
+exports.deletePyramid = function (req, res) {
+  var challengeDetails = {
+    competitionId: req.query.competitionId
+  };
+  Pyramid.findOneAndRemove({
+    _id: req.query.competitionId
+  }).exec(function () {
+    websockets.broadcast('pyramid_deleted', challengeDetails);
+    res.send('deleted');
+  });
+};
+
+
 exports.swapPositions = function (req, res, next) {
   Pyramid.findOneAndUpdate(
     {

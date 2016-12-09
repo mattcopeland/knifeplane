@@ -27,6 +27,7 @@
     vm.cancelUpdate = cancelUpdate;
     vm.reorderPlayers = reorderPlayers;
     vm.removePlayer = removePlayer;
+    vm.disableSubmit = true;
 
     activate();
 
@@ -37,7 +38,9 @@
       _.forEach(removedPlayers, function(player) {
         challengesService.deleteActiveChallengeByCompetitionByPlayer(vm.pyramid._id, player._id);
       });
-      pyramidsService.updatePyramid(vm.pyramid);   
+      pyramidsService.updatePyramid(vm.pyramid).then(function () {
+        vm.disableSubmit = true;
+      });   
     }
 
     // Cancel the update and put everything back to the orginal
@@ -45,6 +48,7 @@
       pyramidsService.getPyramid(vm.pyramid._id).then(function (pyramid) {
         pyramid.data.players = $filter('orderBy')(pyramid.data.players, 'position');
         vm.pyramid = pyramid.data;
+        vm.disableSubmit = true;
       });
     }
 
@@ -55,6 +59,7 @@
         player.position = i;
         ++i;
       });
+      vm.disableSubmit = false;
     }
 
     // Queue up the players to be removed and remove them from the display

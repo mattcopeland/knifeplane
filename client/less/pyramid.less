@@ -105,22 +105,21 @@
     overflow-y: auto;
     padding: 0;
     li {
+        cursor: pointer;
         padding: 5px 10px;
         position: relative;
         &:hover {
             background-color: #cacaca;
+        }
+        &.sortable {
+            cursor: grab;
         }
 
         i {
             cursor: pointer;
             float: right;
             font-size: 18px;
-            padding: 0 10px;
             text-align: center;
-
-            &.sort {
-                cursor: grab;
-            }
 
             &:hover {
                 color: @m-blue;

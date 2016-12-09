@@ -74,9 +74,10 @@
       });
     }
 
-    function deleteChallenge(challengeId) {
+    function deleteChallenge(competitionId, challengeId) {
       return $http.delete('/api/challenges/delete',  {
         params: {
+          competitionId: competitionId,
           challengeId: challengeId
         }
       });

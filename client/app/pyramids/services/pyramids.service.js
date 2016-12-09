@@ -9,6 +9,7 @@
       getPyramids: getPyramids,
       createPyramid: createPyramid,
       updatePyramid: updatePyramid,
+      deletePyramid: deletePyramid,
       swapPositions: swapPositions,
       addPlayerToPyramid: addPlayerToPyramid,
       addPlayerToPyramidRequest: addPlayerToPyramidRequest,
@@ -65,6 +66,14 @@
     function updatePyramid(pyramid) {
       return $http.post('/api/pyramids/update', {
         pyramid: pyramid
+      });
+    }
+
+    function deletePyramid(competitionId) {
+      return $http.delete('/api/pyramids/delete',  {
+        params: {
+          competitionId: competitionId
+        }
       });
     }
 

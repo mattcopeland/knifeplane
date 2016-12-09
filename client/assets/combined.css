@@ -7315,22 +7315,22 @@ body {
   padding: 0;
 }
 .pyramid-players li {
+  cursor: pointer;
   padding: 5px 10px;
   position: relative;
 }
 .pyramid-players li:hover {
   background-color: #cacaca;
 }
+.pyramid-players li.sortable {
+  cursor: -webkit-grab;
+  cursor: grab;
+}
 .pyramid-players li i {
   cursor: pointer;
   float: right;
   font-size: 18px;
-  padding: 0 10px;
   text-align: center;
-}
-.pyramid-players li i.sort {
-  cursor: -webkit-grab;
-  cursor: grab;
 }
 .pyramid-players li i:hover {
   color: #2196F3;
@@ -7438,11 +7438,22 @@ body {
   display: inline-block;
   margin: 10px 0 10px 10px;
   padding: 10px;
+  position: relative;
   text-align: center;
   width: 200px;
 }
 .completed-challenges .card-body .challenge-result:last-child {
   margin-right: 10px;
+}
+.completed-challenges .card-body .challenge-result i {
+  cursor: pointer;
+  font-size: 18px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+.completed-challenges .card-body .challenge-result i:hover {
+  color: #2196F3;
 }
 .completed-challenges .card-body .challenge-result .player {
   font-size: 12px;

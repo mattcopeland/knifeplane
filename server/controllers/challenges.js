@@ -68,9 +68,13 @@ exports.deleteActiveChallengeByCompetitionByPlayer = function (req, res) {
 };
 
 exports.deleteChallenge = function (req, res) {
+  var challengeDetails = {
+    competitionId: req.query.competitionId
+  };
   Challenge.findOneAndRemove({
     _id: req.query.challengeId
   }).exec(function () {
+    websockets.broadcast('challenge_deleted', challengeDetails);
     res.send('deleted');
   });
 };

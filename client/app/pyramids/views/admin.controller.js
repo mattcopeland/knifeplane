@@ -6,6 +6,7 @@
     var vm = this;
     vm.competitionId = null;
     vm.updatePyramidOpenStatus = updatePyramidOpenStatus;
+    vm.deletePyramid = deletePyramid;
 
     activate();
 
@@ -22,6 +23,7 @@
       pyramidsService.getPyramid(vm.competitionId).then(function (pyramid) {
         // Check to see if this user is an owner of this competition
         if (pyramid.data && _.some(pyramid.data.owners, ['_id', identityService.currentUser._id])) {
+          vm.isOwner = true;
           // Display the players in the proper order
           pyramid.data.players = $filter('orderBy')(pyramid.data.players, 'position');
           vm.pyramid = pyramid.data;
@@ -38,6 +40,23 @@
         updatedPyramid.open = vm.pyramid.open;
         pyramidsService.updatePyramid(updatedPyramid);
       });      
+    }
+
+    function deletePyramid() {
+      swal({
+        title: 'Delete Competition?',
+        text: 'This can not be undone',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Delete',
+        cancelButtonText: 'Nevermind',
+        closeOnConfirm: true,
+        closeOnCancel: true
+      }, function () {
+        pyramidsService.deletePyramid(vm.competitionId).then(function () {
+          $state.go('pyramids.myPyramids');
+        });
+      });
     }
 
     // Watch for websocket event
@@ -85,6 +104,14 @@
       if (vm.competitionId === challengeDetails.competitionId) {
         notifyService.info(challengeDetails.description);
         refreshPyramid();
+      }
+    });
+
+    // Watch for websocket event
+    $scope.$on('ws:pyramid_deleted', function (_, challengeDetails) {
+      if (vm.competitionId === challengeDetails.competitionId) {
+        notifyService.info('The competition was deleted by the owner');
+        $state.go('pyramids.myPyramids');
       }
     });
   }

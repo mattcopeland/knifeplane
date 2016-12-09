@@ -4,6 +4,7 @@
     </div>
     <div class="card-body c-overflow" scrollaxis="x">
         <div class="challenge-result bg-app-gray" ng-repeat="challenge in vm.challenges" ng-if="vm.challenges.length > 0">
+            <i class="zmdi zmdi-close-circle-o" ng-click="vm.deleteChallenge(challenge._id, $index)" ng-if="vm.allowDelete"></i>
             <div class="player winner">{{challenge[challenge.winner].firstName}} {{challenge[challenge.winner].lastName}}</div>
             <div class="action">defeated</div>
             <div class="player">{{challenge[challenge.loser].firstName}} {{challenge[challenge.loser].lastName}}</div>
