@@ -7315,28 +7315,34 @@ body {
   padding: 0;
 }
 .pyramid-players li {
+  display: table;
   cursor: pointer;
   padding: 5px 10px;
-  position: relative;
+  width: 100%;
 }
 .pyramid-players li:hover {
   background-color: #cacaca;
 }
 .pyramid-players li.sortable {
-  cursor: -webkit-grab;
-  cursor: grab;
+  cursor: default;
+}
+.pyramid-players li.sortable [sv-handle] {
+  cursor: move;
 }
 .pyramid-players li i {
   cursor: pointer;
-  float: right;
+  display: table-cell;
   font-size: 18px;
   text-align: center;
+  width: 30px;
 }
 .pyramid-players li i:hover {
   color: #2196F3;
 }
 .pyramid-players li span {
-  display: inline-block;
+  display: table-cell;
+}
+.pyramid-players li span.position {
   font-weight: bold;
   width: 17px;
 }

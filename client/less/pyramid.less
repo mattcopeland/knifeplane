@@ -105,21 +105,29 @@
     overflow-y: auto;
     padding: 0;
     li {
+        display: table;
         cursor: pointer;
         padding: 5px 10px;
-        position: relative;
+        width: 100%;
+        
         &:hover {
             background-color: #cacaca;
         }
+
         &.sortable {
-            cursor: grab;
+            cursor: default;
+
+            [sv-handle] {
+                cursor: move;
+            }
         }
 
         i {
             cursor: pointer;
-            float: right;
+            display: table-cell;
             font-size: 18px;
             text-align: center;
+            width: 30px;
 
             &:hover {
                 color: @m-blue;
@@ -127,9 +135,12 @@
         }
         
         span {
-            display: inline-block;
-            font-weight: bold;
-            width: 17px;
+            display: table-cell;
+
+            &.position {
+                font-weight: bold;
+                width: 17px;
+            }
         }
     }
 }

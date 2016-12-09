@@ -30,7 +30,7 @@
                         <label>Available Players</label>
                         <ul class="pyramid-players">
                             <li ng-repeat="player in vm.availablePlayers" ng-click="vm.addPlayer(player)">
-                                {{player.firstName}} {{player.lastName}}
+                                <span class="name">{{player.firstName}} {{player.lastName}}</span>
                             </li>
                         </ul>
                     </div>
@@ -42,7 +42,8 @@
                         <label>Challenge Players</label>
                         <ul class="pyramid-players added-players" sv-root sv-part="vm.addedPlayers" sv-on-sort="vm.reorderPlayers()">
                             <li ng-repeat="player in vm.addedPlayers" class="sortable" ng-class="'added-player' + ($index + 1)" sv-element>
-                                <span class="position">{{player.position}}</span> {{player.firstName}} {{player.lastName}}
+                                <span class="position">{{player.position}}</span>
+                                <span class="name" sv-handle>{{player.firstName}} {{player.lastName}}</span>
                                 <i class="zmdi zmdi-close-circle-o" ng-click="vm.removePlayer(player, $index)"></i>
                             </li>
                         </ul>
