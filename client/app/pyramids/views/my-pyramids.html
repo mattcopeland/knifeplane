@@ -10,6 +10,5 @@
             <p>Create a new pyramid or add yourself to an existing one.</p>
         </div>
     </div>
-
-    <div kp-pyramid-compact type="user"></div>
+    <div ng-repeat="pyramid in vm.pyramids" kp-pyramid-compact pyramid="pyramid"></div>
 </div>

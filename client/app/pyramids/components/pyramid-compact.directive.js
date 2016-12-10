@@ -12,7 +12,7 @@
       controllerAs: 'vm',
       restrict: 'A',
       scope: {
-        type: '@',
+        pyramid: '=',
 
       },
       templateUrl: '/pyramids/components/pyramid-compact.html'
@@ -21,22 +21,10 @@
   }
 
   /* @ngInject */
-  function ctrlFunc(pyramidsService, identityService) {
-    var vm = this;
-    vm.pyramids = null;
+  function ctrlFunc() {
 
     activate();
 
-    function activate() {
-      if (vm.type === 'user') {
-        pyramidsService.getPyramidsForUser(identityService.currentUser._id).then(function (pyramids) {
-          vm.pyramids = pyramids.data;
-        });
-      } else {
-        pyramidsService.getPyramids().then(function (pyramids) {
-          vm.pyramids = pyramids.data;
-        });
-      }
-    }
+    function activate() {}
   }
 })();

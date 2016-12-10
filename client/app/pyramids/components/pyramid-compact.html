@@ -1,18 +1,22 @@
-<div class="row" ng-if="vm.pyramids.length > 0">
-    <div class="col-sm-3" ng-repeat="pyramid in vm.pyramids">
+<div class="row">
+    <div class="col-sm-4">
         <div class="card">
             <div class="card-header ch-alt">
-                <h2>{{pyramid.name}}</h2>
-                <a ui-sref="pyramids.view({competitionId: pyramid._id})" class="btn bgm-blue btn-float waves-effect">
+                <h2>{{vm.pyramid.name}}</h2>
+                <a ui-sref="pyramids.view({competitionId: vm.pyramid._id})" class="btn bgm-blue btn-float waves-effect">
                     <i class="zmdi zmdi-triangle-up"></i>
                 </a>
             </div>
             <div class="card-body card-padding-sm">
-                <div><i class="zmdi zmdi-accounts" uib-tooltip="# of Players" tooltip-placement="top"></i> {{pyramid.players.length}}</div>
+                <div><i class="zmdi zmdi-accounts" uib-tooltip="{{vm.pyramid.players.length}} players in this competition" tooltip-placement="right"></i> {{vm.pyramid.players.length}}</div>
+                <div ng-if="vm.pyramid.activeChallenge">
+                    <i class="zmdi zmdi-notifications-active c-red" uib-tooltip="You have an active challenge" tooltip-placement="right"></i>
+                    <div class="badge pull-right" ng-if="vm.pyramid.activeChallenge.expires">
+                        <i class="zmdi zmdi-time"></i>
+                        <timer interval="1000" countdown="vm.pyramid.activeChallenge.expires" max-time-unit="'hour'">{{hours}}:{{mminutes}}:{{sseconds}}</timer>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="card" ng-if="vm.pyramids.length === 0">
-    <div class="card-body card-padding-sm">No active competitions</div>
 </div>
