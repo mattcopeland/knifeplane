@@ -17,20 +17,53 @@
   }
 
   /* @ngInject */
-  function ctrlFunc(sidebarService, identityService, authService) {
-    var vm = this;
-    vm.indentity = identityService;
-    vm.logout = logout;
-    vm.sidebarStatus = sidebarService.getSidebarStatus();
-    vm.toggleSidebar = toggleSidebar;
+  function ctrlFunc($scope, sidebarService, identityService, authService, notificationsService) {
+    var headerCtrl = this;
+    headerCtrl.indentity = identityService;
+    headerCtrl.logout = logout;
+    headerCtrl.sidebarStatus = sidebarService.getSidebarStatus();
+    headerCtrl.toggleSidebar = toggleSidebar;
+    headerCtrl.clearNotification = clearNotification;
+    headerCtrl.clearAllNotifications = clearAllNotifications;
+    headerCtrl.notifications = [];
+
+    activate();
+
+    function activate() {
+      getActiveNotifications();
+    }
+
+    function getActiveNotifications() {
+      notificationsService.getActiveNotificationsByPlayer(headerCtrl.indentity.currentUser._id).then(function (notifications) {
+        headerCtrl.notifications = notifications.data;
+      });
+    }
+
+    function clearNotification(clearNotification, index) {
+      notificationsService.clearNotification(clearNotification).then(function () {
+        headerCtrl.notifications.splice(index, 1);
+      });
+    }
+
+    function clearAllNotifications() {
+      notificationsService.clearAllNotificationsByPlayer(headerCtrl.indentity.currentUser._id).then(function () {
+        headerCtrl.notifications = [];
+      });
+    }
 
     function toggleSidebar() {
-      vm.sidebarStatus.left = !vm.sidebarStatus.left;
-      sidebarService.setSidebarStatus(vm.sidebarStatus.left);
+      sidebarService.setSidebarStatus(!headerCtrl.sidebarStatus.left);
     }
 
     function logout() {
       authService.logout();
     }
+
+    // Watch for websocket event
+    $scope.$on('ws:notification_created', function (_, notificationDetails) {
+      if (notificationDetails.userId === headerCtrl.indentity.currentUser._id) {
+        getActiveNotifications();
+      }
+    });
   }
 })();

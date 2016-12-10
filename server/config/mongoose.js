@@ -1,7 +1,9 @@
 var mongoose = require('mongoose'),
   userModel = require('../models/User'),
   pyramidModel = require('../models/Pyramid'),
-  challengeModel = require('../models/Challenge');
+  challengeModel = require('../models/Challenge'),
+  notificationsModel = require('../models/Notification');
+
 
 module.exports = function (config) {
   mongoose.Promise = global.Promise;

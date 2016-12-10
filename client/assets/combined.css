@@ -7195,11 +7195,23 @@ body {
           animation-delay: .1s;
 }
 #content.ng-leave {
-  -webkit-animation: fadeOut 0.2s ease both;
-          animation: fadeOut 0.2s ease both;
+  -webkit-animation: fadeOut .2s ease both;
+          animation: fadeOut .2s ease both;
 }
 .ng-leave.ng-leave-active {
   display: none !important;
+}
+.animate-zoom.ng-enter {
+  -webkit-animation: zoomIn .3s ease both;
+          animation: zoomIn .3s ease both;
+}
+.animate-zoom.ng-leave {
+  -webkit-animation: zoomOut .3s ease both;
+          animation: zoomOut .3s ease both;
+}
+#content.ng-leave.ng-leave-active,
+.animate-zoom.ng-leave.ng-leave-active {
+  display: block !important;
 }
 .btns-group .btn {
   margin-left: 5px;
@@ -11353,7 +11365,6 @@ h6 small,
   padding: 0;
 }
 .top-menu > li .dropdown-menu-lg .lv-body {
-  min-height: 295px;
   overflow-x: hidden;
 }
 @media (min-width: 768px) {

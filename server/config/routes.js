@@ -1,7 +1,8 @@
 var auth = require('./auth'),
   users = require('../controllers/users'),
   pyramids = require('../controllers/pyramids'),
-  challenges = require('../controllers/challenges');
+  challenges = require('../controllers/challenges'),
+  notifications = require('../controllers/notifications');
   
 module.exports = function (app) {
   app.get('/api/users', auth.requiresApiLogin, users.getUsers);
@@ -33,6 +34,10 @@ module.exports = function (app) {
   app.delete('/api/challenges/delete', auth.requiresApiLogin, challenges.deleteChallenge);
   app.post('/api/challenges/create', auth.requiresApiLogin, challenges.createChallenge);
   app.post('/api/challenges/complete', challenges.completeChallenge);
+
+  app.get('/api/notifications/', auth.requiresApiLogin, notifications.getActiveNotificationsByPlayer);
+  app.put('/api/notification/clear', auth.requiresApiLogin, notifications.clearNotification);
+  app.put('/api/notifications/clear', auth.requiresApiLogin, notifications.clearNotificationsByPlayer);
 
   app.post('/login', auth.authenticate);
 

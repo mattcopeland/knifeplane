@@ -18,11 +18,24 @@ body {
 }
 
 #content.ng-leave {
-  animation: fadeOut .2s ease both
+  animation: fadeOut .2s ease both;
 }
 
 .ng-leave.ng-leave-active {
   display: none !important;
+}
+
+.animate-zoom.ng-enter {
+    animation: zoomIn .3s ease both;
+}
+
+.animate-zoom.ng-leave {
+    animation: zoomOut .3s ease both;
+}
+
+#content.ng-leave.ng-leave-active,
+.animate-zoom.ng-leave.ng-leave-active {
+  display: block !important;
 }
 
 .btns-group {
