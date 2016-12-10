@@ -55,6 +55,7 @@ exports.getCompletedChallengesByCompetition = function (req, res) {
 exports.deleteActiveChallengeByCompetitionByPlayer = function (req, res) {
   Challenge.findOneAndRemove({
     competitionId: req.query.competitionId,
+    complete: false,
     '$or': [
       {
         'challenger._id': req.query.playerId

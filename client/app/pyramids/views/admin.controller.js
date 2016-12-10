@@ -46,7 +46,7 @@
       swal({
         title: 'Delete Competition?',
         text: 'This can not be undone',
-        type: 'warning',
+        type: 'error',
         showCancelButton: true,
         confirmButtonText: 'Delete',
         cancelButtonText: 'Nevermind',

@@ -20,18 +20,33 @@
   }
 
   /* @ngInject */
-  function ctrlFunc($filter, pyramidsService, challengesService) {
+  function ctrlFunc($scope, $filter, pyramidsService, challengesService, userService) {
     var removedPlayers = [];
     var vm = this;
+    vm.availablePlayers = [];
     vm.updatePyramid = updatePyramid;
     vm.cancelUpdate = cancelUpdate;
     vm.reorderPlayers = reorderPlayers;
     vm.removePlayer = removePlayer;
+    vm.addPlayer = addPlayer;
     vm.disableSubmit = true;
 
     activate();
 
-    function activate() {}
+    function activate() {
+      getAvailablePlayers();
+    }
+
+    function getAvailablePlayers() {
+      userService.getAllUsers().then(function (users) {
+        _.forEach(vm.pyramid.players, function (pyramidPlayer) {
+          _.remove(users.data, function (availablePlayer){
+            return pyramidPlayer._id === availablePlayer._id;
+          });
+        });
+        vm.availablePlayers = users.data;
+      });
+    }
 
     // Perform the updates that were requsted
     function updatePyramid() {
@@ -50,6 +65,7 @@
         vm.pyramid = pyramid.data;
         vm.disableSubmit = true;
       });
+      getAvailablePlayers();
     }
 
     // Reorder the players based on the drag-drop
@@ -62,11 +78,32 @@
       vm.disableSubmit = false;
     }
 
-    // Queue up the players to be removed and remove them from the display
-    function removePlayer(player, playerIndex) {
+    /**
+     * Removes a player from the pyramid
+     * Queue up the players to be removed and remove them from the display
+     * @param  {object} player
+     */
+    function removePlayer(player) {
       removedPlayers.push(player);
-      vm.pyramid.players.splice(playerIndex, 1);
+      vm.availablePlayers.push(_.remove(vm.pyramid.players, {_id: player._id})[0]);
       reorderPlayers();
     }
+
+    /**
+     * Adds a player to the new pyramid
+     * @param  {object} player
+     */
+    function addPlayer(player) {
+      player.position = vm.pyramid.players.length + 1;
+      vm.pyramid.players.push(_.remove(vm.availablePlayers, {_id: player._id})[0]);
+      vm.disableSubmit = false;
+    }
+
+    // Watch for websocket event
+    $scope.$on('ws:pyramid_updated', function (_, challengeDetails) {
+      if (vm.pyramid._id === challengeDetails.competitionId) {
+        getAvailablePlayers();
+      }
+    });
   }
 })();

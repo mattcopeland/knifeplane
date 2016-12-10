@@ -12,20 +12,37 @@
                     <i class="zmdi zmdi-trending-up"></i>
                 </a>
             </li>
-            <li>
-                <a href="" uib-tooltip="Delete Pyramid" tooltip-placement="bottom" ng-click="vm.deletePyramid()">
-                    <i class="zmdi zmdi-minus-circle-outline"></i>
-                </a>
-            </li>
         </ul>
     </div>
     <div kp-completed-challeneges competition-id="{{vm.competitionId}}" allow-delete="vm.isOwner"></div>
     <div kp-pending-players pyramid="vm.pyramid"></div>
     <div class="row">
-        <div class="col-sm-6">
-            <div kp-update-players pyramid="vm.pyramid"></div>
+        <div class="col-sm-3 col-md-3">
+            <div class="card">
+                <div class="card-header ch-alt">
+                    <h2>Delete Pyramid</h2>
+                </div>
+                <div class="card-body card-padding-sm text-center">
+                    <button class="btn btn-danger" ng-click="vm.deletePyramid()">Delete</button>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-4 col-md-3">
+            <div class="card">
+                <div class="card-header ch-alt">
+                    <h2>Player Joins</h2>
+                </div>
+                <div class="card-body card-padding-sm text-center">
+                    <div class="toggle-switch" data-ts-color="blue">
+                        <label for="open" class="ts-label" uib-tooltip="Requires owner approval to join" tooltip-placement="top">Closed</label>
+                        <input id="open" type="checkbox" hidden="hidden" ng-model="vm.pyramid.open" ng-change="vm.updatePyramidOpenStatus()">
+                        <label for="open" class="ts-helper"></label>
+                        <label for="open" class="ts-label" uib-tooltip="Anyone can join" tooltip-placement="top">Open</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-5 col-md-6">
             <div class="card">        
                 <div class="card-header ch-alt">
                     <h2>Owners</h2>
@@ -38,12 +55,7 @@
                     </ul>
                 </div> 
             </div>
-            <div class="toggle-switch" data-ts-color="blue">
-                <label for="open" class="ts-label" uib-tooltip="Requires owner approval to join" tooltip-placement="top">Closed</label>
-                <input id="open" type="checkbox" hidden="hidden" ng-model="vm.pyramid.open" ng-change="vm.updatePyramidOpenStatus()">
-                <label for="open" class="ts-helper"></label>
-                <label for="open" class="ts-label" uib-tooltip="Anyone can join" tooltip-placement="top">Open</label>
-            </div>
         </div>
     </div>
+    <div kp-update-players pyramid="vm.pyramid"></div>
 </div>

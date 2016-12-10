@@ -7284,31 +7284,9 @@ body {
 .pyramid .pyramid-block.unavailable {
   border-top: 3px solid #F44336;
 }
-.create-pyramid-form .pyramid-players {
-  height: 150px;
-}
-.create-pyramid-form .pyramid-players li.ng-enter {
-  -webkit-animation: slideInRight 0.2s ease both;
-          animation: slideInRight 0.2s ease both;
-}
-.create-pyramid-form .pyramid-players li.ng-leave {
-  -webkit-animation: slideOutRight 0.2s ease both;
-          animation: slideOutRight 0.2s ease both;
-}
-.create-pyramid-form .pyramid-players.added-players {
-  height: auto;
-  min-height: 150px;
-}
-.create-pyramid-form .pyramid-players.added-players li.ng-enter {
-  -webkit-animation: slideInLeft 0.2s ease both;
-          animation: slideInLeft 0.2s ease both;
-}
-.create-pyramid-form .pyramid-players.added-players li.ng-leave {
-  -webkit-animation: slideOutLeft 0.2s ease both;
-          animation: slideOutLeft 0.2s ease both;
-}
 .pyramid-players {
   border: 1px solid #e0e0e0;
+  height: 150px;
   list-style-type: none;
   overflow-x: hidden;
   overflow-y: auto;
@@ -7322,6 +7300,14 @@ body {
 }
 .pyramid-players li:hover {
   background-color: #cacaca;
+}
+.pyramid-players li.ng-enter {
+  -webkit-animation: slideInRight 0.2s ease both;
+          animation: slideInRight 0.2s ease both;
+}
+.pyramid-players li.ng-leave {
+  -webkit-animation: slideOutRight 0.2s ease both;
+          animation: slideOutRight 0.2s ease both;
 }
 .pyramid-players li.sortable {
   cursor: default;
@@ -7345,6 +7331,18 @@ body {
 .pyramid-players li span.position {
   font-weight: bold;
   width: 17px;
+}
+.pyramid-players.added-players {
+  height: auto;
+  min-height: 150px;
+}
+.pyramid-players.added-players li.ng-enter {
+  -webkit-animation: slideInLeft 0.2s ease both;
+          animation: slideInLeft 0.2s ease both;
+}
+.pyramid-players.added-players li.ng-leave {
+  -webkit-animation: slideOutLeft 0.2s ease both;
+          animation: slideOutLeft 0.2s ease both;
 }
 .added-player1,
 .added-player4,
