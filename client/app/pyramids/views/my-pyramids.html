@@ -10,5 +10,7 @@
             <p>Create a new pyramid or add yourself to an existing one.</p>
         </div>
     </div>
-    <div ng-repeat="pyramid in vm.pyramids" kp-pyramid-compact pyramid="pyramid"></div>
+    <div class="row" vertilize-container>
+        <div class="col-sm-4" ng-repeat="pyramid in vm.pyramids" kp-pyramid-compact pyramid="pyramid" vertilize></div>
+    </div>
 </div>

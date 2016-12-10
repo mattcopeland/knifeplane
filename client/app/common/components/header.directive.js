@@ -34,9 +34,11 @@
     }
 
     function getActiveNotifications() {
-      notificationsService.getActiveNotificationsByPlayer(headerCtrl.indentity.currentUser._id).then(function (notifications) {
-        headerCtrl.notifications = notifications.data;
-      });
+      if (identityService.isAuthenticated()) {
+        notificationsService.getActiveNotificationsByPlayer(identityService.currentUser._id).then(function (notifications) {
+          headerCtrl.notifications = notifications.data;
+        });
+      }
     }
 
     function clearNotification(clearNotification, index) {
@@ -46,7 +48,7 @@
     }
 
     function clearAllNotifications() {
-      notificationsService.clearAllNotificationsByPlayer(headerCtrl.indentity.currentUser._id).then(function () {
+      notificationsService.clearAllNotificationsByPlayer(identityService.currentUser._id).then(function () {
         headerCtrl.notifications = [];
       });
     }
@@ -61,7 +63,7 @@
 
     // Watch for websocket event
     $scope.$on('ws:notification_created', function (_, notificationDetails) {
-      if (notificationDetails.userId === headerCtrl.indentity.currentUser._id) {
+      if (identityService.isAuthenticated() && notificationDetails.userId === identityService.currentUser._id) {
         getActiveNotifications();
       }
     });

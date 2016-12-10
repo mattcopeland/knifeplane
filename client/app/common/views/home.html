@@ -13,5 +13,7 @@
     <div class="block-header">
         <h2>Active Competitions</h2>
     </div>
-    <div ng-repeat="pyramid in vm.pyramids" kp-pyramid-compact pyramid="pyramid"></div>
+    <div class="row">
+        <div class="col-sm-4" ng-repeat="pyramid in vm.pyramids" kp-pyramid-compact pyramid="pyramid"></div>
+    </div>
 </div>

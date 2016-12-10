@@ -7,5 +7,6 @@ angular.module('app', [
   'localytics.directives',
   'timer',
   'LocalStorageModule',
-  'angular-sortable-view'
+  'angular-sortable-view',
+  'angular.vertilize'
 ]);
