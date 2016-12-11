@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var notificationSchema = mongoose.Schema({
+var alertSchema = mongoose.Schema({
   userId: {
     type: String,
     required: '{PATH} is required!'
@@ -8,8 +8,8 @@ var notificationSchema = mongoose.Schema({
   competitionId: {
     type: String
   },
-  description: {
-    type: String,
+  details: {
+    type: Object,
     required: '{PATH} is required!'
   },
   cleared: {
@@ -22,4 +22,4 @@ var notificationSchema = mongoose.Schema({
   }
 });
 
-mongoose.model('Notification', notificationSchema);
+mongoose.model('Alert', alertSchema);

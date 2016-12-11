@@ -9,6 +9,6 @@
             </li>
         </ul>
     </div>
-    <div kp-completed-challeneges competition-id="{{vm.competitionId}}"></div>
-    <div ng-repeat="player in vm.pyramid.players | orderObjectBy: 'position'" kp-player-overall-results competition-id="{{vm.competitionId}}" player="player"></div>
+    <div kp-completed-challeneges competition-id="{{vm.competitionId}}" challenges="vm.challenges"></div>
+    <div ng-repeat="player in vm.pyramid.players | orderObjectBy: 'position'" kp-player-overall-results player="player"></div>
 </div>

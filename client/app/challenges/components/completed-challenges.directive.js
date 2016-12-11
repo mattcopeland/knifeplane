@@ -14,7 +14,7 @@
       scope: {
         competitionId: '@',
         allowDelete: '=',
-        limit: '@'
+        challenges: '='
       },
       templateUrl: '/challenges/components/completed-challenges.html'
     };
@@ -22,7 +22,7 @@
   }
 
   /* @ngInject */
-  function ctrlFunc($scope, $state, challengesService, notifyService) {
+  function ctrlFunc($scope, $state, challengesService) {
     var vm = this;
     vm.challenges = [];
     vm.deleteChallenge = deleteChallenge;
@@ -30,26 +30,24 @@
     activate();
 
     function activate() {
-      getCompletedChallenges();
+      $scope.$watch('vm.challenges', function() {
+        if (vm.challenges && vm.challenges.length > 0) {
+          displayCompletedChallenges();
+        }
+      });
     }
 
-    function getCompletedChallenges() {
-      vm.challenges = [];
-      challengesService.getCompletedChallengesByCompetition(vm.competitionId, vm.limit).then(function (challenges) {
-        if (challenges.data.length > 0) {
-          vm.challenges = challenges.data;
-          _.forEach(vm.challenges, function (challenge) {
-            challenge.loser = challenge.winner === 'challenger' ? 'opponent' : 'challenger';
-            challenge.whenCompleted = moment(challenge.completed).calendar(null, {
-              sameDay: '[Today]',
-              nextDay: '[Tomorrow]',
-              nextWeek: 'dddd',
-              lastDay: '[Yesterday]',
-              lastWeek: '[Last] dddd',
-              sameElse: 'DD/MM/YYYY'
-            });
-          });
-        }
+    function displayCompletedChallenges() {
+      _.forEach(vm.challenges, function (challenge) {
+        challenge.loser = challenge.winner === 'challenger' ? 'opponent' : 'challenger';
+        challenge.whenCompleted = moment(challenge.completed).calendar(null, {
+          sameDay: '[Today]',
+          nextDay: '[Tomorrow]',
+          nextWeek: 'dddd',
+          lastDay: '[Yesterday]',
+          lastWeek: '[Last] dddd',
+          sameElse: 'DD/MM/YYYY'
+        });
       });
     }
 
@@ -58,12 +56,5 @@
         vm.challenges.splice($index, 1);
       });
     }
-
-    // Watch for websocket event
-    $scope.$on('ws:pyramid_updated', function (_, challengeDetails) {
-      if (vm.competitionId === challengeDetails.competitionId) {
-        getCompletedChallenges();
-      }
-    });
   }
 })();

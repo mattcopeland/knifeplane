@@ -21,24 +21,24 @@
             <li class="dropdown" uib-dropdown ng-if="headerCtrl.indentity.isAuthenticated()">
                 <a href="" uib-dropdown-toggle>
                     <i class="tm-icon zmdi zmdi-notifications"></i>
-                    <i class="tmn-counts animate-zoom" ng-if="headerCtrl.notifications.length > 0">{{headerCtrl.notifications.length}}</i>
+                    <i class="tmn-counts animate-zoom" ng-if="headerCtrl.alerts.length > 0">{{headerCtrl.alerts.length}}</i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg pull-right">
                     <div class="listview" id="notifications">
-                        <div class="lv-header">Notifications
+                        <div class="lv-header">Alerts
                             <ul class="actions">
-                                <li><a href="" ng-click="headerCtrl.clearAllNotifications()" ng-if="headerCtrl.notifications.length > 0"><i class="zmdi zmdi-check-all"></i></a></li>
+                                <li><a href="" ng-click="headerCtrl.clearAllAlerts()" ng-if="headerCtrl.alerts.length > 0"><i class="zmdi zmdi-check-all"></i></a></li>
                             </ul>
                         </div>
                         <div class="lv-body">
-                            <a ui-sref="pyramids.view({competitionId: notification.competitionId})" class="lv-item" ng-repeat="notification in headerCtrl.notifications" ng-click="headerCtrl.clearNotification(notification._id, $index)">
+                            <a ui-sref="pyramids.view({competitionId: alert.competitionId})" class="lv-item" ng-repeat="alert in headerCtrl.alerts" ng-click="headerCtrl.clearAlert(alert._id, $index)">
                                 <div class="media">
                                     <div class="media-body">
-                                        <div class="lv-title">New Challenge</div><small class="lv-small">{{notification.description}}</small>
+                                        <div class="lv-title">New Challenge</div><small class="lv-small">{{alert.details.description}}</small>
                                     </div>
                                 </div>
                             </a> 
-                            <div class="p-20" ng-if="headerCtrl.notifications.length === 0">Nothing to see here...</div>                           
+                            <div class="p-20" ng-if="headerCtrl.alerts.length === 0">Nothing to see here...</div>                           
                         </div>
                     </div>
                 </div>

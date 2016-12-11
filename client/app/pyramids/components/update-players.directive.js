@@ -34,7 +34,11 @@
     activate();
 
     function activate() {
-      getAvailablePlayers();
+      $scope.$watch('vm.pyramid', function () {
+        if (vm.pyramid) {
+          getAvailablePlayers();
+        }
+      });
     }
 
     function getAvailablePlayers() {
@@ -98,12 +102,5 @@
       vm.pyramid.players.push(_.remove(vm.availablePlayers, {_id: player._id})[0]);
       vm.disableSubmit = false;
     }
-
-    // Watch for websocket event
-    $scope.$on('ws:pyramid_updated', function (_, challengeDetails) {
-      if (vm.pyramid._id === challengeDetails.competitionId) {
-        getAvailablePlayers();
-      }
-    });
   }
 })();

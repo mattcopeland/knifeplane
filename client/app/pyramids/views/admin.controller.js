@@ -2,7 +2,7 @@
   'use strict';
   angular.module('app').controller('AdminCtrl', AdminCtrl);
 
-  function AdminCtrl($scope, $state, $stateParams, $filter, pyramidsService, identityService, notifyService) {
+  function AdminCtrl($scope, $state, $stateParams, $filter, pyramidsService, identityService, notifyService, challengesService) {
     var vm = this;
     vm.competitionId = null;
     vm.updatePyramidOpenStatus = updatePyramidOpenStatus;
@@ -30,6 +30,9 @@
         } else {
           $state.go('pyramids.myPyramids');
         }
+      });
+      challengesService.getCompletedChallengesByCompetition(vm.competitionId).then(function (challenges) {
+        vm.challenges = challenges.data;
       });
     }
 

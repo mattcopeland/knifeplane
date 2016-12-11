@@ -10,7 +10,7 @@
       templateUrl: '/pyramids/components/pyramid.html',
       replace: true,
       scope: {
-        competitionId: '@'
+        pyramid: '='
       },
       controller: ctrlFunc,
       controllerAs: 'vm',
@@ -24,7 +24,7 @@
   function ctrlFunc($scope, $state, pyramidsService, $filter, notifyService, identityService, challengesService) {
     var maxLevels = 10;
     var vm = this;
-    vm.pyramid = {};
+    vm.competitionId = null;
     vm.breakPoints = [];
     vm.levels = [];
     vm.numberOfBlocks = 0;
@@ -41,21 +41,21 @@
     vm.pyramidMenuToggle = false;
     vm.addCurrentUserToPyramid = addCurrentUserToPyramid;
     vm.confirmRemoveCurrentUserFromPyramid = confirmRemoveCurrentUserFromPyramid;
+    vm.playerClick = playerClick;
     vm.numberOfRealPlayers = 0;
     vm.maxPlayers = 0;
 
     activate();
 
     function activate() {
-      pyramidsService.getPyramid(vm.competitionId).then(function (pyramid) {
-        // Determine the maximum number of players based on the maximum number of levels
-        for (var i = maxLevels; i > 0; --i) {
-          vm.maxPlayers += i;
-        }
+      // Determine the maximum number of players based on the maximum number of levels
+      for (var i = maxLevels; i > 0; --i) {
+        vm.maxPlayers += i;
+      }
 
-        if (pyramid.data) {
-          vm.pyramid = pyramid.data;
-
+      $scope.$watch('vm.pyramid', function () {
+        if (vm.pyramid) {
+          vm.competitionId = vm.pyramid._id;
           orderPlayers();
           getPlayersStatus();
           assignLevelsToPlayers();
@@ -190,13 +190,16 @@
 
     // Find all the players that are available to be challenged by this user
     function findAvailableChallenges() {
-      var levelAbove = vm.currentUserPlayer.level > 1 ? vm.currentUserPlayer.level - 1 : null;
-      _.forEach(vm.pyramid.players, function (player) {
-        if (player.level === levelAbove && player.position !== 99 && player.class !== 'unavailable') {
-          vm.availableChallenges = true;
-          player.available = true;
-        }
-      });
+      if (vm.currentUserIsOnPyramid && !vm.hasActiveChallenge) {
+        var levelAbove = vm.currentUserPlayer.level > 1 ? vm.currentUserPlayer.level - 1 : null;
+        _.forEach(vm.pyramid.players, function (player) {
+          if (player.level === levelAbove && player.position !== 99 && player.class !== 'unavailable') {
+            vm.availableChallenges = true;
+            player.available = true;
+            player.class = 'available';
+          }
+        });
+      }
     }
 
     function createChallenge(player) {
@@ -349,6 +352,9 @@
           notifyService.warning('Sorry, this pyramid is full');
         }
       } else {
+        notifyService.warning('Please login to join a competition');
+        $state.previous = 'pyramids.view';
+        $state.prevParams = {'competitionId': vm.competitionId};
         $state.go('login');
       }
     }
@@ -430,16 +436,36 @@
     }
 
     /**
+     * Figure out what the appropriate action is based on the player clicking and the player being clicked
+     */
+    function playerClick(player) {
+      // clicked on empty spot
+      if (player.position === 99 && !vm.currentUserIsOnPyramid) {
+        addCurrentUserToPyramid();
+      }
+      if (vm.currentUserIsOnPyramid && !vm.hasActiveChallenge) {
+        swal({
+          title: 'Challenge Request',
+          text: 'Challenge ' + player.firstName + ' ' + player.lastName + '?',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Send Challenge',
+          cancelButtonText: 'Nevermind',
+          closeOnConfirm: false,
+          closeOnCancel: true
+        }, function () {
+          createChallenge(player);
+          swal('Challenge Sent', player.firstName + ' ' + player.lastName + ' has been notified of the challenge.', 'success');
+        });
+      }
+    }
+
+    /**
      * Refresh the pyramid becasue of an update
      */
     function refreshPyramid() {
       pyramidsService.getPyramid(vm.competitionId).then(function (pyramid) {
         vm.pyramid = pyramid.data;
-        orderPlayers();
-        getPlayersStatus();
-        assignLevelsToPlayers();
-        calculatePyramidBlocks();
-        fillInEmptyBlocks();
       });
     }
 

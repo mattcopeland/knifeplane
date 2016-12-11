@@ -8,39 +8,39 @@
     </div>
     <div class="card-body card-padding-sm">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-sm-4 col-md-2">
                 <div class="p-15 text-center" ng-class="vm.streak.type === 'winning' ? 'bgm-green' : 'bgm-red'">
                     <div class="c-white m-b-5"><span class="text-capitalize">{{vm.streak.type}}</span> Streak</div>
                     <h2 class="m-0 c-white f-300">{{vm.streak.value}}</h2>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-sm-4 col-md-2">
                 <div class="bg-app-gray p-15 text-center">
                     <div class="c-green m-b-5">Total Wins</div>
                     <h2 class="m-0 c-green f-300">{{vm.wins.total}}</h2>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-sm-4 col-md-2">
                 <div class="bg-app-gray p-15 text-center">
                     <div class="c-red m-b-5">Total Loses</div>
                     <h2 class="m-0 c-red f-300">{{vm.loses.total}}</h2>
                 </div>
             </div>
-            <div class="col-md-2 text-center">
+            <div class="col-sm-4 col-md-2 text-center">
                 <div class="bg-app-gray p-10 text-center">
                     <h5>Move Up</h5>
                     <div>Wins: {{vm.wins.asChallenger}}</div>
                     <div>Loses: {{vm.loses.asChallenger}}</div>
                 </div>
             </div>
-            <div class="col-md-2 text-center">
+            <div class="col-sm-4 col-md-2 text-center">
                 <div class="bg-app-gray p-10 text-center">
                     <h5>Defend</h5>
                     <div>Wins: {{vm.wins.asOpponent}}</div>
                     <div>Loses: {{vm.loses.asOpponent}}</div>
                 </div>
             </div>
-            <div class="col-md-2 text-center">
+            <div class="col-sm-4 col-md-2 text-center">
                 <div class="bg-app-gray p-10 text-center">
                     <h5>Forfeit</h5>
                     <div>Wins: {{vm.wins.byForfeit}}</div>

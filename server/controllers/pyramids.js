@@ -1,6 +1,8 @@
 var Pyramid = require('mongoose').model('Pyramid');
 var websockets = require('../websockets');
 var emails = require('./emails');
+var alerts = require('./alerts');
+var _ = require('lodash');
 
 exports.getPyramid = function (req, res) {
   Pyramid.findOne({
@@ -31,6 +33,8 @@ exports.getPyramidsForUser = function (req, res) {
 
 exports.createPyramid = function (req, res) {
   var pyramidData = req.body.pyramid;
+  var alertsArray = [];
+
   Pyramid.create(pyramidData, function (err, pyramid) {
     if (err) {
       res.status(400);
@@ -38,6 +42,19 @@ exports.createPyramid = function (req, res) {
         reason: err.toString()
       });
     }
+    _.forEach(pyramidData.players, function (player) {
+      var alertDetails = {
+        competitionId: pyramid._id,
+        userId: player._id,
+        details: {
+          type: 'new competition',
+          description: 'You have been added to a new competition'
+        }
+      };
+      alertsArray.push(alertDetails);
+    });
+    alerts.createAlerts(alertsArray);
+
     res.send(pyramid);
   });
 };

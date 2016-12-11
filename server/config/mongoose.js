@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
   userModel = require('../models/User'),
   pyramidModel = require('../models/Pyramid'),
   challengeModel = require('../models/Challenge'),
-  notificationsModel = require('../models/Notification');
+  alertsModel = require('../models/Alert');
 
 
 module.exports = function (config) {

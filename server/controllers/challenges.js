@@ -1,7 +1,7 @@
 var Challenge = require('mongoose').model('Challenge');
 var websockets = require('../websockets');
 var emails = require('./emails');
-var notifications = require('./notifications');
+var alerts = require('./alerts');
 
 exports.getChallengesByCompetition = function (req, res) {
   var competitionId = req.query.competitionId;
@@ -111,13 +111,16 @@ exports.createChallenge = function (req, res) {
     competitionId: challengeData.competitionId,
     description: challenger + ' has challenged ' + opponent
   };
-  var notificationDetails = {
+  var alertDetails = {
     userId: challengeData.opponent._id,
     competitionId: challengeData.competitionId,
-    description: challenger + ' has challenged you'
+    details: {
+      type: 'challenge',
+      description: challenger + ' has challenged you'
+    }
   };
   emails.challengeNotification(challengeData, req.get('host'));
-  notifications.createNotification(notificationDetails);
+  alerts.createAlerts([alertDetails]);
   
   Challenge.create(challengeData, function (err, challenge) {
     if (err) {
@@ -157,6 +160,13 @@ exports.completeChallenge = function (req, res, next) {
     opponentId: challengeData.opponent._id,
     description: description
   };
+
+  var alertDetails = {
+    userId: challengeData.opponent._id,
+    competitionId: challengeData.competitionId
+  };
+
+  alerts.clearAlertsOnCompletedChallenge([alertDetails]);
 
   Challenge.findOneAndUpdate({
     '_id': challengeData._id

@@ -2,10 +2,12 @@
   'use strict';
   angular.module('app').controller('StatsCtrl', StatsCtrl);
 
-  function StatsCtrl($scope, $stateParams, $state, pyramidsService, notifyService) {
+  function StatsCtrl($scope, $stateParams, $state, pyramidsService, notifyService, challengesService) {
     var vm = this;
     vm.competitionId = null;
-    vm.pyramid = null;
+    vm.pyramid = {};
+    vm.playersResults = [];
+    vm.challenges = [];
 
     activate();
 
@@ -20,9 +22,18 @@
       pyramidsService.getPyramid(vm.competitionId).then(function (pyramid) {
         if (pyramid.data) {
           vm.pyramid = pyramid.data;
+
+          _.forEach(vm.pyramid.players, function (player) {
+            challengesService.getPlayerResultsByCompetition(vm.competitionId, player._id).then(function (results) {
+              player.results = results.data;
+            });
+          });
         } else {
           $state.go('pyramids.myPyramids');
         }
+      });
+      challengesService.getCompletedChallengesByCompetition(vm.competitionId).then(function (challenges) {
+        vm.challenges = challenges.data;
       });
     }
 

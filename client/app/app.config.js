@@ -2,7 +2,7 @@
   'use strict ';
   angular.module('app').config(configuration);
 
-  function configuration($httpProvider, $uibTooltipProvider) {
+  function configuration($httpProvider, $uibTooltipProvider, $qProvider) {
     //initialize get if not there
     if (!$httpProvider.defaults.headers.get) {
       $httpProvider.defaults.headers.get = {};    
@@ -14,5 +14,6 @@
     $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
 
     $uibTooltipProvider.options({ appendToBody: true });
+    $qProvider.errorOnUnhandledRejections(false);
   }
 })();

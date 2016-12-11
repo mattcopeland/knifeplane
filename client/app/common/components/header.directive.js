@@ -17,39 +17,45 @@
   }
 
   /* @ngInject */
-  function ctrlFunc($scope, sidebarService, identityService, authService, notificationsService) {
+  function ctrlFunc($scope, sidebarService, identityService, authService, alertsService) {
     var headerCtrl = this;
     headerCtrl.indentity = identityService;
     headerCtrl.logout = logout;
     headerCtrl.sidebarStatus = sidebarService.getSidebarStatus();
     headerCtrl.toggleSidebar = toggleSidebar;
-    headerCtrl.clearNotification = clearNotification;
-    headerCtrl.clearAllNotifications = clearAllNotifications;
-    headerCtrl.notifications = [];
+    headerCtrl.clearAlert = clearAlert;
+    headerCtrl.clearAllAlerts = clearAllAlerts;
+    headerCtrl.alerts = [];
 
     activate();
 
     function activate() {
-      getActiveNotifications();
+      getActiveAlerts();
+      $scope.$watch('headerCtrl.indentity.currentUser', function () {
+        if (identityService.isAuthenticated()) {
+          getActiveAlerts();
+        }
+      });
     }
 
-    function getActiveNotifications() {
+    function getActiveAlerts() {
+      headerCtrl.alerts = [];
       if (identityService.isAuthenticated()) {
-        notificationsService.getActiveNotificationsByPlayer(identityService.currentUser._id).then(function (notifications) {
-          headerCtrl.notifications = notifications.data;
+        alertsService.getActiveAlertsByPlayer(identityService.currentUser._id).then(function (alerts) {
+          headerCtrl.alerts = alerts.data;
         });
       }
     }
 
-    function clearNotification(clearNotification, index) {
-      notificationsService.clearNotification(clearNotification).then(function () {
-        headerCtrl.notifications.splice(index, 1);
+    function clearAlert(clearAlert, index) {
+      alertsService.clearAlert(clearAlert).then(function () {
+        headerCtrl.alerts.splice(index, 1);
       });
     }
 
-    function clearAllNotifications() {
-      notificationsService.clearAllNotificationsByPlayer(identityService.currentUser._id).then(function () {
-        headerCtrl.notifications = [];
+    function clearAllAlerts() {
+      alertsService.clearAllAlertsByPlayer(identityService.currentUser._id).then(function () {
+        headerCtrl.alerts = [];
       });
     }
 
@@ -62,9 +68,9 @@
     }
 
     // Watch for websocket event
-    $scope.$on('ws:notification_created', function (_, notificationDetails) {
-      if (identityService.isAuthenticated() && notificationDetails.userId === identityService.currentUser._id) {
-        getActiveNotifications();
+    $scope.$on('ws:update_alerts', function (e, alerts) {
+      if (identityService.isAuthenticated() && _.some(alerts, ['userId', identityService.currentUser._id])) {
+        getActiveAlerts();
       }
     });
   }
