@@ -102,7 +102,7 @@ exports.getPlayerResultsByCompetition = function (req, res) {
   });
 };
 
-
+// Create a new challenge
 exports.createChallenge = function (req, res) {
   var challengeData = req.body.challenge;
   var challenger = challengeData.challenger.firstName + ' ' + challengeData.challenger.lastName;
@@ -115,7 +115,9 @@ exports.createChallenge = function (req, res) {
     userId: challengeData.opponent._id,
     competitionId: challengeData.competitionId,
     details: {
-      type: 'challenge',
+      state: 'pyramids.view',
+      stateParams: {'competitionId': challengeData.competitionId},
+      title: 'New Challenge',
       description: challenger + ' has challenged you'
     }
   };

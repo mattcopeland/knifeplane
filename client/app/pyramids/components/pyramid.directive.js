@@ -443,7 +443,7 @@
       if (player.position === 99 && !vm.currentUserIsOnPyramid) {
         addCurrentUserToPyramid();
       }
-      if (vm.currentUserIsOnPyramid && !vm.hasActiveChallenge) {
+      if (player.available === true && vm.currentUserIsOnPyramid && !vm.hasActiveChallenge) {
         swal({
           title: 'Challenge Request',
           text: 'Challenge ' + player.firstName + ' ' + player.lastName + '?',

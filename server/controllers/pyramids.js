@@ -47,7 +47,9 @@ exports.createPyramid = function (req, res) {
         competitionId: pyramid._id,
         userId: player._id,
         details: {
-          type: 'new competition',
+          state: 'pyramids.view',
+          stateParams: {'competitionId': pyramid._id},
+          title: 'New Competition',
           description: 'You have been added to a new competition'
         }
       };

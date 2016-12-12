@@ -31,10 +31,10 @@
                             </ul>
                         </div>
                         <div class="lv-body">
-                            <a ui-sref="pyramids.view({competitionId: alert.competitionId})" class="lv-item" ng-repeat="alert in headerCtrl.alerts" ng-click="headerCtrl.clearAlert(alert._id, $index)">
+                            <a ui-sref="{{alert.details.state}}({{alert.details.stateParams}})" class="lv-item" ng-repeat="alert in headerCtrl.alerts" ng-click="headerCtrl.clearAlert(alert._id, $index)">
                                 <div class="media">
                                     <div class="media-body">
-                                        <div class="lv-title">New Challenge</div><small class="lv-small">{{alert.details.description}}</small>
+                                        <div class="lv-title">{{alert.details.title}}</div><small class="lv-small">{{alert.details.description}}</small>
                                     </div>
                                 </div>
                             </a> 
