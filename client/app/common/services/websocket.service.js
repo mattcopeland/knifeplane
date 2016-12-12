@@ -1,5 +1,20 @@
-angular.module('app')
-  .service('websocketService', function ($rootScope, $window) {
+(function () {
+  'use strict';
+  angular.module('app').factory('websocketService', websocketService).run(function (websocketService) {
+    websocketService.connect();
+  });
+
+  function websocketService($rootScope, $window, $timeout) {
+    var connection;
+    var retrySeconds = [1, 10, 100, 1000];
+    var retry = 0;
+    var service = {
+      connect: connect,
+      send: send
+    };
+
+    return service;
+
     function websocketHost() {
       if ($window.location.protocol === 'https:') {
         return 'wss://' + $window.location.host;
@@ -8,23 +23,32 @@ angular.module('app')
       }
     }
 
-    var connection;
-    this.connect = function () {
+    function connect() {   
       connection = new WebSocket(websocketHost());
 
       connection.onmessage = function (e) {
+        retry = 0;
         var payload = JSON.parse(e.data);
         $rootScope.$broadcast('ws:' + payload.topic, payload.data);
       };
-    };
 
-    this.send = function (topic, data) {
+      connection.onclose = function () {
+        if (retry < retrySeconds.length) {
+          console.log('WebSocket closed. Reconnecting...');
+          $timeout(connect, retrySeconds[retry]*1000);
+          retry += 1;
+        } else {
+          console.log('Giving up on WebSocket');
+        }
+      };
+    }
+
+    function send(topic, data) {
       var json = JSON.stringify({
         topic: topic,
         data: data
       });
       connection.send(json);
-    };
-  }).run(function (websocketService) {
-    websocketService.connect();
-  });
+    }
+  }
+})();
