@@ -6,6 +6,7 @@
         </a>
     </div>
     <div class="card-body card-padding-sm">
+        <div><i class="zmdi zmdi-play-circle-outline" uib-tooltip="{{vm.pyramid.activity}} competition" tooltip-placement="right"></i> {{vm.pyramid.activity}}</div>
         <div><i class="zmdi zmdi-accounts" uib-tooltip="{{vm.pyramid.players.length}} players in this competition" tooltip-placement="right"></i> {{vm.pyramid.players.length}}</div>
         <div ng-if="vm.pyramid.activeChallenge">
             <i class="zmdi zmdi-notifications-active c-red" uib-tooltip="You have an active challenge" tooltip-placement="right"></i>

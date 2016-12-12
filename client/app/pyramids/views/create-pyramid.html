@@ -10,14 +10,21 @@
         <div class="card-body card-padding">
             <form name="createPyramidForm" class="create-pyramid-form" ng-submit="vm.createPyramid(vm.newPyramid)" novalidate>
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <div class="form-group m-b-30">
                             <div class="fg-line">
                                 <input type="text" class="form-control" ng-model="vm.newPyramid.name" placeholder="Pyramid Name" required>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 m-t-5">
+                    <div class="col-sm-4">
+                        <div class="form-group m-b-30">
+                            <div class="fg-line">
+                                <input type="text" class="form-control" ng-model="vm.newPyramid.activity" placeholder="Competition Activity" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 m-t-5">
                         <label class="m-b-10">Forfeit Days:
                             <span ng-if="vm.newPyramid.forfeitDays === 0"> No Limit</span>
                             <span ng-if="vm.newPyramid.forfeitDays > 0">{{ vm.newPyramid.forfeitDays }}</span>

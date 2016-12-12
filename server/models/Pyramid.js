@@ -5,6 +5,10 @@ var pyramidSchema = mongoose.Schema({
     type: String,
     required: '{PATH} is required!'
   },
+  activity: {
+    type: String,
+    required: '{PATH} is required!'
+  },
   forfeitDays: {
     type: Number,
     default: 1
@@ -34,6 +38,7 @@ function createDefaultPyramid() {
     if (collection.length === 0) {
       Pyramid.create({
         name: 'Default Pyramid',
+        activity: 'Testing',
         players: [],
         pendingPlayers: [],
         owners: []

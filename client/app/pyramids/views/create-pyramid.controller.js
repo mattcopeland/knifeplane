@@ -67,22 +67,18 @@
       });
     }
 
-    // Used to keep track of position on the pyramid based on when the player was added
-    var position = 0;
-
     /**
      * Create the pyramid
      * @param  {object} pyramid
      */
     function createPyramid(pyramid) {
       angular.forEach(vm.addedPlayers, function (player) {
-        position += 1;
         var addPlayer = {
-          position: position,
           _id: player._id,
           email: player.username,
           firstName: player.firstName,
-          lastName: player.lastName
+          lastName: player.lastName,
+          position: player.position
         };
         pyramid.players.push(addPlayer);
       });
