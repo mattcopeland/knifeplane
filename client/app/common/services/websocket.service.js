@@ -6,7 +6,7 @@
 
   function websocketService($rootScope, $window, $timeout) {
     var connection;
-    var retrySeconds = [1, 10, 100, 1000];
+    var retrySeconds = [3, 10, 100, 1000];
     var retry = 0;
     var service = {
       connect: connect,
@@ -23,7 +23,7 @@
       }
     }
 
-    function connect() {   
+    function connect() {
       connection = new WebSocket(websocketHost());
 
       connection.onmessage = function (e) {
