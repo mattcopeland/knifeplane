@@ -221,6 +221,18 @@ exports.approvePlayer = function (req, res, next) {
     }
     competitionName = pyramid.name;
     emails.approveRequest(req.body.competitionId, competitionName, req.body.player, req.get('host'));
+
+    var alertDetails = {
+      competitionId: req.body.competitionId,
+      userId: req.body.player._id,
+      details: {
+        state: 'pyramids.view',
+        stateParams: {'competitionId': pyramid._id},
+        title: 'Join Request Approved',
+        description: 'Your join request has been approved in ' + competitionName
+      }
+    };
+    alerts.createAlerts([alertDetails]);
   });
 
   Pyramid.findByIdAndUpdate({
@@ -259,6 +271,18 @@ exports.denyPlayer = function (req, res, next) {
     }
     competitionName = pyramid.name;
     emails.denyRequest(req.body.competitionId, competitionName, req.body.player, req.get('host'));
+
+    var alertDetails = {
+      competitionId: req.body.competitionId,
+      userId: req.body.player._id,
+      details: {
+        state: 'pyramids.view',
+        stateParams: {'competitionId': pyramid._id},
+        title: 'Join Request Denied',
+        description: 'Your join request has been denied in ' + competitionName
+      }
+    };
+    alerts.createAlerts([alertDetails]);
   });
 
   Pyramid.findByIdAndUpdate({

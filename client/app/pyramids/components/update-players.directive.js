@@ -22,6 +22,7 @@
   /* @ngInject */
   function ctrlFunc($scope, $filter, pyramidsService, challengesService, userService) {
     var removedPlayers = [];
+    var originalAvailablePlayers = [];
     var vm = this;
     vm.availablePlayers = [];
     vm.addedPlayers = [];
@@ -45,6 +46,7 @@
     }
 
     function getAvailablePlayers() {
+      vm.availablePlayers = [];
       userService.getAllUsers().then(function (users) {
         _.forEach(vm.pyramid.players, function (pyramidPlayer) {
           _.remove(users.data, function (availablePlayer){
@@ -60,6 +62,8 @@
             _id: availablePlayer._id
           });
         });
+        
+        originalAvailablePlayers = _.cloneDeep(vm.availablePlayers);
       });
     }
 
@@ -77,6 +81,7 @@
     // Cancel the update and put everything back to the orginal
     function cancelUpdate() {
       vm.addedPlayers = _.cloneDeep(vm.pyramid.players);
+      vm.availablePlayers = _.cloneDeep(originalAvailablePlayers);
     }
 
     // Reorder the players based on the drag-drop

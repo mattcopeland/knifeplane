@@ -22,6 +22,7 @@
   /* @ngInject */
   function ctrlFunc($scope, pyramidsService, challengesService, userService, identityService) {
     var removedAdmins = [];
+    var originalAvailableAdmins = [];
     var vm = this;
     vm.availableAdmins = [];
     vm.addedAdmins = [];
@@ -46,6 +47,7 @@
     }
 
     function getAvailableAdmins() {
+      vm.availableAdmins = [];
       userService.getAllUsers().then(function (users) {
         // Remove the current admins from the list of available admins
         _.forEach(vm.pyramid.admins, function (pyramidAdmin) {
@@ -62,6 +64,8 @@
             _id: availableAdmin._id
           });
         });
+
+        originalAvailableAdmins = _.cloneDeep(vm.availableAdmins);
       });
     }
 
@@ -76,6 +80,7 @@
     // Cancel the update and put everything back to the orginal
     function cancelUpdate() {
       vm.addedAdmins = _.cloneDeep(vm.pyramid.admins);
+      vm.availableAdmins = _.cloneDeep(originalAvailableAdmins);
     }
 
     /**
