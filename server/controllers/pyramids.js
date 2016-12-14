@@ -74,7 +74,7 @@ exports.updatePyramid = function (req, res, next) {
       $set: {
         'name': pyramidData.name,
         'forfeitDays': pyramidData.forfeitDays,
-        'open': pyramidData.open,
+        'restrictJoins': pyramidData.restrictJoins,
         'players': pyramidData.players,
         'pendingPlayers': pyramidData.pendingPlayers,
         'admins': pyramidData.admins

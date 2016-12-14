@@ -5,7 +5,7 @@
   function AdminCtrl($scope, $state, $stateParams, $filter, pyramidsService, identityService, notifyService, challengesService) {
     var vm = this;
     vm.competitionId = null;
-    vm.updatePyramidOpenStatus = updatePyramidOpenStatus;
+    vm.updatePyramidRestrictJoins = updatePyramidRestrictJoins;
     vm.deletePyramid = deletePyramid;
 
     activate();
@@ -37,10 +37,10 @@
     }
 
     // Perform the updates that were requsted
-    function updatePyramidOpenStatus() {
+    function updatePyramidRestrictJoins() {
       pyramidsService.getPyramid(vm.competitionId).then(function (pyramid) {
         var updatedPyramid = pyramid.data;
-        updatedPyramid.open = vm.pyramid.open;
+        updatedPyramid.restrictJoins = vm.pyramid.restrictJoins;
         pyramidsService.updatePyramid(updatedPyramid);
       });      
     }

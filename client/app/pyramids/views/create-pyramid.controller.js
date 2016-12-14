@@ -11,7 +11,7 @@
     var vm = this;
     vm.newPyramid = {
       players: [],
-      open: false
+      restrictJoins: false
     };
     vm.availablePlayers = [];
     vm.addedPlayers = [];

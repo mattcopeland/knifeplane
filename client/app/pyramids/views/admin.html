@@ -32,12 +32,13 @@
                 <div class="card-header ch-alt">
                     <h2>Player Joins</h2>
                 </div>
-                <div class="card-body card-padding-sm text-center">
-                    <div class="toggle-switch" data-ts-color="blue">
-                        <label for="open" class="ts-label" uib-tooltip="Requires admin approval to join" tooltip-placement="top">Closed</label>
-                        <input id="open" type="checkbox" hidden="hidden" ng-model="vm.pyramid.open" ng-change="vm.updatePyramidOpenStatus()">
-                        <label for="open" class="ts-helper"></label>
-                        <label for="open" class="ts-label" uib-tooltip="Anyone can join" tooltip-placement="top">Open</label>
+                <div class="card-body card-padding-sm">
+                    <div class="checkbox player-joins-checkbox">
+                        <label>
+                            <input type="checkbox" value="" ng-model="vm.pyramid.restrictJoins" ng-change="vm.updatePyramidRestrictJoins()">
+                            <i class="input-helper"></i>
+                            Admins must approve join requets
+                        </label>
                     </div>
                 </div>
             </div>

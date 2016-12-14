@@ -317,7 +317,7 @@
             email: identityService.currentUser.username,
             position: vm.numberOfRealPlayers + 1
           };
-          if (vm.pyramid.open) {
+          if (!vm.pyramid.restrictJoins) {
             swal({
               title: 'Join Competition?',
               text: 'You\'ll be added to the bottom',

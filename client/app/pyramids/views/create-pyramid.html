@@ -56,11 +56,12 @@
                     </div>
                 </div>
                 <div class="m-b-30">
-                    <div class="toggle-switch" data-ts-color="blue">
-                        <label for="open" class="ts-label" uib-tooltip="Requires admin approval to join" tooltip-placement="top">Closed</label>
-                        <input id="open" type="checkbox" hidden="hidden" ng-model="vm.newPyramid.open">
-                        <label for="open" class="ts-helper"></label>
-                        <label for="open" class="ts-label" uib-tooltip="Anyone can join" tooltip-placement="top">Open</label>
+                    <div class="checkbox m-b-15">
+                        <label>
+                            <input type="checkbox" value="" ng-model="vm.newPyramid.restrictJoins">
+                            <i class="input-helper"></i>
+                            Admins must approve join requets
+                        </label>
                     </div>
                 </div>
                 <div class="btns-group text-center">

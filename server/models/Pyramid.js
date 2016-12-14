@@ -13,9 +13,9 @@ var pyramidSchema = mongoose.Schema({
     type: Number,
     default: 1
   },
-  open: {
+  restrictJoins: {
     type: Boolean,
-    default: true
+    default: false
   },
   players: {
     type: Array,
