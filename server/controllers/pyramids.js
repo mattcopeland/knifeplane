@@ -65,7 +65,7 @@ exports.updatePyramid = function (req, res, next) {
   var pyramidData = req.body.pyramid;
   var details = {
     competitionId: pyramidData._id,
-    description: pyramidData.name + ' has been updated by the owner.'
+    description: pyramidData.name + ' has been updated by the admin.'
   };
   Pyramid.findOneAndUpdate(
     {
@@ -77,7 +77,7 @@ exports.updatePyramid = function (req, res, next) {
         'open': pyramidData.open,
         'players': pyramidData.players,
         'pendingPlayers': pyramidData.pendingPlayers,
-        'owners': pyramidData.owners
+        'admins': pyramidData.admins
       }
     })
     .exec(function (err, pyramid) {
@@ -92,7 +92,7 @@ exports.updatePyramid = function (req, res, next) {
 exports.deletePyramid = function (req, res) {
   var challengeDetails = {
     competitionId: req.query.competitionId,
-    description: 'This competition has been updated by the owner.'
+    description: 'This competition has been updated by the admin.'
   };
   Pyramid.findOneAndRemove({
     _id: req.query.competitionId

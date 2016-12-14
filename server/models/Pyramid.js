@@ -25,7 +25,7 @@ var pyramidSchema = mongoose.Schema({
     type: Array,
     default: []
   },
-  owners: {
+  admins: {
     type: Array,
     default: []
   }  
@@ -41,7 +41,7 @@ function createDefaultPyramid() {
         activity: 'Testing',
         players: [],
         pendingPlayers: [],
-        owners: []
+        admins: []
       });
     }
   });

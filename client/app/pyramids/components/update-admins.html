@@ -1,14 +1,14 @@
 <div class="card">
     <div class="card-header ch-alt">
-        <h2>Update Palyers</h2>
+        <h2>Update Admins</h2>
     </div>
     <div class="card-body card-padding-sm">
         <div class="row swapper">
             <div class="col-sm-5 m-b-30">            
-                <label>Available Players</label>
+                <label>Available Admins</label>
                 <ul>
-                    <li ng-repeat="player in vm.availablePlayers" ng-click="vm.addPlayer(player)">
-                        <span class="name">{{player.firstName}} {{player.lastName}}</span>
+                    <li ng-repeat="admin in vm.availableAdmins" ng-click="vm.addAdmin(admin)">
+                        <span class="name">{{admin.firstName}} {{admin.lastName}}</span>
                     </li>
                 </ul>
             </div>
@@ -17,18 +17,18 @@
                 <i class="zmdi zmdi-swap-vertical visible-xs"></i>
             </span>
             <div class="col-sm-6 m-b-30">
-                <label>Competiton Players</label>
-                <ul sv-root sv-part="vm.pyramid.players" sv-on-sort="vm.reorderPlayers()">
-                    <li ng-repeat="player in vm.pyramid.players" class="sortable" ng-class="'added-player' + ($index + 1)" sv-element>
-                        <span class="position">{{player.position}}</span>
-                        <span class="name" sv-handle>{{player.firstName}} {{player.lastName}}</span>
-                        <i class="zmdi zmdi-close-circle-o" ng-click="vm.removePlayer(player, $index)"></i>
+                <label>Competition Admins</label>
+                <ul>
+                    <li ng-repeat="admin in vm.pyramid.admins">
+                        <span class="position"><i class="zmdi zmdi-star" ng-if="admin.primary"></i></span>
+                        <span class="name">{{admin.firstName}} {{admin.lastName}}</span>
+                        <i class="zmdi zmdi-close-circle-o" ng-click="vm.removeAdmin(admin, $index)" ng-if="!admin.primary"></i>
                     </li>
                 </ul>
             </div>
             <div class="btns-group text-center">
                 <button type="submit" class="btn btn-primary" ng-click="vm.updatePyramid()" ng-disabled="vm.disableSubmit">
-                    <i class="zmdi zmdi-check"></i> Update Players
+                    <i class="zmdi zmdi-check"></i> Update Admins
                 </button>
                 <button class="btn btn-default" ng-click="vm.cancelUpdate()" ng-disabled="vm.disableSubmit">
                     <i class="zmdi zmdi-close"></i> Cancel

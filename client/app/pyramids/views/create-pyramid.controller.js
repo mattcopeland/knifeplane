@@ -82,11 +82,12 @@
         };
         pyramid.players.push(addPlayer);
       });
-      pyramid.owners = [{
+      pyramid.admins = [{
         _id: identityService.currentUser._id,
         email: identityService.currentUser.username,
         firstName: identityService.currentUser.firstName,
-        lastName: identityService.currentUser.lastName
+        lastName: identityService.currentUser.lastName,
+        primary: true
       }];
 
       // Figure out the number of levels based on the number of players

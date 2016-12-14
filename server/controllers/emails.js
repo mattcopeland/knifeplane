@@ -8,8 +8,8 @@ var tagLine = '<i><b>WannaPlayMe</b> - Make your way to the top!</i>';
 // Player has requested to join a competition
 exports.addPlayerRequest = function(competition, player, host) {
   var emails = [];
-  _.forEach(competition.owners, function (owner) {
-    emails.push(owner.email);
+  _.forEach(competition.admins, function (admin) {
+    emails.push(admin.email);
   });
   var email = emails.join();
 
@@ -153,6 +153,9 @@ exports.passwordReset = function(user, verificationToken, host) {
 };
 
 function sendMail(mailOptions) {
+  if (process.env.NODE_ENV === 'development') {
+    return null;
+  }
   var transporter = nodemailer.createTransport(credentials.smtp);
 
   transporter.sendMail(mailOptions, function (error, info) {

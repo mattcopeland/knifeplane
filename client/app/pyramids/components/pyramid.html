@@ -46,7 +46,7 @@
                     </div>
                     <div class="lvh-label hidden-xs">{{vm.pyramid.activity}}</div>
                     <ul class="lv-actions actions">
-                        <li ng-if="vm.currentUserIsOwner">
+                        <li ng-if="vm.currentUserIsAdmin">
                             <a ui-sref="pyramids.admin({competitionId: vm.competitionId})" uib-tooltip="Admin" tooltip-placement="top">
                                 <i class="zmdi zmdi-edit"></i>
                             </a>

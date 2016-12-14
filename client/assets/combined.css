@@ -7296,111 +7296,6 @@ body {
 .pyramid .pyramid-block.unavailable {
   border-top: 3px solid #F44336;
 }
-.pyramid-players {
-  border: 1px solid #e0e0e0;
-  height: 150px;
-  list-style-type: none;
-  overflow-x: hidden;
-  overflow-y: auto;
-  padding: 0;
-}
-.pyramid-players li {
-  display: table;
-  cursor: pointer;
-  padding: 5px 10px;
-  width: 100%;
-}
-.pyramid-players li:hover {
-  background-color: #cacaca;
-}
-.pyramid-players li.ng-enter {
-  -webkit-animation: slideInRight 0.2s ease both;
-          animation: slideInRight 0.2s ease both;
-}
-.pyramid-players li.ng-leave {
-  -webkit-animation: slideOutRight 0.2s ease both;
-          animation: slideOutRight 0.2s ease both;
-}
-.pyramid-players li.sortable {
-  cursor: default;
-}
-.pyramid-players li.sortable [sv-handle] {
-  cursor: move;
-}
-.pyramid-players li i {
-  cursor: pointer;
-  display: table-cell;
-  font-size: 18px;
-  text-align: center;
-  width: 30px;
-}
-.pyramid-players li i:hover {
-  color: #2196F3;
-}
-.pyramid-players li span {
-  display: table-cell;
-}
-.pyramid-players li span.position {
-  font-weight: bold;
-  width: 17px;
-}
-.pyramid-players.added-players {
-  height: auto;
-  min-height: 150px;
-}
-.pyramid-players.added-players li.ng-enter {
-  -webkit-animation: slideInLeft 0.2s ease both;
-          animation: slideInLeft 0.2s ease both;
-}
-.pyramid-players.added-players li.ng-leave {
-  -webkit-animation: slideOutLeft 0.2s ease both;
-          animation: slideOutLeft 0.2s ease both;
-}
-.added-player1,
-.added-player4,
-.added-player5,
-.added-player6,
-.added-player11,
-.added-player12,
-.added-player13,
-.added-player14,
-.added-player15,
-.added-player22,
-.added-player23,
-.added-player24,
-.added-player25,
-.added-player26,
-.added-player27,
-.added-player28 {
-  background-color: #eee;
-}
-.added-player2,
-.added-player3,
-.added-player7,
-.added-player8,
-.added-player9,
-.added-player16,
-.added-player17,
-.added-player18,
-.added-player19,
-.added-player20,
-.added-player21 {
-  background-color: #ddd;
-}
-.swap-players {
-  text-align: center;
-}
-.swap-players i {
-  font-size: 44px;
-}
-.swap-players i.hidden-xs {
-  font-size: 44px;
-  line-height: 180px;
-}
-.swap-players i.visible-xs {
-  font-size: 44px;
-  line-height: 0;
-}
 .pending-players .card-body {
   overflow-x: auto;
   white-space: nowrap;
@@ -7496,6 +7391,121 @@ body {
 .player-statistics h5 {
   margin-bottom: 6px;
   margin-top: 6px;
+}
+.swapper ul {
+  border: 1px solid #e0e0e0;
+  height: 150px;
+  list-style-type: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 0;
+}
+.swapper ul li {
+  display: table;
+  cursor: pointer;
+  padding: 5px 10px;
+  width: 100%;
+}
+.swapper ul li:hover {
+  background-color: #cacaca;
+}
+.swapper ul li.ng-enter {
+  -webkit-animation: slideInRight 0.2s ease both;
+          animation: slideInRight 0.2s ease both;
+}
+.swapper ul li.ng-leave {
+  -webkit-animation: slideOutRight 0.2s ease both;
+          animation: slideOutRight 0.2s ease both;
+}
+.swapper ul li.ng-leave.ng-leave-active {
+  display: table !important;
+}
+.swapper ul li.sortable {
+  cursor: default;
+}
+.swapper ul li.sortable [sv-handle] {
+  cursor: move;
+}
+.swapper ul li > i {
+  cursor: pointer;
+  display: table-cell;
+  font-size: 18px;
+  text-align: center;
+  width: 30px;
+}
+.swapper ul li > i:hover {
+  color: #2196F3;
+}
+.swapper ul li span {
+  display: table-cell;
+}
+.swapper ul li span.position {
+  font-weight: bold;
+  width: 17px;
+}
+.swapper ul li span.position i {
+  font-size: 14px;
+  text-align: left;
+}
+.swapper > div ~ div ul {
+  height: auto;
+  min-height: 150px;
+}
+.swapper > div ~ div ul li {
+  cursor: default;
+}
+.swapper > div ~ div ul li.ng-enter {
+  -webkit-animation: slideInLeft 0.2s ease both;
+          animation: slideInLeft 0.2s ease both;
+}
+.swapper > div ~ div ul li.ng-leave {
+  -webkit-animation: slideOutLeft 0.2s ease both;
+          animation: slideOutLeft 0.2s ease both;
+}
+.swapper > span {
+  text-align: center;
+}
+.swapper > span i {
+  font-size: 44px;
+}
+.swapper > span i.hidden-xs {
+  font-size: 44px;
+  line-height: 180px;
+}
+.swapper > span i.visible-xs {
+  font-size: 44px;
+  line-height: 0;
+}
+.added-player1,
+.added-player4,
+.added-player5,
+.added-player6,
+.added-player11,
+.added-player12,
+.added-player13,
+.added-player14,
+.added-player15,
+.added-player22,
+.added-player23,
+.added-player24,
+.added-player25,
+.added-player26,
+.added-player27,
+.added-player28 {
+  background-color: #eee;
+}
+.added-player2,
+.added-player3,
+.added-player7,
+.added-player8,
+.added-player9,
+.added-player16,
+.added-player17,
+.added-player18,
+.added-player19,
+.added-player20,
+.added-player21 {
+  background-color: #ddd;
 }
 /*
  * Vendors

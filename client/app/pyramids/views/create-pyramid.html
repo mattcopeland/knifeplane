@@ -2,7 +2,6 @@
     <div class="block-header">
         <h2>Create a New Pyramid</h2>
     </div>
-
     <div class="card">
         <div class="card-header">
             <h2>Pyramid Details</h2>
@@ -32,22 +31,22 @@
                         <div class="input-slider m-b-30" slider ng-model="vm.newPyramid.forfeitDays" start="0" end="5" step="1" data-is-color="blue"></div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row swapper">
                     <div class="col-sm-5 m-b-30">
                         <label>Available Players</label>
-                        <ul class="pyramid-players">
+                        <ul>
                             <li ng-repeat="player in vm.availablePlayers" ng-click="vm.addPlayer(player)">
                                 <span class="name">{{player.firstName}} {{player.lastName}}</span>
                             </li>
                         </ul>
                     </div>
-                    <div class="col-sm-2 swap-players">
+                    <span class="col-sm-1">
                         <i class="zmdi zmdi-swap hidden-xs"></i>
                         <i class="zmdi zmdi-swap-vertical visible-xs"></i>
-                    </div>
-                    <div class="col-sm-5 m-b-30">
+                    </span>
+                    <div class="col-sm-6 m-b-30">
                         <label>Challenge Players</label>
-                        <ul class="pyramid-players added-players" sv-root sv-part="vm.addedPlayers" sv-on-sort="vm.reorderPlayers()">
+                        <ul sv-root sv-part="vm.addedPlayers" sv-on-sort="vm.reorderPlayers()">
                             <li ng-repeat="player in vm.addedPlayers" class="sortable" ng-class="'added-player' + ($index + 1)" sv-element>
                                 <span class="position">{{player.position}}</span>
                                 <span class="name" sv-handle>{{player.firstName}} {{player.lastName}}</span>
@@ -58,7 +57,7 @@
                 </div>
                 <div class="m-b-30">
                     <div class="toggle-switch" data-ts-color="blue">
-                        <label for="open" class="ts-label" uib-tooltip="Requires owner approval to join" tooltip-placement="top">Closed</label>
+                        <label for="open" class="ts-label" uib-tooltip="Requires admin approval to join" tooltip-placement="top">Closed</label>
                         <input id="open" type="checkbox" hidden="hidden" ng-model="vm.newPyramid.open">
                         <label for="open" class="ts-helper"></label>
                         <label for="open" class="ts-label" uib-tooltip="Anyone can join" tooltip-placement="top">Open</label>

@@ -72,7 +72,7 @@ exports.deleteActiveChallengeByCompetitionByPlayer = function (req, res) {
 exports.deleteChallenge = function (req, res) {
   var challengeDetails = {
     competitionId: req.query.competitionId,
-    description: 'A challenege was deleted by the owner'
+    description: 'A challenege was deleted by an admin'
   };
   Challenge.findOneAndRemove({
     _id: req.query.challengeId

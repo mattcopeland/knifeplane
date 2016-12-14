@@ -30,7 +30,7 @@
     vm.numberOfBlocks = 0;
     vm.currentUserIsOnPyramid = false;
     vm.currentUserIsPending = false;
-    vm.currentUserIsOwner = false;
+    vm.currentUserIsAdmin = false;
     vm.hasActiveChallenge = false;
     vm.activeChallengeOpponent = null;
     vm.availableChallenges = false;
@@ -77,11 +77,11 @@
      */
     function getPlayersStatus() {
       
-      vm.currentUserIsOwner = false;
+      vm.currentUserIsAdmin = false;
       vm.currentUserIsPending = false;
       if (identityService.isAuthenticated()) {
-        // Check to see if the current user is an owner of this pyramid
-        vm.currentUserIsOwner = _.some(vm.pyramid.owners, ['_id', identityService.currentUser._id]);
+        // Check to see if the current user is an admin of this pyramid
+        vm.currentUserIsAdmin = _.some(vm.pyramid.admins, ['_id', identityService.currentUser._id]);
         // Check to see if the current user has a pending request to join
         vm.currentUserIsPending = _.some(vm.pyramid.pendingPlayers, ['_id', identityService.currentUser._id]);
       }
@@ -334,7 +334,7 @@
           } else {
             swal({
               title: 'Send Join Request?',
-              text: 'This is a closed competition so the owner must approve your request',
+              text: 'This is a closed competition so an admin must approve your request',
               type: 'warning',
               showCancelButton: true,
               confirmButtonText: 'Send Request',
@@ -345,7 +345,7 @@
               pyramidsService.addPlayerToPyramidRequest(vm.pyramid, player).then(function () {
                 vm.currentUserIsPending = true;
               });
-              swal('Request Sent', 'You will receive an email once the owner processes the request.', 'success');
+              swal('Request Sent', 'You will receive an email once an admin processes the request.', 'success');
             });
           }
         } else {
