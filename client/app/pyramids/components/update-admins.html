@@ -19,10 +19,10 @@
             <div class="col-sm-6 m-b-30">
                 <label>Competition Admins</label>
                 <ul>
-                    <li ng-repeat="admin in vm.pyramid.admins">
+                    <li ng-repeat="admin in vm.addedAdmins">
                         <span class="position"><i class="zmdi zmdi-star" ng-if="admin.primary"></i></span>
                         <span class="name">{{admin.firstName}} {{admin.lastName}}</span>
-                        <i class="zmdi zmdi-close-circle-o" ng-click="vm.removeAdmin(admin, $index)" ng-if="!admin.primary"></i>
+                        <i class="zmdi zmdi-close-circle-o" ng-click="vm.removeAdmin(admin, $index)" ng-if="!admin.primary && vm.userIsPrimaryAdmin"></i>
                     </li>
                 </ul>
             </div>

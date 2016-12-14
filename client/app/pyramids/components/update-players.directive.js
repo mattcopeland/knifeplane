@@ -24,6 +24,7 @@
     var removedPlayers = [];
     var vm = this;
     vm.availablePlayers = [];
+    vm.addedPlayers = [];
     vm.updatePyramid = updatePyramid;
     vm.cancelUpdate = cancelUpdate;
     vm.reorderPlayers = reorderPlayers;
@@ -36,6 +37,8 @@
     function activate() {
       $scope.$watch('vm.pyramid', function () {
         if (vm.pyramid) {
+          vm.addedPlayers = _.cloneDeep(vm.pyramid.players);
+          vm.disableSubmit = true;
           getAvailablePlayers();
         }
       });
@@ -48,7 +51,15 @@
             return pyramidPlayer._id === availablePlayer._id;
           });
         });
-        vm.availablePlayers = users.data;
+        // Only use certain properties of the user for the player record
+        _.forEach(users.data, function (availablePlayer) {
+          vm.availablePlayers.push({
+            firstName: availablePlayer.firstName,
+            lastName: availablePlayer.lastName,
+            email: availablePlayer.username,
+            _id: availablePlayer._id
+          });
+        });
       });
     }
 
@@ -57,6 +68,7 @@
       _.forEach(removedPlayers, function(player) {
         challengesService.deleteActiveChallengeByCompetitionByPlayer(vm.pyramid._id, player._id);
       });
+      vm.pyramid.players = vm.addedPlayers;
       pyramidsService.updatePyramid(vm.pyramid).then(function () {
         vm.disableSubmit = true;
       });   
@@ -64,18 +76,13 @@
 
     // Cancel the update and put everything back to the orginal
     function cancelUpdate() {
-      pyramidsService.getPyramid(vm.pyramid._id).then(function (pyramid) {
-        pyramid.data.players = $filter('orderBy')(pyramid.data.players, 'position');
-        vm.pyramid = pyramid.data;
-        vm.disableSubmit = true;
-      });
-      getAvailablePlayers();
+      vm.addedPlayers = _.cloneDeep(vm.pyramid.players);
     }
 
     // Reorder the players based on the drag-drop
     function reorderPlayers() {
       var i = 1;
-      _.forEach(vm.pyramid.players, function (player) {
+      _.forEach(vm.addedPlayers, function (player) {
         player.position = i;
         ++i;
       });
@@ -89,7 +96,7 @@
      */
     function removePlayer(player) {
       removedPlayers.push(player);
-      vm.availablePlayers.push(_.remove(vm.pyramid.players, {_id: player._id})[0]);
+      vm.availablePlayers.push(_.remove(vm.addedPlayers, {_id: player._id})[0]);
       reorderPlayers();
     }
 
@@ -98,8 +105,8 @@
      * @param  {object} player
      */
     function addPlayer(player) {
-      player.position = vm.pyramid.players.length + 1;
-      vm.pyramid.players.push(_.remove(vm.availablePlayers, {_id: player._id})[0]);
+      player.position = vm.addedPlayers.length + 1;
+      vm.addedPlayers.push(_.remove(vm.availablePlayers, {_id: player._id})[0]);
       vm.disableSubmit = false;
     }
   }

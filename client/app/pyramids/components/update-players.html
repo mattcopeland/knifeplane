@@ -18,8 +18,8 @@
             </span>
             <div class="col-sm-6 m-b-30">
                 <label>Competiton Players</label>
-                <ul sv-root sv-part="vm.pyramid.players" sv-on-sort="vm.reorderPlayers()">
-                    <li ng-repeat="player in vm.pyramid.players" class="sortable" ng-class="'added-player' + ($index + 1)" sv-element>
+                <ul sv-root sv-part="vm.addedPlayers" sv-on-sort="vm.reorderPlayers()">
+                    <li ng-repeat="player in vm.addedPlayers" class="sortable" ng-class="'added-player' + ($index + 1)" sv-element>
                         <span class="position">{{player.position}}</span>
                         <span class="name" sv-handle>{{player.firstName}} {{player.lastName}}</span>
                         <i class="zmdi zmdi-close-circle-o" ng-click="vm.removePlayer(player, $index)"></i>
