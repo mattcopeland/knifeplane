@@ -48,6 +48,7 @@
 
     function getAvailableAdmins() {
       vm.availableAdmins = [];
+      removedAdmins = [];
       userService.getAllUsers().then(function (users) {
         // Remove the current admins from the list of available admins
         _.forEach(vm.pyramid.admins, function (pyramidAdmin) {
@@ -79,6 +80,7 @@
 
     // Cancel the update and put everything back to the orginal
     function cancelUpdate() {
+      removedAdmins = [];
       vm.addedAdmins = _.cloneDeep(vm.pyramid.admins);
       vm.availableAdmins = _.cloneDeep(originalAvailableAdmins);
     }

@@ -47,6 +47,7 @@
 
     function getAvailablePlayers() {
       vm.availablePlayers = [];
+      removedPlayers = [];
       userService.getAllUsers().then(function (users) {
         _.forEach(vm.pyramid.players, function (pyramidPlayer) {
           _.remove(users.data, function (availablePlayer){
@@ -80,6 +81,7 @@
 
     // Cancel the update and put everything back to the orginal
     function cancelUpdate() {
+      removedPlayers = [];
       vm.addedPlayers = _.cloneDeep(vm.pyramid.players);
       vm.availablePlayers = _.cloneDeep(originalAvailablePlayers);
     }
