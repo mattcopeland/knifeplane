@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="block-header">
+        <h2>{{vm.competition.name}} Admin</h2>
+        <ul class="actions">
+            <li>
+                <a ui-sref="competitions.view({competitionId: vm.competitionId})" uib-tooltip="View Competition" tooltip-placement="bottom">
+                    <i class="zmdi zmdi-triangle-up"></i>
+                </a>
+            </li>
+            <li>
+                <a ui-sref="competitions.stats({competitionId: vm.competitionId})" uib-tooltip="View Statistics" tooltip-placement="bottom">
+                    <i class="zmdi zmdi-trending-up"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div wpm-completed-challeneges competition-id="{{vm.competitionId}}" challenges="vm.challenges"" allow-delete="vm.isAdmin"></div>
+    <div wpm-pending-players competition="vm.competition"></div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header ch-alt">
+                    <h2>Delete Competition</h2>
+                </div>
+                <div class="card-body card-padding-sm text-center">
+                    <button class="btn btn-danger" ng-click="vm.deleteCompetition()">Delete</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header ch-alt">
+                    <h2>Player Joins</h2>
+                </div>
+                <div class="card-body card-padding-sm">
+                    <div class="checkbox player-joins-checkbox">
+                        <label>
+                            <input type="checkbox" value="" ng-model="vm.competition.restrictJoins" ng-change="vm.updateCompetitionRestrictJoins()">
+                            <i class="input-helper"></i>
+                            Admins must approve join requets
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div wpm-update-players competition="vm.competition"></div>
+    <div wpm-update-admins competition="vm.competition"></div>
+</div>

@@ -3,9 +3,9 @@
 
   angular
     .module('app')
-    .directive('kpSidebar', kpSidebar);
+    .directive('wpmSidebar', wpmSidebar);
 
-  function kpSidebar() {
+  function wpmSidebar() {
     var directive = {
       bindToController: true,
       controller: ctrlFunc,

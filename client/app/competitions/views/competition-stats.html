@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="block-header">
+        <h2>{{vm.competition.name}}</h2>
+        <ul class="actions">
+            <li>
+                <a ui-sref="competitions.view({competitionId: vm.competitionId})" uib-tooltip="View Competition" tooltip-placement="bottom">
+                    <i class="zmdi zmdi-triangle-up"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div wpm-completed-challeneges competition-id="{{vm.competitionId}}" challenges="vm.challenges"></div>
+    <div ng-if="vm.competition.type === 'pyramid'" ng-repeat="player in vm.competition.players | orderObjectBy: 'position'" wpm-player-overall-results player="player"></div>
+    <div ng-if="vm.competition.type === 'versus'" ng-repeat="team in vm.teams | orderObjectBy: 'number'" wpm-team-overall-results challenges="vm.challenges" team="team.number"></div>
+</div>

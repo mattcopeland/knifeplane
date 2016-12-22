@@ -180,3 +180,11 @@
     transform: scale3d(@process);
 }
 
+/*
+ * Vertical Align
+ */
+.vertical-align(@position: relative) {
+  position: @position;
+  top: 50%;
+  transform: translateY(-50%);
+}

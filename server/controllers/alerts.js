@@ -1,5 +1,6 @@
 var Alert = require('mongoose').model('Alert');
 var websockets = require('../websockets');
+var _ = require('lodash');
 
 exports.getActiveAlertsByPlayer = function (req, res) {
   Alert.find({
@@ -42,17 +43,20 @@ exports.clearAlertsByPlayer = function (req, res) {
   });
 };
 
-exports.clearAlertsOnCompletedChallenge = function (alertDetails) {
-  Alert.findOneAndUpdate({
-    'userId': alertDetails[0].userId,
-    'competitionId': alertDetails[0].competitionId,
-    'cleared': { $ne: true }
-  },{
-    'cleared': true
-  }).exec(function (err) {
-    if (err) {
-      console.log('error creating Alert');
-    }
-    websockets.broadcast('update_alerts', alertDetails);
+exports.clearAlertsOnCompletedChallenge = function (alerts) {
+  _.forEach(alerts, function (alert) {
+    Alert.findOneAndUpdate({
+      'userId': alert.userId,
+      'competitionId': alert.competitionId,
+      'details.title': 'New Challenge',
+      'cleared': { $ne: true }
+    },{
+      'cleared': true
+    }).exec(function (err) {
+      if (err) {
+        console.log('error creating Alert');
+      }
+    });
   });
+  websockets.broadcast('update_alerts', alerts);
 };

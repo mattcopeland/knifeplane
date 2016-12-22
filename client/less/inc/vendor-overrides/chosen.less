@@ -1,5 +1,4 @@
 .chosen-container {
-    margin-bottom: 30px;
     .chosen-drop {
         box-shadow: @dropdown-shadow;
         margin-top: 1px;
@@ -30,6 +29,7 @@
         
         li {
             padding: 10px 17px;
+            text-transform: capitalize;
             width: 100%;
             
             &.highlighted {
@@ -66,15 +66,33 @@
     }
 }
 
+.chosen-container-active.chosen-with-drop {
+    .chosen-single {
+        background-image: none;
+        box-shadow: none;
+        border: 0;
+        border-bottom: 1px solid @input-border;
+
+        div b {
+            .img-retina('/images/select.png', '/images/select@2x.png', 12px, 12px);
+            background-repeat: no-repeat;
+            background-position: right 12px;
+        }
+    }
+}
+
 .chosen-container-single {
     .chosen-single { 
         border-radius: 0;
         overflow: visible;
         height: 34px;
-        padding: 6px 0 6px;
-        text-transform: uppercase;
+        padding: 0;
+        text-transform: capitalize;
         border: 0;
         border-bottom: 1px solid @input-border;
+        background-image: none;
+        box-shadow: none;
+        line-height: 34px;
         
         &:after {
             content: "";
@@ -89,7 +107,7 @@
         }
         
         div b {
-            .img-retina('../img/select.png', '../img/select@2x.png', 12px, 12px);
+            .img-retina('/images/select.png', '/images/select@2x.png', 12px, 12px);
             background-repeat: no-repeat;
             background-position: right 12px;
         }
@@ -125,7 +143,6 @@
         padding: 0;
         border: 0;
         border-bottom: 1px solid @input-border;
-        background-image: none;
         
         li { 
             &.search-choice {
@@ -136,8 +153,6 @@
                 padding: 5px 23px 5px 8px;
 
                 .search-choice-close {
-                    background: none;
-
                     &:before {
                         display: inline-block;
                         font-family: @font-icon-md;
@@ -153,7 +168,6 @@
             
             &.search-field {
                 input[type=text] {
-                    color: #9E9E9E !important;
                     padding: 0;
                     height: 31px;
                 }
@@ -163,10 +177,4 @@
 }
 select.chosen {
     display: none;
-}
-
-.chosen-container-active {
-    .chosen-choices {
-        box-shadow: none;
-    }
 }

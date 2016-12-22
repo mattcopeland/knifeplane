@@ -4,9 +4,9 @@
         <p class="m-b-0">No challenges at this time.</p>
     </div>
     <div class="lv-item" ng-repeat="challenge in vm.challenges" ng-if="challenge.expires > 0 || challenge.timeLimit === 0">
-        <div class="player">{{challenge.challenger.firstName}} {{challenge.challenger.lastName}}</div>
+        <div class="player">{{challenge.challenger.displayName}}</div>
         <div class="action">challenged</div>
-        <div class="player">{{challenge.opponent.firstName}} {{challenge.opponent.lastName}}</div>
+        <div class="player">{{challenge.opponent.displayName}}</div>
         <div class="badge" ng-if="challenge.expires">
             <i class="zmdi zmdi-time"></i>
             <timer interval="1000" countdown="challenge.expires" max-time-unit="'hour'">{{hours}}:{{mminutes}}:{{sseconds}}</timer>

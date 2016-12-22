@@ -13,10 +13,10 @@
     <div class="block-header">
         <h2>Active Competitions</h2>
     </div>
-    <div class="row" ng-if="vm.pyramids.length > 0">
-        <div class="col-sm-4" ng-repeat="pyramid in vm.pyramids" kp-pyramid-compact pyramid="pyramid"></div>
+    <div class="row" ng-if="vm.competitions.length > 0">
+        <div class="col-sm-4" ng-repeat="competition in vm.competitions" wpm-competition-compact competition="competition"></div>
     </div>
-    <div class="card" ng-if="vm.pyramids.length === 0">
+    <div class="card" ng-if="vm.competitions.length === 0">
         <div class="card-body card-padding-sm">
             <p>No competitions yet :(</p>
         </div> 

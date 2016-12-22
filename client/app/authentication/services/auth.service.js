@@ -41,7 +41,7 @@
           dfd.resolve(false);
         }
       }, function (response) {
-        if (response.data.reason === 'Error: Duplicate Username') {
+        if (response.data.reason === 'Error: Email already in use') {
           notifyService.error('Sorry, an account already exists with that email address.');
         }
       });

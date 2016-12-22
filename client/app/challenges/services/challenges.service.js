@@ -6,8 +6,10 @@
 
   function challengesService($http) {
     var service = {
-      createChallenge: createChallenge,
-      completeChallenge: completeChallenge,
+      createPyramidChallenge: createPyramidChallenge,
+      createVersusChallenge: createVersusChallenge,
+      completePyramidChallenge: completePyramidChallenge,
+      completeVersusChallenge: completeVersusChallenge,
       getChallengesByCompetition: getChallengesByCompetition,
       getActiveChallengesByCompetition: getActiveChallengesByCompetition,
       getActiveChallengeByCompetitionByPlayer: getActiveChallengeByCompetitionByPlayer,
@@ -19,14 +21,26 @@
 
     return service;
 
-    function createChallenge(challenge) {
-      return $http.post('/api/challenges/create', {
+    function createPyramidChallenge(challenge) {
+      return $http.post('/api/challenges/pyramid/create', {
         challenge: challenge
       });
     }
 
-    function completeChallenge(challenge) {
-      return $http.post('/api/challenges/complete',  {
+    function createVersusChallenge(challenge) {
+      return $http.post('/api/challenges/versus/create', {
+        challenge: challenge
+      });
+    }
+
+    function completePyramidChallenge(challenge) {
+      return $http.post('/api/challenges/pyramid/complete',  {
+        challenge: challenge
+      });
+    }
+
+    function completeVersusChallenge(challenge) {
+      return $http.post('/api/challenges/versus/complete',  {
         challenge: challenge
       });
     }

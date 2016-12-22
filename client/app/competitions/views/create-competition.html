@@ -1,0 +1,85 @@
+<div class="container">
+    <div class="block-header">
+        <h2>Create a New Competition</h2>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h2>Competition Details</h2>
+        </div>
+        <div class="card-body card-padding">
+            <form name="createCompetitionForm" class="create-competition-form" ng-submit="vm.createCompetition(vm.newCompetition)" novalidate>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group m-b-30">
+                            <div class="fg-line">
+                                <input type="text" class="form-control" ng-model="vm.newCompetition.name" placeholder="Competition Name" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group m-b-30">
+                            <div class="fg-line">
+                                <input type="text" class="form-control" ng-model="vm.newCompetition.activity" placeholder="Competition Activity" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+							<select class="w-100" chosen data-placeholder-text-single="'Competition Type'" disable-search="true" ng-model="vm.newCompetition.type" ng-options="competitionType as competitionType for competitionType in vm.competitionTypes" ng-change="vm.reorderPlayers()" required>
+								<option value=""></option>
+							</select>
+						</div>
+                    </div>
+                    <div class="col-sm-3 m-t-5">
+                        <label class="m-b-10">Forfeit Days:
+                            <span ng-if="vm.newCompetition.forfeitDays === 0"> No Limit</span>
+                            <span ng-if="vm.newCompetition.forfeitDays > 0">{{ vm.newCompetition.forfeitDays }}</span>
+                        </label>
+                        <div class="input-slider m-b-30" slider ng-model="vm.newCompetition.forfeitDays" start="0" end="5" step="1" data-is-color="blue"></div>
+                    </div>
+                </div>
+                <div class="row swapper {{vm.newCompetition.type}}swap">
+                    <div class="col-sm-5 m-b-30">
+                        <label>Available Players</label>
+                        <ul>
+                            <li ng-repeat="player in vm.availablePlayers" ng-click="vm.addPlayer(player)">
+                                <span class="name">{{player.firstName}} {{player.lastName}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <span class="col-sm-1">
+                        <i class="zmdi zmdi-swap hidden-xs"></i>
+                        <i class="zmdi zmdi-swap-vertical visible-xs"></i>
+                    </span>
+                    <div class="col-sm-6 m-b-30">
+                        <label>Competition Players</label>
+                        <ul sv-root sv-part="vm.addedPlayers" sv-on-sort="vm.reorderPlayers()">
+                            <li ng-repeat="player in vm.addedPlayers" class="sortable added-player" ng-class="'added-player' + ($index + 1)" sv-element>
+                                <span class="position">{{player.position}}</span>
+                                <span class="name" sv-handle>{{player.firstName}} {{player.lastName}}</span>
+                                <i class="zmdi zmdi-close-circle-o" ng-click="vm.removePlayer(player, $index)"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="m-b-30">
+                    <div class="checkbox m-b-15">
+                        <label>
+                            <input type="checkbox" value="" ng-model="vm.newCompetition.restrictJoins">
+                            <i class="input-helper"></i>
+                            Admins must approve join requets
+                        </label>
+                    </div>
+                </div>
+                <div class="btns-group text-center">
+                    <button type="submit" class="btn btn-primary" ng-disabled="createCompetitionForm.$invalid">
+                        <i class="zmdi zmdi-check"></i> Create Competition
+                    </button>
+                    <a class="btn" ui-sref="competitions">
+                        <i class="zmdi zmdi-close"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

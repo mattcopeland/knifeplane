@@ -1,0 +1,84 @@
+<div class="container versus-container">
+    <div class="card m-b-0" id="messages-main">
+        <div class="ms-menu competition-menu" ng-class="{ 'toggled': vm.competitionMenuToggle }">
+            <div class="active-challenges c-overflow" wpm-active-challeneges competition="vm.competition"></div>
+        </div>
+        <!-- Competition -->
+        <div class="ms-body">
+            <div class="listview lv-message">
+                <div class="lv-header-alt clearfix">
+                    <div id="ms-menu-trigger" ng-class="{ 'open': vm.competitionMenuToggle }" ng-click="vm.competitionMenuToggle = (vm.competitionMenuToggle === true ? false : true )">
+                        <div class="line-wrap">
+                            <div class="line top"></div>
+                            <div class="line center"></div>
+                            <div class="line bottom"></div>
+                        </div>
+                    </div>
+                    <div class="lvh-label hidden-xs">{{vm.competition.activity}}</div>
+                    <ul class="lv-actions actions">
+                        <li ng-if="vm.currentUserIsAdmin">
+                            <a ui-sref="competitions.admin({competitionId: vm.competitionId})" uib-tooltip="Admin" tooltip-placement="top">
+                                <i class="zmdi zmdi-edit"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a ui-sref="competitions.stats({competitionId: vm.competitionId})" uib-tooltip="View Statistics" tooltip-placement="top">
+                                <i class="zmdi zmdi-trending-up"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="lv-body versus" vertilize-container>
+                    <div class="complete-challenege-modal {{vm.competition.class}}" ng-if="vm.hasActiveChallenge" ng-click="vm.toggleControls()" ng-class="{'show-controls': vm.showControls}">
+                        <i class="zmdi zmdi-close-circle-o" ng-if="vm.showControls"></i>
+                        <div class="expire-countdown" ng-if="vm.challengeExpireTime && !vm.showControls">
+                            <i class="zmdi zmdi-time" ng-if="vm.activeChallenge.opponent.team === 1"></i>
+                            <timer interval="1000" countdown="vm.challengeExpireTime" max-time-unit="'hour'" finish-callback="vm.completeChallenge(null, true)">{{hours}}:{{mminutes}}:{{sseconds}}</timer>
+                            <i class="zmdi zmdi-time" ng-if="vm.activeChallenge.opponent.team === 2"></i>
+                        </div>
+                        <div class="complete-challenge-controls" ng-if="vm.showControls">
+                            <p>Who won?</p>
+                            <div class="btn-container">
+                                <button class="btn btn-primary btn-lg" type="button" ng-click="vm.completeChallenge(1)">Team 1</button>
+                                <button class="btn btn-primary btn-lg" type="button" ng-click="vm.completeChallenge(2)">Team 2</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="versus-team {{team.class}}" ng-repeat="team in vm.competition.teams" ng-click="vm.showChallengeModal = !vm.showChallengeModal" ng-class="{'available': !vm.hasActiveChallenge && vm.currentUserIsOnCompetition && vm.currentUserPlayer.position !== $index + 1}">
+                        <div class="create-challenge-modal" ng-if="!vm.hasActiveChallenge && vm.currentUserIsOnCompetition && vm.currentUserPlayer.position !== $index+1 && vm.showChallengeModal">
+                            <i class="zmdi zmdi-close-circle-o"></i>
+                            <button class="btn btn-success btn-lg waves-effect" ng-click="vm.createChallenge($index + 1)">Challenge?</button>
+                        </div>
+                        <div class="team-name" vertilize>Team {{$index + 1}}</div>
+                        <div ng-repeat="player in team.players" class="versus-player" ng-class="player.class">
+                            {{player.firstName}} {{player.lastName}}
+                        </div>
+                    </div>
+                    <!--
+                    <div class="versus-team" ng-click="vm.showChallengeModal = !vm.showChallengeModal" ng-class="{'available': !vm.hasActiveChallenge && vm.currentUserIsOnCompetition && vm.currentUserPlayer.position !== 1}">
+                        <div class="create-challenge-modal" ng-if="!vm.hasActiveChallenge && vm.currentUserIsOnCompetition && vm.currentUserPlayer.position !== 1 && vm.showChallengeModal">
+                            <i class="zmdi zmdi-close-circle-o"></i>
+                            <button class="btn btn-success btn-lg waves-effect" ng-click="vm.createChallenge(1)">Challenge?</button>
+                        </div>
+                        <div class="team-name" vertilize>Team 1</div>
+                        <div ng-repeat="player in vm.competition.team1" class="versus-player" ng-class="player.class">
+                            {{player.firstName}} {{player.lastName}}
+                        </div>
+                    </div>
+                    <div class="versus-team" ng-click="vm.showChallengeModal = !vm.showChallengeModal" ng-class="{'available': !vm.hasActiveChallenge && vm.currentUserIsOnCompetition && vm.currentUserPlayer.position !== 2}">
+                        <div class="create-challenge-modal" ng-if="!vm.hasActiveChallenge && vm.currentUserIsOnCompetition && vm.currentUserPlayer.position !== 2 && vm.showChallengeModal">
+                            <i class="zmdi zmdi-close-circle-o"></i>
+                            <button class="btn btn-success btn-lg waves-effect" ng-click="vm.createChallenge(2)">Challenge?</button>
+                        </div>
+                        <div class="team-name" vertilize>Team 2</div>
+                        <div ng-repeat="player in vm.competition.team2" class="versus-player" ng-class="player.class">
+                            {{player.firstName}} {{player.lastName}}
+                        </div>
+                    </div>
+                    -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

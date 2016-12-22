@@ -2,15 +2,15 @@
   'use strict';
   angular.module('app').controller('HomeCtrl', HomeCtrl);
 
-  function HomeCtrl(pyramidsService) {
+  function HomeCtrl(competitionsService) {
     var vm = this;
-    vm.pyramids = [];
+    vm.competitions = [];
 
     activate();
 
     function activate() {
-      pyramidsService.getPyramids().then(function (pyramids) {
-        vm.pyramids = pyramids.data;
+      competitionsService.getCompetitions().then(function (competitions) {
+        vm.competitions = competitions.data;
       });
     }
   }

@@ -3,9 +3,9 @@
 
   angular
     .module('app')
-    .directive('kpFooter', kpFooter);
+    .directive('wpmFooter', wpmFooter);
 
-  function kpFooter() {
+  function wpmFooter() {
     var directive = {
       bindToController: true,
       controller: ctrlFunc,

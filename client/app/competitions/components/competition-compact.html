@@ -1,0 +1,19 @@
+<div class="card">
+    <div class="card-header ch-alt">
+        <h2>{{vm.competition.name}}</h2>
+        <a ui-sref="competitions.view({competitionId: vm.competition._id})" class="btn bgm-blue btn-float waves-effect">
+            <i class="zmdi zmdi-triangle-up"></i>
+        </a>
+    </div>
+    <div class="card-body card-padding-sm">
+        <div><i class="zmdi zmdi-play-circle-outline" uib-tooltip="{{vm.competition.activity}} competition" tooltip-placement="right"></i> {{vm.competition.activity}}</div>
+        <div><i class="zmdi zmdi-accounts" uib-tooltip="{{vm.competition.players.length}} players in this competition" tooltip-placement="right"></i> {{vm.competition.players.length}}</div>
+        <div ng-if="vm.competition.activeChallenge">
+            <i class="zmdi zmdi-notifications-active c-red" uib-tooltip="You have an active challenge" tooltip-placement="right"></i>
+            <div class="badge pull-right" ng-if="vm.competition.activeChallenge.expires">
+                <i class="zmdi zmdi-time"></i>
+                <timer interval="1000" countdown="vm.competition.activeChallenge.expires" max-time-unit="'hour'">{{hours}}:{{mminutes}}:{{sseconds}}</timer>
+            </div>
+        </div>
+    </div>
+</div>

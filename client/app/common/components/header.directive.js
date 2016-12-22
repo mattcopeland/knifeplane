@@ -3,9 +3,9 @@
 
   angular
     .module('app')
-    .directive('kpHeader', kpHeader);
+    .directive('wpmHeader', wpmHeader);
 
-  function kpHeader() {
+  function wpmHeader() {
     var directive = {
       bindToController: true,
       controller: ctrlFunc,

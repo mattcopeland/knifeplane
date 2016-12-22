@@ -1,7 +1,9 @@
 var Challenge = require('mongoose').model('Challenge');
+var Competition = require('mongoose').model('Competition');
 var websockets = require('../websockets');
 var emails = require('./emails');
 var alerts = require('./alerts');
+var _ = require('lodash');
 
 exports.getChallengesByCompetition = function (req, res) {
   var competitionId = req.query.competitionId;
@@ -53,6 +55,26 @@ exports.getCompletedChallengesByCompetition = function (req, res) {
   });
 };
 
+exports.getPlayerResultsByCompetition = function (req, res) {
+  var competitionId = req.query.competitionId;
+  var playerId = req.query.playerId;
+  Challenge.find({
+    competitionId: competitionId,
+    complete: {$eq: true},
+    '$or': [
+      {
+        'challenger._id': playerId
+      },{
+        'opponent._id': playerId
+      }
+    ]
+  }).sort({
+    'completed': -1
+  }).exec(function (err, collection) {
+    res.send(collection);
+  });
+};
+
 exports.deleteActiveChallengeByCompetitionByPlayer = function (req, res) {
   Challenge.findOneAndRemove({
     competitionId: req.query.competitionId,
@@ -77,45 +99,25 @@ exports.deleteChallenge = function (req, res) {
   Challenge.findOneAndRemove({
     _id: req.query.challengeId
   }).exec(function () {
-    websockets.broadcast('pyramid_updated', challengeDetails);
+    websockets.broadcast('competition_updated', challengeDetails);
     res.send('deleted');
   });
 };
 
-exports.getPlayerResultsByCompetition = function (req, res) {
-  var competitionId = req.query.competitionId;
-  var playerId = req.query.playerId;
-  Challenge.find({
-    competitionId: competitionId,
-    complete: {$eq: true},
-    '$or': [
-      {
-        'challenger._id': playerId
-      },{
-        'opponent._id': playerId
-      }
-    ]
-  }).sort({
-    'completed': -1
-  }).exec(function (err, collection) {
-    res.send(collection);
-  });
-};
-
-// Create a new challenge
-exports.createChallenge = function (req, res) {
+// Create a new pyramid challenge
+exports.createPyramidChallenge = function (req, res) {
   var challengeData = req.body.challenge;
   var challenger = challengeData.challenger.firstName + ' ' + challengeData.challenger.lastName;
   var opponent = challengeData.opponent.firstName + ' ' + challengeData.opponent.lastName;
   var challengeDetails = {
     competitionId: challengeData.competitionId,
-    description: challenger + ' has challenged ' + opponent
+    description: '<b>' + challenger + '</b> has challenged <b>' + opponent + '</b>'
   };
   var alertDetails = {
     userId: challengeData.opponent._id,
     competitionId: challengeData.competitionId,
     details: {
-      state: 'pyramids.view',
+      state: 'competitions.view',
       stateParams: {'competitionId': challengeData.competitionId},
       title: 'New Challenge',
       description: challenger + ' has challenged you'
@@ -131,12 +133,59 @@ exports.createChallenge = function (req, res) {
         reason: err.toString()
       });
     }
-    websockets.broadcast('pyramid_updated', challengeDetails);
+    websockets.broadcast('competition_updated', challengeDetails);
     res.status(201).json(challenge);
   }); 
 };
 
-exports.completeChallenge = function (req, res, next) {
+// Create a new versus challenge
+exports.createVersusChallenge = function (req, res) {
+  var challengeData = req.body.challenge;
+  var alertsArray = [];
+  var challengeDetails = {
+    competitionId: challengeData.competitionId,
+    description: '<b>Team ' + challengeData.challenger.team + '</b> has challenged <b>Team ' +  challengeData.opponent.team + '</b>'
+  };
+  // Get the players in the competition to send alerts
+  Competition.findOne({
+    _id: challengeData.competitionId
+  }, function (err, competition) {
+    if (err) {
+      console.log(err);
+    }
+    _.forEach(competition.players, function (player) {
+      // Don't alert the person who made the challenge'
+      if (player._id !== challengeData.challenger._id) {
+        var description = challengeData.challenger.team === player.position ? 'Your team just issued a challenge' : 'You have been challenged';
+        var alertDetails = {
+          competitionId: challengeData.competitionId,
+          userId: player._id,
+          details: {
+            state: 'competitions.view',
+            stateParams: {'competitionId': challengeData.competitionId},
+            title: 'New Challenge',
+            description: description
+          }
+        };
+        alertsArray.push(alertDetails);
+      }
+    });
+    alerts.createAlerts(alertsArray);
+  });
+  
+  Challenge.create(challengeData, function (err, challenge) {
+    if (err) {
+      res.status(400);
+      return res.send({
+        reason: err.toString()
+      });
+    }
+    websockets.broadcast('competition_updated', challengeDetails);
+    res.status(201).json(challenge);
+  }); 
+};
+
+exports.completePyramidChallenge = function (req, res, next) {
   var challengeData = req.body.challenge;
   var winner, loser, description;
   if (challengeData.forfeit) {
@@ -153,7 +202,7 @@ exports.completeChallenge = function (req, res, next) {
       winner = challengeData.opponent.firstName + ' ' + challengeData.opponent.lastName;
       loser = challengeData.challenger.firstName + ' ' + challengeData.challenger.lastName;
     }
-    description = winner + ' just defeated ' + loser;
+    description = '<b>' + winner + '</b> just defeated <b>' + loser + '</b>';
   }
 
   var challengeDetails = {
@@ -181,7 +230,62 @@ exports.completeChallenge = function (req, res, next) {
     if (err) {
       return next(err);
     }
-    websockets.broadcast('pyramid_updated', challengeDetails);
+    websockets.broadcast('competition_updated', challengeDetails);
+    res.status(201).json(challenge);
+  });
+};
+
+exports.completeVersusChallenge = function (req, res, next) {
+  var challengeData = req.body.challenge;
+  var alertsArray= [];
+  var winner, loser, description;
+  if (challengeData.forfeit) {
+    description = 'Team ' + challengeData.opponent.team + ' forfeited to Team ' +  challengeData.challenger.team;
+  } else {
+    if (challengeData.winner === 'challenger') {
+      winner = 'Team ' + challengeData.challenger.team;
+      loser = 'Team ' + challengeData.opponent.team;
+    } else {
+      winner = 'Team ' + challengeData.opponent.team;
+      loser = 'Team ' + challengeData.challenger.team;
+    }
+    description = '<b>' + winner + '</b> just defeated <b>' + loser + '</b>';
+  }
+
+  var challengeDetails = {
+    competitionId: challengeData.competitionId,
+    description: description
+  };
+
+  // Get the players in the competition to send alerts
+  Competition.findOne({
+    _id: challengeData.competitionId
+  }, function (err, competition) {
+    if (err) {
+      console.log(err);
+    }
+    _.forEach(competition.players, function (player) {
+      var alertDetails = {
+        competitionId: competition._id,
+        userId: player._id
+      };
+      alertsArray.push(alertDetails);
+    });
+    alerts.clearAlertsOnCompletedChallenge(alertsArray);
+  });
+
+  Challenge.findOneAndUpdate({
+    '_id': challengeData._id
+  }, {
+    'complete': true,
+    'forfeit': challengeData.forfeit,
+    'completed': Date.now(),
+    'winner': challengeData.winner
+  }).exec(function (err, challenge) {
+    if (err) {
+      return next(err);
+    }
+    websockets.broadcast('competition_updated', challengeDetails);
     res.status(201).json(challenge);
   });
 };

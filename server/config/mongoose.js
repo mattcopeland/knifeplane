@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'),
   userModel = require('../models/User'),
-  pyramidModel = require('../models/Pyramid'),
+  competitionModel = require('../models/Competition'),
   challengeModel = require('../models/Challenge'),
   alertsModel = require('../models/Alert');
 
@@ -15,5 +15,5 @@ module.exports = function (config) {
   });
 
   userModel.createDefaultUsers();
-  pyramidModel.createDefaultPyramid();
+  competitionModel.createDefaultCompetition();
 };

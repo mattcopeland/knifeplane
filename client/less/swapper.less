@@ -15,7 +15,7 @@
             width: 100%;
             
             &:hover {
-                background-color: #cacaca;
+                background-color: #cacaca !important;
             }
 
             &.ng-enter {
@@ -99,35 +99,72 @@
     }
 }
 
-.added-player1,
-.added-player4,
-.added-player5,
-.added-player6,
-.added-player11,
-.added-player12,
-.added-player13,
-.added-player14,
-.added-player15,
-.added-player22,
-.added-player23,
-.added-player24,
-.added-player25,
-.added-player26,
-.added-player27,
-.added-player28 {
-    background-color: #eee;
+.pyramidswap {
+    .added-player1,
+    .added-player4,
+    .added-player5,
+    .added-player6,
+    .added-player11,
+    .added-player12,
+    .added-player13,
+    .added-player14,
+    .added-player15,
+    .added-player22,
+    .added-player23,
+    .added-player24,
+    .added-player25,
+    .added-player26,
+    .added-player27,
+    .added-player28 {
+        background-color: #eee;
+    }
+
+    .added-player2,
+    .added-player3,
+    .added-player7,
+    .added-player8,
+    .added-player9,
+    .added-player16,
+    .added-player17,
+    .added-player18,
+    .added-player19,
+    .added-player20,
+    .added-player21 {
+        background-color: #ddd;
+    }
 }
 
-.added-player2,
-.added-player3,
-.added-player7,
-.added-player8,
-.added-player9,
-.added-player16,
-.added-player17,
-.added-player18,
-.added-player19,
-.added-player20,
-.added-player21 {
-    background-color: #ddd;
+.versusswap {
+    .added-player {
+        background-color: #eee;
+    }
+    .added-player:nth-last-child(2):first-child ~ .added-player,
+    .added-player:nth-last-child(3):first-child ~ .added-player:nth-child(2) ~ .added-player,
+    .added-player:nth-last-child(4):first-child ~ .added-player:nth-child(2) ~ .added-player,
+    .added-player:nth-last-child(5):first-child ~ .added-player:nth-child(3) ~ .added-player,
+    .added-player:nth-last-child(6):first-child ~ .added-player:nth-child(3) ~ .added-player,
+    .added-player:nth-last-child(7):first-child ~ .added-player:nth-child(4) ~ .added-player,
+    .added-player:nth-last-child(8):first-child ~ .added-player:nth-child(4) ~ .added-player,
+    .added-player:nth-last-child(9):first-child ~ .added-player:nth-child(5) ~ .added-player,
+    .added-player:nth-last-child(10):first-child ~ .added-player:nth-child(5) ~ .added-player,
+    .added-player:nth-last-child(11):first-child ~ .added-player:nth-child(6) ~ .added-player,
+    .added-player:nth-last-child(12):first-child ~ .added-player:nth-child(6) ~ .added-player,
+    .added-player:nth-last-child(13):first-child ~ .added-player:nth-child(7) ~ .added-player,
+    .added-player:nth-last-child(14):first-child ~ .added-player:nth-child(7) ~ .added-player,
+    .added-player:nth-last-child(15):first-child ~ .added-player:nth-child(8) ~ .added-player,
+    .added-player:nth-last-child(16):first-child ~ .added-player:nth-child(8) ~ .added-player,
+    .added-player:nth-last-child(17):first-child ~ .added-player:nth-child(9) ~ .added-player,
+    .added-player:nth-last-child(18):first-child ~ .added-player:nth-child(9) ~ .added-player,
+    .added-player:nth-last-child(19):first-child ~ .added-player:nth-child(10) ~ .added-player,
+    .added-player:nth-last-child(20):first-child ~ .added-player:nth-child(10) ~ .added-player,
+    .added-player:nth-last-child(21):first-child ~ .added-player:nth-child(11) ~ .added-player,
+    .added-player:nth-last-child(22):first-child ~ .added-player:nth-child(11) ~ .added-player,
+    .added-player:nth-last-child(23):first-child ~ .added-player:nth-child(12) ~ .added-player,
+    .added-player:nth-last-child(24):first-child ~ .added-player:nth-child(12) ~ .added-player,
+    .added-player:nth-last-child(25):first-child ~ .added-player:nth-child(13) ~ .added-player,
+    .added-player:nth-last-child(26):first-child ~ .added-player:nth-child(13) ~ .added-player,
+    .added-player:nth-last-child(27):first-child ~ .added-player:nth-child(14) ~ .added-player,
+    .added-player:nth-last-child(28):first-child ~ .added-player:nth-child(14) ~ .added-player  {
+        background-color: #ddd;
+    }
 }

@@ -23,7 +23,7 @@
             $state.previous = null;
             $state.prevParams = null;
           } else {
-            $state.go('pyramids.myPyramids');
+            $state.go('competitions.myCompetitions');
           }
         }
       });

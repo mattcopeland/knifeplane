@@ -1,17 +1,4 @@
 // Pyramid View
-.pyramid-menu {
-    .btn-container {
-        padding: 8px 0;
-        text-align: center;
-        .btn {
-            margin-left: 5px;
-            &:first-child {
-                margin-left: 0;
-            }
-        }
-    }
-}
-
 .pyramid {
     text-align: center;
     .level {
@@ -54,6 +41,10 @@
         &.empty {
             background-color: @m-gray;
             color: #fff;
+
+            &.joinable {
+                cursor: pointer;
+            }
         }
         &.current-user {
             border-top: 3px solid @m-blue;
@@ -64,27 +55,71 @@
         }
         &.unavailable {
             border-top: 3px solid @m-red;
+
+            &.current-opponent {
+                border-top: 3px solid @m-blue;
+                cursor: pointer;
+            }
+            &.current-user {
+                border-top: 3px solid @m-blue;
+                cursor: pointer;
+            }
+        }
+
+        .create-challenge-modal,
+        .complete-challenge-modal {
+            display: none;
+
+            > i {
+                font-size: 18px;
+                position: absolute;
+                right: 2px;
+                top: 2px;
+            }
+        }
+
+        &.available {
+            .create-challenge-modal {
+                background: fade(@m-green, 25%);
+                border: 3px solid @m-green;
+                border-top: none;
+                display: block;
+                height: 100%;
+                left: 0;
+                position: absolute;
+                text-align: center;
+                top: 0;
+                width: 100%;
+                animation: fadeIn .3s ease both;
+
+                > i {
+                    color: @m-green;
+                }
+
+                button {
+                    .vertical-align();
+                }
+            }
+        }
+
+        &.unavailable {
+            .complete-challenge-modal {
+                background: #fff;
+                border: 3px solid @m-blue;
+                border-top: none;
+                display: block;
+                height: 100%;
+                left: 0;
+                position: absolute;
+                text-align: center;
+                top: 0;
+                width: 100%;
+                animation: fadeIn .3s ease both;
+
+                > i {
+                    color: @m-blue;
+                }
+            }
         }
     }
-}
-
-.pending-players .card-body {
-    overflow-x: auto;
-    white-space: nowrap;
-    .pending-player {
-        display: inline-block;
-        margin: 10px 0 10px 10px;
-        padding: 10px;
-        text-align: center;
-        &:last-child {
-            margin-right: 10px;
-        }
-        .player {
-            font-size: @font-size-base + 3px;
-        }
-    }
-}
-
-.player-joins-checkbox {
-  margin: 6px 0;
 }

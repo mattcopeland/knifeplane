@@ -1,6 +1,6 @@
 var auth = require('./auth'),
   users = require('../controllers/users'),
-  pyramids = require('../controllers/pyramids'),
+  competitions = require('../controllers/competitions'),
   challenges = require('../controllers/challenges'),
   alerts = require('../controllers/alerts');
   
@@ -12,18 +12,18 @@ module.exports = function (app) {
   app.get('/api/user/password/link', users.generatePasswordResetLink);
   app.put('/api/user/password/reset', users.resetPassword);
 
-  app.get('/api/pyramid', pyramids.getPyramid);
-  app.get('/api/pyramids', pyramids.getPyramids);
-  app.get('/api/pyramids/user', auth.requiresApiLogin, pyramids.getPyramidsForUser);
-  app.post('/api/pyramids/create', auth.requiresApiLogin, pyramids.createPyramid);
-  app.post('/api/pyramids/update', auth.requiresApiLogin, pyramids.updatePyramid);
-  app.delete('/api/pyramids/delete', auth.requiresApiLogin, pyramids.deletePyramid);
-  app.post('/api/pyramids/swapPositions', pyramids.swapPositions);
-  app.post('/api/pyramids/addPlayer', auth.requiresApiLogin, pyramids.addPlayer);
-  app.post('/api/pyramids/addPlayerRequest', auth.requiresApiLogin, pyramids.addPlayerRequest);
-  app.post('/api/pyramids/removePlayer', auth.requiresApiLogin, pyramids.removePlayer);
-  app.post('/api/pyramids/approvePlayer', auth.requiresApiLogin, pyramids.approvePlayer);
-  app.post('/api/pyramids/denyPlayer', auth.requiresApiLogin, pyramids.denyPlayer);
+  app.get('/api/competition', competitions.getCompetition);
+  app.get('/api/competitions', competitions.getCompetitions);
+  app.get('/api/competitions/user', auth.requiresApiLogin, competitions.getCompetitionsForUser);
+  app.post('/api/competitions/create', auth.requiresApiLogin, competitions.createCompetition);
+  app.post('/api/competitions/update', auth.requiresApiLogin, competitions.updateCompetition);
+  app.delete('/api/competitions/delete', auth.requiresApiLogin, competitions.deleteCompetition);
+  app.post('/api/competitions/swapPositions', competitions.swapPositions);
+  app.post('/api/competitions/addPlayer', auth.requiresApiLogin, competitions.addPlayer);
+  app.post('/api/competitions/addPlayerRequest', auth.requiresApiLogin, competitions.addPlayerRequest);
+  app.post('/api/competitions/removePlayer', auth.requiresApiLogin, competitions.removePlayer);
+  app.post('/api/competitions/approvePlayer', auth.requiresApiLogin, competitions.approvePlayer);
+  app.post('/api/competitions/denyPlayer', auth.requiresApiLogin, competitions.denyPlayer);
 
   app.get('/api/challenges/competition', challenges.getChallengesByCompetition);
   app.get('/api/challenges/active/competition', challenges.getActiveChallengesByCompetition);
@@ -32,8 +32,10 @@ module.exports = function (app) {
   app.get('/api/challenges/results/competition/player', challenges.getPlayerResultsByCompetition);
   app.delete('/api/challenges/active/competition/player/delete', auth.requiresApiLogin, challenges.deleteActiveChallengeByCompetitionByPlayer);
   app.delete('/api/challenges/delete', auth.requiresApiLogin, challenges.deleteChallenge);
-  app.post('/api/challenges/create', auth.requiresApiLogin, challenges.createChallenge);
-  app.post('/api/challenges/complete', challenges.completeChallenge);
+  app.post('/api/challenges/pyramid/create', auth.requiresApiLogin, challenges.createPyramidChallenge);
+  app.post('/api/challenges/versus/create', auth.requiresApiLogin, challenges.createVersusChallenge);
+  app.post('/api/challenges/pyramid/complete', challenges.completePyramidChallenge);
+  app.post('/api/challenges/versus/complete', challenges.completeVersusChallenge);
 
   app.get('/api/alerts/', auth.requiresApiLogin, alerts.getActiveAlertsByPlayer);
   app.put('/api/alert/clear', auth.requiresApiLogin, alerts.clearAlert);
@@ -47,7 +49,7 @@ module.exports = function (app) {
   });
 
   app.all('/api/*', function (req, res) {
-    res.send(404);
+    res.sendStatus(404);
   });
 
   app.get('*', function (req, res) {

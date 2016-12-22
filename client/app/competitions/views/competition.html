@@ -1,0 +1,7 @@
+<div class="container">
+    <div class="block-header">
+        <h2>{{vm.competition.name}}</h2>
+    </div>
+</div>
+<div wpm-pyramid ng-if="vm.competitionId && vm.competition.type === 'pyramid'" competition="vm.competition"></div>
+<div wpm-versus ng-if="vm.competitionId && vm.competition.type === 'versus'" competition="vm.competition"></div>

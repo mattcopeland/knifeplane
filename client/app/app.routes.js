@@ -14,7 +14,7 @@
     // for any unmatched url
     $urlRouterProvider.otherwise('/');
 
-    $urlRouterProvider.when('/pyramids/', '/pyramids');
+    $urlRouterProvider.when('/competitions/', '/competitions');
 
     $stateProvider
       .state('home', {
@@ -26,64 +26,64 @@
             templateUrl: 'common/views/home.html'
           }
         }
-      }).state('pyramids', {
-        url: '/pyramids',
+      }).state('competitions', {
+        url: '/competitions',
         views: {
           'content': {
-            controller: 'PyramidsCtrl',
+            controller: 'CompetitionsCtrl',
             controllerAs: 'vm',
-            templateUrl: 'pyramids/views/pyramids.html'
+            templateUrl: 'competitions/views/competitions.html'
           }
         }
-      }).state('pyramids.myPyramids', {
-        url: '/my-pyramids',
+      }).state('competitions.myCompetitions', {
+        url: '/my-competitions',
         views: {
           'content@': {
-            controller: 'MyPyramidsCtrl',
+            controller: 'MyCompetitionsCtrl',
             controllerAs: 'vm',
-            templateUrl: 'pyramids/views/my-pyramids.html'
+            templateUrl: 'competitions/views/my-competitions.html'
           }
         },
         resolve: {
           auth: routeRoleChecks.user
         }
-      }).state('pyramids.view', {
+      }).state('competitions.view', {
         url: '/view/:competitionId',
         views: {
           'content@': {
-            controller: 'PyramidCtrl',
+            controller: 'CompetitionCtrl',
             controllerAs: 'vm',
-            templateUrl: 'pyramids/views/pyramid.html'
+            templateUrl: 'competitions/views/competition.html'
           }
         }
-      }).state('pyramids.stats', {
+      }).state('competitions.stats', {
         url: '/stats/:competitionId',
         views: {
           'content@': {
-            controller: 'StatsCtrl',
+            controller: 'CompetitionStatsCtrl',
             controllerAs: 'vm',
-            templateUrl: 'pyramids/views/stats.html'
+            templateUrl: 'competitions/views/competition-stats.html'
           }
         }
-      }).state('pyramids.admin', {
+      }).state('competitions.admin', {
         url: '/admin/:competitionId',
         views: {
           'content@': {
-            controller: 'AdminCtrl',
+            controller: 'CompetitionAdminCtrl',
             controllerAs: 'vm',
-            templateUrl: 'pyramids/views/admin.html'
+            templateUrl: 'competitions/views/competition-admin.html'
           }
         },
         resolve: {
           auth: routeRoleChecks.user
         }
-      }).state('pyramids.create', {
+      }).state('competitions.create', {
         url: '/create',
         views: {
           'content@': {
-            controller: 'CreatePyramidCtrl',
+            controller: 'CreateCompetitionCtrl',
             controllerAs: 'vm',
-            templateUrl: 'pyramids/views/create-pyramid.html'
+            templateUrl: 'competitions/views/create-competition.html'
           }
         },
         resolve: {

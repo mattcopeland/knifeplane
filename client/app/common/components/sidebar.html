@@ -9,14 +9,14 @@
         <li ui-sref-active="active" ng-if="!vm.indentity.isAuthenticated()">
             <a ui-sref="register"><i class="zmdi zmdi-account-add"></i> Register</a>
         </li>
-        <li class="sub-menu" ng-class="{ 'active toggled': appCtrl.$state.includes('pyramids') }">
-            <a href="" toggle-submenu><i class="zmdi zmdi-triangle-up"></i> Pyramids</a>
+        <li class="sub-menu" ng-class="{ 'active toggled': appCtrl.$state.includes('competitions') }">
+            <a href="" toggle-submenu><i class="zmdi zmdi-triangle-up"></i> Competitions</a>
             <ul>
                 <li>
-                    <a ui-sref-active="active" ui-sref="pyramids.myPyramids">My Pyramids</a>
+                    <a ui-sref-active="active" ui-sref="competitions.myCompetitions">My Competitions</a>
                 </li>
                 <li>
-                    <a ui-sref-active="active" ui-sref="pyramids.create">Cerate Pyramid</a>
+                    <a ui-sref-active="active" ui-sref="competitions.create">Cerate Competition</a>
                 </li>
             </ul>
         </li>

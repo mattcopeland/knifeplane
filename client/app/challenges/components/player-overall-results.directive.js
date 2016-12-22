@@ -3,9 +3,9 @@
 
   angular
     .module('app')
-    .directive('kpPlayerOverallResults', kpPlayerOverallResults);
+    .directive('wpmPlayerOverallResults', wpmPlayerOverallResults);
 
-  function kpPlayerOverallResults() {
+  function wpmPlayerOverallResults() {
     var directive = {
       bindToController: true,
       controller: ctrlFunc,
@@ -22,7 +22,7 @@
   /* @ngInject */
   function ctrlFunc($scope) {
     var vm = this;
-    vm.maxLevels = 10;
+    vm.maxLevels = 7;
     vm.wins = {
       total: 0,
       asChallenger: 0,

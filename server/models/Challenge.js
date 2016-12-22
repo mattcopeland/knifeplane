@@ -5,6 +5,10 @@ var challengeSchema = mongoose.Schema({
     type: String,
     required: '{PATH} is required!'
   },
+  type: {
+    type: String,
+    required:  '{PATH} is required!'
+  },
   challenger: {
     type: Object,
     required: '{PATH} is required!'
