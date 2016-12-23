@@ -61,6 +61,7 @@
           vm.availableAdmins.push({
             firstName: availableAdmin.firstName,
             lastName: availableAdmin.lastName,
+            displayName: availableAdmin.displayName,
             email: availableAdmin.username,
             _id: availableAdmin._id
           });

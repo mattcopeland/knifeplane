@@ -112,6 +112,7 @@
             email: player.username,
             firstName: player.firstName,
             lastName: player.lastName,
+            displayName: player.displayName,
             position: player.position
           };
           competition.players.push(addPlayer);
@@ -121,6 +122,7 @@
           email: identityService.currentUser.username,
           firstName: identityService.currentUser.firstName,
           lastName: identityService.currentUser.lastName,
+          displayName: identityService.currentUser.displayName,
           primary: true
         }];
 

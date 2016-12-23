@@ -1,4 +1,6 @@
 var User = require('mongoose').model('User'),
+  Competition = require('mongoose').model('Competition'),
+  Challenge = require('mongoose').model('Challenge'),
   encrypt = require('../utilities/encryption'),
   uuid = require('uuid'),
   emails = require('./emails');
@@ -95,6 +97,81 @@ exports.updateUser = function (req, res) {
   if (userUpdates.password && userUpdates.password.length > 0) {
     userUpdates.salt = encrypt.createSalt();
     userUpdates.hashedPwd = encrypt.hashPwd(userUpdates.salt, userUpdates.password);
+  }
+
+  // Uppdate the user's name in competitions players
+  if (userUpdates.displayName && userUpdates.displayName.length > 0) {
+    Competition.update({
+      'players._id': userUpdates._id
+    }, {
+      $set: {
+        'players.$.firstName': userUpdates.firstName,
+        'players.$.lastName': userUpdates.lastName,
+        'players.$.displayName': userUpdates.displayName
+      }
+    },{
+      multi: true
+    }).exec();
+  }
+
+  // Uppdate the user's name in competitions admins
+  if (userUpdates.displayName && userUpdates.displayName.length > 0) {
+    Competition.update({
+      'admins._id': userUpdates._id
+    }, {
+      $set: {
+        'admins.$.firstName': userUpdates.firstName,
+        'admins.$.lastName': userUpdates.lastName,
+        'admins.$.displayName': userUpdates.displayName
+      }
+    },{
+      multi: true
+    }).exec();
+  }
+
+  // Uppdate the user's name in competitions pending players
+  if (userUpdates.displayName && userUpdates.displayName.length > 0) {
+    Competition.update({
+      'pendingPlayers._id': userUpdates._id
+    }, {
+      $set: {
+        'pendingPlayers.$.firstName': userUpdates.firstName,
+        'pendingPlayers.$.lastName': userUpdates.lastName,
+        'pendingPlayers.$.displayName': userUpdates.displayName
+      }
+    },{
+      multi: true
+    }).exec();
+  }
+
+  // Uppdate the user's name in challenges when they are the challenger
+  if (userUpdates.displayName && userUpdates.displayName.length > 0) {
+    Challenge.update({
+      'challenger._id': userUpdates._id
+    }, {
+      $set: {
+        'challenger.firstName': userUpdates.firstName,
+        'challenger.lastName': userUpdates.lastName,
+        'challenger.displayName': userUpdates.displayName
+      }
+    },{
+      multi: true
+    }).exec();
+  }
+
+  // Uppdate the user's name in challenges when they are the opponent
+  if (userUpdates.displayName && userUpdates.displayName.length > 0) {
+    Challenge.update({
+      'opponent._id': userUpdates._id
+    }, {
+      $set: {
+        'opponent.firstName': userUpdates.firstName,
+        'opponent.lastName': userUpdates.lastName,
+        'opponent.displayName': userUpdates.displayName
+      }
+    },{
+      multi: true
+    }).exec();
   }
 
   User.findByIdAndUpdate(userUpdates._id, userUpdates, function (err, user) {

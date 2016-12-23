@@ -67,6 +67,7 @@ function createDefaultUsers() {
       User.create({
         firstName: 'Matt',
         lastName: 'Copeland',
+        displayName: 'Matt Copeland',
         username: 'matt@matt.com',
         salt: salt,
         hashedPwd: hash,
@@ -79,6 +80,7 @@ function createDefaultUsers() {
       User.create({
         firstName: 'Tom',
         lastName: 'Klonowski',
+        displayName: 'Tom Klonowski',
         username: 'tom@tom.com',
         salt: salt,
         hashedPwd: hash,
@@ -91,6 +93,7 @@ function createDefaultUsers() {
       User.create({
         firstName: 'Justin',
         lastName: 'Modrzynski',
+        displayName: 'j-mod',
         username: 'justin@justin.com',
         salt: salt,
         hashedPwd: hash,
@@ -103,6 +106,7 @@ function createDefaultUsers() {
       User.create({
         firstName: 'JT',
         lastName: 'Ripper',
+        displayName: 'JT Ripper',
         username: 'jt@jt.com',
         salt: salt,
         hashedPwd: hash,
@@ -115,6 +119,7 @@ function createDefaultUsers() {
       User.create({
         firstName: 'Jodi',
         lastName: 'Hamann',
+        displayName: 'Jodi',
         username: 'jodi@jodi.com',
         salt: salt,
         hashedPwd: hash,
@@ -127,6 +132,7 @@ function createDefaultUsers() {
       User.create({
         firstName: 'Ryan',
         lastName: 'Kirkpatrick',
+        displayName: 'Classic',
         username: 'ryan@ryan.com',
         salt: salt,
         hashedPwd: hash,
@@ -139,6 +145,7 @@ function createDefaultUsers() {
       User.create({
         firstName: 'Abdul',
         lastName: 'Kader',
+        displayName: 'Abdul Kader',
         username: 'abdul@abdul.com',
         salt: salt,
         hashedPwd: hash,

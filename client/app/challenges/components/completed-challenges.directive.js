@@ -43,10 +43,7 @@
         if (challenge.type === 'versus') {
           challenge.challenger.displayName = 'Team ' + challenge.challenger.team;
           challenge.opponent.displayName = 'Team ' + challenge.opponent.team;
-        } else if (challenge.type === 'pyramid') {
-          challenge.challenger.displayName = challenge.challenger.firstName +  ' ' + challenge.challenger.lastName;
-          challenge.opponent.displayName = challenge.opponent.firstName + ' ' + challenge.opponent.lastName;
-        } 
+        }
         challenge.whenCompleted = moment(challenge.completed).calendar(null, {
           sameDay: '[Today]',
           nextDay: '[Tomorrow]',

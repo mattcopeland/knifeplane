@@ -14,6 +14,9 @@
       if (newUser.password !== newUser.confirmPassword) {
         notifyService.error('Passwords don\'t match!');
       } else {
+        if (!newUser.displayName) {
+          newUser.displayName = newUser.firstName + ' ' + newUser.lastName;
+        }
         authService.createUser(newUser).then(function () {
           $state.go('verify');
         });

@@ -191,6 +191,7 @@
         vm.competition.players.push({
           firstName: 'Empty',
           lastName: 'Spot',
+          displayName: 'Empty Spot',
           position: 99,
           class: vm.currentUserIsOnCompetition ? 'empty': 'joinable empty'
         });
@@ -235,6 +236,7 @@
             email: vm.currentUserPlayer.email,
             firstName: vm.currentUserPlayer.firstName,
             lastName: vm.currentUserPlayer.lastName,
+            displayName: vm.currentUserPlayer.displayName,
             position: vm.currentUserPlayer.position
           },
           opponent: {
@@ -242,6 +244,7 @@
             email: player.email,
             firstName: player.firstName,
             lastName: player.lastName,
+            displayName: player.displayName,
             position: player.position
           }
         };
@@ -333,6 +336,7 @@
             _id: identityService.currentUser._id,
             firstName: identityService.currentUser.firstName,
             lastName: identityService.currentUser.lastName,
+            displayName: identityService.currentUser.displayName,
             email: identityService.currentUser.username,
             position: vm.numberOfRealPlayers + 1
           };
@@ -445,6 +449,7 @@
                 _id: competition.players[i]._id,
                 firstName: competition.players[i].firstName,
                 lastName: competition.players[i].lastName,
+                displayName: competition.players[i].displayName,
                 position: competition.players[i].position
               };
 

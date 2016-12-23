@@ -65,6 +65,7 @@
           vm.availablePlayers.push({
             firstName: availablePlayer.firstName,
             lastName: availablePlayer.lastName,
+            displayName: availablePlayer.displayName,
             email: availablePlayer.username,
             _id: availablePlayer._id
           });

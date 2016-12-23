@@ -43,9 +43,6 @@
             if (challenge.type === 'versus') {
               challenge.challenger.displayName = 'Team ' + challenge.challenger.team;
               challenge.opponent.displayName = 'Team ' + challenge.opponent.team;
-            } else if (challenge.type === 'pyramid') {
-              challenge.challenger.displayName = challenge.challenger.firstName + ' ' + challenge.challenger.lastName;
-              challenge.opponent.displayName = challenge.opponent.firstName + ' ' + challenge.opponent.lastName;
             }
             if (challenge.timeLimit !== 0) {
               challenge.expires = (moment().diff(moment(challenge.created).add(challenge.timeLimit, 'd'),'s')) * -1;

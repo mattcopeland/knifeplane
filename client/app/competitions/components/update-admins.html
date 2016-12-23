@@ -8,7 +8,7 @@
                 <label>Available Admins</label>
                 <ul>
                     <li ng-repeat="admin in vm.availableAdmins" ng-click="vm.addAdmin(admin)">
-                        <span class="name">{{admin.firstName}} {{admin.lastName}}</span>
+                        <span class="name">{{admin.displayName}}</span>
                     </li>
                 </ul>
             </div>
@@ -21,7 +21,7 @@
                 <ul>
                     <li ng-repeat="admin in vm.addedAdmins">
                         <span class="position"><i class="zmdi zmdi-star" ng-if="admin.primary"></i></span>
-                        <span class="name">{{admin.firstName}} {{admin.lastName}}</span>
+                        <span class="name">{{admin.displayName}}</span>
                         <i class="zmdi zmdi-close-circle-o" ng-click="vm.removeAdmin(admin, $index)" ng-if="!admin.primary && vm.userIsPrimaryAdmin"></i>
                     </li>
                 </ul>
