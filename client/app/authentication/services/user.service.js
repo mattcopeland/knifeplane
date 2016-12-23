@@ -7,7 +7,8 @@
       getAllUsers: getAllUsers,
       verifyUser: verifyUser,
       generatePasswordResetLink: generatePasswordResetLink,
-      resetPassword: resetPassword
+      resetPassword: resetPassword,
+      updateUser: updateUser
     };
     return service;
 
@@ -40,6 +41,12 @@
         verificationToken: verificationToken,
         password: password
       });  
+    }
+
+    function updateUser(user) {
+      return $http.put('/api/user', {
+        user: user
+      });
     }
   }
 })();
