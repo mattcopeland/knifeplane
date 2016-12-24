@@ -17,7 +17,7 @@
     <div wpm-completed-challeneges competition-id="{{vm.competitionId}}" challenges="vm.challenges"" allow-delete="vm.isAdmin"></div>
     <div wpm-pending-players competition="vm.competition"></div>
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="card">
                 <div class="card-header ch-alt">
                     <h2>Delete Competition</h2>
@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="card">
                 <div class="card-header ch-alt">
                     <h2>Player Joins</h2>
@@ -38,6 +38,22 @@
                             <input type="checkbox" value="" ng-model="vm.competition.restrictJoins" ng-change="vm.updateCompetitionRestrictJoins()">
                             <i class="input-helper"></i>
                             Admins must approve join requets
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header ch-alt">
+                    <h2>Private Status</h2>
+                </div>
+                <div class="card-body card-padding-sm">
+                    <div class="checkbox player-joins-checkbox">
+                        <label>
+                            <input type="checkbox" value="" ng-model="vm.competition.private" ng-change="vm.updateCompetitionPrivate()">
+                            <i class="input-helper"></i>
+                            Make this competition private
                         </label>
                     </div>
                 </div>

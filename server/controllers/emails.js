@@ -109,7 +109,7 @@ exports.challengeNotification = function (challenge, host) {
     opponentEmail = 'wannaplaymeapp@gmail.com';
   }
 
-  var challenger = challenge.challenger.firstName + ' ' + challenge.challenger.lastName;
+  var challenger = challenge.challenger.displayName;
   var competitionName = challenge.competitionName;
   var timeLimit = '';
   if (challenge.timeLimit) {

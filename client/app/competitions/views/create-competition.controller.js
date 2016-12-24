@@ -12,7 +12,8 @@
     var vm = this;
     vm.newCompetition = {
       players: [],
-      restrictJoins: false
+      restrictJoins: false,
+      private: false
     };
     vm.availablePlayers = [];
     vm.addedPlayers = [];

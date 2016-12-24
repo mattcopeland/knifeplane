@@ -13,7 +13,9 @@ exports.getCompetition = function (req, res) {
 };
 
 exports.getCompetitions = function (req, res) {
-  Competition.find({}).exec(function (err, collection) {
+  Competition.find({
+    private: { $ne: true }
+  }).exec(function (err, collection) {
     res.send(collection);
   });
 };
@@ -75,6 +77,7 @@ exports.updateCompetition = function (req, res, next) {
         'name': competitionData.name,
         'forfeitDays': competitionData.forfeitDays,
         'restrictJoins': competitionData.restrictJoins,
+        'private': competitionData.private,
         'players': competitionData.players,
         'pendingPlayers': competitionData.pendingPlayers,
         'admins': competitionData.admins
@@ -138,7 +141,7 @@ exports.swapPositions = function (req, res, next) {
 };
 
 exports.addPlayer = function (req, res, next) {
-  var player = req.body.player.firstName + ' ' + req.body.player.lastName;
+  var player = req.body.player.displayName;
   var details = {
     competitionId: req.body.competitionId,
     description: '<b>' + player + '</b> has joined the competition'
@@ -161,7 +164,7 @@ exports.addPlayer = function (req, res, next) {
 
 exports.addPlayerRequest = function (req, res, next) {
   emails.addPlayerRequest(req.body.competition, req.body.player, req.get('host'));
-  var player = req.body.player.firstName + ' ' + req.body.player.lastName;
+  var player = req.body.player.displayName;
   var details =  {
     competitionId: req.body.competition._id,
     description: '<b>' + player + '</b> has requested to join the competition'
@@ -187,7 +190,7 @@ exports.removePlayer = function (req, res, next) {
   var removedPlayer = req.body.removedPlayer;
   var details =  {
     competitionId: req.body.competitionId,
-    description: '<b>' + removedPlayer.firstName + ' ' + removedPlayer.lastName + '</b> has left the competition'
+    description: '<b>' + removedPlayer.displayName + '</b> has left the competition'
   };
   Competition.findByIdAndUpdate({
     _id: req.body.competitionId
@@ -206,7 +209,7 @@ exports.removePlayer = function (req, res, next) {
 };
 
 exports.approvePlayer = function (req, res, next) {
-  var player = req.body.player.firstName + ' ' + req.body.player.lastName;
+  var player = req.body.player.displayName;
   var details = {
     competitionId: req.body.competitionId,
     description: '<b>' + player + '</b> has joined the competition'
@@ -257,7 +260,7 @@ exports.approvePlayer = function (req, res, next) {
 };
 
 exports.denyPlayer = function (req, res, next) {
-  var player = req.body.player.firstName + ' ' + req.body.player.lastName;
+  var player = req.body.player.displayName;
   var details = {
     competitionId: req.body.competitionId,
     description: player + ' has been <b>denied</b> entry to the competition'

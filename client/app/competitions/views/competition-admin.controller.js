@@ -6,6 +6,7 @@
     var vm = this;
     vm.competitionId = null;
     vm.updateCompetitionRestrictJoins = updateCompetitionRestrictJoins;
+    vm.updateCompetitionPrivate = updateCompetitionPrivate;
     vm.deleteCompetition = deleteCompetition;
 
     activate();
@@ -41,6 +42,15 @@
       competitionsService.getCompetition(vm.competitionId).then(function (competition) {
         var updatedCompetition = competition.data;
         updatedCompetition.restrictJoins = vm.competition.restrictJoins;
+        competitionsService.updateCompetition(updatedCompetition);
+      });      
+    }
+
+    // Perform the updates that were requsted
+    function updateCompetitionPrivate() {
+      competitionsService.getCompetition(vm.competitionId).then(function (competition) {
+        var updatedCompetition = competition.data;
+        updatedCompetition.private = vm.competition.private;
         competitionsService.updateCompetition(updatedCompetition);
       });      
     }

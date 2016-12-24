@@ -107,8 +107,8 @@ exports.deleteChallenge = function (req, res) {
 // Create a new pyramid challenge
 exports.createPyramidChallenge = function (req, res) {
   var challengeData = req.body.challenge;
-  var challenger = challengeData.challenger.firstName + ' ' + challengeData.challenger.lastName;
-  var opponent = challengeData.opponent.firstName + ' ' + challengeData.opponent.lastName;
+  var challenger = challengeData.challenger.displayName;
+  var opponent = challengeData.opponent.displayName;
   var challengeDetails = {
     competitionId: challengeData.competitionId,
     description: '<b>' + challenger + '</b> has challenged <b>' + opponent + '</b>'
@@ -190,17 +190,17 @@ exports.completePyramidChallenge = function (req, res, next) {
   var winner, loser, description;
   if (challengeData.forfeit) {
     if (challengeData.winner === 'challenger') {
-      description = challengeData.opponent.firstName + ' ' + challengeData.opponent.lastName + ' forfeited to ' +  challengeData.challenger.firstName + ' ' + challengeData.challenger.lastName;
+      description = challengeData.opponent.displayName + ' forfeited to ' +  challengeData.challenger.displayName;
     } else {
-      description = challengeData.challenger.firstName + ' ' + challengeData.challenger.lastName + ' forfeited to ' +  challengeData.opponent.firstName + ' ' + challengeData.opponent.lastName;
+      description = challengeData.challenger.displayName + ' forfeited to ' +  challengeData.opponent.displaytName;
     }
   } else {
     if (challengeData.winner === 'challenger') {
-      winner = challengeData.challenger.firstName + ' ' + challengeData.challenger.lastName;
-      loser = challengeData.opponent.firstName + ' ' + challengeData.opponent.lastName;
+      winner = challengeData.challenger.displayName;
+      loser = challengeData.opponent.displayName;
     } else {
-      winner = challengeData.opponent.firstName + ' ' + challengeData.opponent.lastName;
-      loser = challengeData.challenger.firstName + ' ' + challengeData.challenger.lastName;
+      winner = challengeData.opponent.displayName;
+      loser = challengeData.challenger.displayName;
     }
     description = '<b>' + winner + '</b> just defeated <b>' + loser + '</b>';
   }

@@ -22,6 +22,10 @@ var competitionSchema = mongoose.Schema({
     type: Boolean,
     default: false
   },
+  private: {
+    type: Boolean,
+    default: false
+  },
   players: {
     type: Array,
     default: []
