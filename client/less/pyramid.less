@@ -31,6 +31,7 @@
         font-size: 14px;
         height: 75px;
         margin: 5px;
+        overflow: hidden;
         padding: 5px;
         position: relative;
         vertical-align: top;
@@ -38,6 +39,18 @@
         @media screen and (max-width: 450px) {
             width: 100%;
         }
+
+        .player-name {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 100%;
+
+            +.player-name {
+                font-size: @font-size-base - 2px;
+            }
+        }
+
         &.empty {
             background-color: @m-gray;
             color: #fff;
