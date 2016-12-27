@@ -89,7 +89,7 @@ exports.resetPassword = function (req, res) {
 exports.updateUser = function (req, res) {
   var userUpdates = req.body.user;
 
-  if ((req.user._id.toString() !== userUpdates._id) || !req.user.hasRole('super-admin')) {
+  if ((req.user._id.toString() !== userUpdates._id) && !req.user.hasRole('super-admin')) {
     res.status(403);
     return res.end();
   }
