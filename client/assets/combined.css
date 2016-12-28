@@ -7294,6 +7294,7 @@ body {
   font-size: 14px;
   height: 75px;
   margin: 5px;
+  overflow: hidden;
   padding: 5px;
   position: relative;
   vertical-align: top;
@@ -7303,6 +7304,15 @@ body {
   .pyramid .pyramid-block {
     width: 100%;
   }
+}
+.pyramid .pyramid-block .player-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+.pyramid .pyramid-block .player-name + .player-name {
+  font-size: 11px;
 }
 .pyramid .pyramid-block.empty {
   background-color: #9E9E9E;

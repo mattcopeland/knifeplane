@@ -84,7 +84,8 @@
                                     <button class="btn btn-danger waves-effect" ng-click="vm.completeChallenge(false)">Lost</button>
                                 </div>
                             </div>
-                            {{player.displayName}}
+                            <div ng-if="player.displayName !== player.firstName + ' ' + player.lastName" class="player-name">{{player.displayName}}</div>
+                            <div class="player-name">{{player.firstName}} {{player.lastName}}</div>
                             <div ng-if="player.challenge && player.challenge.position === 'opponent' && player.challenge.expires">
                                 <i class="zmdi zmdi-time"></i>
                                 <timer interval="1000" countdown="player.challenge.expires" max-time-unit="'hour'" finish-callback="vm.challengeExpired(player)">{{hours}}:{{mminutes}}:{{sseconds}}</timer>
