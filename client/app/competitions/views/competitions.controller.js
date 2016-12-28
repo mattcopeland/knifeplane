@@ -9,7 +9,7 @@
     activate();
 
     function activate() {
-      competitionsService.getCompetitions().then(function (competitions) {
+      competitionsService.getPublicCompetitions().then(function (competitions) {
         vm.competitions = competitions.data;
       });
     }

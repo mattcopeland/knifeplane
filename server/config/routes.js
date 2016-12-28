@@ -13,7 +13,8 @@ module.exports = function (app) {
   app.put('/api/user/password/reset', users.resetPassword);
 
   app.get('/api/competition', competitions.getCompetition);
-  app.get('/api/competitions', competitions.getCompetitions);
+  app.get('/api/competitions/public', competitions.getPublicCompetitions);
+  app.get('/api/competitions/private', auth.requiresRole('super-admin'), competitions.getPrivateCompetitions);
   app.get('/api/competitions/user', auth.requiresApiLogin, competitions.getCompetitionsForUser);
   app.post('/api/competitions/create', auth.requiresApiLogin, competitions.createCompetition);
   app.post('/api/competitions/update', auth.requiresApiLogin, competitions.updateCompetition);

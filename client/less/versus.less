@@ -77,7 +77,6 @@
         background-color: #eee;
         border-top: 3px solid #bdbdbd;
         float: left;
-        padding: 15px;
         overflow: hidden;
         position: relative;
         text-align: center;
@@ -112,7 +111,18 @@
         .versus-player {
             font-size: 14px;
             line-height: 18px;
-            padding-bottom: 15px;
+            margin-bottom: 15px;
+
+            .player-name {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                width: 100%;
+
+                +.player-name {
+                    font-size: @font-size-base - 2px;
+                }
+            }
         }
 
         .create-challenge-modal {

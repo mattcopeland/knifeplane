@@ -7478,7 +7478,6 @@ body {
   background-color: #eee;
   border-top: 3px solid #bdbdbd;
   float: left;
-  padding: 15px;
   overflow: hidden;
   position: relative;
   text-align: center;
@@ -7508,7 +7507,16 @@ body {
 .versus .versus-team .versus-player {
   font-size: 14px;
   line-height: 18px;
-  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+.versus .versus-team .versus-player .player-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+.versus .versus-team .versus-player .player-name + .player-name {
+  font-size: 11px;
 }
 .versus .versus-team .create-challenge-modal {
   background: rgba(76, 175, 80, 0.25);

@@ -12,9 +12,17 @@ exports.getCompetition = function (req, res) {
   });
 };
 
-exports.getCompetitions = function (req, res) {
+exports.getPublicCompetitions = function (req, res) {
   Competition.find({
     private: { $ne: true }
+  }).exec(function (err, collection) {
+    res.send(collection);
+  });
+};
+
+exports.getPrivateCompetitions = function (req, res) {
+  Competition.find({
+    private: { $eq: true }
   }).exec(function (err, collection) {
     res.send(collection);
   });

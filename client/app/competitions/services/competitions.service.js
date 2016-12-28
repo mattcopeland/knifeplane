@@ -6,7 +6,8 @@
     var service = {
       getCompetition: getCompetition,
       getCompetitionsForUser: getCompetitionsForUser,
-      getCompetitions: getCompetitions,
+      getPublicCompetitions: getPublicCompetitions,
+      getPrivateCompetitions: getPrivateCompetitions,
       createCompetition: createCompetition,
       updateCompetition: updateCompetition,
       deleteCompetition: deleteCompetition,
@@ -49,12 +50,21 @@
     }
 
     /**
-     * Gets all active competitions from the database
+     * Gets all active public competitions from the database
      *
      * @return {Object} competitions
      */
-    function getCompetitions() {
-      return $http.get('/api/competitions');
+    function getPublicCompetitions() {
+      return $http.get('/api/competitions/public');
+    }
+
+    /**
+     * Gets all private competitions from the database
+     *
+     * @return {Object} competitions
+     */
+    function getPrivateCompetitions() {
+      return $http.get('/api/competitions/private');
     }
 
     function createCompetition(competition) {
