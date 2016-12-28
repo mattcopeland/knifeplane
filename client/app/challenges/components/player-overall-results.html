@@ -4,7 +4,9 @@
             <button class="btn btn-primary btn-icon waves-circle">
                 {{vm.player.level}}
             </button>
-            {{vm.player.displayName}}</h2>
+            <span class="player-name">{{vm.player.displayName}}</span>
+            <small ng-if="vm.player.displayName !== vm.player.firstName + ' ' + vm.player.lastName" class="player-name">{{vm.player.firstName}} {{vm.player.lastName}}</small>
+        </h2>
     </div>
     <div class="card-body card-padding-sm">
         <div class="row">

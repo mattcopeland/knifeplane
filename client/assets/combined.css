@@ -7601,6 +7601,10 @@ body {
 .completed-challenges .card-body .challenge-result .player {
   font-size: 12px;
   font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
 }
 .completed-challenges .card-body .challenge-result .player.winner {
   font-size: 16px;
