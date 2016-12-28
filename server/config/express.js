@@ -19,6 +19,9 @@ module.exports = function (app, config) {
     secret: credentials.sessionSecret,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      maxAge: 14 * 24 * 60 * 60 * 1000 // = 14 days
+    },
     store: new MongoStore({
       mongooseConnection: mongoose.connection
     })
