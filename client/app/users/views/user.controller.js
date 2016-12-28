@@ -15,17 +15,23 @@
 
     activate();
 
-    function activate() {}
+    function activate() {
+      if (!identityService.currentUser.displayName) {
+        vm.user.displayName = identityService.currentUser.firstName + ' ' + identityService.currentUser.lastName;
+      }
+    }
 
     function updateUser (user) {
       if (user.password !== user.confirmPassword) {
         notifyService.error('Passwords don\'t match!');
+      } else if (user.firstName.length < 1 || user.lastName.length < 1 || user.displayName.length < 1) {
+        notifyService.error('Don\'t leave names blank!  How will people know who you are?');
       } else {
         // If any of the names were updated we'll need to update them in the other collections'
         var userUpdates = {
           _id: user._id
         };
-        if (user.firstName !== identityService.currentUser.firstName || user.lastName !== identityService.currentUser.lastName || user.displayName !== identityService.currentUser.displayName) {
+        if ((user.firstName !== identityService.currentUser.firstName && user.firstName.length > 0) || (user.lastName !== identityService.currentUser.lastName && user.lastName.length > 0) || (user.displayName !== identityService.currentUser.displayName && user.displayName.length > 0)) {
           userUpdates.firstName = user.firstName;
           userUpdates.lastName = user.lastName;
           userUpdates.displayName = user.displayName;
