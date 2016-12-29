@@ -46,14 +46,14 @@
                     </div>
 
                     <div class="versus-team {{team.class}}" ng-repeat="team in vm.competition.teams" ng-click="vm.showChallengeModal = !vm.showChallengeModal" ng-class="{'available': !vm.hasActiveChallenge && vm.currentUserIsOnCompetition && vm.currentUserPlayer.position !== $index + 1}" vertilize>
-                        <div class="create-challenge-modal" ng-if="!vm.hasActiveChallenge && vm.currentUserIsOnCompetition && vm.currentUserPlayer.position !== $index+1 && vm.showChallengeModal">
-                            <i class="zmdi zmdi-close-circle-o"></i>
-                            <button class="btn btn-success btn-lg waves-effect" ng-click="vm.createChallenge($index + 1)">Challenge?</button>
-                        </div>
-                        <div class="team-name">Team {{$index + 1}}</div>
+                        <div ng-if="!vm.singlePlayerTeams" class="team-name">Team {{$index + 1}}</div>
                         <div ng-repeat="player in team.players" class="versus-player" ng-class="player.class">
                             <div class="player-name">{{player.displayName}}</div>
                             <div ng-if="player.displayName !== player.firstName + ' ' + player.lastName" class="player-name">{{player.firstName}} {{player.lastName}}</div>
+                        </div>
+                        <div class="create-challenge-modal" ng-if="!vm.hasActiveChallenge && vm.currentUserIsOnCompetition && vm.currentUserPlayer.position !== $index+1 && vm.showChallengeModal">
+                            <i class="zmdi zmdi-close-circle-o"></i>
+                            <button class="btn btn-success btn-lg waves-effect" ng-click="vm.createChallenge($index + 1)">Challenge?</button>
                         </div>
                     </div>
                 </div>

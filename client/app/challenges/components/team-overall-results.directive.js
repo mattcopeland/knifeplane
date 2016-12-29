@@ -12,6 +12,7 @@
       controllerAs: 'vm',
       restrict: 'A',
       scope: {
+        competition: '=',
         team: '=',
         challenges: '='
       },
@@ -39,14 +40,22 @@
       type: null,
       value: 0
     };
+    vm.singlePlayerTeams = false;
 
     activate();
 
     function activate() {
-      $scope.$watch('vm.challenges', function () {
+      $scope.$watchCollection(['vm.challenges', 'vm.competition'], function () {
         if (vm.challenges && vm.challenges.length > 0) {
           calculateStreak(vm.team, vm.challenges);
           calcuateWinAndLoses(vm.team, vm.challenges);
+
+          // If there is only 1 player per team than use player's name
+          if (vm.competition.players.length === 2) {
+            vm.singlePlayerTeams = true;
+            vm.displayName = _.find(vm.competition.players, { 'position':  vm.team}).displayName;
+            vm.playerName =  _.find(vm.competition.players, { 'position':  vm.team}).firstName + ' ' +  _.find(vm.competition.players, { 'position':  vm.team}).lastName;
+          }
         }
       });
     }

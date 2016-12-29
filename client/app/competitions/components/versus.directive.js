@@ -36,6 +36,7 @@
     vm.showControls = false;
     vm.showChallengeModal = false;
     vm.toggleControls = toggleControls;
+    vm.singlePlayerTeams = false;
 
     activate();
 
@@ -63,6 +64,10 @@
           players: _.filter(vm.competition.players, ['position', 2]),
         }
       ];
+
+      if (vm.competition.players.length === 2) {
+        vm.singlePlayerTeams = true;
+      }
     }
 
     /**

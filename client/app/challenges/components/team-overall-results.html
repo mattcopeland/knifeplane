@@ -1,6 +1,10 @@
 <div class="card player-statistics">
     <div class="card-header ch-alt">
-        <h2>Team {{vm.team}}</h2>
+        <h2 ng-if="!vm.singlePlayerTeams">Team {{vm.team}}</h2>
+        <h2 ng-if="vm.singlePlayerTeams">
+            <span class="player-name">{{vm.displayName}}</span>
+            <small ng-if="vm.displayName !== vm.playerName" class="player-name">{{vm.playerName}}</small>
+        </h2>
     </div>
     <div class="card-body card-padding-sm">
         <div class="row">
