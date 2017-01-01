@@ -12,7 +12,7 @@
       controllerAs: 'vm',
       restrict: 'A',
       scope: {
-        competitionId: '@',
+        competition: '=',
         allowDelete: '=',
         challenges: '='
       },
@@ -30,8 +30,8 @@
     activate();
 
     function activate() {
-      $scope.$watch('vm.challenges', function() {
-        if (vm.challenges && vm.challenges.length > 0) {
+      $scope.$watchGroup(['vm.challenges', 'vm.competition'], function() {
+        if (vm.challenges && vm.challenges.length > 0 && vm.competition && vm.competition.players) {
           displayCompletedChallenges();
         }
       });
@@ -41,8 +41,15 @@
       _.forEach(vm.challenges, function (challenge) {
         challenge.loser = challenge.winner === 'challenger' ? 'opponent' : 'challenger';
         if (challenge.type === 'versus') {
-          challenge.challenger.displayName = 'Team ' + challenge.challenger.team;
-          challenge.opponent.displayName = 'Team ' + challenge.opponent.team;
+          // If more than 1 player per team than use Team name
+          if (vm.competition.players.length > 2) {
+            challenge.challenger.displayName = 'Team ' + challenge.challenger.team;
+            challenge.opponent.displayName = 'Team ' + challenge.opponent.team;
+          // If only 1 player per team than just use the players names
+          } else {
+            challenge.challenger.displayName = _.find(vm.competition.players, { 'position':  challenge.challenger.team}).displayName;
+            challenge.opponent.displayName = _.find(vm.competition.players, { 'position':  challenge.opponent.team}).displayName;
+          }
         }
         challenge.whenCompleted = moment(challenge.completed).calendar(null, {
           sameDay: '[Today]',
@@ -56,7 +63,7 @@
     }
 
     function deleteChallenge(challengeId, $index) {
-      challengesService.deleteChallenge(vm.competitionId, challengeId).then (function () {
+      challengesService.deleteChallenge(vm.competition._id, challengeId).then (function () {
         vm.challenges.splice($index, 1);
       });
     }

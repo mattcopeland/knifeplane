@@ -41,8 +41,15 @@
           vm.challenges = challenges.data;          
           _.forEach(vm.challenges, function (challenge) {
             if (challenge.type === 'versus') {
-              challenge.challenger.displayName = 'Team ' + challenge.challenger.team;
-              challenge.opponent.displayName = 'Team ' + challenge.opponent.team;
+              // If more than 1 player per team than use Team name
+              if (vm.competition.players.length > 2) {
+                challenge.challenger.displayName = 'Team ' + challenge.challenger.team;
+                challenge.opponent.displayName = 'Team ' + challenge.opponent.team;
+              // If only 1 player per team than just use the players names
+              } else {
+                challenge.challenger.displayName = _.find(vm.competition.players, { 'position':  challenge.challenger.team}).displayName;
+                challenge.opponent.displayName = _.find(vm.competition.players, { 'position':  challenge.opponent.team}).displayName;
+              }
             }
             if (challenge.timeLimit !== 0) {
               challenge.expires = (moment().diff(moment(challenge.created).add(challenge.timeLimit, 'd'),'s')) * -1;
