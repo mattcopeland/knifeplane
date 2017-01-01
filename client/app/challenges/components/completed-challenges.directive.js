@@ -63,8 +63,19 @@
     }
 
     function deleteChallenge(challengeId, $index) {
-      challengesService.deleteChallenge(vm.competition._id, challengeId).then (function () {
-        vm.challenges.splice($index, 1);
+      swal({
+        title: 'Delete Challenge Result?',
+        text: 'You\'ll still need to reorder the players on your own',
+        type: 'error',
+        showCancelButton: true,
+        confirmButtonText: 'Delete',
+        cancelButtonText: 'Nevermind',
+        closeOnConfirm: true,
+        closeOnCancel: true
+      }, function () {
+        challengesService.deleteChallenge(vm.competition._id, challengeId).then (function () {
+          vm.challenges.splice($index, 1);
+        });
       });
     }
   }
