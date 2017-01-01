@@ -35,6 +35,7 @@ module.exports = function (app) {
   app.delete('/api/challenges/delete', auth.requiresApiLogin, challenges.deleteChallenge);
   app.post('/api/challenges/pyramid/create', auth.requiresApiLogin, challenges.createPyramidChallenge);
   app.post('/api/challenges/versus/create', auth.requiresApiLogin, challenges.createVersusChallenge);
+  app.put('/api/challenges/pyramid/cancel', auth.requiresApiLogin, challenges.cancelPyramidChallenge);
   app.post('/api/challenges/pyramid/complete', challenges.completePyramidChallenge);
   app.post('/api/challenges/versus/complete', challenges.completeVersusChallenge);
 

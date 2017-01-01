@@ -8,6 +8,7 @@
     var service = {
       createPyramidChallenge: createPyramidChallenge,
       createVersusChallenge: createVersusChallenge,
+      cancelPyramidChallenge: cancelPyramidChallenge,
       completePyramidChallenge: completePyramidChallenge,
       completeVersusChallenge: completeVersusChallenge,
       getChallengesByCompetition: getChallengesByCompetition,
@@ -23,6 +24,12 @@
 
     function createPyramidChallenge(challenge) {
       return $http.post('/api/challenges/pyramid/create', {
+        challenge: challenge
+      });
+    }
+
+    function cancelPyramidChallenge(challenge) {
+      return $http.put('/api/challenges/pyramid/cancel', {
         challenge: challenge
       });
     }

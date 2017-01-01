@@ -35,6 +35,7 @@
     vm.activeChallengeOpponent = null;
     vm.availableChallenges = false;
     vm.createChallenge = createChallenge;
+    vm.cancelChallenge = cancelChallenge;
     vm.completeChallenge = completeChallenge;
     vm.challengeExpired = challengeExpired;
     vm.currentUserPlayer = {};
@@ -254,6 +255,24 @@
           vm.competitionMenuToggle = false;
         });
       }
+    }
+
+    // Allows the challenger to cancel a challenge
+    // Informs the opponent to ask the challenger to cancel the opponent
+    function cancelChallenge() {
+      challengesService.getActiveChallengeByCompetitionByPlayer(vm.competitionId, vm.currentUserPlayer._id).then(function (challenge) {
+        if (challenge.data) {
+          // Allow the challenger to cancel the challenge
+          if (challenge.data.challenger._id === vm.currentUserPlayer._id) {
+            challengesService.cancelPyramidChallenge(challenge.data).then(function () {
+              vm.hasActiveChallenge = false;
+            });
+          // Inform the opponent to ask the challenger to cancel the challenge
+          } else {
+            swal('Challenger must cancel challenge' , 'You\'ll have to ask ' + challenge.data.challenger.displayName + ' to cancel the challenge.');
+          }
+        }
+      });
     }
 
     /**

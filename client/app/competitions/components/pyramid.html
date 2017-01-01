@@ -72,11 +72,18 @@
                     <div ng-repeat="level in vm.levels" class="level level-{{level}}">
                         <div class="level-marker">{{level}}</div>
                         <div ng-repeat="player in vm.competition.players" ng-if="player.level === level" class="pyramid-block" ng-class="player.class" ng-click="vm.playerClick(player)">
+                            <!-- Create a challenge -->
                             <div class="create-challenge-modal" ng-if="player.available && player.showChallengeModal">
                                 <i class="zmdi zmdi-close-circle-o"></i>
                                 <button class="btn btn-success waves-effect" ng-click="vm.createChallenge(player)">Challenge?</button>
                             </div>
-                            <div class="complete-challenge-modal" ng-if="(player._id === vm.activeChallengeOpponent._id || player._id === vm.currentUserPlayer._id) && player.showChallengeModal">
+                            <!-- Cancel a challenge -->
+                            <div class="cancel-challenge-modal" ng-if="!player.available && player._id === vm.activeChallengeOpponent._id && player.showChallengeModal">
+                                <i class="zmdi zmdi-close-circle-o"></i>
+                                <button class="btn btn-primary waves-effect" ng-click="vm.cancelChallenge()">Cancel<br/>Challenge?</button>
+                            </div>
+                            <!-- Complete a challenge -->
+                            <div class="complete-challenge-modal" ng-if="player._id === vm.currentUserPlayer._id && player.showChallengeModal">
                                 <i class="zmdi zmdi-close-circle-o"></i>
                                 <p class="m-b-5 m-t-5">Your Result</p>
                                 <div class="btn-container">
@@ -84,6 +91,7 @@
                                     <button class="btn btn-danger waves-effect" ng-click="vm.completeChallenge(false)">Lost</button>
                                 </div>
                             </div>
+                            <!-- Player info -->
                             <div class="player-name">{{player.displayName}}</div>
                             <div ng-if="player.displayName !== player.firstName + ' ' + player.lastName" class="player-name">{{player.firstName}} {{player.lastName}}</div>
                             <div ng-if="player.challenge && player.challenge.position === 'opponent' && player.challenge.expires">

@@ -80,8 +80,19 @@
         }
 
         .create-challenge-modal,
+        .cancel-challenge-modal,
         .complete-challenge-modal {
             display: none;
+            border-width: 3px;
+            border-style: solid;
+            border-top: none !important;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            text-align: center;
+            top: 0;
+            width: 100%;
+            animation: fadeIn .3s ease both;
 
             > i {
                 font-size: 18px;
@@ -94,16 +105,8 @@
         &.available {
             .create-challenge-modal {
                 background: fade(@m-green, 25%);
-                border: 3px solid @m-green;
-                border-top: none;
+                border-color: @m-green;
                 display: block;
-                height: 100%;
-                left: 0;
-                position: absolute;
-                text-align: center;
-                top: 0;
-                width: 100%;
-                animation: fadeIn .3s ease both;
 
                 > i {
                     color: @m-green;
@@ -116,18 +119,26 @@
         }
 
         &.unavailable {
+            .cancel-challenge-modal {
+                background: fade(@m-blue, 25%);
+                border-color: @m-blue;
+                display: block;
+
+                > i {
+                    color: @m-blue;
+                }
+
+                button {
+                    .vertical-align();
+                }
+            }
+        }
+
+        &.unavailable {
             .complete-challenge-modal {
                 background: #fff;
-                border: 3px solid @m-blue;
-                border-top: none;
+                border-color: @m-blue;
                 display: block;
-                height: 100%;
-                left: 0;
-                position: absolute;
-                text-align: center;
-                top: 0;
-                width: 100%;
-                animation: fadeIn .3s ease both;
 
                 > i {
                     color: @m-blue;

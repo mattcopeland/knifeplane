@@ -7340,21 +7340,12 @@ body {
   cursor: pointer;
 }
 .pyramid .pyramid-block .create-challenge-modal,
+.pyramid .pyramid-block .cancel-challenge-modal,
 .pyramid .pyramid-block .complete-challenge-modal {
   display: none;
-}
-.pyramid .pyramid-block .create-challenge-modal > i,
-.pyramid .pyramid-block .complete-challenge-modal > i {
-  font-size: 18px;
-  position: absolute;
-  right: 2px;
-  top: 2px;
-}
-.pyramid .pyramid-block.available .create-challenge-modal {
-  background: rgba(76, 175, 80, 0.25);
-  border: 3px solid #4CAF50;
-  border-top: none;
-  display: block;
+  border-width: 3px;
+  border-style: solid;
+  border-top: none !important;
   height: 100%;
   left: 0;
   position: absolute;
@@ -7363,6 +7354,19 @@ body {
   width: 100%;
   -webkit-animation: fadeIn .3s ease both;
           animation: fadeIn .3s ease both;
+}
+.pyramid .pyramid-block .create-challenge-modal > i,
+.pyramid .pyramid-block .cancel-challenge-modal > i,
+.pyramid .pyramid-block .complete-challenge-modal > i {
+  font-size: 18px;
+  position: absolute;
+  right: 2px;
+  top: 2px;
+}
+.pyramid .pyramid-block.available .create-challenge-modal {
+  background: rgba(76, 175, 80, 0.25);
+  border-color: #4CAF50;
+  display: block;
 }
 .pyramid .pyramid-block.available .create-challenge-modal > i {
   color: #4CAF50;
@@ -7373,19 +7377,24 @@ body {
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
 }
+.pyramid .pyramid-block.unavailable .cancel-challenge-modal {
+  background: rgba(33, 150, 243, 0.25);
+  border-color: #2196F3;
+  display: block;
+}
+.pyramid .pyramid-block.unavailable .cancel-challenge-modal > i {
+  color: #2196F3;
+}
+.pyramid .pyramid-block.unavailable .cancel-challenge-modal button {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
 .pyramid .pyramid-block.unavailable .complete-challenge-modal {
   background: #fff;
-  border: 3px solid #2196F3;
-  border-top: none;
+  border-color: #2196F3;
   display: block;
-  height: 100%;
-  left: 0;
-  position: absolute;
-  text-align: center;
-  top: 0;
-  width: 100%;
-  -webkit-animation: fadeIn .3s ease both;
-          animation: fadeIn .3s ease both;
 }
 .pyramid .pyramid-block.unavailable .complete-challenge-modal > i {
   color: #2196F3;

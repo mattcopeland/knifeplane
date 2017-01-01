@@ -235,6 +235,35 @@ exports.completePyramidChallenge = function (req, res, next) {
   });
 };
 
+exports.cancelPyramidChallenge = function (req, res, next) {
+  var challengeData = req.body.challenge;
+  var description = '<b>' + challengeData.challenger.displayName + '</b> cancelled the challenge against <b>' + challengeData.opponent.displayName + '</b>';
+
+  var challengeDetails = {
+    competitionId: challengeData.competitionId,
+    challengerId: challengeData.challenger._id,
+    opponentId: challengeData.opponent._id,
+    description: description
+  };
+
+  var alertDetails = {
+    userId: challengeData.opponent._id,
+    competitionId: challengeData.competitionId
+  };
+
+  alerts.clearAlertsOnCancelledChallenge([alertDetails]);
+
+  Challenge.findOneAndRemove({
+    '_id': challengeData._id
+  }).exec(function (err, challenge) {
+    if (err) {
+      return next(err);
+    }
+    websockets.broadcast('competition_updated', challengeDetails);
+    res.status(201).json(challenge);
+  });
+};
+
 exports.completeVersusChallenge = function (req, res, next) {
   var challengeData = req.body.challenge;
   var alertsArray= [];

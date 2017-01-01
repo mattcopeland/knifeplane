@@ -54,7 +54,25 @@ exports.clearAlertsOnCompletedChallenge = function (alerts) {
       'cleared': true
     }).exec(function (err) {
       if (err) {
-        console.log('error creating Alert');
+        console.log('error clearing Alert');
+      }
+    });
+  });
+  websockets.broadcast('update_alerts', alerts);
+};
+
+exports.clearAlertsOnCancelledChallenge = function (alerts) {
+  _.forEach(alerts, function (alert) {
+    Alert.findOneAndUpdate({
+      'userId': alert.userId,
+      'competitionId': alert.competitionId,
+      'details.title': 'New Challenge',
+      'cleared': { $ne: true }
+    },{
+      'cleared': true
+    }).exec(function (err) {
+      if (err) {
+        console.log('error clearing Alert');
       }
     });
   });
