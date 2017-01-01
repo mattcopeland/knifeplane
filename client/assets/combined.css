@@ -7477,6 +7477,7 @@ body {
 .versus .complete-challenege-modal .complete-challenge-controls p {
   font-size: 20px;
   font-weight: bold;
+  margin-bottom: 10px;
   text-shadow: -1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 .versus .complete-challenege-modal.show-controls {
@@ -7487,7 +7488,9 @@ body {
   background-color: #eee;
   border-top: 3px solid #bdbdbd;
   float: left;
+  min-height: 95px;
   overflow: hidden;
+  padding: 0 10px;
   position: relative;
   text-align: center;
   width: 50%;
@@ -7510,7 +7513,7 @@ body {
 }
 @media (max-width: 991px) {
   .versus .versus-team .team-name {
-    font-size: 18px;
+    font-size: 20px;
   }
 }
 .versus .versus-team .versus-player {
@@ -7520,10 +7523,15 @@ body {
   margin-bottom: 15px;
 }
 .versus .versus-team .versus-player:first-child {
-  font-size: 28px;
+  font-size: 20px;
   font-weight: bold;
-  line-height: 30px;
+  line-height: 24px;
   margin-top: 30px;
+}
+@media (max-width: 991px) {
+  .versus .versus-team .versus-player:first-child {
+    font-size: 16px;
+  }
 }
 .versus .versus-team .versus-player .player-name {
   overflow: hidden;
@@ -7550,10 +7558,10 @@ body {
 }
 .versus .versus-team .create-challenge-modal > i {
   color: #4CAF50;
-  font-size: 28px;
+  font-size: 20px;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 5px;
+  right: 5px;
 }
 .versus .versus-team .create-challenge-modal button {
   position: relative;
