@@ -105,8 +105,6 @@
               var currentOpponent = _.find(vm.competition.players, {'_id': vm.activeChallengeOpponent._id});
               currentOpponent.class = currentOpponent.class ? currentOpponent.class + ' current-opponent': 'current-opponent';
             // The user doesn't have an active challenge, so find the available challenges'
-            } else {
-              findAvailableChallenges();
             }
           });
         }
@@ -147,6 +145,8 @@
             }
           }
         });
+        // Now that we know about all the active challenges find the available challenges for the ucrrent user
+        findAvailableChallenges();
       });
     }
 
@@ -203,6 +203,7 @@
 
     // Find all the players that are available to be challenged by this user
     function findAvailableChallenges() {
+      vm.availableChallenges = false;
       if (vm.currentUserIsOnCompetition && !vm.hasActiveChallenge) {
         var levelAbove = vm.currentUserPlayer.level > 1 ? vm.currentUserPlayer.level - 1 : null;
         _.forEach(vm.competition.players, function (player) {
