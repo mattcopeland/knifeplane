@@ -4,21 +4,16 @@
             <a ui-sref="home"><i class="zmdi zmdi-home"></i> Home</a>
         </li>
         <li ui-sref-active="active" ng-if="!vm.indentity.isAuthenticated()">
-            <a ui-sref="login"><i class="zmdi zmdi-account"></i> Login</a>
+            <a ui-sref="login"><i class="zmdi zmdi-sign-in"></i> Login</a>
         </li>
         <li ui-sref-active="active" ng-if="!vm.indentity.isAuthenticated()">
             <a ui-sref="register"><i class="zmdi zmdi-account-add"></i> Register</a>
         </li>
-        <li class="sub-menu" ng-class="{ 'active toggled': appCtrl.$state.includes('competitions') }">
-            <a href="" toggle-submenu><i class="zmdi zmdi-triangle-up"></i> Competitions</a>
-            <ul>
-                <li>
-                    <a ui-sref-active="active" ui-sref="competitions.myCompetitions">My Competitions</a>
-                </li>
-                <li>
-                    <a ui-sref-active="active" ui-sref="competitions.create">Create Competition</a>
-                </li>
-            </ul>
+        <li ui-sref-active="active">
+            <a ui-sref="competitions.myCompetitions"><i class="zmdi zmdi-triangle-up"></i> My Competitions</a>
+        </li>
+        <li ui-sref-active="active">
+            <a ui-sref="competitions.create"><i class="zmdi zmdi-plus"></i> Create Competition</a>
         </li>
     </ul>
 </div>
