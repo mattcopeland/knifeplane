@@ -4,7 +4,8 @@
     </div>
     <div class="card-body c-overflow" scrollaxis="x">
         <div class="pending-player bg-app-gray" ng-repeat="player in vm.competition.pendingPlayers">
-            <div class="player m-b-10">{{player.displayName}}</div>
+            <div class="player-name">{{player.displayName}}</div>
+            <div ng-if="player.displayName !== player.firstName + ' ' + player.lastName" class="player-name">{{player.firstName}} {{player.lastName}}</div>
             <div class="btns-group text-center">
                 <button class="btn btn-primary" ng-click="vm.approvePendingPlayer(player)">Approve</button>
                 <button class="btn btn-danger" ng-click="vm.denyPendingPlayer(player)">Deny</button>

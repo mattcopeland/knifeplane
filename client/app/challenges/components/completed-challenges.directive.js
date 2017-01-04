@@ -57,7 +57,7 @@
           nextWeek: 'dddd',
           lastDay: '[Yesterday]',
           lastWeek: '[Last] dddd',
-          sameElse: 'DD/MM/YYYY'
+          sameElse: 'MMM DD YYYY'
         });
       });
     }

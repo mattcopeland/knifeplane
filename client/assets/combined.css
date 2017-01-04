@@ -7255,8 +7255,16 @@ body {
 .pending-players .card-body .pending-player:last-child {
   margin-right: 10px;
 }
-.pending-players .card-body .pending-player .player {
-  font-size: 16px;
+.pending-players .card-body .pending-player .player-name {
+  font-size: 15px;
+  margin-bottom: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+.pending-players .card-body .pending-player .player-name + .player-name {
+  font-size: 11px;
 }
 .player-joins-checkbox {
   margin: 6px 0;
@@ -7275,6 +7283,7 @@ body {
   line-height: 75px;
   padding: 10px 15px;
   position: absolute;
+  text-shadow: 1px 1px 0 rgba(249, 249, 249, 0.6), -1px -1px 1px rgba(134, 134, 134, 0.5);
   top: 0;
 }
 .pyramid .level:nth-child(odd) {
