@@ -7702,7 +7702,7 @@ body {
 }
 .swapper ul li span.position {
   font-weight: bold;
-  width: 17px;
+  width: 20px;
 }
 .swapper ul li span.position i {
   font-size: 14px;
@@ -7760,6 +7760,7 @@ body {
 .pyramidswap .added-player7,
 .pyramidswap .added-player8,
 .pyramidswap .added-player9,
+.pyramidswap .added-player10,
 .pyramidswap .added-player16,
 .pyramidswap .added-player17,
 .pyramidswap .added-player18,
