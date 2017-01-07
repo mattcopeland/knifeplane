@@ -45,8 +45,8 @@
     activate();
 
     function activate() {
-      $scope.$watchCollection(['vm.challenges', 'vm.competition'], function () {
-        if (vm.challenges && vm.challenges.length > 0) {
+      $scope.$watch('vm.challenges', function () {
+        if (vm.challenges && vm.challenges.length > 0 && vm.competition) {
           calculateStreak(vm.team, vm.challenges);
           calcuateWinAndLoses(vm.team, vm.challenges);
 
