@@ -22,6 +22,7 @@
     vm.removePlayer = removePlayer;
     vm.reorderPlayers = reorderPlayers;
     vm.newCompetition.forfeitDays = 1;
+    vm.newCompetition.waitingPeriodDays = 1;
     vm.competitionTypes = ['pyramid', 'versus'];
 
     activate();

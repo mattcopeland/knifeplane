@@ -208,10 +208,19 @@
       if (vm.currentUserIsOnCompetition && !vm.hasActiveChallenge) {
         var levelAbove = vm.currentUserPlayer.level > 1 ? vm.currentUserPlayer.level - 1 : null;
         _.forEach(vm.competition.players, function (player) {
+          var waitingForPlayer = null;
           if (player.level === levelAbove && player.position !== 99 && player.class !== 'unavailable' && player.available !== false) {
-            vm.availableChallenges = true;
-            player.available = true;
-            player.class = 'available';
+            // Check if there is a waiting period for this player
+            waitingForPlayer = _.find(vm.currentUserPlayer.waitingPeriods, { 'player': player._id });
+            // If there is a waitin period for this user don't make them available
+            if (waitingForPlayer && moment().isBefore(waitingForPlayer.expires)) {
+              player.class = 'waiting';
+              player.waitUntil = moment(waitingForPlayer.expires).format('MMM Do  LT');
+            } else {
+              vm.availableChallenges = true;
+              player.available = true;
+              player.class = 'available';
+            }
           }
         });
       }
@@ -313,6 +322,16 @@
             swapPositions = true;
           }
         }
+
+        var loser, winner = null;
+        if (challenge.data.winner === 'opponent') {
+          winner = challenge.data.opponent;
+          loser = challenge.data.challenger;
+        } else {
+          winner = challenge.data.challenger;
+          loser = challenge.data.opponent;
+        }
+        competitionsService.createWaitingPeriod(vm.competitionId, loser._id, winner._id, vm.competition.waitingPeriodDays);
 
         // Swap positions and then complete the challenge or just complete the challenge
         // Websocket event will refresh the competition

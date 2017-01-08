@@ -11,6 +11,7 @@
       createCompetition: createCompetition,
       updateCompetition: updateCompetition,
       deleteCompetition: deleteCompetition,
+      createWaitingPeriod: createWaitingPeriod,
       swapPositions: swapPositions,
       addPlayerToCompetition: addPlayerToCompetition,
       addPlayerToCompetitionRequest: addPlayerToCompetitionRequest,
@@ -84,6 +85,15 @@
         params: {
           competitionId: competitionId
         }
+      });
+    }
+
+    function createWaitingPeriod(competitionId, loserId, winnerId, waitingPeriod) {
+      return $http.put('/api/competitions/createWaitingPeriod',  {
+        competitionId: competitionId,
+        loserId: loserId,
+        winnerId: winnerId,
+        waitingPeriod: waitingPeriod
       });
     }
 

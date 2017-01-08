@@ -18,6 +18,10 @@ var competitionSchema = mongoose.Schema({
     type: Number,
     default: 1
   },
+  waitingPeriodDays: {
+    type: Number,
+    default: 1
+  },
   restrictJoins: {
     type: Boolean,
     default: false

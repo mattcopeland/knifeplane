@@ -79,7 +79,7 @@
                             <div class="player-name">{{player.displayName}}</div>
                             <div ng-if="player.displayName !== player.firstName + ' ' + player.lastName" class="player-name">{{player.firstName}} {{player.lastName}}</div>
 
-                            <div class="tray" ng-if="player.available || (player._id === vm.currentUserPlayer._id && vm.hasActiveChallenge) || player.challenge || (!vm.currentUserIsOnCompetition && player.position === 99)" ng-click="vm.playerClick(player)">
+                            <div class="tray" ng-if="player.available || player.waitUntil || (player._id === vm.currentUserPlayer._id && vm.hasActiveChallenge) || player.challenge || (!vm.currentUserIsOnCompetition && player.position === 99)" ng-click="vm.playerClick(player)">
                                 <!-- Active challenge time -->
                                 <span ng-if="player.challenge && player.challenge.position === 'opponent' && player.challenge.expires" ng-class="{'c-red': player.challenge.expires < .5}">
                                     <i class="zmdi zmdi-time"></i>
@@ -96,6 +96,7 @@
                                 <div class="c-blue cur-pointer" ng-if="player._id === vm.currentUserPlayer._id && vm.hasActiveChallenge">Match Result</div>
                                 <!-- Join the competition -->
                                 <div class="cur-pointer" ng-if="!vm.currentUserIsOnCompetition && player.position === 99">Join</div>
+                                <div class="c-orange" ng-if="player.waitUntil"><i class="zmdi zmdi-alert-octagon"></i> {{player.waitUntil}}</div>
                             </div>
                             <!-- Create a challenge modal -->
                             <div class="create-challenge-modal" ng-if="player.available && player.showChallengeModal">

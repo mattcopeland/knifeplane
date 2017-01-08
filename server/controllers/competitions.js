@@ -113,6 +113,48 @@ exports.deleteCompetition = function (req, res) {
   });
 };
 
+exports.createWaitingPeriod = function (req, res, next) {
+  var waitingPeriod = req.body.waitingPeriod * 24;
+  // Create a new waitin period
+  Competition.findOneAndUpdate(
+    {
+      _id: req.body.competitionId,
+      'players._id': req.body.loserId
+    }, {
+      $push: {
+        'players.$.waitingPeriods': {
+          player: req.body.winnerId,
+          expires: new Date(new Date().getTime() + 60 * 60 * waitingPeriod * 1000).toISOString()
+        }
+      }
+    })
+    .exec(function (err) {
+      if (err) {
+        return next(err);
+      }
+    });
+  // Remove expired waiting periods
+  Competition.findOneAndUpdate(
+    {
+      _id: req.body.competitionId,
+      'players._id': req.body.loserId
+    }, {
+      $pull: {
+        'players.$.waitingPeriods': {
+          'expires': {
+            $lte: new Date().toISOString()
+          }
+        }
+      }
+    })
+    .exec(function (err, competitions) {
+      if (err) {
+        return next(err);
+      }
+
+      res.status(201).json(competitions);
+    });
+};
 
 exports.swapPositions = function (req, res, next) {
   Competition.findOneAndUpdate(

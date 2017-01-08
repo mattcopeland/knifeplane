@@ -19,6 +19,7 @@ module.exports = function (app) {
   app.post('/api/competitions/create', auth.requiresApiLogin, competitions.createCompetition);
   app.post('/api/competitions/update', auth.requiresApiLogin, competitions.updateCompetition);
   app.delete('/api/competitions/delete', auth.requiresApiLogin, competitions.deleteCompetition);
+  app.put('/api/competitions/createWaitingPeriod', competitions.createWaitingPeriod);
   app.post('/api/competitions/swapPositions', competitions.swapPositions);
   app.post('/api/competitions/addPlayer', auth.requiresApiLogin, competitions.addPlayer);
   app.post('/api/competitions/addPlayerRequest', auth.requiresApiLogin, competitions.addPlayerRequest);

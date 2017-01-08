@@ -7359,6 +7359,9 @@ body {
 .pyramid .pyramid-block.unavailable.current-user {
   border-top: 3px solid #2196F3;
 }
+.pyramid .pyramid-block.waiting {
+  border-top: 3px solid #FF9800;
+}
 .pyramid .pyramid-block .create-challenge-modal,
 .pyramid .pyramid-block .cancel-challenge-modal,
 .pyramid .pyramid-block .complete-challenge-modal,

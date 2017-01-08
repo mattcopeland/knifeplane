@@ -9,33 +9,42 @@
         <div class="card-body card-padding">
             <form name="createCompetitionForm" class="create-competition-form" ng-submit="vm.createCompetition(vm.newCompetition)" novalidate>
                 <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <div class="form-group m-b-30">
                             <div class="fg-line">
                                 <input type="text" class="form-control" ng-model="vm.newCompetition.name" placeholder="Competition Name" required>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <div class="form-group m-b-30">
                             <div class="fg-line">
                                 <input type="text" class="form-control" ng-model="vm.newCompetition.activity" placeholder="Competition Activity" required>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <div class="form-group">
 							<select class="w-100" chosen data-placeholder-text-single="'Competition Type'" disable-search="true" ng-model="vm.newCompetition.type" ng-options="competitionType as competitionType for competitionType in vm.competitionTypes" ng-change="vm.reorderPlayers()" required>
 								<option value=""></option>
 							</select>
 						</div>
                     </div>
-                    <div class="col-sm-3 m-t-5">
+                </div>
+                <div class="row">
+                    <div class="col-sm-5 m-t-5">
                         <label class="m-b-10">Forfeit Days:
                             <span ng-if="vm.newCompetition.forfeitDays === 0"> No Limit</span>
                             <span ng-if="vm.newCompetition.forfeitDays > 0">{{ vm.newCompetition.forfeitDays }}</span>
                         </label>
                         <div class="input-slider m-b-30" slider ng-model="vm.newCompetition.forfeitDays" start="0" end="5" step="1" data-is-color="blue"></div>
+                    </div>
+                    <div class="col-sm-6 col-sm-offset-1 m-t-5" ng-if="vm.newCompetition.type !== 'versus'">
+                        <label class="m-b-10">Rechallenge Wait Days:
+                            <span ng-if="vm.newCompetition.waitingPeriodDays === 0"> No Limit</span>
+                            <span ng-if="vm.newCompetition.waitingPeriodDays > 0">{{ vm.newCompetition.waitingPeriodDays }}</span>
+                        </label>
+                        <div class="input-slider m-b-30" slider ng-model="vm.newCompetition.waitingPeriodDays" start="0" end="5" step="1" data-is-color="blue"></div>
                     </div>
                 </div>
                 <div class="row swapper {{vm.newCompetition.type}}swap">
