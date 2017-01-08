@@ -105,10 +105,11 @@
 
           // Track when the challenge will expire
           if (vm.activeChallenge.timeLimit !== 0) {
-            var timeToExpire = moment().diff(moment(vm.activeChallenge.created).add(vm.activeChallenge.timeLimit, 'd'), 's') * -1;
+            var timeToExpire = moment().diff(moment(vm.activeChallenge.created).add(vm.activeChallenge.timeLimit, 'd')) * -1;
+            var hoursToExpire = moment.duration(timeToExpire).asHours();
             // If the challenge has not yet expired display a countdown
             if (timeToExpire > 0) {
-              vm.challengeExpireTime = timeToExpire;
+              vm.challengeExpireTime = hoursToExpire;
               // If the challenge expired while no one was viewing this competition complete the challenge by forfeit
             } else if (timeToExpire <= 0) {
               completeChallenge(null, true);

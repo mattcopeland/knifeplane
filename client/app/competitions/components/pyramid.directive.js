@@ -37,7 +37,7 @@
     vm.createChallenge = createChallenge;
     vm.cancelChallenge = cancelChallenge;
     vm.completeChallenge = completeChallenge;
-    vm.challengeExpired = challengeExpired;
+    vm.forfeitChallenge = forfeitChallenge;
     vm.currentUserPlayer = {};
     vm.competitionMenuToggle = false;
     vm.addCurrentUserToCompetition = addCurrentUserToCompetition;
@@ -135,10 +135,11 @@
 
           // Track when the challenge will expire
           if (challenge.timeLimit !== 0) {
-            var timeToExpire = moment().diff(moment(challenge.created).add(challenge.timeLimit, 'd'), 's') * -1;
+            var timeToExpire = moment().diff(moment(challenge.created).add(challenge.timeLimit, 'd')) * -1;
+            var hoursToExpire = moment.duration(timeToExpire).asHours();
             // If the challenge has not yet expired display a countdown on the opponent
             if (timeToExpire > 0) {
-              opponent.challenge.expires = timeToExpire;
+              opponent.challenge.expires = hoursToExpire;
               // If the challenge expired while no one was viewing this competition complete the challenge by forfeit
             } else if (timeToExpire <= 0) {
               completeChallenge(null, true, opponent);
@@ -194,7 +195,7 @@
           lastName: 'Spot',
           displayName: 'Empty Spot',
           position: 99,
-          class: vm.currentUserIsOnCompetition ? 'empty': 'joinable empty'
+          class: 'empty'
         });
       }
       // We have to give levels to the new empty spots
@@ -268,9 +269,6 @@
             challengesService.cancelPyramidChallenge(challenge.data).then(function () {
               vm.hasActiveChallenge = false;
             });
-          // Inform the opponent to ask the challenger to cancel the challenge
-          } else {
-            swal('Challenger must cancel challenge' , 'You\'ll have to ask ' + challenge.data.challenger.displayName + ' to cancel the challenge.');
           }
         }
       });
@@ -341,7 +339,7 @@
      * Calls the complete challnge function with the forfeiting player
      * @param  {object} player
      */
-    function challengeExpired(player) {
+    function forfeitChallenge(player) {
       completeChallenge(null, true, player);
     }
 

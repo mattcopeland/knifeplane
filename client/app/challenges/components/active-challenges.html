@@ -7,9 +7,10 @@
         <div class="player">{{challenge.challenger.displayName}}</div>
         <div class="action">challenged</div>
         <div class="player">{{challenge.opponent.displayName}}</div>
-        <div class="badge" ng-if="challenge.expires">
+        <div class="badge" ng-if="challenge.expires" ng-class="{'bgm-red': challenge.expires < .5}">
             <i class="zmdi zmdi-time"></i>
-            <timer interval="1000" countdown="challenge.expires" max-time-unit="'hour'">{{hours}}:{{mminutes}}:{{sseconds}}</timer>
+            <span ng-if="challenge.expires >= .5">{{challenge.expires | number: 0}}hrs</span>
+            <span ng-if="challenge.expires < .5">Forfeit Soon</span>
         </div>
     </div>
 </div>

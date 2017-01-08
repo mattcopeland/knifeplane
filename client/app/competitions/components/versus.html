@@ -1,12 +1,14 @@
 <div class="container versus-container">
-    <div class="card m-b-0" id="messages-main">
+    <div class="card m-b-0"><!-- id="messages-main">
         <div class="ms-menu competition-menu" ng-class="{ 'toggled': vm.competitionMenuToggle }">
             <div class="active-challenges" wpm-active-challeneges competition="vm.competition"></div>
         </div>
+        -->
         <!-- Competition -->
         <div class="ms-body">
             <div class="listview lv-message">
                 <div class="lv-header-alt clearfix">
+                    <!--
                     <div id="ms-menu-trigger" ng-class="{ 'open': vm.competitionMenuToggle }" ng-click="vm.competitionMenuToggle = (vm.competitionMenuToggle === true ? false : true )">
                         <div class="line-wrap">
                             <div class="line top"></div>
@@ -14,6 +16,7 @@
                             <div class="line bottom"></div>
                         </div>
                     </div>
+                    -->
                     <div class="lvh-label hidden-xs">{{vm.competition.activity}}</div>
                     <ul class="lv-actions actions">
                         <li ng-if="vm.currentUserIsAdmin">
@@ -33,7 +36,7 @@
                         <i class="zmdi zmdi-close-circle-o" ng-if="vm.showControls"></i>
                         <div class="expire-countdown" ng-if="vm.challengeExpireTime && !vm.showControls">
                             <i class="zmdi zmdi-time" ng-if="vm.activeChallenge.opponent.team === 1"></i>
-                            <timer interval="1000" countdown="vm.challengeExpireTime" max-time-unit="'hour'" finish-callback="vm.completeChallenge(null, true)">{{hours}}:{{mminutes}}:{{sseconds}}</timer>
+                            <span>{{vm.challengeExpireTime | number: 0}}hrs</span>
                             <i class="zmdi zmdi-time" ng-if="vm.activeChallenge.opponent.team === 2"></i>
                         </div>
                         <div class="complete-challenge-controls" ng-if="vm.showControls">

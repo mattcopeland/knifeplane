@@ -52,7 +52,8 @@
               }
             }
             if (challenge.timeLimit !== 0) {
-              challenge.expires = (moment().diff(moment(challenge.created).add(challenge.timeLimit, 'd'),'s')) * -1;
+              var timeToExpire = moment().diff(moment(challenge.created).add(challenge.timeLimit, 'd')) * -1;
+              challenge.expires = moment.duration(timeToExpire).asHours();
             }
           });
         }

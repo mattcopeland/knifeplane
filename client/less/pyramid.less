@@ -41,6 +41,22 @@
             width: 100%;
         }
 
+        .tray {
+            background-color: @app-gray;
+            border-top: 1px solid darken(@app-gray, 10%);
+            bottom: 0px;
+            left: 0px;
+            padding: 0 3px;
+            position: absolute;
+            width: 100%;
+
+            .challenge-action {
+                float: right;
+                font-size: 15px;
+                line-height: 20px
+            }
+        }
+
         .player-name {
             overflow: hidden;
             text-overflow: ellipsis;
@@ -56,8 +72,8 @@
             background-color: @m-gray;
             color: #fff;
 
-            &.joinable {
-                cursor: pointer;
+            .tray {
+                color: @text-color;
             }
         }
         &.current-user {
@@ -65,25 +81,24 @@
         }
         &.available {
             border-top: 3px solid @m-green;
-            cursor: pointer;
         }
         &.unavailable {
             border-top: 3px solid @m-red;
 
             &.current-opponent {
                 border-top: 3px solid @m-blue;
-                cursor: pointer;
             }
             &.current-user {
                 border-top: 3px solid @m-blue;
-                cursor: pointer;
             }
         }
 
         .create-challenge-modal,
         .cancel-challenge-modal,
-        .complete-challenge-modal {
+        .complete-challenge-modal,
+        .forfeit-challenge-modal {
             display: none;
+            background: #fff;
             border-width: 3px;
             border-style: solid;
             border-top: none !important;
@@ -96,16 +111,15 @@
             animation: fadeIn .3s ease both;
 
             > i {
-                font-size: 18px;
+                cursor: pointer;
                 position: absolute;
-                right: 2px;
-                top: 2px;
+                right: 3px;
+                top: 0;
             }
         }
 
         &.available {
             .create-challenge-modal {
-                background: fade(@m-green, 25%);
                 border-color: @m-green;
                 display: block;
 
@@ -120,8 +134,8 @@
         }
 
         &.unavailable {
-            .cancel-challenge-modal {
-                background: fade(@m-blue, 25%);
+            .cancel-challenge-modal,
+            .forfeit-challenge-modal {
                 border-color: @m-blue;
                 display: block;
 
@@ -137,7 +151,6 @@
 
         &.unavailable {
             .complete-challenge-modal {
-                background: #fff;
                 border-color: @m-blue;
                 display: block;
 

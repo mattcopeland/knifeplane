@@ -7314,6 +7314,20 @@ body {
     width: 100%;
   }
 }
+.pyramid .pyramid-block .tray {
+  background-color: #F7F7F7;
+  border-top: 1px solid #dedede;
+  bottom: 0px;
+  left: 0px;
+  padding: 0 3px;
+  position: absolute;
+  width: 100%;
+}
+.pyramid .pyramid-block .tray .challenge-action {
+  float: right;
+  font-size: 15px;
+  line-height: 20px;
+}
 .pyramid .pyramid-block .player-name {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -7327,31 +7341,30 @@ body {
   background-color: #9E9E9E;
   color: #fff;
 }
-.pyramid .pyramid-block.empty.joinable {
-  cursor: pointer;
+.pyramid .pyramid-block.empty .tray {
+  color: #5E5E5E;
 }
 .pyramid .pyramid-block.current-user {
   border-top: 3px solid #2196F3;
 }
 .pyramid .pyramid-block.available {
   border-top: 3px solid #4CAF50;
-  cursor: pointer;
 }
 .pyramid .pyramid-block.unavailable {
   border-top: 3px solid #F44336;
 }
 .pyramid .pyramid-block.unavailable.current-opponent {
   border-top: 3px solid #2196F3;
-  cursor: pointer;
 }
 .pyramid .pyramid-block.unavailable.current-user {
   border-top: 3px solid #2196F3;
-  cursor: pointer;
 }
 .pyramid .pyramid-block .create-challenge-modal,
 .pyramid .pyramid-block .cancel-challenge-modal,
-.pyramid .pyramid-block .complete-challenge-modal {
+.pyramid .pyramid-block .complete-challenge-modal,
+.pyramid .pyramid-block .forfeit-challenge-modal {
   display: none;
+  background: #fff;
   border-width: 3px;
   border-style: solid;
   border-top: none !important;
@@ -7366,14 +7379,14 @@ body {
 }
 .pyramid .pyramid-block .create-challenge-modal > i,
 .pyramid .pyramid-block .cancel-challenge-modal > i,
-.pyramid .pyramid-block .complete-challenge-modal > i {
-  font-size: 18px;
+.pyramid .pyramid-block .complete-challenge-modal > i,
+.pyramid .pyramid-block .forfeit-challenge-modal > i {
+  cursor: pointer;
   position: absolute;
-  right: 2px;
-  top: 2px;
+  right: 3px;
+  top: 0;
 }
 .pyramid .pyramid-block.available .create-challenge-modal {
-  background: rgba(76, 175, 80, 0.25);
   border-color: #4CAF50;
   display: block;
 }
@@ -7386,22 +7399,23 @@ body {
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
 }
-.pyramid .pyramid-block.unavailable .cancel-challenge-modal {
-  background: rgba(33, 150, 243, 0.25);
+.pyramid .pyramid-block.unavailable .cancel-challenge-modal,
+.pyramid .pyramid-block.unavailable .forfeit-challenge-modal {
   border-color: #2196F3;
   display: block;
 }
-.pyramid .pyramid-block.unavailable .cancel-challenge-modal > i {
+.pyramid .pyramid-block.unavailable .cancel-challenge-modal > i,
+.pyramid .pyramid-block.unavailable .forfeit-challenge-modal > i {
   color: #2196F3;
 }
-.pyramid .pyramid-block.unavailable .cancel-challenge-modal button {
+.pyramid .pyramid-block.unavailable .cancel-challenge-modal button,
+.pyramid .pyramid-block.unavailable .forfeit-challenge-modal button {
   position: relative;
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
 }
 .pyramid .pyramid-block.unavailable .complete-challenge-modal {
-  background: #fff;
   border-color: #2196F3;
   display: block;
 }
@@ -11293,6 +11307,12 @@ body.stop-scrolling {
 }
 .di-block {
   display: inline-block !important;
+}
+/*
+ * Cursors
+ */
+.cur-pointer {
+  cursor: pointer!important;
 }
 /* 
  * Material Background Colors
@@ -18377,14 +18397,14 @@ hr.fc-divider {
 .chosen-container-single .chosen-single {
   border-radius: 0;
   overflow: visible;
-  height: 34px;
+  height: 35px;
   padding: 0;
   text-transform: capitalize;
   border: 0;
   border-bottom: 1px solid #e0e0e0;
   background-image: none;
   box-shadow: none;
-  line-height: 34px;
+  line-height: 35px;
 }
 .chosen-container-single .chosen-single:after {
   content: "";
