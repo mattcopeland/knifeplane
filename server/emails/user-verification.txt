@@ -83,7 +83,7 @@
                                         <tr>
                                             <td width="41" style="font-size:1px;line-height:1px">&nbsp;</td>
                                             <td style="font-family:\'Proxima Nova\',Calibri,Helvetica,sans-serif;font-size:36px;color:#FFFFFF;text-align:center;line-height:55px;font-weight:100">
-                                                <p>Welcom to WannaPlayMe!</p>
+                                                <p>Welcome to WannaPlayMe!</p>
                                             </td>
                                             <td width="41" style="font-size:1px;line-height:1px">&nbsp;</td>
                                         </tr>
