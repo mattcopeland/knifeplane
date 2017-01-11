@@ -7328,6 +7328,12 @@ body {
   font-size: 15px;
   line-height: 20px;
 }
+.pyramid .pyramid-block .tray > div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
 .pyramid .pyramid-block .player-name {
   overflow: hidden;
   text-overflow: ellipsis;

@@ -90,10 +90,12 @@
                                 <div class="c-green cur-pointer" ng-if="player.available">Challenge Player</div>
                                 <!-- Show cancel active challenge modal -->
                                 <i class="zmdi zmdi-close-circle-o challenge-action c-blue cur-pointer" ng-if="vm.hasActiveChallenge && player._id === vm.activeChallengeOpponent._id && player.challenge.position === 'opponent'"></i>
-                                <!-- Show forfeit active challenge modal -->
-                                <div class="c-red cur-pointer" ng-if="vm.hasActiveChallenge && player._id === vm.activeChallengeOpponent._id && player.challenge.position === 'challenger'">Forfeit Match</div>
                                 <!-- Show complete challenge modal -->
                                 <div class="c-blue cur-pointer" ng-if="player._id === vm.currentUserPlayer._id && vm.hasActiveChallenge">Match Result</div>
+                                <!-- Display who this person has challenged -->
+                                <div ng-if="player._id !== vm.currentUserPlayer._id && player.challenge && player.challenge.position === 'challenger'"><i class="zmdi zmdi-triangle-up"></i> {{player.challenge.opponent}}</div>
+                                <!-- Show forfeit active challenge modal -->
+                                <div class="c-red cur-pointer" ng-if="vm.hasActiveChallenge && player._id === vm.activeChallengeOpponent._id && player.challenge.position === 'challenger'">Forfeit Match</div>
                                 <!-- Join the competition -->
                                 <div class="cur-pointer" ng-if="!vm.currentUserIsOnCompetition && player.position === 99">Join</div>
                                 <div class="c-orange" ng-if="player.waitUntil"><i class="zmdi zmdi-alert-octagon"></i> {{player.waitUntil}}</div>

@@ -87,6 +87,7 @@
         vm.currentUserIsPending = _.some(vm.competition.pendingPlayers, ['_id', identityService.currentUser._id]);
       }
 
+      // Set stuff for the current user
       vm.currentUserIsOnCompetition = false;
       vm.hasActiveChallenge = false;
       _.forEach(vm.competition.players, function (player) {
@@ -104,12 +105,12 @@
               // Add a class to the current user's opponent'
               var currentOpponent = _.find(vm.competition.players, {'_id': vm.activeChallengeOpponent._id});
               currentOpponent.class = currentOpponent.class ? currentOpponent.class + ' current-opponent': 'current-opponent';
-            // The user doesn't have an active challenge, so find the available challenges'
             }
           });
         }
       });
 
+      // Check all the active challenges for this competition and sets the status of the players
       challengesService.getActiveChallengesByCompetition(vm.competitionId).then(function (challenges) {
         _.forEach(challenges.data, function (challenge) {
 
@@ -120,7 +121,8 @@
           challenger.class = challenger.class ? challenger.class + ' unavailable': 'unavailable';
           challenger.available = false;
           challenger.challenge = {
-            position: 'challenger'
+            position: 'challenger',
+            opponent: _.find(vm.competition.players, { '_id': challenge.opponent._id }).displayName
           };
 
           var opponent = _.find(vm.competition.players, { '_id': challenge.opponent._id });

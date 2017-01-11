@@ -155,7 +155,7 @@ exports.passwordReset = function(user, verificationToken, host) {
 
 function sendMail(mailOptions) {
   if (process.env.NODE_ENV === 'development') {
-    //return null;
+    return null;
   }
   var transporter = nodemailer.createTransport(credentials.smtp);
 
