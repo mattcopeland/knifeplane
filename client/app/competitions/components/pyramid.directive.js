@@ -77,48 +77,12 @@
      * Figure out if each player is already challenged and set some stuff
      */
     function getPlayersStatus() {
-      
-      vm.currentUserIsAdmin = false;
-      vm.currentUserIsPending = false;
-      if (identityService.isAuthenticated()) {
-        // Check to see if the current user is an admin of this competition
-        vm.currentUserIsAdmin = _.some(vm.competition.admins, ['_id', identityService.currentUser._id]);
-        // Check to see if the current user has a pending request to join
-        vm.currentUserIsPending = _.some(vm.competition.pendingPlayers, ['_id', identityService.currentUser._id]);
-      }
-
-      // Set stuff for the current user
-      vm.currentUserIsOnCompetition = false;
-      vm.hasActiveChallenge = false;
-      _.forEach(vm.competition.players, function (player) {
-        // Find the current user if they are on this competition and set some properties
-        if (identityService.isAuthenticated() && player._id === identityService.currentUser._id) {
-          vm.currentUserIsOnCompetition = true;
-          player.class = 'current-user';
-          vm.currentUserPlayer = player;
-
-          // Check if the current user has an active challenge
-          challengesService.getActiveChallengeByCompetitionByPlayer(vm.competitionId, player._id).then(function (challenge) {
-            if (challenge.data) {
-              vm.hasActiveChallenge = true;
-              vm.activeChallengeOpponent = challenge.data.challenger._id === player._id ? challenge.data.opponent : challenge.data.challenger;
-              // Add a class to the current user's opponent'
-              var currentOpponent = _.find(vm.competition.players, {'_id': vm.activeChallengeOpponent._id});
-              currentOpponent.class = currentOpponent.class ? currentOpponent.class + ' current-opponent': 'current-opponent';
-            }
-          });
-        }
-      });
-
       // Check all the active challenges for this competition and sets the status of the players
       challengesService.getActiveChallengesByCompetition(vm.competitionId).then(function (challenges) {
         _.forEach(challenges.data, function (challenge) {
 
           var challenger = _.find(vm.competition.players, { '_id': challenge.challenger._id });
-          if (challenger.class === 'available') {
-            challenger.class = '';
-          }
-          challenger.class = challenger.class ? challenger.class + ' unavailable': 'unavailable';
+          challenger.class = 'unavailable';
           challenger.available = false;
           challenger.challenge = {
             position: 'challenger',
@@ -126,10 +90,7 @@
           };
 
           var opponent = _.find(vm.competition.players, { '_id': challenge.opponent._id });
-          if (opponent.class === 'available') {
-            opponent.class = '';
-          }
-          opponent.class = opponent.class ? opponent.class + ' unavailable': 'unavailable';
+          opponent.class = 'unavailable';
           opponent.available = false;
           opponent.challenge = {
             position: 'opponent'
@@ -148,8 +109,41 @@
             }
           }
         });
-        // Now that we know about all the active challenges find the available challenges for the ucrrent user
-        findAvailableChallenges();
+
+        vm.currentUserIsAdmin = false;
+        vm.currentUserIsPending = false;
+        if (identityService.isAuthenticated()) {
+          // Check to see if the current user is an admin of this competition
+          vm.currentUserIsAdmin = _.some(vm.competition.admins, ['_id', identityService.currentUser._id]);
+          // Check to see if the current user has a pending request to join
+          vm.currentUserIsPending = _.some(vm.competition.pendingPlayers, ['_id', identityService.currentUser._id]);
+        }
+
+        // Set stuff for the current user
+        vm.currentUserIsOnCompetition = false;
+        vm.hasActiveChallenge = false;
+        _.forEach(vm.competition.players, function (player) {
+          // Find the current user if they are on this competition and set some properties
+          if (identityService.isAuthenticated() && player._id === identityService.currentUser._id) {
+            vm.currentUserIsOnCompetition = true;
+            player.class = player.class ? player.class + ' current-user': 'current-user';
+            vm.currentUserPlayer = player;
+
+            // Check if the current user has an active challenge
+            challengesService.getActiveChallengeByCompetitionByPlayer(vm.competitionId, player._id).then(function (challenge) {
+              if (challenge.data) {
+                vm.hasActiveChallenge = true;
+                vm.activeChallengeOpponent = challenge.data.challenger._id === player._id ? challenge.data.opponent : challenge.data.challenger;
+                // Add a class to the current user's opponent'
+                var currentOpponent = _.find(vm.competition.players, {'_id': vm.activeChallengeOpponent._id});
+                currentOpponent.class = currentOpponent.class ? currentOpponent.class + ' current-opponent': 'current-opponent';
+              // Now that we know about all the active challenges find the available challenges for the current user
+              } else {
+                findAvailableChallenges();
+              }
+            });
+          }
+        });
       });
     }
 
