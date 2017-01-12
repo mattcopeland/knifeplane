@@ -7,10 +7,10 @@
         </a>
     </div>
     <div class="card-body card-padding-sm">
-        <div><i class="zmdi zmdi-play-circle-outline" uib-tooltip="{{vm.competition.activity}} competition" tooltip-placement="right"></i> {{vm.competition.activity}}</div>
-        <div><i class="zmdi zmdi-accounts" uib-tooltip="{{vm.competition.players.length}} players in this competition" tooltip-placement="right"></i> {{vm.competition.players.length}}</div>
+        <div><i class="zmdi zmdi-play-circle-outline"></i> {{vm.competition.activity}}</div>
+        <div><i class="zmdi zmdi-accounts"></i> {{vm.competition.players.length}}</div>
         <div ng-if="vm.competition.activeChallenge">
-            <i class="zmdi zmdi-notifications-active c-red" uib-tooltip="You have an active challenge" tooltip-placement="right"></i>
+            <i class="zmdi zmdi-notifications-active c-red"></i>
             <div class="badge pull-right" ng-if="vm.competition.activeChallenge.expires > 0">
                 <i class="zmdi zmdi-time"></i>
                 <timer interval="1000" countdown="vm.competition.activeChallenge.expires" max-time-unit="'hour'">{{hours}}:{{mminutes}}:{{sseconds}}</timer>

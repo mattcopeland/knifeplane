@@ -3,7 +3,7 @@
         <h2>{{vm.competition.name}}</h2>
         <ul class="actions">
             <li>
-                <a ui-sref="competitions.view({competitionId: vm.competitionId})" uib-tooltip="View Competition" tooltip-placement="bottom">
+                <a ui-sref="competitions.view({competitionId: vm.competitionId})">
                     <i ng-if="vm.competition.type==='pyramid'" class="zmdi zmdi-triangle-up"></i>
                     <i ng-if="vm.competition.type==='versus'" class="zmdi zmdi-graphic-eq"></i>
                 </a>

@@ -50,21 +50,21 @@
                     <div class="lvh-label hidden-xs">{{vm.competition.activity}}</div>
                     <ul class="lv-actions actions">
                         <li ng-if="vm.currentUserIsAdmin">
-                            <a ui-sref="competitions.admin({competitionId: vm.competitionId})" uib-tooltip="Admin" tooltip-placement="top">
+                            <a ui-sref="competitions.admin({competitionId: vm.competitionId})">
                                 <i class="zmdi zmdi-edit"></i>
                             </a>
                         </li>
                         <li>
-                            <a ui-sref="competitions.stats({competitionId: vm.competitionId})" uib-tooltip="View Statistics" tooltip-placement="top">
+                            <a ui-sref="competitions.stats({competitionId: vm.competitionId})">
                                 <i class="zmdi zmdi-trending-up"></i>
                             </a>
                         </li>
                         <li ng-if="vm.currentUserIsOnCompetition">
-                            <a href="" ng-click="vm.confirmRemoveCurrentUserFromCompetition()" uib-tooltip="Leave Competition" tooltip-placement="top">
+                            <a href="" ng-click="vm.confirmRemoveCurrentUserFromCompetition()">
                                 <i class="zmdi zmdi-close-circle-o"></i>
                             </a>
                         </li>
-                        <li ng-if="!vm.currentUserIsOnCompetition && !vm.currentUserIsPending && vm.numberOfRealPlayers < vm.maxPlayers" uib-tooltip="Join Competition" tooltip-placement="top">
+                        <li ng-if="!vm.currentUserIsOnCompetition && !vm.currentUserIsPending && vm.numberOfRealPlayers < vm.maxPlayers">
                             <a href="" ng-click="vm.addCurrentUserToCompetition()">
                                 <i class="zmdi zmdi-account-add"></i>
                             </a>
