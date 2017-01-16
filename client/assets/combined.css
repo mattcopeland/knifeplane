@@ -7606,7 +7606,7 @@ body {
 }
 .active-challenges table td,
 .completed-challenges table td {
-  width: 40%;
+  width: 35%;
 }
 .active-challenges table td .delete-challenge-control,
 .completed-challenges table td .delete-challenge-control {
@@ -7616,7 +7616,7 @@ body {
 }
 .active-challenges table td:last-child,
 .completed-challenges table td:last-child {
-  width: 20%;
+  width: 30%;
 }
 .player-statistics .card-header h2 {
   margin-left: 10px;
