@@ -1,52 +1,9 @@
 <div class="container pyramid-container">
-    <div class="card m-b-0"><!-- id="messages-main">
-        <div class="ms-menu competition-menu" ng-class="{ 'toggled': vm.competitionMenuToggle }">
-            <!-- Make a challenge --
-            <div class="ms-block m-b-20" ng-if="vm.currentUserIsOnCompetition && !vm.hasActiveChallenge && vm.currentUserPlayer.level !== 1">
-                <div class="dropdown" uib-dropdown>
-                    <a class="btn btn-primary btn-block" href="" uib-dropdown-toggle>Make a Challenge <i class="caret m-l-5"></i></a>
-                    <ul class="dropdown-menu w-100" ng-if="vm.availableChallenges">
-                        <li class="dd-header">Available opponents:</li>
-                        <li class="divider hidden-xs"></li>
-                        <li ng-repeat="player in vm.competition.players" ng-if="player.available">
-                            <a href="" ng-click="vm.createChallenge(player)"><i class="zmdi zmdi-account"></i> {{player.firstName}} {{player.lastName}}</a>
-                        </li>
-                    </ul>
-                    <ul class="dropdown-menu w-100" ng-if="!vm.availableChallenges">
-                        <li class="dd-header">Sorry, you have no available opponents</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Complete a challenge --
-            <div class="ms-block m-b-20" ng-if="vm.currentUserIsOnCompetition && vm.hasActiveChallenge">
-                <div class="dropdown" uib-dropdown>
-                    <a class="btn btn-primary btn-block" href="" uib-dropdown-toggle>Complete a Challenge <i class="caret m-l-5"></i></a>
-                    <ul class="dropdown-menu w-100">
-                        <li class="dd-header">How did you do against<div><b>{{vm.activeChallengeOpponent.firstName}} {{vm.activeChallengeOpponent.lastName}}</b>?</div></li>
-                        <li class="divider hidden-xs"></li>
-                        <li class="btn-container">
-                            <button class="btn btn-success" type="button" ng-click="vm.completeChallenge(true)">Won</button>
-                            <button class="btn btn-danger" type="button" ng-click="vm.completeChallenge(false)">Lost</button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="active-challenges c-overflow" wpm-active-challeneges competition="vm.competition"></div>
-        </div>
-        -->
+    <div class="card">
         <!-- Competition -->
         <div class="ms-body">
             <div class="listview lv-message">
                 <div class="lv-header-alt clearfix">
-                    <!--
-                    <div id="ms-menu-trigger" ng-class="{ 'open': vm.competitionMenuToggle }" ng-click="vm.competitionMenuToggle = (vm.competitionMenuToggle === true ? false : true )">
-                        <div class="line-wrap">
-                            <div class="line top"></div>
-                            <div class="line center"></div>
-                            <div class="line bottom"></div>
-                        </div>
-                    </div>
-                    -->
                     <div class="lvh-label hidden-xs">{{vm.competition.activity}}</div>
                     <ul class="lv-actions actions">
                         <li ng-if="vm.currentUserIsAdmin">

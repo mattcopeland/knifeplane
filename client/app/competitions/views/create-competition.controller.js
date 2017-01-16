@@ -5,7 +5,7 @@
   'use strict';
   angular.module('app').controller('CreateCompetitionCtrl', CreateCompetitionCtrl);
 
-  function CreateCompetitionCtrl($state, userService, competitionsService, identityService, notifyService) {
+  function CreateCompetitionCtrl($state, $filter, userService, competitionsService, identityService, notifyService) {
     var breakPoints = [];
     var maxLevels = 7;
     var maxPlayers = null;
@@ -32,7 +32,7 @@
      */
     function activate() {
       userService.getAllUsers().then(function (users) {
-        vm.availablePlayers = users.data;
+        vm.availablePlayers = $filter('orderBy')(users.data, 'firstName');
       });
 
       // Determine the maximum number of players based on the maximum number of levels

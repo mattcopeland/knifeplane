@@ -71,6 +71,7 @@
           });
         });
         
+        vm.availablePlayers = $filter('orderBy')(vm.availablePlayers, 'firstName');
         originalAvailablePlayers = _.cloneDeep(vm.availablePlayers);
       });
     }

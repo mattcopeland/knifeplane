@@ -12,7 +12,10 @@
       controllerAs: 'vm',
       restrict: 'A',
       scope: {
-        competition: '='
+        competition: '=',
+        allowDelete: '=',
+        numberOfChallenges: '@',
+        challengesPerPage: '@'
       },
       templateUrl: '/challenges/components/active-challenges.html'
     };
@@ -20,7 +23,7 @@
   }
 
   /* @ngInject */
-  function ctrlFunc($scope, challengesService) {
+  function ctrlFunc($scope, challengesService, ngTableParams) {
     var vm = this;
     vm.challenges = [];
 
@@ -38,6 +41,18 @@
       vm.challenges = [];
       challengesService.getActiveChallengesByCompetition(vm.competition._id).then(function (challenges) {
         if (challenges.data.length > 0) {
+          //Data Table info
+          vm.tableData = new ngTableParams({
+            page: 1, // show first page
+            count: vm.challengesPerPage || 5 // count per page
+          }, {
+            counts: [], // hides page sizes
+            total: vm.challenges.length, // length of data
+            getData: function ($defer, params) {
+              $defer.resolve(vm.challenges.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+            }
+          });
+
           vm.challenges = challenges.data;          
           _.forEach(vm.challenges, function (challenge) {
             if (challenge.type === 'versus') {

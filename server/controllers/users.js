@@ -6,7 +6,11 @@ var User = require('mongoose').model('User'),
   emails = require('./emails');
 
 exports.getUsers = function (req, res) {
-  User.find({}).exec(function (err, collection) {
+  User.find({
+    verified: { $eq: true }
+  }).sort({
+    'firstName': 1 
+  }).exec(function (err, collection) {
     res.send(collection);
   });
 };

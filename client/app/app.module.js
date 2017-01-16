@@ -8,5 +8,6 @@ angular.module('app', [
   'timer',
   'LocalStorageModule',
   'angular-sortable-view',
-  'angular.vertilize'
+  'angular.vertilize',
+  'ngTable'
 ]);

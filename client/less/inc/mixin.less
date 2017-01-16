@@ -184,7 +184,16 @@
  * Vertical Align
  */
 .vertical-align(@position: relative) {
-  position: @position;
-  top: 50%;
-  transform: translateY(-50%);
+    position: @position;
+    top: 50%;
+    transform: translateY(-50%);
+}
+/*
+ * Prevent text wrap with ellipsis
+ */
+.nowrap-ellip() {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
 }

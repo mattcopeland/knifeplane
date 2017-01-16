@@ -1,80 +1,16 @@
-.active-challenges {
-    height: ~"calc(100% - 73px)";
+.active-challenges,
+.completed-challenges {
+    table td {
+        width: 40%;
 
-    .listview {
-        text-align: center;
-
-        .lv-header {
-            margin-bottom: 0;
+        .delete-challenge-control {
+            cursor: pointer;
+            float: right;
+            font-size: 18px;
         }
-        
-        .lv-item,
-        .lv-item:hover {
-            background: none !important;
-            border-bottom: 1px solid #eee;
-            cursor: default !important;
-
-            .player {
-                font-size: @font-size-base - 1px;
-                font-weight: bold;
-
-                &.winner {
-                    font-size: @font-size-base + 2px;
-                }
-            }
-
-            .action {
-                font-size: @font-size-base - 2px;
-                font-style: italic;
-            }
-        }
-    }
-}
-
-.completed-challenges .card-body {
-    overflow-x: auto;
-    white-space: nowrap;
-
-    .challenge-result {
-        display: inline-block;
-        margin: 10px 0 10px 10px;
-        padding: 10px;
-        position: relative;
-        text-align: center;
-        width: 200px;
 
         &:last-child {
-            margin-right: 10px;
-        }
-
-        i {
-            cursor: pointer;
-            font-size: 18px;
-            position: absolute;
-            right: 5px;
-            top: 5px;
-
-            &:hover {
-                color: @m-blue;
-            }
-        }
-
-        .player {
-            font-size: @font-size-base - 1px;
-            font-weight: bold;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            width: 100%;
-
-            &.winner {
-                font-size: @font-size-base + 3px;
-            }
-        }
-
-        .action {
-            font-size: @font-size-base - 2px;
-            font-style: italic;
+            width: 20%;
         }
     }
 }

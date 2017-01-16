@@ -5050,7 +5050,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > .active > span:focus {
   z-index: 3;
   color: #fff;
-  background-color: #00BCD4;
+  background-color: #2196F3;
   border-color: #fff;
   cursor: default;
 }
@@ -7124,6 +7124,9 @@ button.close {
  * Vertical Align
  */
 /*
+ * Prevent text wrap with ellipsis
+ */
+/*
  * Load Font
  */
 /*
@@ -7601,74 +7604,19 @@ body {
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
 }
-.active-challenges {
-  height: calc(100% - 73px);
+.active-challenges table td,
+.completed-challenges table td {
+  width: 40%;
 }
-.active-challenges .listview {
-  text-align: center;
-}
-.active-challenges .listview .lv-header {
-  margin-bottom: 0;
-}
-.active-challenges .listview .lv-item,
-.active-challenges .listview .lv-item:hover {
-  background: none !important;
-  border-bottom: 1px solid #eee;
-  cursor: default !important;
-}
-.active-challenges .listview .lv-item .player,
-.active-challenges .listview .lv-item:hover .player {
-  font-size: 12px;
-  font-weight: bold;
-}
-.active-challenges .listview .lv-item .player.winner,
-.active-challenges .listview .lv-item:hover .player.winner {
-  font-size: 15px;
-}
-.active-challenges .listview .lv-item .action,
-.active-challenges .listview .lv-item:hover .action {
-  font-size: 11px;
-  font-style: italic;
-}
-.completed-challenges .card-body {
-  overflow-x: auto;
-  white-space: nowrap;
-}
-.completed-challenges .card-body .challenge-result {
-  display: inline-block;
-  margin: 10px 0 10px 10px;
-  padding: 10px;
-  position: relative;
-  text-align: center;
-  width: 200px;
-}
-.completed-challenges .card-body .challenge-result:last-child {
-  margin-right: 10px;
-}
-.completed-challenges .card-body .challenge-result i {
+.active-challenges table td .delete-challenge-control,
+.completed-challenges table td .delete-challenge-control {
   cursor: pointer;
+  float: right;
   font-size: 18px;
-  position: absolute;
-  right: 5px;
-  top: 5px;
 }
-.completed-challenges .card-body .challenge-result i:hover {
-  color: #2196F3;
-}
-.completed-challenges .card-body .challenge-result .player {
-  font-size: 12px;
-  font-weight: bold;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 100%;
-}
-.completed-challenges .card-body .challenge-result .player.winner {
-  font-size: 16px;
-}
-.completed-challenges .card-body .challenge-result .action {
-  font-size: 11px;
-  font-style: italic;
+.active-challenges table td:last-child,
+.completed-challenges table td:last-child {
+  width: 20%;
 }
 .player-statistics .card-header h2 {
   margin-left: 10px;
@@ -14204,10 +14152,6 @@ a.lv-footer:hover {
 .table > tfoot > tr.danger > td {
   border: 0;
 }
-.table > tbody > tr:last-child > td,
-.table > tfoot > tr:last-child > td {
-  padding-bottom: 20px;
-}
 .table-striped td,
 .table-striped th {
   border: 0 !important;
@@ -15153,6 +15097,11 @@ html:not(.ie9) .select.fg-line:before {
 .pagination > li.disabled {
   opacity: 0.5;
   filter: alpha(opacity=50);
+}
+.pagination > li:first-child > a,
+.pagination > li:last-child > a {
+  font-size: 24px;
+  line-height: 35px;
 }
 /*
  * Listview Pagination
@@ -19263,8 +19212,7 @@ select.chosen {
   border-color: #D7D7D7 !important;
 }
 .ng-table-pager {
-  padding: 12px 25px 15px;
-  min-height: 101px;
+  text-align: center;
 }
 @media screen and (min-width: 768px) {
   .ng-table-pager {
@@ -19301,16 +19249,6 @@ select.chosen {
   left: 16px;
   top: 5px;
   z-index: 12;
-}
-.ng-table-pagination > li:first-child > a,
-.ng-table-pagination > li:last-child > a {
-  font-size: 0px;
-}
-.ng-table-pagination > li:first-child:before {
-  content: "\f2fa";
-}
-.ng-table-pagination > li:last-child:before {
-  content: "\f2fb";
 }
 .sortable .ng-table-header {
   position: relative;

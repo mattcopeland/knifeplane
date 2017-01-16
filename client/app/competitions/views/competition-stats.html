@@ -10,7 +10,7 @@
             </li>
         </ul>
     </div>
-    <div wpm-completed-challeneges competition="vm.competition" challenges="vm.challenges"></div>
+    <div wpm-completed-challeneges competition="vm.competition" challenges-per-page="10"></div>
     <div ng-if="vm.competition.type === 'pyramid'" ng-repeat="player in vm.competition.players | orderObjectBy: 'position'" wpm-player-overall-results player="player"></div>
     <div ng-if="vm.competition.type === 'versus'" ng-repeat="team in vm.teams | orderObjectBy: 'number'" wpm-team-overall-results competition="vm.competition" challenges="vm.challenges" team="team.number"></div>
 </div>

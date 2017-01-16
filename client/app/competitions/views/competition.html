@@ -5,3 +5,13 @@
 </div>
 <div wpm-pyramid ng-if="vm.competitionId && vm.competition.type === 'pyramid'" competition="vm.competition"></div>
 <div wpm-versus ng-if="vm.competitionId && vm.competition.type === 'versus'" competition="vm.competition"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div wpm-active-challeneges competition="vm.competition" challenges-per-page="5"></div>
+        </div>
+        <div class="col-md-6">
+            <div wpm-completed-challeneges competition="vm.competition" challenges-per-page="5"></div>
+        </div>
+    </div>
+</div>
