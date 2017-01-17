@@ -26,6 +26,7 @@
   function ctrlFunc($scope, challengesService, ngTableParams) {
     var vm = this;
     vm.challenges = [];
+    vm.deleteChallenge = deleteChallenge;
 
     activate();
 
@@ -41,6 +42,8 @@
       vm.challenges = [];
       challengesService.getActiveChallengesByCompetition(vm.competition._id).then(function (challenges) {
         if (challenges.data.length > 0) {
+          vm.challenges = challenges.data; 
+          
           //Data Table info
           vm.tableData = new ngTableParams({
             page: 1, // show first page
@@ -52,8 +55,7 @@
               $defer.resolve(vm.challenges.slice((params.page() - 1) * params.count(), params.page() * params.count()));
             }
           });
-
-          vm.challenges = challenges.data;          
+         
           _.forEach(vm.challenges, function (challenge) {
             if (challenge.type === 'versus') {
               // If more than 1 player per team than use Team name
@@ -72,6 +74,23 @@
             }
           });
         }
+      });
+    }
+
+    function deleteChallenge(challengeId, $index) {
+      swal({
+        title: 'Delete Challenge Result?',
+        text: 'It\'ll be like it never happened',
+        type: 'error',
+        showCancelButton: true,
+        confirmButtonText: 'Delete',
+        cancelButtonText: 'Nevermind',
+        closeOnConfirm: true,
+        closeOnCancel: true
+      }, function () {
+        challengesService.deleteChallenge(vm.competition._id, challengeId).then (function () {
+          vm.challenges.splice($index, 1);
+        });
       });
     }
   }
