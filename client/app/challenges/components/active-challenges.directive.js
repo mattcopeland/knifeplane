@@ -25,7 +25,7 @@
   /* @ngInject */
   function ctrlFunc($scope, challengesService, ngTableParams) {
     var vm = this;
-    vm.challenges = [];
+    vm.challenges = null;
     vm.deleteChallenge = deleteChallenge;
 
     activate();
@@ -39,11 +39,10 @@
     }
 
     function getActiveChallenges() {
-      vm.challenges = [];
       challengesService.getActiveChallengesByCompetition(vm.competition._id).then(function (challenges) {
+        vm.challenges = challenges.data; 
         if (challenges.data.length > 0) {
-          vm.challenges = challenges.data; 
-          
+
           //Data Table info
           vm.tableData = new ngTableParams({
             page: 1, // show first page

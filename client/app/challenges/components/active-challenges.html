@@ -2,6 +2,7 @@
     <div class="card-header">
         <h2>Active Challenges</h2>
     </div>
+    <div class="card-body card-padding" ng-if="vm.challenges === null">Getting active challenges...</div>
     <div class="card-body card-padding" ng-if="vm.challenges.length === 0">No challenges at this time</div>
     <div class="card-body table-responsive hidden-xs" ng-if="vm.challenges.length > 0">
         <table ng-table="vm.tableData" class="table table-striped table-vmiddle">

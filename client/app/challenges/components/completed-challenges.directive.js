@@ -25,7 +25,7 @@
   /* @ngInject */
   function ctrlFunc($scope, $state, challengesService, ngTableParams) {
     var vm = this;
-    vm.challenges = [];
+    vm.challenges = null;
     vm.deleteChallenge = deleteChallenge;
 
     activate();
@@ -41,8 +41,8 @@
     function getCompletedChallenges() {
       // Get completed challenges in this competition
       challengesService.getCompletedChallengesByCompetition(vm.competition._id, vm.numberOfChallenges).then(function (challenges) {
+        vm.challenges = challenges.data;
         if (challenges.data.length > 0) {
-          vm.challenges = challenges.data;
         
           //Data Table info
           vm.tableData = new ngTableParams({
