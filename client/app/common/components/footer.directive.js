@@ -11,7 +11,7 @@
       controller: ctrlFunc,
       controllerAs: 'vm',
       restrict: 'A',
-      templateUrl: '/common/components/footer.html'
+      templateUrl: 'common/components/footer.html'
     };
     return directive;
   }

@@ -11,7 +11,7 @@
       controller: ctrlFunc,
       controllerAs: 'headerCtrl',
       restrict: 'A',
-      templateUrl: '/common/components/header.html'
+      templateUrl: 'common/components/header.html'
     };
     return directive;
   }

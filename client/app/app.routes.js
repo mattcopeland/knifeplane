@@ -171,7 +171,7 @@
           'content@': {
             controller: 'EditUserAdminCtrl',
             controllerAs: 'vm',
-            templateUrl: '/admin/views/edit-user-admin.html'
+            templateUrl: 'admin/views/edit-user-admin.html'
           }
         },
         resolve: {

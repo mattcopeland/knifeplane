@@ -14,7 +14,7 @@
       scope: {
         competition: '='
       },
-      templateUrl: '/competitions/components/pending-players.html'
+      templateUrl: 'competitions/components/pending-players.html'
     };
     return directive;
   }

@@ -11,7 +11,7 @@
       controller: ctrlFunc,
       controllerAs: 'sidebarCtrl',
       restrict: 'A',
-      templateUrl: '/common/components/sidebar.html'
+      templateUrl: 'common/components/sidebar.html'
     };
     return directive;
   }

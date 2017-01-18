@@ -15,7 +15,7 @@
         competition: '=',
 
       },
-      templateUrl: '/competitions/components/competition-compact.html'
+      templateUrl: 'competitions/components/competition-compact.html'
     };
     return directive;
   }

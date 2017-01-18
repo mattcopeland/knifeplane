@@ -14,7 +14,7 @@
       scope: {
         competition: '='
       },
-      templateUrl: '/competitions/components/update-admins.html'
+      templateUrl: 'competitions/components/update-admins.html'
     };
     return directive;
   }

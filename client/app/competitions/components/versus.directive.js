@@ -7,7 +7,7 @@
   function wpmVersus() {
     var directive = {
       restrict: 'A',
-      templateUrl: '/competitions/components/versus.html',
+      templateUrl: 'competitions/components/versus.html',
       replace: true,
       scope: {
         competition: '='

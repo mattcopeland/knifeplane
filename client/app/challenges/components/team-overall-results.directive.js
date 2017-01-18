@@ -16,7 +16,7 @@
         team: '=',
         challenges: '='
       },
-      templateUrl: '/challenges/components/team-overall-results.html'
+      templateUrl: 'challenges/components/team-overall-results.html'
     };
     return directive;
   }

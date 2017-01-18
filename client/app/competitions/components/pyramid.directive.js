@@ -7,7 +7,7 @@
   function wpmPyramid() {
     var directive = {
       restrict: 'A',
-      templateUrl: '/competitions/components/pyramid.html',
+      templateUrl: 'competitions/components/pyramid.html',
       replace: true,
       scope: {
         competition: '='

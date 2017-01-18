@@ -17,7 +17,7 @@
         numberOfChallenges: '@',
         challengesPerPage: '@'
       },
-      templateUrl: '/challenges/components/active-challenges.html'
+      templateUrl: 'challenges/components/active-challenges.html'
     };
     return directive;
   }

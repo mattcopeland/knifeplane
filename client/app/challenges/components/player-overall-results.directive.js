@@ -14,7 +14,7 @@
       scope: {
         player: '='
       },
-      templateUrl: '/challenges/components/player-overall-results.html'
+      templateUrl: 'challenges/components/player-overall-results.html'
     };
     return directive;
   }
