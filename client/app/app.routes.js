@@ -15,6 +15,7 @@
     $urlRouterProvider.otherwise('/');
 
     $urlRouterProvider.when('/competitions/', '/competitions');
+    $urlRouterProvider.when('/admin/', '/admin');
 
     $stateProvider
       .state('home', {
@@ -154,6 +155,27 @@
             controllerAs: 'vm',
             templateUrl: 'authentication/views/password-reset.html'
           }
+        }
+      }).state('admin', {
+        url: '/admin',
+        views: {
+          'content': {
+            controller: 'LoginCtrl',
+            controllerAs: 'vm',
+            templateUrl: 'authentication/views/login.html'
+          }
+        }
+      }).state('admin.users', {
+        url: '/users',
+        views: {
+          'content@': {
+            controller: 'EditUserAdminCtrl',
+            controllerAs: 'vm',
+            templateUrl: '/admin/views/edit-user-admin.html'
+          }
+        },
+        resolve: {
+          auth: routeRoleChecks.superAdmin
         }
       });
   }

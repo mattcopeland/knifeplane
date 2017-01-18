@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <ul>
+                <li ng-repeat="user in vm.users" ng-click="vm.selectUser(user)">
+                    {{user.firstName}} {{user.lastName}}</span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <div class="block-header">
+                <h2>User Information</h2>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2>Update User Info</h2>
+                </div>
+                <div class="card-body card-padding">
+                    <form role="form" name="vm.userForm" ng-submit="vm.updateUser(vm.selectedUser)" novalidate>
+                        <div class="form-group m-b-30">
+                            <div class="fg-line">
+                                <input type="text" class="form-control fg-input" ng-model="vm.selectedUser.firstName" placeholder="First Name">
+                            </div>
+                        </div>
+                        <div class="form-group m-b-30">
+                            <div class="fg-line">
+                                <input type="text" class="form-control fg-input" ng-model="vm.selectedUser.lastName" placeholder="Last Name">
+                            </div>
+                        </div>
+                        <div class="form-group m-b-30">
+                            <div class="fg-line">
+                                <input type="text" class="form-control fg-input" ng-model="vm.selectedUser.displayName" placeholder="Display Name">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary waves-effect" ng-disabled="vm.userForm.$invalid || !vm.userForm.$dirty">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

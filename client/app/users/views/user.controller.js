@@ -35,6 +35,8 @@
           notifyService.error('Don\'t leave names blank!  How will people know who you are?');
         } else if (_.indexOf(displayNames, user.displayName.toLowerCase()) > -1) {
           notifyService.error('Sorry, someone else is already using that display name');
+        } else if (!identityService.isAuthorized('super-admin') && user.displayName.toLowerCase().indexOf('maestro') > -1) {
+          notifyService.error('Sorry, there\'s only one Maestro');
         } else {
           // If any of the names were updated we'll need to update them in the other collections'
           var userUpdates = {

@@ -20,7 +20,7 @@
   }
 
   /* @ngInject */
-  function ctrlFunc($scope, $filter, competitionsService, challengesService, userService, notifyService) {
+  function ctrlFunc($scope, competitionsService, challengesService, userService, notifyService) {
     var removedPlayers = [];
     var originalAvailablePlayers = [];
     var maxLevels = 7;
@@ -54,7 +54,7 @@
     function getAvailablePlayers() {
       vm.availablePlayers = [];
       removedPlayers = [];
-      userService.getAllUsers().then(function (users) {
+      userService.getVerifiedUsers().then(function (users) {
         _.forEach(vm.competition.players, function (competitionPlayer) {
           _.remove(users.data, function (availablePlayer){
             return competitionPlayer._id === availablePlayer._id;
@@ -71,7 +71,6 @@
           });
         });
         
-        vm.availablePlayers = $filter('orderBy')(vm.availablePlayers, 'firstName');
         originalAvailablePlayers = _.cloneDeep(vm.availablePlayers);
       });
     }

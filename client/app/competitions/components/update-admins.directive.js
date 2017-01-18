@@ -20,7 +20,7 @@
   }
 
   /* @ngInject */
-  function ctrlFunc($scope, $filter, competitionsService, challengesService, userService, identityService) {
+  function ctrlFunc($scope, competitionsService, challengesService, userService, identityService) {
     var removedAdmins = [];
     var originalAvailableAdmins = [];
     var vm = this;
@@ -49,7 +49,7 @@
     function getAvailableAdmins() {
       vm.availableAdmins = [];
       removedAdmins = [];
-      userService.getAllUsers().then(function (users) {
+      userService.getVerifiedUsers().then(function (users) {
         // Remove the current admins from the list of available admins
         _.forEach(vm.competition.admins, function (competitionAdmin) {
           _.remove(users.data, function (availableAdmin){
@@ -67,7 +67,6 @@
           });
         });
 
-        vm.availableAdmins = $filter('orderBy')(vm.availableAdmins, 'firstName');
         originalAvailableAdmins = _.cloneDeep(vm.availableAdmins);
       });
     }

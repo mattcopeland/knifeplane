@@ -5,6 +5,7 @@
   function userService($http) {
     var service = {
       getAllUsers: getAllUsers,
+      getVerifiedUsers: getVerifiedUsers,
       verifyUser: verifyUser,
       generatePasswordResetLink: generatePasswordResetLink,
       resetPassword: resetPassword,
@@ -14,13 +15,18 @@
 
     function getAllUsers() {
       return $http.get('/api/users').then(function (users) {
+        return users;
+      });
+    }
+
+    function getVerifiedUsers() {
+      return $http.get('/api/users/verified').then(function (users) {
         // Make sure every user has a display name
         _.forEach(users.data, function (user) {
           if (!user.displayName) {
             user.displayName = user.firstName + ' ' + user.lastName;
           }
         });
-        users.data = _.sortBy(users.data, 'displayName');
         return users;
       });
     }

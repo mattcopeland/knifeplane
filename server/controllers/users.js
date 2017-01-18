@@ -6,9 +6,17 @@ var User = require('mongoose').model('User'),
   emails = require('./emails');
 
 exports.getUsers = function (req, res) {
+  User.find({}, {hashedPwd: 0, salt: 0}).sort({
+    'firstName': 1 
+  }).exec(function (err, collection) {
+    res.send(collection);
+  });
+};
+
+exports.getVerifiedUsers = function (req, res) {
   User.find({
     verified: { $eq: true }
-  }).sort({
+  }, {hashedPwd: 0, salt: 0}).sort({
     'firstName': 1 
   }).exec(function (err, collection) {
     res.send(collection);
