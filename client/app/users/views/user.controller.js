@@ -3,6 +3,7 @@
   angular.module('app').controller('UserCtrl', UserCtrl);
 
   function UserCtrl(identityService, userService, notifyService) {
+    var originalUser = null;
     var vm = this;
     vm.user =  {
       _id:  identityService.currentUser._id,
@@ -19,6 +20,7 @@
       if (!identityService.currentUser.displayName) {
         vm.user.displayName = identityService.currentUser.firstName + ' ' + identityService.currentUser.lastName;
       }
+      originalUser = _.cloneDeep(vm.user);
     }
 
     function updateUser (user) {
@@ -33,7 +35,7 @@
           notifyService.error('Passwords don\'t match!');
         } else if (user.firstName.length < 1 || user.lastName.length < 1 || user.displayName.length < 1) {
           notifyService.error('Don\'t leave names blank!  How will people know who you are?');
-        } else if (_.indexOf(displayNames, user.displayName.toLowerCase()) > -1) {
+        } else if (originalUser.displayName !== user.displayName && _.indexOf(displayNames, user.displayName.toLowerCase()) > -1) {
           notifyService.error('Sorry, someone else is already using that display name');
         } else if (!identityService.isAuthorized('super-admin') && user.displayName.toLowerCase().indexOf('maestro') > -1) {
           notifyService.error('Sorry, there\'s only one Maestro');

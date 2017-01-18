@@ -4,6 +4,7 @@
 
   function EditUserAdminCtrl(identityService, userService, notifyService) {
     var originalUsers = [];
+    var orginalSelectedUser = null;
     var vm = this;
     vm.users =  null;
     vm.selectedUser = null;
@@ -26,6 +27,7 @@
 
     function selectUser(user) {
       vm.selectedUser = user;
+      orginalSelectedUser = _.cloneDeep(user);
     }
 
     function updateUser (user) {
@@ -37,7 +39,7 @@
 
       if (user.firstName.length < 1 || user.lastName.length < 1 || user.displayName.length < 1) {
         notifyService.error('Don\'t leave names blank!  How will people know who you are?');
-      } else if (_.indexOf(displayNames, user.displayName.toLowerCase()) > -1) {
+      } else if (user.displayName !== orginalSelectedUser.displayName && _.indexOf(displayNames, user.displayName.toLowerCase()) > -1) {
         notifyService.error('Sorry, someone else is already using that display name');
       } else {
         var userUpdates = {
