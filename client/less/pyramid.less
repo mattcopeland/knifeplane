@@ -45,19 +45,40 @@
             background-color: @app-gray;
             border-top: 1px solid darken(@app-gray, 10%);
             bottom: 0px;
+            font-size: @font-size-base - 1px;
             left: 0px;
+            max-height: 23px;
             padding: 0 3px;
             position: absolute;
+            transition: max-height .3s ease-in-out;
             width: 100%;
 
-            .challenge-action {
-                float: right;
-                font-size: 15px;
-                line-height: 20px
+            &.open {
+                max-height: 75px;
+            }
+
+            .tray-expander {
+                font-size: 18px;
+                height: 29px;
+                left: 0;
+                line-height: 13px;
+                position: absolute;
+                text-align: center;
+                top: -6px;
+                width: 148px;
+
+                &:hover {
+                    color: @m-blue;
+
+                    + div {
+                        color: @m-blue;
+                    }
+                }
             }
 
             > div {
                 .nowrap-ellip();
+                line-height: 22px;
             }
         }
 
@@ -97,10 +118,7 @@
             border-top: 3px solid @m-orange;
         }
 
-        .create-challenge-modal,
-        .cancel-challenge-modal,
-        .complete-challenge-modal,
-        .forfeit-challenge-modal {
+        .complete-challenge-modal{
             display: none;
             background: #fff;
             border-width: 3px;
@@ -119,37 +137,6 @@
                 position: absolute;
                 right: 3px;
                 top: 0;
-            }
-        }
-
-        &.available {
-            .create-challenge-modal {
-                border-color: @m-green;
-                display: block;
-
-                > i {
-                    color: @m-green;
-                }
-
-                button {
-                    .vertical-align();
-                }
-            }
-        }
-
-        &.unavailable {
-            .cancel-challenge-modal,
-            .forfeit-challenge-modal {
-                border-color: @m-blue;
-                display: block;
-
-                > i {
-                    color: @m-blue;
-                }
-
-                button {
-                    .vertical-align();
-                }
             }
         }
 

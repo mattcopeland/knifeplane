@@ -7321,21 +7321,40 @@ body {
   background-color: #F7F7F7;
   border-top: 1px solid #dedede;
   bottom: 0px;
+  font-size: 12px;
   left: 0px;
+  max-height: 23px;
   padding: 0 3px;
   position: absolute;
+  -webkit-transition: max-height 0.3s ease-in-out;
+  transition: max-height 0.3s ease-in-out;
   width: 100%;
 }
-.pyramid .pyramid-block .tray .challenge-action {
-  float: right;
-  font-size: 15px;
-  line-height: 20px;
+.pyramid .pyramid-block .tray.open {
+  max-height: 75px;
+}
+.pyramid .pyramid-block .tray .tray-expander {
+  font-size: 18px;
+  height: 29px;
+  left: 0;
+  line-height: 13px;
+  position: absolute;
+  text-align: center;
+  top: -6px;
+  width: 148px;
+}
+.pyramid .pyramid-block .tray .tray-expander:hover {
+  color: #2196F3;
+}
+.pyramid .pyramid-block .tray .tray-expander:hover + div {
+  color: #2196F3;
 }
 .pyramid .pyramid-block .tray > div {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 100%;
+  line-height: 22px;
 }
 .pyramid .pyramid-block .player-name {
   overflow: hidden;
@@ -7371,10 +7390,7 @@ body {
 .pyramid .pyramid-block.waiting {
   border-top: 3px solid #FF9800;
 }
-.pyramid .pyramid-block .create-challenge-modal,
-.pyramid .pyramid-block .cancel-challenge-modal,
-.pyramid .pyramid-block .complete-challenge-modal,
-.pyramid .pyramid-block .forfeit-challenge-modal {
+.pyramid .pyramid-block .complete-challenge-modal {
   display: none;
   background: #fff;
   border-width: 3px;
@@ -7389,43 +7405,11 @@ body {
   -webkit-animation: fadeIn .3s ease both;
           animation: fadeIn .3s ease both;
 }
-.pyramid .pyramid-block .create-challenge-modal > i,
-.pyramid .pyramid-block .cancel-challenge-modal > i,
-.pyramid .pyramid-block .complete-challenge-modal > i,
-.pyramid .pyramid-block .forfeit-challenge-modal > i {
+.pyramid .pyramid-block .complete-challenge-modal > i {
   cursor: pointer;
   position: absolute;
   right: 3px;
   top: 0;
-}
-.pyramid .pyramid-block.available .create-challenge-modal {
-  border-color: #4CAF50;
-  display: block;
-}
-.pyramid .pyramid-block.available .create-challenge-modal > i {
-  color: #4CAF50;
-}
-.pyramid .pyramid-block.available .create-challenge-modal button {
-  position: relative;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-}
-.pyramid .pyramid-block.unavailable .cancel-challenge-modal,
-.pyramid .pyramid-block.unavailable .forfeit-challenge-modal {
-  border-color: #2196F3;
-  display: block;
-}
-.pyramid .pyramid-block.unavailable .cancel-challenge-modal > i,
-.pyramid .pyramid-block.unavailable .forfeit-challenge-modal > i {
-  color: #2196F3;
-}
-.pyramid .pyramid-block.unavailable .cancel-challenge-modal button,
-.pyramid .pyramid-block.unavailable .forfeit-challenge-modal button {
-  position: relative;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
 }
 .pyramid .pyramid-block.unavailable .complete-challenge-modal {
   border-color: #2196F3;

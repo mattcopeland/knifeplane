@@ -34,9 +34,12 @@
     vm.hasActiveChallenge = false;
     vm.activeChallengeOpponent = null;
     vm.availableChallenges = false;
+    vm.confirmCreateChallenge = confirmCreateChallenge;
     vm.createChallenge = createChallenge;
+    vm.confirmCancelChallenge = confirmCancelChallenge;
     vm.cancelChallenge = cancelChallenge;
     vm.completeChallenge = completeChallenge;
+    vm.confirmForfeitChallenge = confirmForfeitChallenge;
     vm.forfeitChallenge = forfeitChallenge;
     vm.currentUserPlayer = {};
     vm.competitionMenuToggle = false;
@@ -223,6 +226,26 @@
     }
 
     /**
+     * Show a confirmation modal before forfeiting
+     * 
+     * @param  {object} player, player to challenge
+     */
+    function confirmCreateChallenge(player) {
+      swal({
+        title: 'Challenge ' + player.displayName + '?',
+        text: 'You can do it!',
+        showCancelButton: true,
+        confirmButtonClass: 'btn-success',
+        confirmButtonText: 'Yes, challenge!',
+        cancelButtonText: 'Nevermind',
+        closeOnConfirm: true,
+        closeOnCancel: true
+      }, function () {
+        createChallenge(player);
+      });
+    }
+
+    /**
      * Creates a challenge between the current user and the player selected
      * 
      * @param  {object} player, the challenged player
@@ -262,6 +285,21 @@
           vm.competitionMenuToggle = false;
         });
       }
+    }
+
+    function confirmCancelChallenge() {
+      swal({
+        title: 'Cancel challenge?',
+        text: 'Are you sure you want to cancel this challenge?',
+        showCancelButton: true,
+        confirmButtonClass: 'btn-warning',
+        confirmButtonText: 'Yes, cancel it',
+        cancelButtonText: 'Nevermind',
+        closeOnConfirm: true,
+        closeOnCancel: true
+      }, function () {
+        cancelChallenge();
+      });
     }
 
     // Allows the challenger to cancel a challenge
@@ -347,6 +385,25 @@
           });
         }
         vm.competitionMenuToggle = false;
+      });
+    }
+
+    /**
+     * Show a confirmation modal before forfeiting
+     * @param  {object} player
+     */
+    function confirmForfeitChallenge(player) {
+      swal({
+        title: 'Forfeit challenge?',
+        text: 'Are you sure you want to forfeit this challenge?',
+        showCancelButton: true,
+        confirmButtonClass: 'btn-danger',
+        confirmButtonText: 'Yes, forfeit',
+        cancelButtonText: 'Nevermind',
+        closeOnConfirm: true,
+        closeOnCancel: true
+      }, function () {
+        forfeitChallenge(player);
       });
     }
 
