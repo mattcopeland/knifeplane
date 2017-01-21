@@ -104,6 +104,20 @@ exports.deleteChallenge = function (req, res) {
   });
 };
 
+exports.deleteAllActiveChallenges = function (req, res) {
+  var challengeDetails = {
+    competitionId: req.query.competitionId,
+    description: 'All challeneges were cancelled'
+  };
+  Challenge.remove({
+    competitionId: req.query.competitionId,
+    complete: {$ne: true}
+  }).exec(function () {
+    websockets.broadcast('competition_updated', challengeDetails);
+    res.send('deleted');
+  });
+};
+
 // Create a new pyramid challenge
 exports.createPyramidChallenge = function (req, res) {
   var challengeData = req.body.challenge;

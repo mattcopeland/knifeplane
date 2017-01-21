@@ -30,6 +30,10 @@ var competitionSchema = mongoose.Schema({
     type: Boolean,
     default: false
   },
+  allowWeekendChallenges: {
+    type: Boolean,
+    default: false
+  },
   players: {
     type: Array,
     default: []

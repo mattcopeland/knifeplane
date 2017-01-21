@@ -17,6 +17,7 @@
       getCompletedChallengesByCompetition: getCompletedChallengesByCompetition,
       deleteActiveChallengeByCompetitionByPlayer: deleteActiveChallengeByCompetitionByPlayer,
       deleteChallenge: deleteChallenge,
+      deleteAllActiveChallenges: deleteAllActiveChallenges,
       getPlayerResultsByCompetition: getPlayerResultsByCompetition
     };
 
@@ -100,6 +101,14 @@
         params: {
           competitionId: competitionId,
           challengeId: challengeId
+        }
+      });
+    }
+
+    function deleteAllActiveChallenges(competitionId) {
+      return $http.delete('/api/challenges/active/delete',  {
+        params: {
+          competitionId: competitionId
         }
       });
     }

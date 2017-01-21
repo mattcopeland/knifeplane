@@ -50,6 +50,7 @@
     vm.playerClick = playerClick;
     vm.numberOfRealPlayers = 0;
     vm.maxPlayers = 0;
+    vm.challengesAllowed = true;
 
     activate();
 
@@ -62,6 +63,7 @@
       $scope.$watch('vm.competition', function () {
         if (vm.competition) {
           vm.competitionId = vm.competition._id;
+          checkForChallengesAllowed();
           orderPlayers();
           getPlayersStatus();
           assignLevelsToPlayers();
@@ -69,6 +71,20 @@
           fillInEmptyBlocks();
         }
       });
+    }
+
+    /**
+     * Check to see if challenges are currently allowed
+     */
+    function checkForChallengesAllowed() {
+      vm.challengesAllowed = true;
+      // Check for allowed weekend challenges
+      if (!vm.competition.allowWeekendChallenges &&
+        (moment().format('ddd') === 'Fri' && moment().format('H') >= 17) ||
+        moment().format('ddd') === 'Sat' ||
+        moment().format('ddd') === 'Sun') {
+        vm.challengesAllowed = false;
+      }
     }
 
     /**
@@ -91,36 +107,41 @@
 
       // Check all the active challenges for this competition and sets the status of the players
       challengesService.getActiveChallengesByCompetition(vm.competitionId).then(function (challenges) {
-        _.forEach(challenges.data, function (challenge) {
+        // If challenges are not allowed, cancel all active challenges
+        if (!vm.challengesAllowed && challenges.data.length > 0) {
+          challengesService.deleteAllActiveChallenges(vm.competitionId);
+        } else {
+          _.forEach(challenges.data, function (challenge) {
 
-          var challenger = _.find(vm.competition.players, { '_id': challenge.challenger._id });
-          challenger.class = 'unavailable';
-          challenger.available = false;
-          challenger.challenge = {
-            position: 'challenger',
-            opponent: _.find(vm.competition.players, { '_id': challenge.opponent._id }).displayName
-          };
+            var challenger = _.find(vm.competition.players, { '_id': challenge.challenger._id });
+            challenger.class = 'unavailable';
+            challenger.available = false;
+            challenger.challenge = {
+              position: 'challenger',
+              opponent: _.find(vm.competition.players, { '_id': challenge.opponent._id }).displayName
+            };
 
-          var opponent = _.find(vm.competition.players, { '_id': challenge.opponent._id });
-          opponent.class = 'unavailable';
-          opponent.available = false;
-          opponent.challenge = {
-            position: 'opponent'
-          };
+            var opponent = _.find(vm.competition.players, { '_id': challenge.opponent._id });
+            opponent.class = 'unavailable';
+            opponent.available = false;
+            opponent.challenge = {
+              position: 'opponent'
+            };
 
-          // Track when the challenge will expire
-          if (challenge.timeLimit !== 0) {
-            var timeToExpire = moment().diff(moment(challenge.created).add(challenge.timeLimit, 'd')) * -1;
-            var hoursToExpire = moment.duration(timeToExpire).asHours();
-            // If the challenge has not yet expired display a countdown on the opponent
-            if (timeToExpire > 0) {
-              opponent.challenge.expires = hoursToExpire;
-              // If the challenge expired while no one was viewing this competition complete the challenge by forfeit
-            } else if (timeToExpire <= 0) {
-              completeChallenge(null, true, opponent);
+            // Track when the challenge will expire
+            if (challenge.timeLimit !== 0) {
+              var timeToExpire = moment().diff(moment(challenge.created).add(challenge.timeLimit, 'd')) * -1;
+              var hoursToExpire = moment.duration(timeToExpire).asHours();
+              // If the challenge has not yet expired display a countdown on the opponent
+              if (timeToExpire > 0) {
+                opponent.challenge.expires = hoursToExpire;
+                // If the challenge expired while no one was viewing this competition complete the challenge by forfeit
+              } else if (timeToExpire <= 0) {
+                completeChallenge(null, true, opponent);
+              }
             }
-          }
-        });
+          });
+        }
 
         vm.currentUserIsAdmin = false;
         vm.currentUserIsPending = false;
@@ -152,7 +173,7 @@
                   var currentOpponent = _.find(vm.competition.players, {'_id': vm.activeChallengeOpponent._id});
                   currentOpponent.class = currentOpponent.class ? currentOpponent.class + ' current-opponent': 'current-opponent';
                 // Now that we know about all the active challenges find the available challenges for the current user
-                } else {
+                } else if (vm.challengesAllowed) {
                   findAvailableChallenges();
                 }
               });
@@ -206,7 +227,8 @@
           lastName: 'Spot',
           displayName: 'Empty Spot',
           position: 99,
-          class: 'empty'
+          class: 'empty',
+          _id: 'XX'
         });
       }
       // We have to give levels to the new empty spots

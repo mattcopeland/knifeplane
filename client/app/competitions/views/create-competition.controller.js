@@ -13,7 +13,8 @@
     vm.newCompetition = {
       players: [],
       restrictJoins: false,
-      private: false
+      private: false,
+      allowWeekendChallenges: false
     };
     vm.availablePlayers = [];
     vm.addedPlayers = [];

@@ -15066,8 +15066,13 @@ html:not(.ie9) .select.fg-line:before {
 }
 .pagination > li {
   margin: 0 2px;
-  display: none;
+  display: inline-block;
   vertical-align: top;
+}
+@media screen and (max-width: 768px) {
+  .pagination > li {
+    display: none;
+  }
 }
 .pagination > li > a,
 .pagination > li > span {
