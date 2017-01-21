@@ -48,7 +48,6 @@
             font-size: @font-size-base - 1px;
             left: 0px;
             max-height: 23px;
-            padding: 0 3px;
             position: absolute;
             transition: max-height .3s ease-in-out;
             width: 100%;
@@ -59,13 +58,18 @@
 
             .tray-expander {
                 font-size: 18px;
-                height: 29px;
-                left: 0;
-                line-height: 13px;
+                height: 22px;
+                right: 0;
+                line-height: 18px;
                 position: absolute;
-                text-align: center;
-                top: -6px;
+                text-align: right;
+                top: 0;
                 width: 148px;
+                padding-right: 5px;
+
+                + div {
+                    padding: 0 10px;
+                }
 
                 &:hover {
                     color: @m-blue;
@@ -79,6 +83,25 @@
             > div {
                 .nowrap-ellip();
                 line-height: 22px;
+                padding: 0 3px;
+
+                &.cur-pointer:hover {
+                    background-color: #ddd;
+                }
+
+
+                i {
+                    font-size: 14px;
+
+                    &.sm {
+                        font-size: 12px;
+                    }
+
+                    &.cancel {
+                        float: right;
+                        line-height: 22px;
+                    }
+                }
             }
         }
 
@@ -113,6 +136,9 @@
             &.current-user {
                 border-top: 3px solid @m-blue;
             }
+        }
+        &.hold {
+            border-top: 3px solid @m-orange;
         }
         &.waiting {
             border-top: 3px solid @m-orange;

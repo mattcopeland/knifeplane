@@ -27,6 +27,8 @@ module.exports = function (app) {
   app.post('/api/competitions/removePlayer', auth.requiresApiLogin, competitions.removePlayer);
   app.post('/api/competitions/approvePlayer', auth.requiresApiLogin, competitions.approvePlayer);
   app.post('/api/competitions/denyPlayer', auth.requiresApiLogin, competitions.denyPlayer);
+  app.put('/api/competitions/playerHold', auth.requiresApiLogin, competitions.createPlayerHold);
+  app.delete('/api/competitions/playerHold', auth.requiresApiLogin, competitions.cancelPlayerHold);
 
   app.get('/api/challenges/competition', challenges.getChallengesByCompetition);
   app.get('/api/challenges/active/competition', challenges.getActiveChallengesByCompetition);

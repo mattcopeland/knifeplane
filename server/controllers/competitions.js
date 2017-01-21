@@ -355,3 +355,51 @@ exports.denyPlayer = function (req, res, next) {
     res.status(201).json(competition);
   });
 };
+
+exports.createPlayerHold = function (req, res, next) {
+  var player = req.body.player.displayName;
+  var details = {
+    competitionId: req.body.competitionId,
+    description: '<b>' + player + '</b> is now on hold'
+  };
+  // Create a new hold period
+  Competition.findOneAndUpdate(
+    {
+      _id: req.body.competitionId,
+      'players._id': req.body.player._id
+    }, {
+      'players.$.hold': true
+    })
+    .exec(function (err, competitions) {
+      if (err) {
+        return next(err);
+      }
+      
+      websockets.broadcast('competition_updated', details);
+      res.status(201).json(competitions);
+    });
+};
+
+exports.cancelPlayerHold = function (req, res, next) {
+  var details = {
+    competitionId: req.query.competitionId,
+    description: '<b>' + req.query.displayName + '</b> is now available'
+  };
+
+  // Remove existing hold period
+  Competition.findOneAndUpdate(
+    {
+      _id: req.query.competitionId,
+      'players._id': req.query.playerId
+    }, {
+      $unset: {'players.$.hold': ''}
+    })
+    .exec(function (err, competitions) {
+      if (err) {
+        return next(err);
+      }
+
+      websockets.broadcast('competition_updated', details);
+      res.status(201).json(competitions);
+    });
+};

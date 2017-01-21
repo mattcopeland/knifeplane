@@ -17,7 +17,9 @@
       addPlayerToCompetitionRequest: addPlayerToCompetitionRequest,
       removedPlayerFromCompetition: removedPlayerFromCompetition,
       approvePendingPlayer: approvePendingPlayer,
-      denyPendingPlayer: denyPendingPlayer
+      denyPendingPlayer: denyPendingPlayer,
+      putPlayerOnHold: putPlayerOnHold,
+      cancelPlayerHold: cancelPlayerHold
     };
 
     return service;
@@ -138,6 +140,23 @@
       return $http.post('/api/competitions/denyPlayer', {
         competitionId: competitionId,
         player: player
+      });
+    }
+
+    function putPlayerOnHold(competitionId, player) {
+      return $http.put('/api/competitions/playerHold', {
+        competitionId: competitionId,
+        player: player
+      });
+    }
+
+    function cancelPlayerHold(competitionId, playerId, displayName) {
+      return $http.delete('/api/competitions/playerHold', {
+        params: {
+          competitionId: competitionId,
+          playerId: playerId,
+          displayName: displayName
+        }
       });
     }
   }

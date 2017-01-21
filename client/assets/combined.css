@@ -7324,7 +7324,6 @@ body {
   font-size: 12px;
   left: 0px;
   max-height: 23px;
-  padding: 0 3px;
   position: absolute;
   -webkit-transition: max-height 0.3s ease-in-out;
   transition: max-height 0.3s ease-in-out;
@@ -7335,13 +7334,17 @@ body {
 }
 .pyramid .pyramid-block .tray .tray-expander {
   font-size: 18px;
-  height: 29px;
-  left: 0;
-  line-height: 13px;
+  height: 22px;
+  right: 0;
+  line-height: 18px;
   position: absolute;
-  text-align: center;
-  top: -6px;
+  text-align: right;
+  top: 0;
   width: 148px;
+  padding-right: 5px;
+}
+.pyramid .pyramid-block .tray .tray-expander + div {
+  padding: 0 10px;
 }
 .pyramid .pyramid-block .tray .tray-expander:hover {
   color: #2196F3;
@@ -7354,6 +7357,20 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 100%;
+  line-height: 22px;
+  padding: 0 3px;
+}
+.pyramid .pyramid-block .tray > div.cur-pointer:hover {
+  background-color: #ddd;
+}
+.pyramid .pyramid-block .tray > div i {
+  font-size: 14px;
+}
+.pyramid .pyramid-block .tray > div i.sm {
+  font-size: 12px;
+}
+.pyramid .pyramid-block .tray > div i.cancel {
+  float: right;
   line-height: 22px;
 }
 .pyramid .pyramid-block .player-name {
@@ -7386,6 +7403,9 @@ body {
 }
 .pyramid .pyramid-block.unavailable.current-user {
   border-top: 3px solid #2196F3;
+}
+.pyramid .pyramid-block.hold {
+  border-top: 3px solid #FF9800;
 }
 .pyramid .pyramid-block.waiting {
   border-top: 3px solid #FF9800;

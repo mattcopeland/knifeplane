@@ -39,7 +39,7 @@
                             <!-- Info tray -->
                             <div class="tray"
                                 ng-class="{'open': player.expandTray}"
-                                ng-if="player.available || player.waitUntil || (player._id === vm.currentUserPlayer._id && vm.hasActiveChallenge) || player.challenge || (!vm.currentUserIsOnCompetition && player.position === 99)">
+                                ng-if="player.available || player.waitUntil || player.hold || player._id === vm.currentUserPlayer._id || player.challenge || (!vm.currentUserIsOnCompetition && player.position === 99)">
                                 <!-- Tray expand icon -->
                                 <i class="zmdi zmdi-chevron-up cur-pointer tray-expander"
                                     ng-class="player.expandTray ? 'zmdi-chevron-down' : 'zmdi-chevron-up'"
@@ -47,7 +47,7 @@
                                     ng-if="player._id === vm.currentUserPlayer._id && vm.hasActiveChallenge"></i>
                                 <!-- Active challenge time -->
                                 <div ng-if="player.challenge && player.challenge.position === 'opponent' && player.challenge.expires" ng-class="{'c-red': player.challenge.expires < .5}">
-                                    <i class="zmdi zmdi-time"></i>
+                                    <i class="zmdi zmdi-timer"></i>
                                     <span ng-if="player.challenge.expires >= .5">{{player.challenge.expires | number: 0}}hrs</span>
                                     <span ng-if="player.challenge.expires < .5">Forfeit Soon</span>
                                 </div>
@@ -60,17 +60,20 @@
                                     ng-if="player.challenge && player.challenge.position === 'challenger'">
                                     <i class="zmdi zmdi-triangle-up"></i> {{player.challenge.opponent}}</div>
                                 <!-- Show complete challenge modal -->
-                                <button class="btn btn-primary btn-xs"
-                                    ng-if="vm.hasActiveChallenge && player._id === vm.currentUserPlayer._id"
-                                    ng-click="vm.playerClick(player)">Match Result</button>
-                                <!-- Show cancel active challenge modal -->
                                 <div class="cur-pointer c-blue"
+                                    ng-if="vm.hasActiveChallenge && player._id === vm.currentUserPlayer._id"
+                                    ng-click="vm.playerClick(player)">
+                                    <i class="zmdi zmdi-check sm"></i> Match Result</div>
+                                <!-- Show cancel active challenge modal -->
+                                <div class="cur-pointer c-red"
                                     ng-if="vm.hasActiveChallenge && player._id === vm.currentUserPlayer._id && player.challenge.position === 'challenger'"
-                                    ng-click="vm.confirmCancelChallenge()">Cancel Challenge</div>
+                                    ng-click="vm.confirmCancelChallenge()">
+                                        <i class="zmdi zmdi-close-circle-o sm"></i> Cancel Challenge</div>
                                 <!-- Show forfeit active challenge modal -->
                                 <div class="cur-pointer c-red"
                                     ng-if="player._id === vm.currentUserPlayer._id && vm.hasActiveChallenge && player.challenge.position === 'opponent'"
-                                    ng-click="vm.confirmForfeitChallenge(player)">Forfeit Match</div>
+                                    ng-click="vm.confirmForfeitChallenge(player)">
+                                    <i class="zmdi zmdi-flag sm"></i> Forfeit Match</div>
                                 <!-- Join the competition -->
                                 <div class="cur-pointer"
                                     ng-if="!vm.currentUserIsOnCompetition && player.position === 99"
@@ -78,7 +81,21 @@
                                 <!-- Show waiting period -->
                                 <div class="c-orange"
                                     ng-if="player.waitUntil">
-                                    <i class="zmdi zmdi-alert-octagon"></i> {{player.waitUntil}}</div>
+                                    <i class="zmdi zmdi-time-countdown"></i> {{player.waitUntil}}</div>
+                                <!-- Show on hold modal -->
+                                <div class="cur-pointer c-blue"
+                                    ng-if="!vm.hasActiveChallenge && player._id === vm.currentUserPlayer._id && !player.hold"
+                                    ng-click="vm.putPlayerOnHold(player)">
+                                    <i class="zmdi zmdi-alert-octagon"></i> Put On Hold</div>
+                                <!-- Show holding period -->
+                                <div class="c-orange"
+                                    ng-if="player.hold">
+                                    <i class="zmdi zmdi-alert-octagon"></i> On Hold
+                                    <i class="zmdi zmdi-close-circle-o cancel cur-pointer"
+                                        ng-if="player._id === vm.currentUserPlayer._id"
+                                        ng-click="vm.cancelPlayerHold(player)"></i>
+                                </div>
+
                             </div>
                             <!-- Complete a challenge modal -->
                             <div class="complete-challenge-modal" ng-if="player._id === vm.currentUserPlayer._id && player.showChallengeModal">

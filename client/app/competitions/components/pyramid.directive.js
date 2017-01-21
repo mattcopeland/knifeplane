@@ -41,6 +41,8 @@
     vm.completeChallenge = completeChallenge;
     vm.confirmForfeitChallenge = confirmForfeitChallenge;
     vm.forfeitChallenge = forfeitChallenge;
+    vm.putPlayerOnHold = putPlayerOnHold;
+    vm.cancelPlayerHold = cancelPlayerHold;
     vm.currentUserPlayer = {};
     vm.competitionMenuToggle = false;
     vm.addCurrentUserToCompetition = addCurrentUserToCompetition;
@@ -80,6 +82,13 @@
      * Figure out if each player is already challenged and set some stuff
      */
     function getPlayersStatus() {
+      // Check for player holds
+      _.forEach(vm.competition.players, function (player) {
+        if (player.hold) {
+          player.class = 'hold';
+        }
+      });
+
       // Check all the active challenges for this competition and sets the status of the players
       challengesService.getActiveChallengesByCompetition(vm.competitionId).then(function (challenges) {
         _.forEach(challenges.data, function (challenge) {
@@ -132,19 +141,22 @@
             player.class = player.class ? player.class + ' current-user': 'current-user';
             vm.currentUserPlayer = player;
 
-            // Check if the current user has an active challenge
-            challengesService.getActiveChallengeByCompetitionByPlayer(vm.competitionId, player._id).then(function (challenge) {
-              if (challenge.data) {
-                vm.hasActiveChallenge = true;
-                vm.activeChallengeOpponent = challenge.data.challenger._id === player._id ? challenge.data.opponent : challenge.data.challenger;
-                // Add a class to the current user's opponent'
-                var currentOpponent = _.find(vm.competition.players, {'_id': vm.activeChallengeOpponent._id});
-                currentOpponent.class = currentOpponent.class ? currentOpponent.class + ' current-opponent': 'current-opponent';
-              // Now that we know about all the active challenges find the available challenges for the current user
-              } else {
-                findAvailableChallenges();
-              }
-            });
+            // Only check for active challenges for the current user if they are not on hold
+            if (!player.hold) {
+              // Check if the current user has an active challenge
+              challengesService.getActiveChallengeByCompetitionByPlayer(vm.competitionId, player._id).then(function (challenge) {
+                if (challenge.data) {
+                  vm.hasActiveChallenge = true;
+                  vm.activeChallengeOpponent = challenge.data.challenger._id === player._id ? challenge.data.opponent : challenge.data.challenger;
+                  // Add a class to the current user's opponent'
+                  var currentOpponent = _.find(vm.competition.players, {'_id': vm.activeChallengeOpponent._id});
+                  currentOpponent.class = currentOpponent.class ? currentOpponent.class + ' current-opponent': 'current-opponent';
+                // Now that we know about all the active challenges find the available challenges for the current user
+                } else {
+                  findAvailableChallenges();
+                }
+              });
+            }
           }
         });
       });
@@ -208,10 +220,10 @@
         var levelAbove = vm.currentUserPlayer.level > 1 ? vm.currentUserPlayer.level - 1 : null;
         _.forEach(vm.competition.players, function (player) {
           var waitingForPlayer = null;
-          if (player.level === levelAbove && player.position !== 99 && player.class !== 'unavailable' && player.available !== false) {
+          if (player.level === levelAbove && player.position !== 99 && player.class !== 'unavailable' && player.available !== false && !player.hold) {
             // Check if there is a waiting period for this player
             waitingForPlayer = _.find(vm.currentUserPlayer.waitingPeriods, { 'player': player._id });
-            // If there is a waitin period for this user don't make them available
+            // If there is a waiting period for this user don't make them available
             if (waitingForPlayer && moment().isBefore(waitingForPlayer.expires)) {
               player.class = 'waiting';
               player.waitUntil = moment(waitingForPlayer.expires).format('MMM Do  LT');
@@ -287,12 +299,13 @@
       }
     }
 
+    // Confirm the cancel challenge
     function confirmCancelChallenge() {
       swal({
-        title: 'Cancel challenge?',
+        title: 'Cancel challenge',
         text: 'Are you sure you want to cancel this challenge?',
         showCancelButton: true,
-        confirmButtonClass: 'btn-warning',
+        confirmButtonClass: 'btn-danger',
         confirmButtonText: 'Yes, cancel it',
         cancelButtonText: 'Nevermind',
         closeOnConfirm: true,
@@ -315,6 +328,30 @@
           }
         }
       });
+    }
+
+    /**
+     * Show a confirmation modal before placing hold
+     * 
+     * @param  {object} player, player to put on hold
+     */
+    function putPlayerOnHold(player) {
+      swal({
+        title: 'Hold my spot!',
+        text: 'You\'ll have to remove the hold when you\'re ready to play again',
+        showCancelButton: true,
+        confirmButtonClass: 'btn-primary',
+        confirmButtonText: 'Hold Please!',
+        cancelButtonText: 'Nevermind',
+        closeOnConfirm: true,
+        closeOnCancel: true,
+      }, function () {
+        competitionsService.putPlayerOnHold(vm.competitionId, player);
+      });
+    }
+
+    function cancelPlayerHold(player) {
+      competitionsService.cancelPlayerHold(vm.competitionId, player._id, player.displayName);
     }
 
     /**
