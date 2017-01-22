@@ -80,9 +80,9 @@
       vm.challengesAllowed = true;
       // Check for allowed weekend challenges
       if (!vm.competition.allowWeekendChallenges &&
-        (moment().format('ddd') === 'Fri' && moment().format('H') >= 17) ||
+        ((moment().format('ddd') === 'Fri' && moment().format('H') >= 17) ||
         moment().format('ddd') === 'Sat' ||
-        moment().format('ddd') === 'Sun') {
+        moment().format('ddd') === 'Sun')) {
         vm.challengesAllowed = false;
       }
     }
