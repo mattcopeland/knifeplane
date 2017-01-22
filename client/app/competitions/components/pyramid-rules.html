@@ -1,0 +1,48 @@
+<div class="card">
+    <div class="card-header">
+        <h2>Competition Rules</h2>
+    </div>
+    <div class="card-body card-padding">
+        <div class="row" vertilize-container>
+            <div class="col-sm-4 m-b-25" vertilize>
+                <p class="c-black">Challenges</p>
+                <p>Players can only issue one challenge at a time.<br />
+                    Players can only challenge players on the level directly above them.<br />
+                    Players can only be involved in one active challenge per competition.</p>
+            </div>
+            <div class="col-sm-4 m-b-25" ng-if="vm.competition.waitingPeriodDays >= 1" vertilize>
+                <p class="c-black">Rechallenges</p>
+                <p>After losing (or forfeiting) a match, the loser must wait a period of time before they can challenge the winner again.</p>
+                <p>Number of days before rechallenge:</p>
+                <p class="text-center f-20">{{vm.competition.waitingPeriodDays}} day<span ng-if="vm.competition.waitingPeriodDays > 1">s</span></p>
+            </div>
+            <div class="col-sm-4 m-b-25" ng-if="vm.competition.forfeitDays >= 1" vertilize>
+                <p class="c-black">Forfeits</p>
+                <p>If a challenge result has not been entered after a period of time, the opponent forfeits and swicthes places with the challenger in the competition.</p>
+                <p>Number of days before forfeit:</p>
+                <p class="text-center f-20">{{vm.competition.forfeitDays}} day<span ng-if="vm.competition.forfeitDays > 1">s</span></p>
+            </div>
+            <div class="col-sm-4 m-b-25" vertilize>
+                <p class="c-black">Holds</p>
+                <p>Players can place themselves on hold when they are unable to play matches (ex. out of the office).<br />
+                    Players on hold can not be challenges and cannot challenge other players.<br />
+                    Players must remove the hold before they can resume participation in the competition.<br />
+                    Holds should not be used to avoid challenges from particular players.</p>
+            </div>
+            <div class="col-sm-4 m-b-25" ng-if="!vm.competition.allowWeekendChallenges" vertilize>
+                <p class="c-black">Weekends</p>
+                <p>Challenges are not allowed on weekends.<br />
+                All incomplete (result not entered) challenges will be cancelled on Friday at 5:00pm.<br />
+                Players can resume issuing challenges on Monday.</p>
+            </div>
+            <div class="col-sm-4 m-b-25" vertilize>
+                <p class="c-black">Disputes</p>
+                <p>If you have a dispute regarding a challenge or rules violations you can address it with a competition admin.</p>
+                <p>You competition admin(s) are:</p>
+                <ul>
+                    <li ng-repeat="admin in vm.competition.admins">{{admin.displayName}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

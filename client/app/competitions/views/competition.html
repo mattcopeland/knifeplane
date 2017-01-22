@@ -14,4 +14,9 @@
             <div wpm-completed-challeneges competition="vm.competition" challenges-per-page="5"></div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div wpm-pyramid-rules ng-if="vm.competition.type === 'pyramid'" competition="vm.competition"></div>
+        </div>
+    </div>
 </div>
