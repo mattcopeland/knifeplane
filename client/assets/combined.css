@@ -7438,7 +7438,7 @@ body {
 .pyramid .pyramid-block.unavailable .complete-challenge-modal > i {
   color: #2196F3;
 }
-@media (max-width: 1199px) {
+@media (min-width: 1199px) {
   .pyramid .level-7 .pyramid-block {
     width: 138px;
   }
