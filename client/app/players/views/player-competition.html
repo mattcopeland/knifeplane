@@ -18,10 +18,13 @@
                         <div class="c-white m-b-5"><span class="text-capitalize">{{vm.streak.type}}</span> Streak</div>
                         <h2 class="m-0 c-white f-300">{{vm.streak.value}}</h2>
                     </div>
-                    <div class="bg-app-gray p-10 text-center">
-                        <h5>Forfeits</h5>
-                        <div>Wins: {{vm.wins.byForfeit}}</div>
-                        <div>Loses: {{vm.loses.byForfeit}}</div>
+                    <div class="bg-app-gray p-15 text-center">
+                        <div class="c-green m-b-5">Total Wins</div>
+                        <h2 class="m-0 c-green f-300">{{vm.wins.total}}</h2>
+                    </div>
+                    <div class="bg-app-gray p-15 text-center">
+                        <div class="c-red m-b-5">Total Loses</div>
+                        <h2 class="m-0 c-red f-300">{{vm.loses.total}}</h2>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -35,6 +38,11 @@
                         <div>Wins: {{vm.wins.asOpponent}}</div>
                         <div>Loses: {{vm.loses.asOpponent}}</div>
                     </div>
+                    <div class="bg-app-gray p-10 text-center">
+                        <h5>Forfeits</h5>
+                        <div>Wins: {{vm.wins.byForfeit}}</div>
+                        <div>Loses: {{vm.loses.byForfeit}}</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -43,7 +51,7 @@
         <div class="col-md-3" ng-repeat="player in vm.otherPlayers">
             <div class="card">
                 <div class="card-header">
-                    <h2><span class="nowrap-ellip">vs. {{player.displayName}}</span>
+                    <h2><div class="nowrap-ellip">vs. {{player.displayName}}</div>
                         <small>{{player.firstName}} {{player.lastName}}</small>
                     </h2>
                 </div>
