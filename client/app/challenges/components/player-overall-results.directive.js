@@ -45,14 +45,14 @@
     function activate() {
       $scope.$watch('vm.player.results', function () {
         if (vm.player) {
-          assignplayersToLevels(vm.player);
+          assignPlayersToLevels(vm.player);
           calculateStreak(vm.player);
           calcuateWinAndLoses(vm.player);
         }
       });
     }
 
-    function assignplayersToLevels(player) {
+    function assignPlayersToLevels(player) {
       // Determine all the break points to figure out levels
       var breakPoints = [];
       for (var i = 0; i < vm.maxLevels; i++) {

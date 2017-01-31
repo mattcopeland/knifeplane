@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="block-header">
+        <h2>Player Competitions</h2>
+    </div>
+    <div class="row">
+        <div class="col-md-6" ng-if="vm.pyramids.length > 0">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Pyramid Competitions</h2>
+                </div>
+                <div class="card-body card-padding">
+                    <ul class="clist clist-pyramid">
+                        <li ng-repeat="pyramid in vm.pyramids">
+                            <a ui-sref="player.competition({userId: vm.userId, competitionId: pyramid._id})">{{pyramid.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--
+        <div class="col-md-6" ng-if="vm.versus.length > 0">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Versus Competitions</h2>
+                </div>
+                <div class="card-body card-padding">
+                    <ul class="clist clist-pyramid">
+                        <li ng-repeat="v in vm.versus">
+                            <a ui-sref="player.competition({userId: vm.userId, competitionId: v._id})">{{v.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        -->
+    </div>
+</div>

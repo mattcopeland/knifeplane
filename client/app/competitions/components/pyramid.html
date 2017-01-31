@@ -33,7 +33,8 @@
                         <div class="level-marker">{{level}}</div>
                         <div ng-repeat="player in vm.competition.players" ng-if="player.level === level" class="pyramid-block" ng-class="player.class">
                             <!-- Player info -->
-                            <div class="player-name">{{player.displayName}}</div>
+                            <a class="player-name" ui-sref="player.competitions({userId: player._id})" ng-if="player.position !== 99">{{player.displayName}}</a>
+                            <div class="player-name" ng-if="player.position === 99">{{player.displayName}}</div>
                             <div ng-if="player.displayName !== player.firstName + ' ' + player.lastName" class="player-name">{{player.firstName}} {{player.lastName}}</div>
 
                             <!-- Info tray -->

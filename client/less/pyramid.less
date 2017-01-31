@@ -107,6 +107,7 @@
 
         .player-name {
             .nowrap-ellip();
+            color: @text-color;
 
             +.player-name {
                 font-size: @font-size-base - 2px;
@@ -115,7 +116,10 @@
 
         &.empty {
             background-color: @m-gray;
-            color: #fff;
+
+            .player-name {
+                color: #fff;
+            }
 
             .tray {
                 color: @text-color;

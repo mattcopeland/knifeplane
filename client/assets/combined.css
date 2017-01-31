@@ -7225,6 +7225,13 @@ body {
 .btns-group .btn:first-child {
   margin-left: 0;
 }
+.nowrap-ellip {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
 .login-page input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px white inset;
   -webkit-transition: background-color 5000s ease-in-out 0s;
@@ -7261,6 +7268,7 @@ body {
 .pending-players .card-body .pending-player .player-name {
   font-size: 15px;
   margin-bottom: 5px;
+  display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -7353,6 +7361,7 @@ body {
   color: #2196F3;
 }
 .pyramid .pyramid-block .tray > div {
+  display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -7374,16 +7383,20 @@ body {
   line-height: 22px;
 }
 .pyramid .pyramid-block .player-name {
+  display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 100%;
+  color: #5E5E5E;
 }
 .pyramid .pyramid-block .player-name + .player-name {
   font-size: 11px;
 }
 .pyramid .pyramid-block.empty {
   background-color: #9E9E9E;
+}
+.pyramid .pyramid-block.empty .player-name {
   color: #fff;
 }
 .pyramid .pyramid-block.empty .tray {
@@ -7578,6 +7591,7 @@ body {
   }
 }
 .versus .versus-team .versus-player .player-name {
+  display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -13175,6 +13189,14 @@ a.lv-footer:hover {
 }
 [class*="flc-"] .legendColorBox > div > div {
   border-radius: 50%;
+  border: 5px solid #fff;
+  overflow: hidden;
+}
+[class*="flc-"] .legendColorBox > div > div.wins {
+  border-color: #4CAF50;
+}
+[class*="flc-"] .legendColorBox > div > div.loses {
+  border-color: #F44336;
 }
 [class*="flc-"] .legendLabel {
   padding: 0 8px 0 3px;

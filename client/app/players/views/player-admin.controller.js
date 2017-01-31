@@ -1,8 +1,8 @@
 (function () {
   'use strict';
-  angular.module('app').controller('UserCtrl', UserCtrl);
+  angular.module('app').controller('PlayerAdminCtrl', PlayerAdminCtrl);
 
-  function UserCtrl(identityService, userService, notifyService) {
+  function PlayerAdminCtrl(identityService, userService, notifyService) {
     var originalUser = null;
     var vm = this;
     vm.user =  {

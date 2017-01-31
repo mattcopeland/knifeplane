@@ -232,6 +232,15 @@
             
             & > div {
                 border-radius: 50%;
+                border: 5px solid #fff;
+                overflow: hidden;
+
+                &.wins {
+                    border-color: @m-green;
+                }
+                &.loses {
+                    border-color: @m-red;
+                }
             }
         }
     }

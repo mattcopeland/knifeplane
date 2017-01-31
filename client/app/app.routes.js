@@ -16,6 +16,7 @@
 
     $urlRouterProvider.when('/competitions/', '/competitions');
     $urlRouterProvider.when('/admin/', '/admin');
+    $urlRouterProvider.when('/player/', '/player');
 
     $stateProvider
       .state('home', {
@@ -90,13 +91,40 @@
         resolve: {
           auth: routeRoleChecks.user
         }
-      }).state('user', {
-        url: '/user',
+      }).state('player', {
+        url: '/player',
         views: {
           'content': {
-            controller: 'UserCtrl',
+            controller: 'PlayerCompetitionsCtrl',
             controllerAs: 'vm',
-            templateUrl: 'users/views/user.html'
+            templateUrl: 'players/views/player-competitions.html'
+          }
+        }
+      }).state('player.competitions', {
+        url: '/competitions/:userId',
+        views: {
+          'content@': {
+            controller: 'PlayerCompetitionsCtrl',
+            controllerAs: 'vm',
+            templateUrl: 'players/views/player-competitions.html'
+          }
+        }
+      }).state('player.competition', {
+        url: '/competition/:userId/:competitionId',
+        views: {
+          'content@': {
+            controller: 'PlayerCompetitionCtrl',
+            controllerAs: 'vm',
+            templateUrl: 'players/views/player-competition.html'
+          }
+        }
+      }).state('player.admin', {
+        url: '/admin',
+        views: {
+          'content@': {
+            controller: 'PlayerAdminCtrl',
+            controllerAs: 'vm',
+            templateUrl: 'players/views/player-admin.html'
           }
         },
         resolve: {

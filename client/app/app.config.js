@@ -2,7 +2,7 @@
   'use strict ';
   angular.module('app').config(configuration);
 
-  function configuration($httpProvider, $uibTooltipProvider, $qProvider) {
+  function configuration($httpProvider, $uibTooltipProvider, $qProvider, ChartJsProvider) {
     //initialize get if not there
     if (!$httpProvider.defaults.headers.get) {
       $httpProvider.defaults.headers.get = {};    
@@ -15,5 +15,9 @@
 
     $uibTooltipProvider.options({ appendToBody: true });
     $qProvider.errorOnUnhandledRejections(false);
+
+    ChartJsProvider.setOptions({
+      responsive: true
+    });
   }
 })();

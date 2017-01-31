@@ -9,5 +9,6 @@ angular.module('app', [
   'LocalStorageModule',
   'angular-sortable-view',
   'angular.vertilize',
-  'ngTable'
+  'ngTable',
+  'chart.js'
 ]);
