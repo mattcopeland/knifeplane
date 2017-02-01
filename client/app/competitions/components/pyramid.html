@@ -84,16 +84,17 @@
                                 <!-- Show waiting period -->
                                 <div class="c-orange"
                                     ng-if="player.waitUntil">
-                                    <i class="zmdi zmdi-time-countdown"></i> {{player.waitUntil}}</div>
+                                    <i class="zmdi zmdi-time-countdown"></i> {{player.waitUntil}}
+                                </div>
                                 <!-- Show on hold modal -->
                                 <div class="cur-pointer c-blue"
-                                    ng-if="!vm.hasActiveChallenge && player._id === vm.currentUserPlayer._id && !player.hold"
+                                    ng-if="!vm.hasActiveChallenge && player._id === vm.currentUserPlayer._id && !player.hold && !player.preventHold"
                                     ng-click="vm.putPlayerOnHold(player)">
                                     <i class="zmdi zmdi-alert-octagon"></i> Put On Hold</div>
                                 <!-- Show on hold -->
                                 <div class="c-orange"
                                     ng-if="player.hold && player._id !== vm.currentUserPlayer._id">
-                                    <i class="zmdi zmdi-alert-octagon"></i> On Hold
+                                    <i class="zmdi zmdi-alert-octagon"></i> {{player.holdUntil}}
                                 </div>
                                 <!-- Show remove hold -->
                                 <div class="c-orange cur-pointer"

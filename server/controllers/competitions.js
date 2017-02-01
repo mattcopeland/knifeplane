@@ -368,7 +368,8 @@ exports.createPlayerHold = function (req, res, next) {
       _id: req.body.competitionId,
       'players._id': req.body.player._id
     }, {
-      'players.$.hold': true
+      'players.$.holdUntil': new Date(new Date().getTime() + 60 * 60 * 8 * 1000).toISOString(),
+      'players.$.preventHold': true
     })
     .exec(function (err, competitions) {
       if (err) {
@@ -386,20 +387,38 @@ exports.cancelPlayerHold = function (req, res, next) {
     description: '<b>' + req.query.displayName + '</b> is now available'
   };
 
-  // Remove existing hold period
-  Competition.findOneAndUpdate(
-    {
-      _id: req.query.competitionId,
-      'players._id': req.query.playerId
-    }, {
-      $unset: {'players.$.hold': ''}
-    })
-    .exec(function (err, competitions) {
-      if (err) {
-        return next(err);
-      }
+  // Player was challenged, so allow them to hold after it's complete
+  if (req.query.challenged) {
+    Competition.findOneAndUpdate(
+      {
+        _id: req.query.competitionId,
+        'players._id': req.query.playerId
+      }, {
+        $unset: {'players.$.holdUntil': '', 'players.$.preventHold': ''}
+      })
+      .exec(function (err, competitions) {
+        if (err) {
+          return next(err);
+        }
 
-      websockets.broadcast('competition_updated', details);
-      res.status(201).json(competitions);
-    });
+        res.status(201).json(competitions);
+      });
+  // Player took them self off of hold
+  } else {
+    Competition.findOneAndUpdate(
+      {
+        _id: req.query.competitionId,
+        'players._id': req.query.playerId
+      }, {
+        $unset: {'players.$.holdUntil': ''}
+      })
+      .exec(function (err, competitions) {
+        if (err) {
+          return next(err);
+        }
+
+        websockets.broadcast('competition_updated', details);
+        res.status(201).json(competitions);
+      });
+  }
 };

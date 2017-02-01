@@ -44,7 +44,6 @@
     vm.putPlayerOnHold = putPlayerOnHold;
     vm.cancelPlayerHold = cancelPlayerHold;
     vm.currentUserPlayer = {};
-    vm.competitionMenuToggle = false;
     vm.addCurrentUserToCompetition = addCurrentUserToCompetition;
     vm.confirmRemoveCurrentUserFromCompetition = confirmRemoveCurrentUserFromCompetition;
     vm.playerClick = playerClick;
@@ -100,7 +99,9 @@
     function getPlayersStatus() {
       // Check for player holds
       _.forEach(vm.competition.players, function (player) {
-        if (player.hold) {
+        if (player.holdUntil && moment() < moment(player.holdUntil)) {
+          player.hold = true;
+          player.holdUntil = moment(player.holdUntil).format('MMM Do @ LT');
           player.class = 'hold';
         }
       });
@@ -248,7 +249,7 @@
             // If there is a waiting period for this user don't make them available
             if (waitingForPlayer && moment().isBefore(waitingForPlayer.expires)) {
               player.class = 'waiting';
-              player.waitUntil = moment(waitingForPlayer.expires).format('MMM Do  LT');
+              player.waitUntil = moment(waitingForPlayer.expires).format('MMM Do @ LT');
             } else {
               vm.availableChallenges = true;
               player.available = true;
@@ -316,7 +317,10 @@
         // Create the challenge
         // Websocket event will refresh the competition
         challengesService.createPyramidChallenge(challenge).then(function () {
-          vm.competitionMenuToggle = false;
+          // Allow the challenged player to use a hold after the challenge
+          if (player.preventHold) {
+            cancelPlayerHold(player, true);
+          }
         });
       }
     }
@@ -372,8 +376,16 @@
       });
     }
 
-    function cancelPlayerHold(player) {
-      competitionsService.cancelPlayerHold(vm.competitionId, player._id, player.displayName);
+    /**
+     * Cancel the player hold
+     * Either by the player, removing their own hold
+     * Or the player being challenged
+     * 
+     * @param  {object} player to remove the hold from
+     * @param  {boolean} challenged, if the hold is being removed becasue of a challenge
+     */
+    function cancelPlayerHold(player, challenged) {
+      competitionsService.cancelPlayerHold(vm.competitionId, player._id, player.displayName, challenged);
     }
 
     /**
@@ -443,7 +455,6 @@
             }
           });
         }
-        vm.competitionMenuToggle = false;
       });
     }
 

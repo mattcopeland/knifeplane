@@ -150,12 +150,13 @@
       });
     }
 
-    function cancelPlayerHold(competitionId, playerId, displayName) {
+    function cancelPlayerHold(competitionId, playerId, displayName, challenged) {
       return $http.delete('/api/competitions/playerHold', {
         params: {
           competitionId: competitionId,
           playerId: playerId,
-          displayName: displayName
+          displayName: displayName,
+          challenged: challenged
         }
       });
     }
