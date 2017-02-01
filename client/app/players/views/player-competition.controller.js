@@ -38,19 +38,8 @@
       type: null,
       value: 0
     };
-    vm.overall = [];
-    vm.overallChart = {
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true,
-              stepSize: 1
-            }
-          }]
-        }
-      }
-    };
+    vm.overallResults = [];
+    vm.overallChart = {};
 
     activate();
 
@@ -222,8 +211,20 @@
         );
       }));
 
-      vm.overall.push(vm.wins.total);
-      vm.overall.push(vm.loses.total);
+      vm.overallResults.push(vm.wins.total);
+      vm.overallResults.push(vm.loses.total);
+      vm.overallChart = {
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true,
+                stepSize: _.ceil(_.max(vm.overallResults) / 10)
+              }
+            }]
+          }
+        }
+      };
     }
   }
 })();
