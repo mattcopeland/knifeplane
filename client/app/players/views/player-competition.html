@@ -3,6 +3,13 @@
         <h2>{{vm.player.displayName}}
             <small>Statistics</small>
         </h2>
+        <ul class="actions">
+            <li>
+                <a ui-sref="competitions.view({competitionId: vm.competitionId})">
+                    <i class="zmdi zmdi-triangle-up"></i>
+                </a>
+            </li>
+        </ul>
     </div>
     <div class="card">
         <div class="card-header">
