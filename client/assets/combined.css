@@ -12929,6 +12929,9 @@ a.lv-footer:hover {
   font-size: 17px;
   font-weight: 400;
 }
+.card-header h2 span {
+  line-height: 1.2em;
+}
 .card-header h2 small {
   display: block;
   margin-top: 5px;
