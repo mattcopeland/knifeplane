@@ -96,11 +96,6 @@
                     &.sm {
                         font-size: 12px;
                     }
-
-                    &.cancel {
-                        float: right;
-                        line-height: 22px;
-                    }
                 }
             }
         }
@@ -109,8 +104,13 @@
             .nowrap-ellip();
             color: @text-color;
 
-            +.player-name {
+            > div {
+                .nowrap-ellip();
                 font-size: @font-size-base - 2px;
+            }
+
+            &:hover {
+                background-color: #ddd;
             }
         }
 

@@ -33,9 +33,11 @@
                         <div class="level-marker">{{level}}</div>
                         <div ng-repeat="player in vm.competition.players" ng-if="player.level === level" class="pyramid-block" ng-class="player.class">
                             <!-- Player info -->
-                            <a class="player-name" ui-sref="player.competition({userId: player._id, competitionId: vm.competitionId})" ng-if="player.position !== 99">{{player.displayName}}</a>
+                            <a class="player-name" ui-sref="player.competition({userId: player._id, competitionId: vm.competitionId})" ng-if="player.position !== 99">
+                                {{player.displayName}}
+                                <div ng-if="player.displayName !== player.firstName + ' ' + player.lastName">{{player.firstName}} {{player.lastName}}</div>
+                            </a>
                             <div class="player-name" ng-if="player.position === 99">{{player.displayName}}</div>
-                            <div ng-if="player.displayName !== player.firstName + ' ' + player.lastName" class="player-name">{{player.firstName}} {{player.lastName}}</div>
 
                             <!-- Info tray -->
                             <div class="tray"
@@ -88,13 +90,15 @@
                                     ng-if="!vm.hasActiveChallenge && player._id === vm.currentUserPlayer._id && !player.hold"
                                     ng-click="vm.putPlayerOnHold(player)">
                                     <i class="zmdi zmdi-alert-octagon"></i> Put On Hold</div>
-                                <!-- Show holding period -->
+                                <!-- Show on hold -->
                                 <div class="c-orange"
-                                    ng-if="player.hold">
+                                    ng-if="player.hold && player._id !== vm.currentUserPlayer._id">
                                     <i class="zmdi zmdi-alert-octagon"></i> On Hold
-                                    <i class="zmdi zmdi-close-circle-o cancel cur-pointer"
-                                        ng-if="player._id === vm.currentUserPlayer._id"
-                                        ng-click="vm.cancelPlayerHold(player)"></i>
+                                </div>
+                                <!-- Show remove hold -->
+                                <div class="c-orange cur-pointer"
+                                    ng-if="player.hold && player._id === vm.currentUserPlayer._id" ng-click="vm.cancelPlayerHold(player)">
+                                    <i class="zmdi zmdi-alert-octagon"></i> Remove Hold
                                 </div>
 
                             </div>

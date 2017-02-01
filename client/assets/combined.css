@@ -7378,10 +7378,6 @@ body {
 .pyramid .pyramid-block .tray > div i.sm {
   font-size: 12px;
 }
-.pyramid .pyramid-block .tray > div i.cancel {
-  float: right;
-  line-height: 22px;
-}
 .pyramid .pyramid-block .player-name {
   display: block;
   overflow: hidden;
@@ -7390,8 +7386,16 @@ body {
   width: 100%;
   color: #5E5E5E;
 }
-.pyramid .pyramid-block .player-name + .player-name {
+.pyramid .pyramid-block .player-name > div {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
   font-size: 11px;
+}
+.pyramid .pyramid-block .player-name:hover {
+  background-color: #ddd;
 }
 .pyramid .pyramid-block.empty {
   background-color: #9E9E9E;
