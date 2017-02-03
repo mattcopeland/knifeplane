@@ -607,6 +607,7 @@
             for (var i = 0; i < vm.numberOfRealPlayers - 1; ++i) {
               var updatedPlayer = {
                 _id: competition.players[i]._id,
+                email: competition.players[i].email,
                 firstName: competition.players[i].firstName,
                 lastName: competition.players[i].lastName,
                 displayName: competition.players[i].displayName,
