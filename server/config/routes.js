@@ -6,6 +6,7 @@ var auth = require('./auth'),
   
 module.exports = function (app) {
   app.get('/api/users', auth.requiresApiLogin, users.getUsers);
+  app.get('/api/user', users.getUserInfo);
   app.post('/api/users', users.createUser);
   app.put('/api/user', auth.requiresApiLogin, users.updateUser);
   app.get('/api/users/verified', auth.requiresApiLogin, users.getVerifiedUsers);

@@ -1,7 +1,7 @@
 <div class="container">
     <div class="block-header">
         <h2>{{vm.player.displayName}}
-            <small>Statistics</small>
+            <small>Statistics for <b>{{vm.competition.name}}</b> competition</small>
         </h2>
         <ul class="actions">
             <li>
@@ -13,7 +13,7 @@
     </div>
     <div class="card">
         <div class="card-header">
-                    <h2>Overall Statistics</h2>
+                    <h2>Overall</h2>
                 </div>
         <div class="card-body card-padding">
             <div class="row">
@@ -59,7 +59,8 @@
             <div class="card">
                 <div class="card-header">
                     <h2><span class="nowrap-ellip">vs. {{player.displayName}}</span>
-                        <small>{{player.firstName}} {{player.lastName}}</small>
+                        <small ng-if="player.displayName !== player.firstName + ' ' + player.lastName">{{player.firstName}} {{player.lastName}}</small>
+                        <small ng-if="player.displayName === player.firstName + ' ' + player.lastName">&nbsp;</small>
                     </h2>
                 </div>
                 <div class="card-body card-padding">

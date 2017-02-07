@@ -5,6 +5,7 @@
   function userService($http) {
     var service = {
       getAllUsers: getAllUsers,
+      getUserInfo: getUserInfo,
       getVerifiedUsers: getVerifiedUsers,
       verifyUser: verifyUser,
       generatePasswordResetLink: generatePasswordResetLink,
@@ -17,6 +18,14 @@
       return $http.get('/api/users').then(function (users) {
         return users;
       });
+    }
+
+    function getUserInfo(userId) {
+      return $http.get('/api/user/', {
+        params: {
+          userId: userId
+        }
+      });  
     }
 
     function getVerifiedUsers() {

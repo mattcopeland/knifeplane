@@ -44,12 +44,14 @@
           var userUpdates = {
             _id: user._id
           };
-          if ((user.firstName !== identityService.currentUser.firstName && user.firstName.length > 0) || (user.lastName !== identityService.currentUser.lastName && user.lastName.length > 0) || (user.displayName !== identityService.currentUser.displayName && user.displayName.length > 0)) {
+          if ((user.firstName !== identityService.currentUser.firstName && user.firstName.length > 0) ||
+              (user.lastName !== identityService.currentUser.lastName && user.lastName.length > 0) ||
+              (user.displayName !== identityService.currentUser.displayName && user.displayName.length > 0)) {
             userUpdates.firstName = user.firstName;
             userUpdates.lastName = user.lastName;
             userUpdates.displayName = user.displayName;
           }
-          if (user.password && user.password.lentgh > 0) {
+          if (user.password && user.password.length > 0) {
             userUpdates.password = user.password;
           }
           userService.updateUser(userUpdates).then(function () {

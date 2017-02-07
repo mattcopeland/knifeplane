@@ -33,7 +33,7 @@
         height: 75px;
         margin: 5px;
         overflow: hidden;
-        padding: 5px;
+        padding: 4px;
         position: relative;
         vertical-align: top;
         width: 150px;
@@ -103,14 +103,12 @@
         .player-name {
             .nowrap-ellip();
             color: @text-color;
+            padding: 3px;
+            .hover-pop(rgba(0,0,0,0.12), 2px, 250ms, 0);
 
             > div {
                 .nowrap-ellip();
                 font-size: @font-size-base - 2px;
-            }
-
-            &:hover {
-                background-color: #ddd;
             }
         }
 

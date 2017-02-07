@@ -2,8 +2,9 @@
   'use strict';
   angular.module('app').controller('PlayerCompetitionCtrl', PlayerCompetitionCtrl);
 
-  function PlayerCompetitionCtrl($state, $stateParams, challengesService) {
+  function PlayerCompetitionCtrl($state, $stateParams, challengesService, competitionsService, userService) {
     var vm = this;
+    vm.competition = {};
     vm.userId = null;
     vm.player = {};
     vm.otherPlayers = [];
@@ -47,13 +48,19 @@
       if ($stateParams.userId && $stateParams.competitionId) {
         vm.userId = $stateParams.userId;
         vm.competitionId = $stateParams.competitionId;
-        getCompetition();
+        getPlayerInfo();
       } else {
         $state.go('home');
       }
     }
 
-    function getCompetition() {
+    function getPlayerInfo() {
+      userService.getUserInfo(vm.userId).then(function (user) {
+        vm.player = user.data;
+      });
+      competitionsService.getCompetition(vm.competitionId).then(function (competition) {
+        vm.competition = competition.data;
+      });
       challengesService.getPlayerResultsByCompetition(vm.competitionId, vm.userId).then(function (challenges) {
         calculateStreak(challenges.data);
         calcuateWinAndLoses(challenges.data);
@@ -79,51 +86,24 @@
           wins: 0,
           loses: 0
         };
+        userService.getUserInfo(otherPlayerId).then(function (user) {
+          otherPlayer.displayName = user.data.displayName;
+          otherPlayer.firstName = user.data.firstName;
+          otherPlayer.lastName = user.data.lastName;
+        });
         _.forEach(challenges, function (challenge){
           // Win as challenger
           if (challenge.winner === 'challenger' && challenge.challenger._id === vm.userId && challenge.opponent._id === otherPlayerId) {
             otherPlayer.wins += 1;
-            otherPlayer.displayName = challenge.opponent.displayName;
-            otherPlayer.firstName = challenge.opponent.firstName;
-            otherPlayer.lastName = challenge.opponent.lastName;
-            vm.player = {
-              displayName: challenge.challenger.displayName,
-              firstName: challenge.challenger.firstName,
-              lastName: challenge.challenger.lastName
-            };
             // Win as opponent
           } else if (challenge.winner === 'opponent' && challenge.opponent._id === vm.userId && challenge.challenger._id === otherPlayerId) {
             otherPlayer.wins += 1;
-            otherPlayer.displayName = challenge.challenger.displayName;
-            otherPlayer.firstName = challenge.challenger.firstName;
-            otherPlayer.lastName = challenge.challenger.lastName;
-            vm.player = {
-              displayName: challenge.opponent.displayName,
-              firstName: challenge.opponent.firstName,
-              lastName: challenge.opponent.lastName
-            };
             // Lose as opponent
           } else if (challenge.winner === 'challenger' && challenge.opponent._id === vm.userId && challenge.challenger._id === otherPlayerId) {
             otherPlayer.loses += 1;
-            otherPlayer.displayName = challenge.challenger.displayName;
-            otherPlayer.firstName = challenge.challenger.firstName;
-            otherPlayer.lastName = challenge.challenger.lastName;
-            vm.player = {
-              displayName: challenge.opponent.displayName,
-              firstName: challenge.opponent.firstName,
-              lastName: challenge.opponent.lastName
-            };
             // Lose as challenger
           } else if (challenge.winner === 'opponent' && challenge.challenger._id === vm.userId && challenge.opponent._id === otherPlayerId) {
             otherPlayer.loses += 1;
-            otherPlayer.displayName = challenge.opponent.displayName;
-            otherPlayer.firstName = challenge.opponent.firstName;
-            otherPlayer.lastName = challenge.opponent.lastName;
-            vm.player = {
-              displayName: challenge.challenger.displayName,
-              firstName: challenge.challenger.firstName,
-              lastName: challenge.challenger.lastName
-            };
           }
         });
         otherPlayer.data = [otherPlayer.wins, otherPlayer.loses];
